@@ -15,8 +15,8 @@
   <property name="projectName" value="/S12/issues/0000839" /> 
   <property name="projectNameForDownload" value="cs56_S12_0000839" /> 
 
-  <property name="packageName" value="edu.ucsb.cs56.projects.pong" />
-  <property name="projectPath" value="edu/ucsb/cs56/projects/" />
+  <property name="packageName" value="edu.ucsb.cs56.projects.games.pong" />
+  <property name="projectPath" value="edu/ucsb/cs56/projects/pong" />
   <property name="projectName" value="pong" />
   <property name="projectRepoName" value="cs56-games-pong" />
 
@@ -40,7 +40,7 @@
 
 
   <target name="run" depends = "compile"  description="run the Pong game, started through Screen.java">
-    <java classname="Screen" classpath="build" fork = "true" />
+    <java classname="${packageName}.${mainClass}" classpath="build" fork = "true" />
   </target>
 
   <target name="clean" description="delete unnecessary files and directories">
