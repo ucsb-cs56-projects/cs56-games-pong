@@ -30,6 +30,7 @@ public class Ball implements Runnable{
     //  Oval c;
 
     int points = 0;
+	int ballsLost = 0;
 
        Paddle p1 = new Paddle(8,160);
     PaddleRight p2 = new PaddleRight(50, 160);
@@ -118,23 +119,33 @@ public class Ball implements Runnable{
 	g.fillOval(b.x,b.y,b.width,b.height);
 
 	//	g2.fill(c);
-
-	if (points >= 10){
-	    pointsReset();
-	    gameWin();
-	    //setdx(0);
-	    // setdy(0);
-	g.setFont(new Font("sansserif", Font.BOLD, 32));
-	g.setColor(Color.WHITE);
-	g.drawString("YOU WIN!",275,100);
+	if(ballsLost >= 3)
+	{
+		    pointsReset();
+		    gameWin();
+		    //setdx(0);
+		    // setdy(0);
+		g.setFont(new Font("sansserif", Font.BOLD, 32));
+		g.setColor(Color.WHITE);
+		g.drawString("YOU WIN!",275,100);
 	}
 
-	else if (points <= -3){
-	    pointsReset();
-	    gameLoss();
-	g.setFont(new Font("sansserif", Font.BOLD, 32));
-	g.setColor(Color.WHITE);
-	g.drawString("YOU LOST, GAME OVER!",100,100);
+	// if (points >= 10){
+	//     pointsReset();
+	//     gameWin();
+	//     //setdx(0);
+	//     // setdy(0);
+	// g.setFont(new Font("sansserif", Font.BOLD, 32));
+	// g.setColor(Color.WHITE);
+	// g.drawString("YOU WIN!",275,100);
+	// }
+	// 
+	// else if (points <= -3){
+	//     pointsReset();
+	//     gameLoss();
+	// g.setFont(new Font("sansserif", Font.BOLD, 32));
+	// g.setColor(Color.WHITE);
+	// g.drawString("YOU LOST, GAME OVER!",100,100);
 	   
 
 	}
@@ -212,6 +223,7 @@ public class Ball implements Runnable{
 	if(b.x <= (Screen.w - Screen.w)){
 	    setdx(-3);
 	    points--;
+		ballsLost++;
 	    resetBall();
 	}
 	if(b.x >= (Screen.w - 20)){
