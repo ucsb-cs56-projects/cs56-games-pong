@@ -168,7 +168,6 @@ public class myKeyAdapter extends KeyAdapter {
     }
 
 }
-
 /** create the screen and start the threads of the ball and paddle
  *  so they can start animating.
  *   @param args no return
