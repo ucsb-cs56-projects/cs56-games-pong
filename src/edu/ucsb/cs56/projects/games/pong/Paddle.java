@@ -26,6 +26,7 @@ public class Paddle implements Runnable{
     int x,y;
     int dy;
     int dx;
+    boolean right;
     public static Integer paddleHeight = 90;
     //public static int newPH;
 
@@ -40,7 +41,17 @@ public class Paddle implements Runnable{
 	//	this.setPaddleHeight(newPH);
 	p = new Rectangle(x,y,10,paddleHeight);
     }
-
+/** Right paddle constructor to initialize intial x,y placement of paddle
+    @param x sets the x position of the paddle
+    @param y sets the y position of the paddle
+    @param sideRight sees if the paddle is the rightmost paddle
+*/
+    public Paddle(int x, int y, boolean sideRight){
+	this.x = x;
+	this.y = y;
+	p = new Rectangle(x,y,10,paddleHeight);
+	this.right = sideRight;
+    }
 
 /** set the height of the paddle
  *   @param newHeight chooses the new height for the paddle
@@ -71,13 +82,24 @@ public class Paddle implements Runnable{
  *   @param e finds which key on the keyboard was hit.
 */
     public void keyPressed(KeyEvent evt){
-	if(evt.getKeyCode() == evt.VK_Q){
-	    setdy(-5);
-	}
+	if (this.right == false) {
+	    if(evt.getKeyCode() == evt.VK_Q){
+		setdy(-5);
+	    }
 	
-	if(evt.getKeyCode() == evt.VK_A){
-	    setdy(5);
+	    if(evt.getKeyCode() == evt.VK_A){
+		setdy(5);
+	    }
 	}
+	else {
+		if(evt.getKeyCode() == evt.VK_UP){
+		    setdy(-5);
+		}
+	
+		if(evt.getKeyCode() == evt.VK_DOWN){
+		    setdy(5);
+		}
+	    }
     }
     
 
@@ -86,19 +108,32 @@ public class Paddle implements Runnable{
  *   @param e finds which key on the keyboard was released.
 */
    public void keyReleased(KeyEvent evt){
-	if(evt.getKeyCode() == evt.VK_Q){
-	    setdy(0);
-	}
+	if (this.right == false) {
+	    if(evt.getKeyCode() == evt.VK_Q){
+		setdy(0);
+	    }
 	
-	if(evt.getKeyCode() == evt.VK_A){
-	    setdy(0);
+	    if(evt.getKeyCode() == evt.VK_A){
+		setdy(0);
+	    }
 	}
+	else {
+		if(evt.getKeyCode() == evt.VK_UP){
+		    setdy(0);
+		}
+	
+		if(evt.getKeyCode() == evt.VK_DOWN){
+		    setdy(0);
+		}
+	    }
     }
-    
 
+ 
 /** draw the paddle onto the screen as a rectangle
  *   @param g graphics handles the drawing of the paddle
 */
+
+
     public void draw(Graphics g){
 	g.setColor(Color.GREEN);
 	g.fillRect(p.x,p.y,p.width,p.height);

@@ -32,8 +32,8 @@ public class Ball implements Runnable{
 
     int points = 0;
 
-       Paddle p1 = new Paddle(8,160);
-    PaddleRight p2 = new PaddleRight(50, 160);
+    Paddle p1 = new Paddle(8,160);
+    Paddle p2 = new Paddle(50, 160, true);
     
 /** Ball constructor to initialize location of Ball onto the screen
  *  and draw it as a rectangle for a simpler and precise hitbox.
@@ -206,7 +206,7 @@ public class Ball implements Runnable{
 	    setdx(3);
 	}
 
-	if(b.intersects(p2.pad)){
+	if(b.intersects(p2.p)){
 	    setdx(3);
 	}
 
