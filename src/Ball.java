@@ -23,6 +23,8 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 
 
 @author Timothy Fok
+@author Sanchit Gupta
+@author Bhanu Khanijau
 @version CS56, Spring 2012, UCSB
 */
 public class Ball implements Runnable{
