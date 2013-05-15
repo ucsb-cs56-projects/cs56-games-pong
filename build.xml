@@ -7,12 +7,11 @@
 
    <property environment="env"/> <!-- load the environment variables --> 
    <property name="webRoot" value="${env.HOME}/public_html/cs56" />
-   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56/S12/issues/0000839" />
-
-  <property name="projectName" value="/S12/issues/0000839" /> 
-  <property name="projectNameForDownload" value="cs56_S12_0000839" /> 
-  <property name="javadocDest" value="~/public_html/cs56/13S/sanchitg94/cs56_games_pong" /> 
-  <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" /> 
+   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56" />
+   
+   <property name="projectName" value="cs56_games_pong" /> 
+   <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" /> 
+   <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" />
 
 
  <property name="jwsDest" value="${webRoot}${projectName}/jws" /> 
@@ -28,43 +27,6 @@
  </classpath>                                                                                                          
   </javac>   
   </target>
-
-<target name="publish" depends="jar,javadoc,download,jws,linenumbers">                           
-   <mkdir dir="${webRoot}/${projectName}" />                                      
-                                                                                  
-   <delete dir="${webRoot}/${projectName}/browse" />                              
-   <mkdir dir="${webRoot}/${projectName}/browse" />                               
-                                                                                  
-   <delete dir="${webRoot}/${projectName}/download" />                            
-   <mkdir dir="${webRoot}/${projectName}/download" />                             
-                                                               
-   <delete dir="${webRoot}/${projectName}/dist" />                            
-   <mkdir dir="${webRoot}/${projectName}/dist" />    
-
-                   
-   <copy file="html/index.html" todir="${webRoot}/${projectName}"/>                                                                                                 
-   <copy todir="${webRoot}/${projectName}/download" >                                
-     <fileset dir="download"/>                                                    
-     <fileset dir="dist" />                                                       
-   </copy>                                                                        
-                 
-  <copy todir="${webRoot}/${projectName}/dist" >                                
-     <fileset dir="download"/>                                                    
-     <fileset dir="dist" />                                                       
-   </copy>   
-                                                                 
-   <copy file="build.xml" todir="${webRoot}/${projectName}/browse"/>              
-                                                                                  
-   <copy todir="${webRoot}/${projectName}/browse/src" >                           
-     <fileset dir="src"/>                                                         
-   </copy>            
-                                                            
-   <copy file="numberedsource.txt" todir="${webRoot}/${projectName}/browse"/>                                        
-     
-                              
-   <echo>Project published to ${webBaseUrl}/${projectName}</echo>     
-           
- </target>   
 
   <target name="run" depends = "compile"  description="run the Pong game, started through Screen.java">
   <java classname="Screen" classpath="build" fork = "true" />
@@ -249,22 +211,6 @@
   <!--<delete dir="download" quiet="true" />                                         
   <delete dir="temp" quiet="true" />   
 -->
-                              
-                                                                       
- <target name="jws" depends="compile,jar">
-
-   <delete dir="${webRoot}/${projectName}/jws" />
-   <mkdir dir="${webRoot}/${projectName}/jws" />
-
-   <copy todir="${jwsDest}" file="dist/${projectNameForDownload}.jar" />
-   <copy todir="${jwsDest}" >
-       <fileset dir="jws" includes="*.html"/>
-       <fileset dir="jws" includes="*.jnlp"/>
-       <fileset dir="jws" includes="*.png"/>
-       <fileset dir="jws" includes=".htaccess"/>
-   </copy>
-   <echo>Java web start at ${jwsURL}</echo>
- </target>
 
 
 <target name="linenumbers" description="Creates a file containing all source files with line numbers">               
