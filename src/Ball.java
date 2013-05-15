@@ -23,8 +23,6 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 
 
 @author Timothy Fok
-@author Sanchit Gupta
-@author Bhanu Khanijau
 @version CS56, Spring 2012, UCSB
 */
 public class Ball implements Runnable{
@@ -140,26 +138,6 @@ public void draw(Graphics g){
 		g.drawString("GAME OVER!",275,100);
 	}
 
-	// if (points >= 10){
-		//     pointsReset();
-		//     gameWin();
-		//     //setdx(0);
-		//     // setdy(0);
-		// g.setFont(new Font("sansserif", Font.BOLD, 32));
-		// g.setColor(Color.WHITE);
-		// g.drawString("YOU WIN!",275,100);
-		// }
-		// 
-		// else if (points <= -3){
-			//     pointsReset();
-			//     gameLoss();
-			// g.setFont(new Font("sansserif", Font.BOLD, 32));
-			// g.setColor(Color.WHITE); 
-
-			// g.drawString("YOU LOST, GAME OVER!",100,100);
-
-
-			//	}
 		}
 
 /** runs the ball Thread, gets the ball animating
