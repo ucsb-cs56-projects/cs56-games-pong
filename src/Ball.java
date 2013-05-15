@@ -1,3 +1,5 @@
+//package edu.ucsb.cs56.projects.S13.cs56_games_pong;
+
 import java.io.*;
 import java.util.*;
 import java.awt.event.ActionEvent;
@@ -20,9 +22,9 @@ import java.awt.geom.Line2D;  // single lines
 import java.awt.geom.Rectangle2D; // for the bounding box
 
 /** Ball is the class that will move the ball around the screen
-
-
 @author Timothy Fok
+@author Bhanu Khanijau
+@author Sanchit Gupta
 @version CS56, Spring 2012, UCSB
 */
 public class Ball implements Runnable{
@@ -120,45 +122,20 @@ public int getdy(){
 public void draw(Graphics g){
 
 	//Graphics2D g2 = (Graphics2D) g;
-
 	g.setColor(Color.PINK);
 	//	g.fillRect(b.x,b.y,b.width,b.height);  
 	g.fillOval(b.x,b.y,b.width,b.height);
 
 	//	g2.fill(c);
-	if(ballsLost >= 1) //number of tries
+	if(ballsLost >= 3) //number of tries
 	{
-
 		gameLoss();
 		//pointsReset();
-		//setdx(0);
-		// setdy(0);
 		g.setFont(new Font("sansserif", Font.BOLD, 32));
 		g.setColor(Color.WHITE);
 		g.drawString("GAME OVER!",275,100);
 	}
-
-	// if (points >= 10){
-		//     pointsReset();
-		//     gameWin();
-		//     //setdx(0);
-		//     // setdy(0);
-		// g.setFont(new Font("sansserif", Font.BOLD, 32));
-		// g.setColor(Color.WHITE);
-		// g.drawString("YOU WIN!",275,100);
-		// }
-		// 
-		// else if (points <= -3){
-			//     pointsReset();
-			//     gameLoss();
-			// g.setFont(new Font("sansserif", Font.BOLD, 32));
-			// g.setColor(Color.WHITE); 
-
-			// g.drawString("YOU LOST, GAME OVER!",100,100);
-
-
-			//	}
-		}
+}
 
 /** runs the ball Thread, gets the ball animating
 */
@@ -166,12 +143,10 @@ public void run(){
 	try{
 		while(true){
 			moveBall();
-			Thread.sleep(8);}
+			Thread.sleep(8);
 		}
-		catch(Exception e)
-		{
-		}
-	}
+	}catch(Exception e){}
+}
 
 
 /** resets the ball to the middle parts of the screen
@@ -181,25 +156,20 @@ public void resetBall(){
 		b.x = Screen.w/2;
 		b.y = Screen.h/2;
 	}
-
 }
 
-/** handles players losing the game, stop the ball from moving
+/** handles players losing the game, stop the ball from moving, writes score to file and displays a leaderboard
 */
 public void gameLoss(){
 
 	text.setVisible(true);
 	text.setEditable(true);
 	text.setBounds (245, 50, 60, 25);
-	//jScrollPane1 = new JScrollPane(text);
-	//	add(text);
 	final JFrame f = new JFrame();
 	JLabel label = new JLabel("Enter your name!");
 	JPanel newF = new JPanel();
 	final JTextField text = new JTextField();
 	JButton button = new JButton("Enter");
-
-	//	newF.setSize(500,500);
 	newF.add(label);
 	newF.add(text);
 	newF.add(button);
@@ -209,10 +179,8 @@ public void gameLoss(){
 	f.add(newF);
 	f.setVisible(true);
 	button.addActionListener(new ActionListener() {
-
 		public void actionPerformed(ActionEvent e)
-		{
-			//Execute when button is pressed
+		{//Execute when button is pressed
 			try{
 				// Create file 
 				PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("scores.txt", true)));
@@ -220,49 +188,44 @@ public void gameLoss(){
 				out.close();
 				f.dispose();	
 				ArrayList<String> yo = new ArrayList<String>();			
-
 				BufferedReader br2 = new BufferedReader(new FileReader("scores.txt"));
 				String line;
 				int[] fifth  = {0,0,0,0,0};
 				while ((line = br2.readLine()) != null) {
 					yo.add(line);
 				}
-				// Deal with the line
-
-				// Done with the file
 				br2.close();
 				int lineSize = yo.size();
-				while(lineSize < 5)
-				{
+				
+				while(lineSize < 5){
 					out = new PrintWriter(new BufferedWriter(new FileWriter("scores.txt", true)));
 					out.write(0 + " null\n");
 					out.close();
 					lineSize++;
-					
-				}
+				}				
 				
 				br2 = new BufferedReader(new FileReader("scores.txt"));
 				int r = 0;
-				while(yo.size() != 0)
-				{
+				
+				while(yo.size() != 0){
 					yo.remove(r);
 				}
+				
 				while ((line = br2.readLine()) != null) {
 						yo.add(line);
 				}
+				
 				String[] gameNames = new String[lineSize];
 				String[] gameScores = new String[lineSize];
-				for(int i = 0; i < 5; i++)
-				{
+				
+				for(int i = 0; i < 5; i++){
 					gameNames[i] = "0";
 					gameScores[i] = "0";
-					
 				}
+				
 				if(lineSize > 0){
-					for(int i = 0; i < lineSize; i++)
-					{
-						for(int j = 0; j < yo.get(i).length() - 1; j++)
-						{
+					for(int i = 0; i < lineSize; i++){
+						for(int j = 0; j < yo.get(i).length() - 1; j++){
 							if(yo.get(i).substring(j, j+1).equals(" ")){
 								gameScores[i] = yo.get(i).substring(0, j); 
 								gameNames[i] = yo.get(i).substring(j, yo.get(i).length());
@@ -271,103 +234,72 @@ public void gameLoss(){
 						}
 					}	
 				}
-				// int check = 0;
-				// 					 	for(int i = 0; i < lineSize; i++)
-				// 					 	{
-					// 							check=0;
-					// 							for(int j = 0; j < 5; j++)
-					// 							{
-						// 								if(Integer.parseInt(gameScores[i]) > fifth[j])
-						// 								{
-							// 									if(4-check+1 != 5){
-								// 										while(4-check > 0)
-								// 										{
-									// 											fifth[4-check+1] = fifth[4-check];
-									// 											gameScores[4-check+1] = gameScores[4-check];
-									// 											gameNames[4-check+1] = gameNames[4-check];
-									// 											check++;
-									// 											break;
-									// 										}
-									// 									} 
-									// 									fifth[4-j] = Integer.parseInt(gameScores[i]);
-									// 									gameScores[4-j] = gameScores[i];
-									// 									gameNames[4-j] = gameNames[i];
-									// 									break;
-									// 								}
-									// 									check++;
-									// 							}
-									// 								
-									// 					 	}
-									// 					
-									// 						if(lineSize > 5)
-									// 							for(int i= 5; i > 0; i--)
-									// 						{
-										// 							System.out.println("Name " + gameNames[i] + " " + gameScores[i]);
-										// 						}
-										// 						else
-										// 						{
-											// 							for(int i= lineSize; i > 0; i--)
-											// 							{
-												// 								System.out.println("Name " + gameNames[i] + " " + gameScores[i]);
-												// 							}	
-												// 						}	
-												//insertion_srt(gameNames,gameScores, listSize);
-												int[] scores = new int[lineSize];
-												for(int i = 0; i < lineSize; i++)
-												{
-													scores[i] = Integer.parseInt(gameScores[i]);
-												}	
-												insertion_srt(scores,gameNames, lineSize);
-												if(lineSize >= 5)
-												for (int v= lineSize-1;v>lineSize-6;v--)
-													System.out.println(scores[v] + gameNames[v]);
-												else
-												{
-													for(int v = lineSize - 1; v >= 0; v--)
-														System.out.println(scores[v] + gameNames[v]);
-												}
-												JFrame hs = new JFrame();
-												JPanel npl = new JPanel();
-												JLabel l1 = new JLabel("1st: " + gameNames[lineSize-1] + "," +scores[lineSize-1] + " ");
-												JLabel l2 = new JLabel("2nd: " + gameNames[lineSize-2] + "," +scores[lineSize-2] + " ");
-												JLabel l3 = new JLabel("3rd: " + gameNames[lineSize-3] + "," +scores[lineSize-3] + " ");
-												JLabel l4 = new JLabel("4th: " + gameNames[lineSize-4] + "," +scores[lineSize-4] + " ");
-												JLabel l5 = new JLabel("5th: " + gameNames[lineSize-5] + "," +scores[lineSize-5] + " ");
-												npl.add(l1);
-												npl.add(l2);
-												npl.add(l3);
-												npl.add(l4);
-												npl.add(l5);
-												hs.add(npl);
-												hs.setSize(500,100);
-												hs.setVisible(true);
-													
-											}catch (Exception ex){//Catch exception if any
-												System.err.println("Error: " + ex.getMessage());
-											}
-									}
-									});
-									setdx(0);
-									b.x =0;
-									b.y =0;
-									b = null;
-								}
+				
+				int[] scores = new int[lineSize];
+				
+				for(int i = 0; i < lineSize; i++){
+					scores[i] = Integer.parseInt(gameScores[i]);
+				}	
+				
+				sortArray(scores,gameNames,lineSize);
+				
+				if(lineSize >= 5){
+					for (int v= lineSize-1;v>lineSize-6;v--)
+						System.out.println(scores[v] + gameNames[v]);
+				}				
+				else{
+					for(int v = lineSize - 1; v >= 0; v--)
+						System.out.println(scores[v] + gameNames[v]);
+				}
+				
+				JFrame hs = new JFrame();
+				JPanel npl = new JPanel();
+				JLabel l1 = new JLabel("1st: " + gameNames[lineSize-1] + "," +scores[lineSize-1] + " \n");
+				JLabel l2 = new JLabel("2nd: " + gameNames[lineSize-2] + "," +scores[lineSize-2] + " ");
+				JLabel l3 = new JLabel("3rd: " + gameNames[lineSize-3] + "," +scores[lineSize-3] + " ");
+				JLabel l4 = new JLabel("4th: " + gameNames[lineSize-4] + "," +scores[lineSize-4] + " ");
+				JLabel l5 = new JLabel("5th: " + gameNames[lineSize-5] + "," +scores[lineSize-5] + " ");
+				npl.add(l1);
+				npl.add(l2);
+				npl.add(l3);
+				npl.add(l4);
+				npl.add(l5);
+				hs.add(npl);
+				hs.pack();
+				hs.setTitle("High Scores!");
+				hs.setSize(500,100);
+				hs.setVisible(true);
+				
+			}catch (Exception ex){//Catch exception if any
+				System.err.println("Error: " + ex.getMessage());
+			}
+		}
+	});
+	
+	setdx(0);
+	b.x =0;
+	b.y =0;
+	b = null;
+}
 
-								public static void insertion_srt(int array[], String array2[], int n){
-									for (int i = 1; i < n; i++){
-										int j = i;
-										int B = array[i];
-										String C = array2[i];
-										while ((j > 0) && (array[j-1] > B)){
-											array[j] = array[j-1];
-											array2[j] = array2[j-1];
-											j--;
-										}
-										array[j] = B;
-										array2[j]=C;
-									}
-								}
-						//	}
+/** sort 2 arrays using insertsort method to help make leaderboard
+*  @param array[] sort game scores
+*  @param array2[] sort player names according to game scores sorting
+*/
+public static void sortArray(int array[], String array2[], int n){
+	for (int i = 1; i < n; i++){
+		int j = i;
+		int B = array[i];
+		String C = array2[i];
+		while ((j > 0) && (array[j-1] > B)){
+			array[j] = array[j-1];
+			array2[j] = array2[j-1];
+			j--;
+		}
+		array[j] = B;
+		array2[j]=C;
+	}
+}
 
 /** handles players winning the game, stops the ball from moving
 */
@@ -400,11 +332,9 @@ public void moveBall(){
 	if(b.intersects(p1.p)){
 		setdx(3);
 	}
-
 	if(b.intersects(p2.pad)){
 		setdx(3);
 	}
-
 	if(b.x <= (Screen.w - Screen.w)){
 		setdx(-3);
 		//  points--;
@@ -422,5 +352,6 @@ public void moveBall(){
 		setdy(3);
 	}
 }
+
 
 }

@@ -11,7 +11,7 @@
 
   <property name="projectName" value="/S12/issues/0000839" /> 
   <property name="projectNameForDownload" value="cs56_S12_0000839" /> 
-  <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" /> 
+  <property name="javadocDest" value="~/public_html/cs56/13S/sanchitg94/cs56_games_pong" /> 
   <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" /> 
 
 
@@ -24,7 +24,7 @@
 <javac srcdir="src" destdir="build" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
      <classpath>                                                                                        
          <pathelement location="build"/>                                                                                                        
- <pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>                                           
+ <pathelement location="lib/junit-4.8.2.jar"/>                                           
  </classpath>                                                                                                          
   </javac>   
   </target>
