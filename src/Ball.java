@@ -294,8 +294,30 @@ public void gameLoss(){
 													scores[i] = Integer.parseInt(gameScores[i]);
 												}	
 												insertion_srt(scores,gameNames, lineSize);
+												if(lineSize >= 5)
 												for (int v= lineSize-1;v>lineSize-6;v--)
 													System.out.println(scores[v] + gameNames[v]);
+												else
+												{
+													for(int v = lineSize - 1; v >= 0; v--)
+														System.out.println(scores[v] + gameNames[v]);
+												}
+												JFrame hs = new JFrame();
+												JPanel npl = new JPanel();
+												JLabel l1 = new JLabel("1st: " + gameNames[lineSize-1] + "," +scores[lineSize-1] + " ");
+												JLabel l2 = new JLabel("2nd: " + gameNames[lineSize-2] + "," +scores[lineSize-2] + " ");
+												JLabel l3 = new JLabel("3rd: " + gameNames[lineSize-3] + "," +scores[lineSize-3] + " ");
+												JLabel l4 = new JLabel("4th: " + gameNames[lineSize-4] + "," +scores[lineSize-4] + " ");
+												JLabel l5 = new JLabel("5th: " + gameNames[lineSize-5] + "," +scores[lineSize-5] + " ");
+												npl.add(l1);
+												npl.add(l2);
+												npl.add(l3);
+												npl.add(l4);
+												npl.add(l5);
+												hs.add(npl);
+												hs.setSize(500,100);
+												hs.setVisible(true);
+													
 											}catch (Exception ex){//Catch exception if any
 												System.err.println("Error: " + ex.getMessage());
 											}
