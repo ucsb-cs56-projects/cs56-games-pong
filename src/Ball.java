@@ -1,4 +1,6 @@
-
+import java.io.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
@@ -125,8 +127,9 @@ public class Ball implements Runnable{
 	//	g2.fill(c);
 	if(ballsLost >= 1)
 	{
-		pointsReset();
+		
 		gameLoss();
+		//pointsReset();
 		    //setdx(0);
 		    // setdy(0);
 		g.setFont(new Font("sansserif", Font.BOLD, 32));
@@ -182,10 +185,7 @@ public class Ball implements Runnable{
 /** handles players losing the game, stop the ball from moving
  */
     public void gameLoss(){
-	setdx(0);
-	b.x =0;
-	b.y =0;
-	b = null;
+	
         text.setVisible(true);
 		text.setEditable(true);
 		text.setBounds (245, 50, 60, 25);
@@ -194,7 +194,7 @@ public class Ball implements Runnable{
 		JFrame f = new JFrame();
 		JLabel label = new JLabel("Enter your name!");
 		JPanel newF = new JPanel();
-		JTextField text = new JTextField();
+		final JTextField text = new JTextField();
 		JButton button = new JButton("Enter");
 		
 	//	newF.setSize(500,500);
@@ -206,6 +206,26 @@ public class Ball implements Runnable{
 		f.setSize(400,80);
 		f.add(newF);
 		f.setVisible(true);
+		button.addActionListener(new ActionListener() {
+
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    //Execute when button is pressed
+		        try{
+				  // Create file 
+				  PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("out.txt", true)));
+				  out.write(points + " " + text.getText() + "\n");
+				  //Close the output stream
+				  out.close();
+				  }catch (Exception ex){//Catch exception if any
+				  	System.err.println("Error: " + ex.getMessage());
+				  }
+		     }
+	 	});
+		setdx(0);
+		b.x =0;
+		b.y =0;
+		b = null;
     }
     
 /** handles players winning the game, stops the ball from moving
