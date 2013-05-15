@@ -138,6 +138,26 @@ public void draw(Graphics g){
 		g.drawString("GAME OVER!",275,100);
 	}
 
+	// if (points >= 10){
+		//     pointsReset();
+		//     gameWin();
+		//     //setdx(0);
+		//     // setdy(0);
+		// g.setFont(new Font("sansserif", Font.BOLD, 32));
+		// g.setColor(Color.WHITE);
+		// g.drawString("YOU WIN!",275,100);
+		// }
+		// 
+		// else if (points <= -3){
+			//     pointsReset();
+			//     gameLoss();
+			// g.setFont(new Font("sansserif", Font.BOLD, 32));
+			// g.setColor(Color.WHITE); 
+
+			// g.drawString("YOU LOST, GAME OVER!",100,100);
+
+
+			//	}
 		}
 
 /** runs the ball Thread, gets the ball animating
@@ -212,8 +232,32 @@ public void gameLoss(){
 				// Done with the file
 				br2.close();
 				int lineSize = yo.size();
+				while(lineSize < 5)
+				{
+					out = new PrintWriter(new BufferedWriter(new FileWriter("scores.txt", true)));
+					out.write(0 + " null\n");
+					out.close();
+					lineSize++;
+					
+				}
+				
+				br2 = new BufferedReader(new FileReader("scores.txt"));
+				int r = 0;
+				while(yo.size() != 0)
+				{
+					yo.remove(r);
+				}
+				while ((line = br2.readLine()) != null) {
+						yo.add(line);
+				}
 				String[] gameNames = new String[lineSize];
 				String[] gameScores = new String[lineSize];
+				for(int i = 0; i < 5; i++)
+				{
+					gameNames[i] = "0";
+					gameScores[i] = "0";
+					
+				}
 				if(lineSize > 0){
 					for(int i = 0; i < lineSize; i++)
 					{
