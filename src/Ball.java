@@ -1,5 +1,6 @@
 
 import javax.swing.*;
+import javax.swing.text.*;
 import java.awt.*;
 import java.awt.BasicStroke;
 import java.awt.event.KeyAdapter;
@@ -30,6 +31,9 @@ public class Ball implements Runnable{
     //  Oval c;
 
     int points = 0;
+	int ballsLost = 0;
+	JTextField text;
+	JScrollPane jScrollPane1;
 
        Paddle p1 = new Paddle(8,160);
     PaddleRight p2 = new PaddleRight(50, 160);
@@ -44,7 +48,8 @@ public class Ball implements Runnable{
 	this.y = y;
 	this.w = w;
 	this.h = h;
-
+	text = new JTextField();
+	ballsLost = 0;
 	points = 0;
 	setdx(-2);
 	setdy(1);
@@ -118,26 +123,36 @@ public class Ball implements Runnable{
 	g.fillOval(b.x,b.y,b.width,b.height);
 
 	//	g2.fill(c);
-
-	if (points >= 10){
-	    pointsReset();
-	    gameWin();
-	    //setdx(0);
-	    // setdy(0);
-	g.setFont(new Font("sansserif", Font.BOLD, 32));
-	g.setColor(Color.WHITE);
-	g.drawString("YOU WIN!",275,100);
+	if(ballsLost >= 1)
+	{
+		pointsReset();
+		gameLoss();
+		    //setdx(0);
+		    // setdy(0);
+		g.setFont(new Font("sansserif", Font.BOLD, 32));
+		g.setColor(Color.WHITE);
+		g.drawString("GAME OVER!",275,100);
 	}
 
-	else if (points <= -3){
-	    pointsReset();
-	    gameLoss();
-	g.setFont(new Font("sansserif", Font.BOLD, 32));
-	g.setColor(Color.WHITE);
-	g.drawString("YOU LOST, GAME OVER!",100,100);
+	// if (points >= 10){
+	//     pointsReset();
+	//     gameWin();
+	//     //setdx(0);
+	//     // setdy(0);
+	// g.setFont(new Font("sansserif", Font.BOLD, 32));
+	// g.setColor(Color.WHITE);
+	// g.drawString("YOU WIN!",275,100);
+	// }
+	// 
+	// else if (points <= -3){
+	//     pointsReset();
+	//     gameLoss();
+	// g.setFont(new Font("sansserif", Font.BOLD, 32));
+	// g.setColor(Color.WHITE);
+	// g.drawString("YOU LOST, GAME OVER!",100,100);
 	   
 
-	}
+//	}
     }
 
 /** runs the ball Thread, gets the ball animating
@@ -171,6 +186,26 @@ public class Ball implements Runnable{
 	b.x =0;
 	b.y =0;
 	b = null;
+        text.setVisible(true);
+		text.setEditable(true);
+		text.setBounds (245, 50, 60, 25);
+        //jScrollPane1 = new JScrollPane(text);
+	//	add(text);
+		JFrame f = new JFrame();
+		JLabel label = new JLabel("Enter your name!");
+		JPanel newF = new JPanel();
+		JTextField text = new JTextField();
+		JButton button = new JButton("Enter");
+		
+	//	newF.setSize(500,500);
+		newF.add(label);
+		newF.add(text);
+		newF.add(button);
+		button.setPreferredSize(new Dimension(60,40));
+		text.setPreferredSize(new Dimension(150,40)); 
+		f.setSize(400,80);
+		f.add(newF);
+		f.setVisible(true);
     }
     
 /** handles players winning the game, stops the ball from moving
@@ -212,6 +247,7 @@ public class Ball implements Runnable{
 	if(b.x <= (Screen.w - Screen.w)){
 	    setdx(-3);
 	    points--;
+		ballsLost++;
 	    resetBall();
 	}
 	if(b.x >= (Screen.w - 20)){
