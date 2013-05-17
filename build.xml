@@ -10,10 +10,8 @@
 
   <property environment="env"/> <!-- load the environment variables --> 
   <property name="webRoot" value="${env.HOME}/public_html/cs56/13S/jdumont" />
-  <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56/13S/jdumont" />
-
-  <property name="projectName" value="/S12/issues/0000839" /> 
-  <property name="projectNameForDownload" value="cs56_S12_0000839" /> 
+  <property name="webBaseURL" 
+	    value="http://www.cs.ucsb.edu/~${env.USER}/cs56/13S/jdumont" />
 
   <property name="packageName" value="edu.ucsb.cs56.projects.games.pong" />
   <property name="projectPath" value="edu/ucsb/cs56/projects/pong" />
@@ -22,25 +20,21 @@
 
 
   <property name="javadocDest" value="${webRoot}/${projectRepoName}/javadoc" /> 
-  <property name="javadocURL" value="${webBaseURL}/${projectRepoName}/javadoc" /> 
-
-
-<!-- <property name="jwsDest" value="${webRoot}${projectName}/jws" /> 
-  <property name="jwsURL" value="${webBaseUrl}/jws" /> -->
+  <property name="javadocURL" value="${webBaseURL}/${projectRepoName}/javadoc"/> 
 
 
   <target name="compile" description="compile my code">
     <mkdir dir ="build" />
-    <javac srcdir="src" destdir="build" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
-     <classpath>                                                                                        
-       <pathelement location="build"/>                                                                                       <pathelement location="lib/junit-4.8.2.jar"/>                                           
-     </classpath>                                                                                                          
-    </javac>   
+    <javac srcdir="src" destdir="build" debug="true" 
+	   debuglevel="lines,vars,source" includeantruntime="false">
+     <classpath>                                                                       <pathelement location="build"/>                                                 <pathelement location="lib/junit-4.8.2.jar"/>                                 </classpath>                                                                   </javac>   
   </target>
 
 
-  <target name="run" depends = "compile"  description="run the Pong game, started through Screen.java">
-    <java classname="${packageName}.${mainClass}" classpath="build" fork = "true" />
+  <target name="run" depends = "compile"  
+	  description="run the Pong game, started through Screen.java">
+    <java classname="${packageName}.${mainClass}" classpath="build" 
+	  fork = "true" />
   </target>
 
   <target name="clean" description="delete unnecessary files and directories">
@@ -53,35 +47,23 @@
    <!-- delete the old javadoc -->
     <delete quiet="true" dir="javadoc" />
     <delete quiet = "true" dir ="temp"/>
-
   </target> 
 
-  <target name="javadoc" depends="compile">                                                                         <delete dir="javadoc" quiet="true" />                                                          
-    <javadoc  destdir="javadoc" author="true" version="true" use="true" >                          
-      <fileset dir="src" includes="**/*.java"/>                                                     
-      <classpath>                                                                                 
-          <pathelement location="lib/junit-4.8.2.jar"/>      
-     </classpath>                                                                                 
-   </javadoc>                                                                                     
-                                                                                                  
-   <!-- delete the old javadoc -->                                                                
-   <delete quiet="true" dir="${javadocDest}" />                                                   
-                                                                                                  
+  <target name="javadoc" depends="compile">                                         <delete dir="javadoc" quiet="true" />                                           <javadoc  destdir="javadoc" author="true" version="true" use="true" >             <fileset dir="src" includes="**/*.java"/>                                       <classpath>                                                                       <pathelement location="lib/junit-4.8.2.jar"/>      
+     </classpath>                                                                  </javadoc>                                                                      <!-- delete the old javadoc -->                                                                
+   <delete quiet="true" dir="${javadocDest}" />                                 
+
    <!-- copy everything you just made to the javadoc destination, and then make it readable -->   
-                                                                                                  
-   <copy todir="${javadocDest}" >                                                                 
-     <fileset dir="javadoc"/>                                                                     
-   </copy>                                                                                        
-                                                                                                  
+
+   <copy todir="${javadocDest}" >                                                    <fileset dir="javadoc"/>                                                      </copy>                                                                      
+
    <!-- Note: this only does the chmod command on the                                             
         javadoc subdirectory and its contents.  You MIGHT have to                                 
         MANUALLY do the chmod on the parent directories.  However,                                
         you should only need to do that once. -->                                                 
-                                                                                                  
-   <chmod dir="${javadocDest}" perm="755"  type="dir" includes="**" />                            
+                                                                                   <chmod dir="${javadocDest}" perm="755"  type="dir" includes="**" />                            
    <chmod dir="${javadocDest}" perm="755"  type="file" includes="**/*" />                         
    <echo>Javadoc deployed to ${javadocURL}</echo>                                                 
-                                                                                                  
   </target>      
 
   <target name="test" depends="compile">
@@ -112,175 +94,5 @@
     </manifest>
    </jar>
  </target>   
-<!--
-<target name="download" depends="">       -->                                   
 
-  <!-- delete everything under the "temp" and "download" subdirectories 
-          In Ant, **/* means "all files under any number of directory levels" -->
-    <!--                                                                              
-  <delete quiet="true">                                                           
-     <fileset dir="temp" includes="**/*" />                                       
-     <fileset dir="download" includes="**/*" />                                    
-  </delete>                                                                       
-           -->                                                    
-  <!-- create the directories we'll need to stage the zip file and tarballs -->
-       <!--            
-  <mkdir dir="download" />                                                         
-  <mkdir dir="temp" />                                                            
-  <mkdir dir="temp/${projectNameForDownload}" />            -->                                 
-                                                                                  
-  <!-- copy everything from the current directory that we want to put in the zip file/tarball into the
-          temp subdirectory.   Exclude things we do NOT want to include in the tarball/zip file -->
-<!--
-  <copy todir="temp/${projectNameForDownload}">                                              
-    <fileset dir="."                                                              
-     excludes="build/**, javadoc/**, **/*~, temp/**, dist/**, download/**"/>       
-  </copy>                                                                         
-            -->                                                                      
-  <!-- create the tar file from the temp directory -->
-<!--
-  <tar destfile="temp/${projectNameForDownload}.tar"                                         
-       basedir="temp"                                                             
-       includes="${projectNameForDownload}/**"                                               
-   />                                                                             
-  -->
- <!-- compress the tar file into a tarball (using "gzip") 
-                                                                                
-  <gzip zipfile="download/${projectNameForDownload}.tgz"                                      
-        src="temp/${projectNameForDownload}.tar" />                                          
- 
-  create a zip file 
-                                                 
- <zip destfile="download/${projectNameForDownload}.zip"                                      
-       basedir="temp"                                                             
-       includes="${projectNameForDownload}/**"                                               
-  />                           
-
-   Now we have the tarball and zip file in the download 
-          subdirectory, so we are finished with the temp directory                                                  
-                                                                                  
-  <delete quiet="true">                                                           
-     <fileset dir="temp" includes="**/*"/>                                        
-  </delete>                                                                       
-                                                                                  
-</target>     
-
-<target name="dist" depends="">                                          
-
-   delete everything under the "temp" and "dist" subdirectories 
-          In Ant, **/* means "all files under any number of directory levels" 
-                                                                                  
-  <delete quiet="true">                                                           
-     <fileset dir="temp" includes="**/*" />                                       
-     <fileset dir="dist" includes="**/*" />                                    
-  </delete>                                                                       
-                                                               
-   create the directories we'll need to stage the zip file and tarballs 
-                   
-  <mkdir dir="dist" />                                                         
-  <mkdir dir="temp" />                                                            
-  <mkdir dir="temp/${projectNameForDownload}" />                                             
-                                                                                  
-   copy everything from the current directory that we want to put in the zip file/tarball into the
-          temp subdirectory.   Exclude things we do NOT want to include in the tarball/zip file 
-
-  <copy todir="temp/${projectNameForDownload}">                                              
-    <fileset dir="."                                                              
-     excludes="build/**, javadoc/**, **/*~, temp/**, dist/**, download/**"/>       
-  </copy>                                                                         
-                                                                                  
-   create the tar file from the temp directory 
-
-  <tar destfile="temp/${projectNameForDownload}.tar"                                         
-       basedir="temp"                                                             
-       includes="${projectNameForDownload}/**"                                               
-   />                                                                             
-  
-  compress the tar file into a tarball (using "gzip") 
-                                                                                
-  <gzip zipfile="dist/${projectNameForDownload}.tgz"                                      
-        src="temp/${projectNameForDownload}.tar" />                                          
- 
-  create a zip file 
-                                                 
- <zip destfile="dist/${projectNameForDownload}.zip"                                      
-       basedir="temp"                                                             
-       includes="${projectNameForDownload}/**"                                               
-  />                           
-
-   Now we have the tarball and zip file in the download 
-          subdirectory, so we are finished with the temp directory                                                
-                                                                                  
-  <delete quiet="true">                                                           
-     <fileset dir="temp" includes="**/*"/>                                        
-  </delete>                                                                       
-                                                                                  
-</target>     
--->
-  <!--<delete dir="download" quiet="true" />                                         
-  <delete dir="temp" quiet="true" />   
--->
-                              
- <!--                                                                      
- <target name="jws" depends="compile,jar">
-
-   <delete dir="${webRoot}/${projectName}/jws" />
-   <mkdir dir="${webRoot}/${projectName}/jws" />
-
-   <copy todir="${jwsDest}" file="dist/${projectNameForDownload}.jar" />
-   <copy todir="${jwsDest}" >
-       <fileset dir="jws" includes="*.html"/>
-       <fileset dir="jws" includes="*.jnlp"/>
-       <fileset dir="jws" includes="*.png"/>
-       <fileset dir="jws" includes=".htaccess"/>
-   </copy>
-   <echo>Java web start at ${jwsURL}</echo>
- </target>
--->
-<!--
-<target name="linenumbers" description="Creates a file containing all source files with line numbers">               
-   <exec executable="bash">                                                                                          
-     <arg value="-c"/>                                                                                               
-     <arg value='tree -ifQ src | grep \.java\"$ | xargs pr -n > numberedsource.txt'/>                                
-   </exec>                                                                                                           
-</target>                                                                                                            
-
-
-<target name="publish" depends="jar,javadoc,download,jws,linenumbers">                           
-   <mkdir dir="${webRoot}/${projectName}" />                                      
-                                                                                  
-   <delete dir="${webRoot}/${projectName}/browse" />                              
-   <mkdir dir="${webRoot}/${projectName}/browse" />                               
-                                                                                  
-   <delete dir="${webRoot}/${projectName}/download" />                            
-   <mkdir dir="${webRoot}/${projectName}/download" />                             
-                                                               
-   <delete dir="${webRoot}/${projectName}/dist" />                            
-   <mkdir dir="${webRoot}/${projectName}/dist" />    
-   
-   <copy file="html/index.html" todir="${webRoot}/${projectName}"/>                                                                                                 
-   <copy todir="${webRoot}/${projectName}/download" >                              
-     <fileset dir="download"/>                                                    
-     <fileset dir="dist" />                                                       
-   </copy>                                                                        
-                 
-  <copy todir="${webRoot}/${projectName}/dist" >                                
-     <fileset dir="download"/>                                                    
-     <fileset dir="dist" />                                                       
-   </copy>   
-                                                                 
-   <copy file="build.xml" todir="${webRoot}/${projectName}/browse"/>              
-                                                                                  
-   <copy todir="${webRoot}/${projectName}/browse/src" >                           
-     <fileset dir="src"/>                                                         
-   </copy>            
-                                                            
-   <copy file="numberedsource.txt" todir="${webRoot}/${projectName}/browse"/>                                        
-     
-                              
-   <echo>Project published to ${webBaseUrl}/${projectName}</echo>     
-           
- </target>   
-
--->
 </project>
