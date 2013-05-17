@@ -22,18 +22,18 @@ import java.awt.geom.Rectangle2D; // for the bounding box
      @author Timothy Fok
      @version CS56, Spring 2012, UCSB
 */
-public class Ball implements Runnable{
+public class Ball {
 
     int x,y;
     int dx,dy;
     int w,h;
-    Rectangle b;
+    Rectangle rect;
     //  Oval c;
 
-    int points = 0;
+    //int points = 0;
 
-    Paddle p1 = new Paddle(8,160);
-    Paddle p2 = new Paddle(50, 160, true);
+    //Paddle p1 = new Paddle(8,160);
+    //Paddle p2 = new Paddle(50, 160, true);
     
 /** Ball constructor to initialize location of Ball onto the screen
  *  and draw it as a rectangle for a simpler and precise hitbox.
@@ -46,10 +46,10 @@ public class Ball implements Runnable{
 	this.w = w;
 	this.h = h;
 
-	points = 0;
+	//points = 0;
 	setdx(-2);
 	setdy(1);
-		b = new Rectangle(this.x,this.y,20,20);
+		rect = new Rectangle(this.x,this.y,20,20);
 	//	c = new Oval(this.x,this.y, 20,20);
     }   
 
@@ -116,18 +116,18 @@ public class Ball implements Runnable{
 
 	g.setColor(Color.PINK);
 	//	g.fillRect(b.x,b.y,b.width,b.height);  
-	g.fillOval(b.x,b.y,b.width,b.height);
+	g.fillOval(rect.x,rect.y,rect.width,rect.height);
 
 	//	g2.fill(c);
 
-	if (points >= 10){
+	/*if (points >= 10){
 	    pointsReset();
 	    gameWin();
 	    //setdx(0);
 	    // setdy(0);
-	g.setFont(new Font("sansserif", Font.BOLD, 32));
-	g.setColor(Color.WHITE);
-	g.drawString("YOU WIN!",275,100);
+	    g.setFont(new Font("sansserif", Font.BOLD, 32));
+	    g.setColor(Color.WHITE);
+	    g.drawString("YOU WIN!",275,100);
 	}
 
 	else if (points <= -3){
@@ -138,44 +138,48 @@ public class Ball implements Runnable{
 	g.drawString("YOU LOST, GAME OVER!",100,100);
 	   
 
-	}
+	}*/
     }
 
+
 /** runs the ball Thread, gets the ball animating
- */
+ */ /*
     public void run(){
 	try{
 	    while(true){
-			moveBall();
+		getXpos();
 		Thread.sleep(8);}
 	}
 	catch(Exception e)
 	    {
 	     }
     }
-
-
+    */
+  
 /** resets the ball to the middle parts of the screen
  */
     public void resetBall(){
-	if (b.x <= Screen.w - Screen.w){
-	    b.x = Screen.w/2;
-	    b.y = Screen.h/2;
+	if (rect.x <= Screen.w - Screen.w){
+	    rect.x = Screen.w/2;
+	    rect.y = Screen.h/2;
 	}
 
     }
 
+}   
+
+    
 /** handles players losing the game, stop the ball from moving
- */
+ */ /*
     public void gameLoss(){
 	setdx(0);
 	b.x =0;
 	b.y =0;
 	b = null;
-    }
+	}  */
     
 /** handles players winning the game, stops the ball from moving
- */
+ */ /*
     public void gameWin(){
 	setdx(0);
 	setdy(0); 
@@ -186,21 +190,24 @@ public class Ball implements Runnable{
 	//	p2 = null; 
 	//	Screen = null;
     }
-
+    */
 /** resets the points back to 0
- */
+ */ /*
     public void pointsReset(){
 	points = 0;
     }
+    */
     
-
 /** moves the ball around and checks for if it hits walls and paddle. Changes
  *  speed upon collision of walls and paddle.
- */
+ */ /*
     public void moveBall(){
 
-	b.x += dx;
-	b.y += dy;
+	rect.x += dx;
+	rect.y += dy;
+    }
+}
+
 
 	if(b.intersects(p1.p)){
 	    setdx(3);
@@ -228,3 +235,4 @@ public class Ball implements Runnable{
     }
 
 }
+*/

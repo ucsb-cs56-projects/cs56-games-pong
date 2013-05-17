@@ -38,7 +38,7 @@ public class Screen extends JFrame{
      *Create a static Ball so we can work with it
      * and buffer graphics to ease performance issues
      */
-    static Ball b1 = new Ball(193,143,20,20);
+    static Pong game = new Pong();
     //	Thread theball = new Thread(b1);
     Graphics doublebufferG;
     Image doublebufferImg;
@@ -74,18 +74,19 @@ public class Screen extends JFrame{
  * @param e MouseEvents to handle running game when mouse is on Screen.
 */
     public Screen(){
-
+	
 	getContentPane().addMouseListener(
 	     new MouseAdapter(){
 		 
 		 public void mouseEntered(MouseEvent e){
-		     //    this.theComp.interrupt();
-		     Thread theball = new Thread(b1);
+		 //    this.theComp.interrupt();
+		     Thread theball = new Thread(game);
 	theball.start();
-		 }
-	     }
-	      );
 
+		 }}
+		 );
+	/*	Thread theball = new Thread(game);
+		theball.start();*/
  	this.addKeyListener(new myKeyAdapter());
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	this.setScreenWidth(newW);
@@ -111,7 +112,7 @@ public class Screen extends JFrame{
 
 	g.setFont(new Font("sansserif", Font.BOLD, 32));
 	g.setColor(Color.WHITE);
-	g.drawString(b1.points + "",400,70);
+	g.drawString(game.points + "",400,70);
 
 	/*	if (theball.interrupt()){
 	g.setFont(new Font("sansserif", Font.BOLD, 32));
@@ -120,10 +121,10 @@ public class Screen extends JFrame{
 	*/
 	
 
-	b1.draw(g);
-	b1.p1.draw(g);
+	game.draw(g);
+      	game.p1.draw(g);
 	repaint();
-	b1.p2.draw(g);
+	game.p2.draw(g);
 	repaint();
 }	
 
@@ -156,8 +157,8 @@ public void paint(Graphics g){
  */
 public class myKeyAdapter extends KeyAdapter {
     public void keyPressed(KeyEvent evt){
-	b1.p1.keyPressed(evt);
-	b1.p2.keyPressed(evt);
+	game.p1.keyPressed(evt);
+	game.p2.keyPressed(evt);
     }
 
 /** myKeyAdapter handles keyboard released events.
@@ -165,8 +166,8 @@ public class myKeyAdapter extends KeyAdapter {
  *  for movement of paddle.
  */
     public void keyReleased(KeyEvent evt){
-	b1.p1.keyReleased(evt);
-	b1.p2.keyReleased(evt);
+	game.p1.keyReleased(evt);
+	game.p2.keyReleased(evt);
     }
 
 }
@@ -184,7 +185,7 @@ public class myKeyAdapter extends KeyAdapter {
 	    newY= 600;
 	    // Paddle.newPH = 90;
 	}
-
+	
 	else if(args.length == 1)
 	    {
 		newW = Integer.parseInt(args[0]);	
@@ -201,12 +202,12 @@ public class myKeyAdapter extends KeyAdapter {
 	//	Thread theball = new Thread(b1);
 	//	theball.start();
 
-	Thread LeftPaddle = new Thread(b1.p1);
+	Thread LeftPaddle = new Thread(game.p1);
 	LeftPaddle.start();
 
 	Screen myScreen = new Screen();
 
-	Thread RightPaddle = new Thread(b1.p2);
+	Thread RightPaddle = new Thread(game.p2);
 	RightPaddle.start();
 
 	//	height = args[0];
