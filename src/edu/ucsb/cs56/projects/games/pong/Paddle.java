@@ -18,18 +18,17 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 /** Paddle is the class that will move the user-controlled paddle                                                                                                                    
  around the screen                                                                                                                                                                
 
- @author Timothy Fok                                                                                                                                                             
- @version CS56, Spring 2012, UCSB                                                                                                                                                
+ @author Timothy Fok
+ @author Jake Dumont, Heneli Kailahi
+ @version CS56, Spring 2013, UCSB                                                                                                                                                
 */
-public class Paddle //implements Runnable
-{
+public class Paddle {
     Rectangle p;
     int x,y;
     int dy;
     int dx;
     boolean right;
     public static Integer paddleHeight = 90;
-    //public static int newPH;                                                                                                                                                       
 
 
     /** Paddle contructor to initialize intial x,y placement of paddle                                                                                                                   
@@ -39,14 +38,13 @@ public class Paddle //implements Runnable
     public Paddle(int x, int y){
 	this.x = x;
 	this.y = y;
-	//      this.setPaddleHeight(newPH);                                                                                                                                         
 	p = new Rectangle(x,y,10,paddleHeight);
     }
 
     /** Right paddle constructor to initialize intial x,y placement of paddle                                                                                                            
 	 @param x sets the x position of the paddle                                                                                                                                       
-	  @param y sets the y position of the paddle                                                                                                                                       
-	   @param sideRight sees if the paddle is the rightmost paddle                                                                                                                      
+	 @param y sets the y position of the paddle                                                                                                                                       
+	 @param sideRight sees if the paddle is the rightmost paddle                                                                                                                      
     */
     public Paddle(int x, int y, boolean sideRight){
 	this.x = x;
@@ -63,24 +61,9 @@ public class Paddle //implements Runnable
     }
 
 
-    /** runs the paddle thread and starts animating it.                                                                                                                                  
-	 
-	public void run(){
-	try{
-	while(true){
-	movePaddleLeft();
-	Thread.sleep(9);
-	}
-	}
-	catch(Exception e)
-	{
-
-	}
-	}
-    */
-
-    /** KeyPressed handles what to do if player hits up or down key.                                                                                                                     
-     *  Paddle should move up upon up key and down upon down key.                                                                                                                        
+   
+    /** KeyPressed handles what to do if player hits up or down key, and Q and A key.                                                                                                                     
+     *  Paddle should move up upon up key and Q key, and down upon down key and A key.                                                                                                                        
      *   @param evt finds which key on the keyboard was hit.                                                                                                                               
      */
     public void keyPressed(KeyEvent evt){
@@ -103,6 +86,10 @@ public class Paddle //implements Runnable
 	    }
 	}
     }
+
+    /** KeyReleased handles what to do if player releases up or down key, or Q or A key.                                                                                                                     
+     *   @param evt finds which key on the keyboard was hit.                                                                                                                               
+     */
 
 
     public void keyReleased(KeyEvent evt){
@@ -199,7 +186,7 @@ public class Paddle //implements Runnable
     /** move handles the changing position of the paddle,                                                                                                                                
      *  keeps the paddle from going offscreen.                                                                                                                                           
      */
-    public void movePaddleLeft(){
+    public void movePaddle(){
 	if(p.y <= this.getPaddleBotHit()){
 	    setYpos(this.getPaddleBotHit());
 	}

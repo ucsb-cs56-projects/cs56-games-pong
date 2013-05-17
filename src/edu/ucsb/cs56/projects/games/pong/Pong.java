@@ -20,7 +20,7 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 
 
  @author Heneli Kailahi, Jake Dumont                                                                                                                                             
- @version CS56, Spring 2012, UCSB                                                                                                                                                
+ @version CS56, Spring 2013, UCSB                                                                                                                                                
 */
 public class Pong implements Runnable {
 
@@ -30,30 +30,37 @@ public class Pong implements Runnable {
     Ball b;
     Ball b2;
     
+    /** Pong constructor to initialize 2 paddle objects, a ball object, and points value
+     */
+
     public Pong() {
 	this.p1 = new Paddle(8,160);
 	this.p2 = new Paddle(50, 160, true);
 	this.b = new Ball(300,300,20,20);
+	this.points = 0;
     }
 
+    /** returns the current value of points                                                                                                                           
+     */
     public int getPoints() {
 	return points;
     }
     
-
+    /** sets points value to newPoints                                                                                                                                
+	 *  @param newPoints chooses a new amount of points                                                                                                                                                
+     */
     public void setPoints(int newPoints) {
 	this.points = newPoints;
     }
 
+    /** draw a ball to the screen, draw Win or Lose game depending on points value                                                                                                        
+     *  @param g graphics draws the pink ball.                                                                                                                                           
+     */
+
     public void draw(Graphics g) {
 	b.draw(g);
-	if (b2 != null)
-	    b2.draw(g);
-	//System.out.println(points);
 	if (points >= 10){
 	    pointsReset();
-	    //System.out.println("game over");
-	    //gameWin();
 	    b.setdx(0);
 	    b.setdy(0);
 	    g.setFont(new Font("sansserif", Font.BOLD, 32));
@@ -70,13 +77,11 @@ public class Pong implements Runnable {
 	    g.drawString("YOU LOST, GAME OVER!",100,100);
 
 	}
-	
-	else if (points == 3) {
-	    if (b2 != null) {
-		b2 = new Ball(300,300,20,20);
-	    }
-	}
+
     }
+
+    /** handles player winning the game,  reset ball values to 0 and stop the ball from moving
+     */
 
     public void gameWin(){
 	b.setdx(0);
@@ -84,9 +89,7 @@ public class Pong implements Runnable {
 	b.setXpos(0);
 	b.setYpos(0);
 	b = null;
-	//      p1 = null;                                                                                                                                                           
-	//      p2 = null;                                                                                                                                                           
-	//      Screen = null;                                                                                                                                                       
+                                                                                                                                                      
     }
 
     /** handles players losing the game, stop the ball from moving                                                                                                                       
@@ -106,15 +109,19 @@ public class Pong implements Runnable {
 	this.points = 0;
     }
 
+    /** Move the paddles and the ball. Check for collision 
+     */
     public void moveGame() {
-	p1.movePaddleLeft();
-	p2.movePaddleLeft();
+	p1.movePaddle();
+	p2.movePaddle();
 	b.setXpos(b.getXpos()+b.getdx());
 	b.setYpos(b.getYpos()+b.getdy());
 	paddleCollision();
 	wallCollision();
     }
 
+    /** Detect whether ball hits a paddle
+     */
     public void paddleCollision() {
 	if((b.rect).intersects(p1.p)){
 	    b.setdx(3);
@@ -125,6 +132,8 @@ public class Pong implements Runnable {
 	}
     }
 
+    /** Detect whether the ball hits a wall
+     */
     public void wallCollision() {
 	if(b.getXpos() <= (Screen.w - Screen.w)){
 	    b.setdx(-3);
@@ -143,6 +152,8 @@ public class Pong implements Runnable {
 	}
     }
 
+    /** Run thread to move paddles and ball
+     */
     public void run(){
 	try{
 	    while(true){

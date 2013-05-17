@@ -9,9 +9,9 @@
   
 
   <property environment="env"/> <!-- load the environment variables --> 
-  <property name="webRoot" value="${env.HOME}/public_html/cs56/13S/jdumont" />
+  <property name="webRoot" value="${env.HOME}/public_html/cs56/13S/jdumont/hkailahi" />
   <property name="webBaseURL" 
-	    value="http://www.cs.ucsb.edu/~${env.USER}/cs56/13S/jdumont" />
+	    value="http://www.cs.ucsb.edu/~${env.USER}/cs56/13S/jdumont/hkailahi" />
 
   <property name="packageName" value="edu.ucsb.cs56.projects.games.pong" />
   <property name="projectPath" value="edu/ucsb/cs56/projects/pong" />

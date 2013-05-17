@@ -24,8 +24,10 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 
 /** Screen is the GUI implementation of the Pong game                                                                                                                                
 
- @author Timothy Fok                                                                                                                                                             
- @version CS56, Spring 2012, UCSB                                                                                                                                                
+ @author Timothy Fok    
+ @author Jake Dumont, Heneli Kailahi
+ @version CS56, Spring 2013, UCSB
+
 */
 
 public class Screen extends JFrame {
@@ -77,14 +79,13 @@ public class Screen extends JFrame {
 					  new MouseAdapter(){
 
 					      public void mouseEntered(MouseEvent e){
-						  //    this.theComp.interrupt();                                                                                                                                     
+						                                                                                                                         
 						  Thread theball = new Thread(game);
 						  theball.start();
 					      }
 					  }
 					  );
-        /*      Thread theball = new Thread(game);                                                                                                                                   
-                theball.start();*/
+        
 	this.addKeyListener(new myKeyAdapter());
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	this.setScreenWidth(newW);
@@ -113,21 +114,11 @@ public class Screen extends JFrame {
 	g.drawString(game.points + "",400,70);
 
 	game.draw(g);
-	//game.b.draw(g);                                                                                                                                                            
 	game.p1.draw(g);
 	repaint();
 	game.p2.draw(g);
 	repaint();
     }
-
-
-
-    /*   public void draw(Graphics g){                                                                                                                                               
-       l.draw(g);                                                                                                                                                                    
-       //       repaint();                                                                                                                                                           
-                                                                                                                                                                                     
-    }                                                                                                                                                                                
-    */
 
 
     /** paint buffer graphics onto screen                                                                                                                                                
@@ -146,7 +137,7 @@ public class Screen extends JFrame {
 
     /** myKeyAdapter handles keyboard events.                                                                                                                                            
      *  it handles up and down keys in particular                                                                                                                                        
- *  for movement of paddle.                                                                                                                                                          
+     *  for movement of paddle.  
  */
     public class myKeyAdapter extends KeyAdapter {
 	public void keyPressed(KeyEvent evt){
@@ -176,7 +167,6 @@ public class Screen extends JFrame {
 	    {
 		newW = 800;
 		newY= 600;
-		// Paddle.newPH = 90;                                                                                                                                                    
 	    }
 
 	else if(args.length == 1)
@@ -189,29 +179,12 @@ public class Screen extends JFrame {
 	    {
 		newW = Integer.parseInt(args[0]);
 		newY = Integer.parseInt(args[1]);
-		//Paddle.paddleHeight = Integer.parseInt(args[2]);                                                                                                                           
-	    }
+	    }                                                                                                                                                     
 
-	//      Thread theball = new Thread(b1);                                                                                                                                     
-	//      theball.start();                                                                                                                                                     
-
-	//Thread LeftPaddle = new Thread(game.p1);
-	//LeftPaddle.start();
 
 	Screen myScreen = new Screen();
-
-	//Thread RightPaddle = new Thread(game.p2);
-	//RightPaddle.start();
-
-	//      height = args[0];                                                                                                                                                    
+                                                                                                                                               
     }
-
-    /*   public void draw(Graphics g){                                                                                                                                               
-    l.draw(g);                                                                                                                                                                    
-    //       repaint();                                                                                                                                                           
-                                                                                                                                                                                     
-}                                                                                                                                                                                
-    */
 
 
 }

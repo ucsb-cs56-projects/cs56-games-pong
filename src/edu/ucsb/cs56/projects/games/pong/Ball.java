@@ -20,8 +20,8 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 
 
  @author Timothy Fok  
- @author Jake Dumont
- @version CS56, Spring 2012, UCSB                                                                                                                                                
+ @author Jake Dumont, Heneli Kailahi
+ @version CS56, Spring 2013, UCSB                                                                                                                                                
 */
 public class Ball {
 
@@ -29,17 +29,14 @@ public class Ball {
     int dx,dy;
     int w,h;
     Rectangle rect;
-    //  Oval c;                                                                                                                                                                      
-
-    //int points = 0;                                                                                                                                                                
-
-    //Paddle p1 = new Paddle(8,160);                                                                                                                                                 
-    //Paddle p2 = new Paddle(50, 160, true);                                                                                                                                         
+                                                
 
     /** edu.ucsb.cs56.projects.games.pong.Ball constructor to initialize location of edu.ucsb.cs56.projects.games.pong.Ball onto the screen                                                                                                                  
      *  and draw it as a rectangle for a simpler and precise hitbox.                                                                                                                     
      *  @param x set initial x coordinate of ball                                                                                                                                        
-     *  @param y set initial y coordinate of ball                                                                                                                                        
+     *  @param y set initial y coordinate of ball 
+     *  @param w set initial w of ball
+     *  @param h set initial h of ball
      */
     public Ball(int x, int y, int w, int h){
 	this.x = x;
@@ -47,11 +44,9 @@ public class Ball {
 	this.w = w;
 	this.h = h;
 
-	//points = 0;                                                                                                                                                                
 	setdx(-2);
 	setdy(1);
 	rect = new Rectangle(this.x,this.y,20,20);
-	//      c = new Oval(this.x,this.y, 20,20);                                                                                                                                  
     }
 
     /** sets a different x position for the ball                                                                                                                                         
@@ -114,12 +109,11 @@ public class Ball {
      */
     public void draw(Graphics g){
 
-	//Graphics2D g2 = (Graphics2D) g;                                                                                                                                            
-
 	g.setColor(Color.PINK);
-	//      g.fillRect(b.x,b.y,b.width,b.height);                                                                                                                                
+
 	g.fillOval(x,y,rect.width,rect.height);
     }
+
     /** resets the ball to the middle parts of the screen                                                                                                                                
      */
     public void resetBall(){
