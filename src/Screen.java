@@ -1,6 +1,7 @@
 //code influence and ideas from http://www.dreamincode.net/forums/topic/172211-programing-an-applet-game-of-pong/
 //http://www.youtube.com/watch?v=E-CJYELJa88
 // https://foo.cs.ucsb.edu/56mantis/view.php?id=740
+//package edu.ucsb.cs56.projects.S13.cs56_games_pong;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,9 +22,10 @@ import java.awt.geom.Line2D;  // single lines
 import java.awt.geom.Rectangle2D; // for the bounding box
 
 /** Screen is the GUI implementation of the Pong game
-
-     @author Timothy Fok 
-     @version CS56, Spring 2012, UCSB
+	@author Timothy Fok 
+	@author Bhanu Khanijau
+	@author Sanchit Gupta
+	@version CS56, Spring 2013, UCSB
 */
 
 public class Screen extends JFrame{
@@ -111,29 +113,12 @@ public class Screen extends JFrame{
 	g.setColor(Color.WHITE);
 	g.drawString(b1.points + "",400,70);
 
-	/*	if (theball.interrupt()){
-	g.setFont(new Font("sansserif", Font.BOLD, 32));
-	g.setColor(Color.WHITE);
-	g.drawString("MOUSE OVER TO PLAY",400,150);
-	*/
-	
-
 	b1.draw(g);
 	b1.p1.draw(g);
 	repaint();
 	b1.p2.draw(g);
 	repaint();
 }	
-
-
-
-    /*   public void draw(Graphics g){
-       l.draw(g);
-       //       repaint();
-
-    }
-    */
-
 
 /** paint buffer graphics onto screen
  *
@@ -168,7 +153,6 @@ public class myKeyAdapter extends KeyAdapter {
     }
 
 }
-
 /** create the screen and start the threads of the ball and paddle
  *  so they can start animating.
  *   @param args no return
@@ -184,20 +168,17 @@ public class myKeyAdapter extends KeyAdapter {
 	}
 
 	else if(args.length == 1)
-	    {
+    {
 		newW = Integer.parseInt(args[0]);	
 		newY = 600;
-	    }
+	}
 	
 	else
-	    {
-	newW = Integer.parseInt(args[0]);
-	newY = Integer.parseInt(args[1]);
-	//Paddle.paddleHeight = Integer.parseInt(args[2]);
-	    }
+	{
+		newW = Integer.parseInt(args[0]);
+		newY = Integer.parseInt(args[1]);
+	}
 
-	//	Thread theball = new Thread(b1);
-	//	theball.start();
 
 	Thread LeftPaddle = new Thread(b1.p1);
 	LeftPaddle.start();
@@ -207,15 +188,7 @@ public class myKeyAdapter extends KeyAdapter {
 	Thread RightPaddle = new Thread(b1.p2);
 	RightPaddle.start();
 
-	//	height = args[0];
     }
-
-    /*   public void draw(Graphics g){
-       l.draw(g);
-       //       repaint();
-
-    }
-    */
 
 
 }
