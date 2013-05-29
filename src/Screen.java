@@ -33,6 +33,7 @@ public class Screen extends JFrame{
     public static int h;
     public static Integer newW;    
     public static Integer newY;
+	public Color backgroundColor = Color.BLACK;
 
 /**
      *Create a static Ball so we can work with it
@@ -91,10 +92,10 @@ public class Screen extends JFrame{
 	this.setScreenWidth(newW);
 	this.setScreenHeight(newY);
 	this.setSize(w,h);
-	this.setBackground(Color.BLACK);
+	this.setBackground(backgroundColor);
 	this.setResizable(false);
 
-	this.setTitle("Cooperative PONG. WIN: 10 LOSE: -3. MOUSE OVER TO UNPAUSE AND INCREASE SPEED");
+	this.setTitle("A Game of Pong. MOUSE OVER TO UNPAUSE AND INCREASE SPEED");
 	this.setVisible(true);	
     }
 
@@ -114,8 +115,8 @@ public class Screen extends JFrame{
 	g.drawString(b1.points + "",400,70);
 
 	b1.draw(g);
-	b1.p1.draw(g);
-	repaint();
+//	b1.p1.draw(g);
+//	repaint();
 	b1.p2.draw(g);
 	repaint();
 }	
@@ -139,7 +140,7 @@ public void paint(Graphics g){
  */
 public class myKeyAdapter extends KeyAdapter {
     public void keyPressed(KeyEvent evt){
-	b1.p1.keyPressed(evt);
+	//b1.p1.keyPressed(evt);
 	b1.p2.keyPressed(evt);
     }
 
@@ -148,7 +149,7 @@ public class myKeyAdapter extends KeyAdapter {
  *  for movement of paddle.
  */
     public void keyReleased(KeyEvent evt){
-	b1.p1.keyReleased(evt);
+//	b1.p1.keyReleased(evt);
 	b1.p2.keyReleased(evt);
     }
 
@@ -180,8 +181,8 @@ public class myKeyAdapter extends KeyAdapter {
 	}
 
 
-	Thread LeftPaddle = new Thread(b1.p1);
-	LeftPaddle.start();
+	//Thread LeftPaddle = new Thread(b1.p1);
+	//LeftPaddle.start();
 
 	Screen myScreen = new Screen();
 

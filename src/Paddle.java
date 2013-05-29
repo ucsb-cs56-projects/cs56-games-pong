@@ -90,9 +90,41 @@ public class Paddle implements Runnable{
  *   @param g graphics handles the drawing of the paddle
 */
 	public void draw(Graphics g){
-		g.setColor(Color.GREEN);
+			Color ballColor;
+			double ballC = Math.random();
+			Color purple = new Color (131,0,131) ;
+			Color darkBlue = new Color (24,52,111);
+			if(ballC < 0.1){
+				ballColor = Color.RED;
+			}
+			else if(ballC < 0.2){
+				ballColor = darkBlue;
+				}
+				else if(ballC < 0.3){
+					ballColor = Color.ORANGE;
+				}
+				else if(ballC < 0.4){
+					ballColor = Color.CYAN;
+					}
+				else if(ballC < 0.5){
+					ballColor = Color.YELLOW;
+				}
+				else if(ballC < 0.6){
+					ballColor = purple;
+					}
+				else if(ballC < 0.7){
+					ballColor = Color.GREEN;
+				}
+				else if(ballC < 0.8){
+					ballColor = ballColor;
+					}
+				else{
+					ballColor = Color.BLUE; //twice as likely to get Blue
+				}
+		g.setColor(ballColor);
 		g.fillRect(p.x,p.y,p.width,p.height);
 	}
+
 
 /** set the speed of the change of y position
  *   @param newdy chooses the new speed
