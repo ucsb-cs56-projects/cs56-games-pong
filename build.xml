@@ -3,7 +3,7 @@
   <property name="mainClass" value="Screen" />
  
   <!-- build.xml for CP3, S12, CS56
-       name: Timothy Fok-->
+       name: Bhanu Khanijau and Sanchit Gupta-->
 
    <property environment="env"/> <!-- load the environment variables --> 
    <property name="webRoot" value="${env.HOME}/public_html/cs56" />

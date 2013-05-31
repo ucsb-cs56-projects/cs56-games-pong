@@ -115,9 +115,6 @@ public class Paddle implements Runnable{
 				else if(ballC < 0.7){
 					ballColor = Color.GREEN;
 				}
-				else if(ballC < 0.8){
-					ballColor = ballColor;
-					}
 				else{
 					ballColor = Color.BLUE; //twice as likely to get Blue
 				}

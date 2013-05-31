@@ -73,17 +73,10 @@ public class PaddleRight implements Runnable{
 		if(evt.getKeyCode() == evt.VK_DOWN){
 			setdy(5);
 		}
-		if(evt.getKeyCode() == evt.VK_P){
-				try{
-					while(true){
-					movePaddleRight();
-					Thread.sleep();
-					}
-				}catch(Exception e){
-					System.err.println(e.getMessage());
-			    }
-			}
+		if(evt.getKeyCode() == evt.VK_Q){
+			System.exit(0);
 		}    
+	}
 
 /** KeyReleased handles what to do if player releaseds up or down key.
  *  PaddleRight should stop upon key release.
@@ -127,9 +120,6 @@ public class PaddleRight implements Runnable{
 			else if(paddleC < 0.7){
 				paddleColor = Color.GREEN;
 			}
-			else if(paddleC < 0.8){
-				paddleColor = paddleColor;
-				}
 			else{
 				paddleColor = Color.BLUE; //twice as likely to get Blue
 			}
