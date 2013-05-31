@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
-import java.awt.BasicStroke;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color; // class for Colors
@@ -40,7 +39,7 @@ public class Ball implements Runnable{
 	JTextField text;
 	JScrollPane jScrollPane1;
 
-	Paddle p1 = new Paddle(8,160);
+//	Paddle p1 = new Paddle(8,160);
 	PaddleRight p2 = new PaddleRight(50, 160);
 
 /** Ball constructor to initialize location of Ball onto the screen
@@ -122,7 +121,38 @@ public int getdy(){
 public void draw(Graphics g){
 
 	//Graphics2D g2 = (Graphics2D) g;
-	g.setColor(Color.PINK);
+	Color ballColor = Color.RED;
+	double ballC = Math.random();
+	Color purple = new Color (131,0,131) ;
+	Color darkBlue = new Color (24,52,111);
+	if(ballC < 0.1){
+		ballColor = Color.RED;
+	}
+	else if(ballC < 0.2){
+		ballColor = darkBlue;
+		}
+		else if(ballC < 0.3){
+			ballColor = Color.ORANGE;
+		}
+		else if(ballC < 0.4){
+			ballColor = Color.CYAN;
+			}
+		else if(ballC < 0.5){
+			ballColor = Color.YELLOW;
+		}
+		else if(ballC < 0.6){
+			ballColor = purple;
+			}
+		else if(ballC < 0.7){
+			ballColor = Color.GREEN;
+		}
+		else if(ballC < 0.8){
+			ballColor = ballColor;
+			}
+		else{
+			ballColor = Color.BLUE; //twice as likely to get Blue
+		}
+g.setColor(ballColor);
 	//	g.fillRect(b.x,b.y,b.width,b.height);  
 	g.fillOval(b.x,b.y,b.width,b.height);
 
@@ -329,9 +359,9 @@ public void moveBall(){
 	b.x += dx;
 	b.y += dy;
 
-	if(b.intersects(p1.p)){
-		setdx(3);
-	}
+//	if(b.intersects(p1.p)){
+//		setdx(3);
+//	}
 	if(b.intersects(p2.pad)){
 		setdx(3);
 	}

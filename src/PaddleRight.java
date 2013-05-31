@@ -73,7 +73,10 @@ public class PaddleRight implements Runnable{
 		if(evt.getKeyCode() == evt.VK_DOWN){
 			setdy(5);
 		}
-	}    
+		if(evt.getKeyCode() == evt.VK_Q){
+			System.exit(0);
+		}    
+	}
 
 /** KeyReleased handles what to do if player releaseds up or down key.
  *  PaddleRight should stop upon key release.
@@ -92,7 +95,35 @@ public class PaddleRight implements Runnable{
  *   @param g graphics handles the drawing of the paddle
 */
 	public void draw(Graphics g){
-		g.setColor(Color.BLUE);
+		Color paddleColor = Color.RED;
+		double paddleC = Math.random();
+		Color purple = new Color (131,0,131) ;
+		Color darkBlue = new Color (24,52,111);
+		if(paddleC < 0.1){
+			paddleColor = Color.RED;
+		}
+		else if(paddleC < 0.2){
+			paddleColor = darkBlue;
+			}
+			else if(paddleC < 0.3){
+				paddleColor = Color.ORANGE;
+			}
+			else if(paddleC < 0.4){
+				paddleColor = Color.CYAN;
+				}
+			else if(paddleC < 0.5){
+				paddleColor = Color.YELLOW;
+			}
+			else if(paddleC < 0.6){
+				paddleColor = purple;
+				}
+			else if(paddleC < 0.7){
+				paddleColor = Color.GREEN;
+			}
+			else{
+				paddleColor = Color.BLUE; //twice as likely to get Blue
+			}
+	g.setColor(paddleColor);
 		g.fillRect(pad.x,pad.y,pad.width,pad.height);
 	}
 
