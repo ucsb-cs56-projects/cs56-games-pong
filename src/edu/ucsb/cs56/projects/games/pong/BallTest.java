@@ -16,9 +16,9 @@ public class BallTest
     /**
        test constructor from BallTest
        @see Ball
-     */
+    */
    
-   @Test public void testConstructor()
+    @Test public void testConstructor()
     {
         Ball ball = new Ball(20,20,20,20);
         assertEquals(20,ball.getXpos());
@@ -28,9 +28,9 @@ public class BallTest
     /**
        test constructor again from BallTest
        @see Ball
-     */
+    */
    
-   @Test public void testConstructor2()
+    @Test public void testConstructor2()
     {
         Ball ball = new Ball(30,100,20,20);
         assertEquals(30,ball.getXpos());
@@ -40,9 +40,9 @@ public class BallTest
     /**
        test getdx
        @see Ball#getdx
-     */
+    */
    
-  @Test public void testgetdx()
+    @Test public void testgetdx()
     {
         Ball ball = new Ball(30,100,20,20);
 	ball.setdx(5);
@@ -53,8 +53,8 @@ public class BallTest
     /**
        test getdy
        @see Ball#getdy
-     */  
-  @Test public void testgetdy()
+    */  
+    @Test public void testgetdy()
     {
         Ball ball = new Ball(30,100,20,20);
 	ball.setdy(7);
@@ -64,5 +64,3 @@ public class BallTest
 
 
 }
-
-  

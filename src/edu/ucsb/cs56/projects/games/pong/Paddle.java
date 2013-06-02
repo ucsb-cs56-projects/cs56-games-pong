@@ -32,9 +32,9 @@ public class Paddle {
 
 
     /** Paddle contructor to initialize intial x,y placement of paddle                                                                                                                   
-	 @param x sets the x position of the paddle.                                                                                                                                      
-	 @param y sets the y position of the paddle.                                                                                                                                      
-	 */
+     @param x sets the x position of the paddle.                                                                                                                                      
+     @param y sets the y position of the paddle.                                                                                                                                      
+    */
     public Paddle(int x, int y){
 	this.x = x;
 	this.y = y;
@@ -42,9 +42,9 @@ public class Paddle {
     }
 
     /** Right paddle constructor to initialize intial x,y placement of paddle                                                                                                            
-	 @param x sets the x position of the paddle                                                                                                                                       
-	 @param y sets the y position of the paddle                                                                                                                                       
-	 @param sideRight sees if the paddle is the rightmost paddle                                                                                                                      
+     @param x sets the x position of the paddle                                                                                                                                       
+     @param y sets the y position of the paddle                                                                                                                                       
+     @param sideRight sees if the paddle is the rightmost paddle                                                                                                                      
     */
     public Paddle(int x, int y, boolean sideRight){
 	this.x = x;
@@ -165,8 +165,8 @@ public class Paddle {
     /**
      *  returns the Ypos of the paddle, which is                                                                                                                                     
      * the top of the screen where the paddle can highest                                                                                                                            
-     *  go to                                                                                                                                                                        
-	 */
+     *  go to.
+     */
     public int getPaddleTopHit(){
 	int Ypos = Screen.h - 97;
 	return Ypos;

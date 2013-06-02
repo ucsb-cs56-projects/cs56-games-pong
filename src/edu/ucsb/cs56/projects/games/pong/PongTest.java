@@ -16,14 +16,14 @@ public class PongTest
     /**
        test constructor from Pong
        @see Pong
-     */
+    */
    
-   @Test public void testConstructor()
+    @Test public void testConstructor()
     {
         Pong game = new Pong();
 	Paddle pp = new Paddle(8, 160);
 	Ball bb = new Ball(300, 300, 20, 20);
-	
+    
         assertEquals(pp.getXpos(),game.p1.getXpos());
 	assertEquals(pp.getYpos(),game.p1.getYpos());
 
@@ -35,9 +35,9 @@ public class PongTest
     /**
        test getPoints
        @see Pong#getPoints
-     */
+    */
    
-  @Test public void testgetPoints()
+    @Test public void testgetPoints()
     {
         Pong game = new Pong();
 	game.setPoints(5);
