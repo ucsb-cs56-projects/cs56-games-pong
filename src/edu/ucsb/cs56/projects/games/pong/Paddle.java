@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.games.pong;
+//package edu.ucsb.cs56.projects.games.pong;
 
 import javax.swing.*;
 import java.awt.BasicStroke;
@@ -19,6 +19,7 @@ import java.awt.geom.Rectangle2D; // for the bounding box
  around the screen                                                                                                                                                                
 
  @author Timothy Fok
+ @author Sanchit Gupta, Bhanu Khanijau
  @author Jake Dumont, Heneli Kailahi
  @version CS56, Spring 2013, UCSB                                                                                                                                                
 */
@@ -36,9 +37,9 @@ public class Paddle {
      @param y sets the y position of the paddle.                                                                                                                                      
     */
     public Paddle(int x, int y){
-	this.x = x;
-	this.y = y;
-	p = new Rectangle(x,y,10,paddleHeight);
+    this.x = x;
+    this.y = y;
+    p = new Rectangle(x,y,10,paddleHeight);
     }
 
     /** Right paddle constructor to initialize intial x,y placement of paddle                                                                                                            
@@ -47,17 +48,17 @@ public class Paddle {
      @param sideRight sees if the paddle is the rightmost paddle                                                                                                                      
     */
     public Paddle(int x, int y, boolean sideRight){
-	this.x = x;
-	this.y = y;
-	p = new Rectangle(x,y,10,paddleHeight);
-	this.right = sideRight;
+    this.x = x;
+    this.y = y;
+    p = new Rectangle(x,y,10,paddleHeight);
+    this.right = sideRight;
     }
 
     /** set the height of the paddle                                                                                                                                                     
      *   @param newHeight chooses the new height for the paddle                                                                                                                          
      */
     public void setPaddleHeight(int newHeight){
-	this.paddleHeight = newHeight;
+    this.paddleHeight = newHeight;
     }
 
 
@@ -67,24 +68,26 @@ public class Paddle {
      *   @param evt finds which key on the keyboard was hit.                                                                                                                               
      */
     public void keyPressed(KeyEvent evt){
-	if (this.right == false) {
-	    if(evt.getKeyCode() == evt.VK_Q){
-		setdy(-5);
-	    }
-
-	    if(evt.getKeyCode() == evt.VK_A){
-		setdy(5);
-	    }
-	}
-	else {
-	    if(evt.getKeyCode() == evt.VK_UP){
-		setdy(-5);
-	    }
-
-	    if(evt.getKeyCode() == evt.VK_DOWN){
-		setdy(5);
-	    }
-	}
+        if (this.right == false) {
+            if(evt.getKeyCode() == evt.VK_Q){
+                System.exit(0);
+            }
+            if(evt.getKeyCode() == evt.VK_W){
+                setdy(-5);
+            }
+            if(evt.getKeyCode() == evt.VK_S){
+                setdy(5);
+            }
+        
+        }
+        else {
+            if(evt.getKeyCode() == evt.VK_UP){
+                setdy(-5);
+            }
+            if(evt.getKeyCode() == evt.VK_DOWN){
+                setdy(5);
+            }
+        }
     }
 
     /** KeyReleased handles what to do if player releases up or down key, or Q or A key.                                                                                                                     
@@ -93,24 +96,24 @@ public class Paddle {
 
 
     public void keyReleased(KeyEvent evt){
-	if (this.right == false) {
-	    if(evt.getKeyCode() == evt.VK_Q){
-		setdy(0);
-	    }
+    if (this.right == false) {
+        if(evt.getKeyCode() == evt.VK_W){
+        setdy(0);
+        }
 
-	    if(evt.getKeyCode() == evt.VK_A){
-		setdy(0);
-	    }
-	}
-	else {
-	    if(evt.getKeyCode() == evt.VK_UP){
-		setdy(0);
-	    }
+        if(evt.getKeyCode() == evt.VK_S){
+        setdy(0);
+        }
+    }
+    else {
+        if(evt.getKeyCode() == evt.VK_UP){
+        setdy(0);
+        }
 
-	    if(evt.getKeyCode() == evt.VK_DOWN){
-		setdy(0);
-	    }
-	}
+        if(evt.getKeyCode() == evt.VK_DOWN){
+        setdy(0);
+        }
+    }
     }
 
 
@@ -120,8 +123,36 @@ public class Paddle {
 
 
     public void draw(Graphics g){
-	g.setColor(Color.GREEN);
-	g.fillRect(p.x,p.y,p.width,p.height);
+        Color paddleColor;
+        double ballC = Math.random();
+        Color purple = new Color (131,0,131) ;
+        Color darkBlue = new Color (24,52,111);
+        if(ballC < 0.1){
+            paddleColor = Color.RED;
+        }
+        else if(ballC < 0.2){
+            paddleColor = darkBlue;
+            }
+        else if(ballC < 0.3){
+            paddleColor = Color.ORANGE;
+        }
+        else if(ballC < 0.4){
+            paddleColor = Color.CYAN;
+        }
+        else if(ballC < 0.5){
+            paddleColor = Color.YELLOW;
+        }
+        else if(ballC < 0.6){
+            paddleColor = purple;
+            }
+        else if(ballC < 0.7){
+            paddleColor = Color.GREEN;
+        }
+        else{
+            paddleColor = Color.BLUE; //twice as likely to get Blue
+        }
+        g.setColor(paddleColor);
+        g.fillRect(p.x,p.y,p.width,p.height);
     }
 
 
@@ -129,14 +160,14 @@ public class Paddle {
      *   @param newdy chooses the new speed                                                                                                                                              
      */
     public void setdy(int newdy){
-	dy = newdy;
+    dy = newdy;
     }
 
 
     /** return the dy of the paddle                                                                                                                                                      
      */
     public int getdy(){
-	return this.dy;
+    return this.dy;
     }
 
 
@@ -144,21 +175,21 @@ public class Paddle {
      *   @param newY chooses the new speed                                                                                                                                              
      */
     public void setYpos(int newY){
-	p.y =  newY;
+    p.y =  newY;
     }
 
 
     /** returns the Y position of the paddle                                                                                                                                             
      */
     public int getYpos(){
-	return this.y;
+    return this.y;
     }
 
 
     /** returns the X position of the paddle                                                                                                                                             
      */
     public int getXpos(){
-	return this.x;
+    return this.x;
     }
 
 
@@ -168,8 +199,8 @@ public class Paddle {
      *  go to.
      */
     public int getPaddleTopHit(){
-	int Ypos = Screen.h - 97;
-	return Ypos;
+    int Ypos = Screen.h - 97;
+    return Ypos;
     }
 
 
@@ -178,8 +209,8 @@ public class Paddle {
      * the paddle can go to.                                                                                                                                                         
      */
     public int getPaddleBotHit(){
-	int Ypos2 = Screen.h - (Screen.h-37);
-	return Ypos2;
+    int Ypos2 = Screen.h - (Screen.h-37);
+    return Ypos2;
     }
 
 
@@ -187,14 +218,14 @@ public class Paddle {
      *  keeps the paddle from going offscreen.                                                                                                                                           
      */
     public void movePaddle(){
-	if(p.y <= this.getPaddleBotHit()){
-	    setYpos(this.getPaddleBotHit());
-	}
-	if(p.y >= this.getPaddleTopHit()){
-	    setYpos(this.getPaddleTopHit());
-	}
+    if(p.y <= this.getPaddleBotHit()){
+        setYpos(this.getPaddleBotHit());
+    }
+    if(p.y >= this.getPaddleTopHit()){
+        setYpos(this.getPaddleTopHit());
+    }
 
-	p.y += dy;
+    p.y += dy;
     }
 
 
