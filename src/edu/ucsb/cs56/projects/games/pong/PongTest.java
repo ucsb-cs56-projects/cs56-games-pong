@@ -21,14 +21,14 @@ public class PongTest
     @Test public void testConstructor()
     {
         Pong game = new Pong();
-	Paddle pp = new Paddle(8, 160);
-	Ball bb = new Ball(300, 300, 20, 20);
+  Paddle pp = new Paddle(8, 160);
+  Ball bb = new Ball(300, 300, 20, 20);
     
         assertEquals(pp.getXpos(),game.p1.getXpos());
-	assertEquals(pp.getYpos(),game.p1.getYpos());
+  assertEquals(pp.getYpos(),game.p1.getYpos());
 
-	assertEquals(bb.getXpos(), game.b.getXpos());
-	assertEquals(bb.getYpos(), game.b.getYpos());
+  assertEquals(bb.getXpos(), game.b.getXpos());
+  assertEquals(bb.getYpos(), game.b.getYpos());
     }
 
    
@@ -40,7 +40,7 @@ public class PongTest
     @Test public void testgetPoints()
     {
         Pong game = new Pong();
-	game.setPoints(5);
+  game.setPoints(5);
         assertEquals(5,game.getPoints());
     }
 
