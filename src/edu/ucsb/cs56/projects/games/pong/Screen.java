@@ -24,7 +24,8 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 
 /** Screen is the GUI implementation of the Pong game                                                                                                                                
 
- @author Timothy Fok    
+ @author Timothy Fok 
+ @author Bhanu Khanijau, Sanchit Gupta   
  @author Jake Dumont, Heneli Kailahi
  @version CS56, Spring 2013, UCSB
 
@@ -163,25 +164,30 @@ public class Screen extends JFrame {
      */
     public static void main (String[] args) {
 
-	if(args.length == 0)
-	    {
-		newW = 800;
-		newY= 600;
-	    }
-
-	else if(args.length == 1)
-	    {
-		newW = Integer.parseInt(args[0]);
-		newY = 600;
-	    }
-
-	else
-	    {
-		newW = Integer.parseInt(args[0]);
-		newY = Integer.parseInt(args[1]);
-	    }                                                                                                                                                     
-
-
+    	Object[] options = {"Easy", "Medium", "Hard"};
+    	int multiplier = 100;
+        JFrame frame = new JFrame();
+    	int n = JOptionPane.showOptionDialog(frame,
+    			"What level would you like to play?"
+    			+ "",
+    			"",
+    			JOptionPane.YES_NO_CANCEL_OPTION,
+    			JOptionPane.QUESTION_MESSAGE,
+    			null,
+    			options,
+    			options[2]);
+    			if(n == 0){
+    			multiplier = 80;
+    			}
+    			else if(n == 1){
+    			multiplier = 100;
+    			}
+    			else if(n == 2){
+    			multiplier = 120;
+    			}	
+    	
+	newW = 8 * multiplier;
+	newY= 6 * multiplier;
 	Screen myScreen = new Screen();
                                                                                                                                                
     }

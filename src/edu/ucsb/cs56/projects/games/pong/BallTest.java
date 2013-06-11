@@ -22,7 +22,7 @@ public class BallTest
     {
         Ball ball = new Ball(20,20,20,20);
         assertEquals(20,ball.getXpos());
-	assertEquals(20,ball.getYpos()); 
+  assertEquals(20,ball.getYpos()); 
     }
 
     /**
@@ -34,7 +34,7 @@ public class BallTest
     {
         Ball ball = new Ball(30,100,20,20);
         assertEquals(30,ball.getXpos());
-	assertEquals(100,ball.getYpos()); 
+  assertEquals(100,ball.getYpos()); 
     }
 
     /**
@@ -45,7 +45,7 @@ public class BallTest
     @Test public void testgetdx()
     {
         Ball ball = new Ball(30,100,20,20);
-	ball.setdx(5);
+  ball.setdx(5);
         assertEquals(5,ball.getdx());
     }
 
@@ -57,7 +57,7 @@ public class BallTest
     @Test public void testgetdy()
     {
         Ball ball = new Ball(30,100,20,20);
-	ball.setdy(7);
+  ball.setdy(7);
         assertEquals(7,ball.getdy());
 
     }
