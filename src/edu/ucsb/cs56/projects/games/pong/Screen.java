@@ -1,4 +1,4 @@
-//package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong;
 
 //code influence and ideas from http://www.dreamincode.net/forums/topic/172211-programing-an-applet-game-of-pong/                                                                    
 //http://www.youtube.com/watch?v=E-CJYELJa88                                                                                                                                         
