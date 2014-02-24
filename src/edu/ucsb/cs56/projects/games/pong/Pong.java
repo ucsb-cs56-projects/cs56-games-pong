@@ -3,22 +3,23 @@ package edu.ucsb.cs56.projects.games.pong;
 import javax.swing.*;
 
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.Color; // class for Colors                                                                                                                                           
+import java.awt.Color; // class for Colors
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Rectangle;  // squares and rectangles                                                                                                                                
-import java.awt.Shape; // general class for shapes                                                                                                                                   
+import java.awt.Rectangle;  // squares and rectangles
+import java.awt.Shape; // general class for shapes
 import java.awt.Stroke;
-import java.awt.geom.AffineTransform; // translation, rotation, scale                                                                                                                
-import java.awt.geom.Ellipse2D;  // ellipses and circles                                                                                                                             
-import java.awt.geom.GeneralPath; // combinations of lines and curves                                                                                                                
-import java.awt.geom.Line2D;  // single lines                                                                                                                                        
-import java.awt.geom.Rectangle2D; // for the bounding box                                                                                                                            
+import java.awt.geom.AffineTransform; // translation, rotation, scale
+import java.awt.geom.Ellipse2D;  // ellipses and circles
+import java.awt.geom.GeneralPath; // combinations of lines and curves
+import java.awt.geom.Line2D;  // single lines
+import java.awt.geom.Rectangle2D; // for the bounding box
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -26,12 +27,14 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/** edu.ucsb.cs56.projects.games.pong.Ball is the class that will move the ball around the screen                                                                                                                      
+/** edu.ucsb.cs56.projects.games.pong.Ball is the class that will move the ball around the screen
 
  @author Sanchit Gupta, Bhanu Khanijau
- @author Heneli Kailahi, Jake Dumont                                                                                                                                             
- @version CS56, Spring 2013, UCSB                                                                                                                                                
+ @author Heneli Kailahi, Jake Dumont  
+ @author Benjamin Hartl, Sarah Darwiche
+ @version CS56, Winter 2014, UCSB
 */
+
 public class Pong implements Runnable {
 
     int points;
@@ -56,33 +59,34 @@ public class Pong implements Runnable {
         this.ballsLost = 0;
     }
 
-    /** returns the current value of points                                                                                                                           
+    /** returns the current value of points
      */
+
     public int getPoints() {
         return points;
     }
     
-    /** sets points value to newPoints                                                                                                                                
-     *  @param newPoints chooses a new amount of points                                                                                                                                                
+    /** sets points value to newPoints
+     *  @param newPoints chooses a new amount of points
      */
+
     public void setPoints(int newPoints) {
         this.points = newPoints;
     }
 
-    /** draw a ball to the screen, draw Win or Lose game depending on points value                                                                                                        
-     *  @param g graphics draws the pink ball.                                                                                                                                           
+    /** draw a ball to the screen, draw Win or Lose game depending on points value
+     *  @param g graphics draws the pink ball.
      */
 
     public void draw(Graphics g) {
         b.draw(g);
-
     
-    if(ballsLost >= 3) {
-        gameLoss();
-        g.setFont(new Font("sansserif", Font.BOLD, 32));
-        g.setColor(Color.WHITE);
-        g.drawString("GAME OVER!",275,100);
-    }
+	if(ballsLost >= 3) {
+	    gameLoss();
+	    g.setFont(new Font("sansserif", Font.BOLD, 32));
+	    g.setColor(Color.WHITE);
+	    g.drawString("GAME OVER!",275,100);
+	}
     }
 
     /** handles player winning the game,  reset ball values to 0 and stop the ball from moving
@@ -94,27 +98,39 @@ public class Pong implements Runnable {
         b.setXpos(0);
         b.setYpos(0);
         b = null;
-                                                                                                                                                      
     }
 
-    /** handles players losing the game, stop the ball from moving                                                                                                                       
+    /** handles players losing the game, stop the ball from moving
      */
 
     public void gameLoss(){
-        text.setVisible(true);
-        text.setEditable(true);
-        text.setBounds (245, 50, 60, 25);
         final JFrame f = new JFrame();
-        JLabel label = new JLabel("Enter your name!");
+	JLabel label = new JLabel("Enter your name!", JLabel.CENTER);
         JPanel newF = new JPanel();
         final JTextField text = new JTextField();
         JButton button = new JButton("Enter");
-        newF.add(label);
-        newF.add(text);
-        newF.add(button);
-        button.setPreferredSize(new Dimension(60,40));
-        text.setPreferredSize(new Dimension(150,40)); 
-        f.setSize(400,80);
+	newF.setLayout(new GridLayout(5,3,0,10));
+
+	newF.add(new JLabel(""));
+	newF.add(new JLabel(""));
+	newF.add(new JLabel(""));	
+	newF.add(new JLabel(""));
+	
+	newF.add(label);	
+	newF.add(new JLabel(""));	
+	newF.add(new JLabel(""));
+        
+	newF.add(text);
+	newF.add(new JLabel(""));
+	newF.add(new JLabel(""));
+        
+	newF.add(button);
+	newF.add(new JLabel(""));	
+	newF.add(new JLabel(""));	
+	newF.add(new JLabel(""));	
+	newF.add(new JLabel(""));
+
+        f.setSize(Screen.w,Screen.h);
         f.add(newF);
         f.setVisible(true);
         button.addActionListener(new ActionListener() {
@@ -225,6 +241,7 @@ public class Pong implements Runnable {
     *  @param array[] sort game scores
     *  @param array2[] sort player names according to game scores sorting
     */
+
     public static void sortArray(int array[], String array2[], int n){
         for (int i = 1; i < n; i++){
             int j = i;
@@ -240,15 +257,16 @@ public class Pong implements Runnable {
         }
     }
 
-
-    /** resets the points back to 0                                                                                                                                                      
+    /** resets the points back to 0
      */
+
     public void pointsReset(){
         this.points = 0;
     }
 
     /** Move the paddles and the ball. Check for collision 
      */
+
     public void moveGame() {
         p1.movePaddle();
         p2.movePaddle();
@@ -260,6 +278,7 @@ public class Pong implements Runnable {
     
         /** Detect whether ball hits a paddle
          */
+
         public void paddleCollision() {
         if((b.rect).intersects(p1.p)){
             b.setdx(3);
@@ -272,6 +291,7 @@ public class Pong implements Runnable {
 
     /** Detect whether the ball hits a wall
      */
+
     public void wallCollision() {
         if(b.getXpos() <= (Screen.w - Screen.w)){
             b.setdx(-3);
@@ -292,6 +312,7 @@ public class Pong implements Runnable {
 
     /** Run thread to move paddles and ball
      */
+
     public void run(){
         try{
             while(true){
@@ -299,7 +320,5 @@ public class Pong implements Runnable {
                 Thread.sleep(15);
             }
         }catch(Exception e){}
-    }
-    
-    
+    }   
 }
