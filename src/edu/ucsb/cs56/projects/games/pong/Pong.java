@@ -92,8 +92,8 @@ public class Pong implements Runnable {
      */
 
     public void gameWin(){
-        b.setdx(0);
-        b.setdy(0);
+        b.setXVelocity(0);
+        b.setYVelocity(0);
         b.setXpos(0);
         b.setYpos(0);
         b = null;
@@ -230,9 +230,10 @@ public class Pong implements Runnable {
             }
         });
         
-        b.setdx(0);
-        b.x =0;
-        b.y =0;
+	////////////////////////////////////// dont need if dereference b
+        //b.setXVelocity( 0 );
+        //b.setXCoordinate( 0 );
+        //b.setYCoordinate( 0 );
         b = null;
     }
 
@@ -280,11 +281,11 @@ public class Pong implements Runnable {
 
         public void paddleCollision() {
         if((b.rect).intersects(p1.p)){
-            b.setdx(3);
+            b.setXVelocity( 3 );
         }
     
         if((b.rect).intersects(p2.p)){
-            b.setdx(3);
+            b.setXVelocity( 3 );
         }
     }
 
@@ -293,19 +294,19 @@ public class Pong implements Runnable {
 
     public void wallCollision() {
         if(b.getXpos() <= (Screen.w - Screen.w)){
-            b.setdx(-3);
+            b.setXVelocity( -3 );
             this.ballsLost++;
             b.resetBall();
         }
         if(b.getXpos() >= (Screen.w - 20)){
-            b.setdx(-3);
+            b.setXVelocity( -3 );
             this.points++;
         }
         if(b.getYpos() >= (Screen.h - 20)){
-            b.setdy(-3);
+            b.setYVelocity( -3 );
         }
         if(b.getYpos() <= (Screen.h - Screen.h + 30)){
-            b.setdy(3);
+            b.setYVelocity( 3 );
         }
     }
 

@@ -23,10 +23,9 @@ import java.awt.geom.Rectangle2D; // for the bounding box
  @author Benjamin Hartl, Sarah Darwiche
  @version CS56, Spring 2013, UCSB                   
 */
-public class Ball {
+public class Ball extends gameObject {
 
-    public int x,y;
-    public int dx,dy;
+    //public int dx,dy;
     public int w,h;
     public Rectangle rect;
                                                 
@@ -39,14 +38,17 @@ public class Ball {
      */
 
     public Ball(int x, int y, int w, int h){
-	this.x = x;
-	this.y = y;
+	super( x, y, -2, 1 );	
+
+	//	this.x = x;
+	//this.y = y;
 	this.w = w;
 	this.h = h;
 	
-	setdx(-2);
-	setdy(1);
-	rect = new Rectangle(this.x,this.y,20,20);
+	//	setdx(-2);
+	//setdy(1);
+	rect = new Rectangle( getXCoordinate(), getYCoordinate(),20,20);
+	//rect = new Rectangle(this.x,this.y,20,20);
     }
 
     /** sets a different x position for the ball
@@ -54,8 +56,10 @@ public class Ball {
      */
 
     public void setXpos(int x){
-	this.x = x;
-	rect.x = x - 10;
+	setXCoordinate( x );
+	//this.x = x;
+	rect.x = getXCoordinate();
+	//rect.x = x - 10;
     }
 
     /** sets a different y position for the ball
@@ -63,8 +67,10 @@ public class Ball {
      */
 
     public void setYpos(int y){
-	this.y = y;
-	rect.y = y - 10;
+	setYCoordinate( y );
+	//this.y = y;
+	rect.y = getYCoordinate() - 10;
+	//rect.y = y - 10;
     }
 
     /** sets a different speed of x position for the ball
@@ -72,7 +78,7 @@ public class Ball {
      */
 
     public void setdx(int newdx){ 
-	dx = newdx;
+	setXVelocity( newdx );
     }
 
     /** sets a different speed of y position for the ball 
@@ -80,35 +86,37 @@ public class Ball {
      */
 
     public void setdy(int newdy){
-	dy = newdy;
+	setYVelocity( newdy );
     }
 
     /** returns the coordinate of the x location of the ball
      */
 
     public int getXpos(){
-	return this.x;
+	return getXCoordinate();
+	//return this.x;
     }
 
     /** returns the coordinate of the y location of the ball
      */
 
     public int getYpos(){
-	return this.y;
+	return getYCoordinate();
+	//return this.y;
     }
 
     /** returns the dx of the ball
      */
 
     public int getdx(){
-	return this.dx;
+	return getXVelocity();
     }
 
     /** returns the dy of the ball
      */
    
     public int getdy(){
-	return this.dy;
+	return getYVelocity();
     }
 
 
@@ -119,24 +127,20 @@ public class Ball {
     public void draw(Graphics g){
 
  
-	g.setColor(ballColor);
+	g.setColor( getRandomColor() );
         //  g.fillRect(b.x,b.y,b.width,b.height);  
-        g.fillOval(x,y,rect.width,rect.height);
+	g.fillOval(getXCoordinate(), getYCoordinate(),
+		   rect.width,rect.height);
+	//g.fillOval(x,y,rect.width,rect.height);
 
     }
 
-    public Color getRandomColor(){
-	int r = (int) (Math.random() * 250);
-	int gr = (int) (Math.random() * 250);
-	int b = (int) (Math.random() * 250);
-	
-	return( new Color( r, gr, b ) );
-    }
     /** resets the ball to the middle parts of the screen
      */
     
     public void resetBall(){
-	if (x <= Screen.w - Screen.w){
+	if ( getXCoordinate() <= Screen.w - Screen.w){
+	//if (x <= Screen.w - Screen.w){
 	    setXpos(Screen.w/2);
 	    setYpos(Screen.h/2);
 	}

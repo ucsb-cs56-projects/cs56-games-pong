@@ -25,9 +25,8 @@ import java.awt.geom.Rectangle2D; // for the bounding box
  @author Benjamin Hartl, Sarah Darwiche
  @version CS56, Winter 2014, UCSB 
 */
-public class Paddle {
+public class Paddle extends gameObject{
     public Rectangle p;
-    public int x,y;
     public int dy;
     public int dx;
     public boolean right;
@@ -50,9 +49,8 @@ public class Paddle {
     */
 
     public Paddle(int x, int y, boolean sideRight){
-	this.x = x;
-	this.y = y;
-	p = new Rectangle(x,y,10,paddleHeight);
+	super( x, y );
+	p = new Rectangle( x, y, 10, paddleHeight );
 	this.right = sideRight;
     }
  
@@ -115,12 +113,7 @@ public class Paddle {
      */
 
     public void draw(Graphics g){
-        Color paddleColor;
-	int r = (int) (Math.random() * 250);
-	int gr = (int) (Math.random() * 250);
-	int b = (int) (Math.random() * 250);
- 
-        g.setColor(new Color( r, gr, b ) );
+        g.setColor( getRandomColor() );
         g.fillRect(p.x,p.y,p.width,p.height);
     }
 
@@ -146,21 +139,21 @@ public class Paddle {
      */
     
     public void setYpos(int newY){
-	p.y =  newY;
+    	p.y =  newY;
     }
 
     /** returns the Y position of the paddle
      */
     
     public int getYpos(){
-	return this.y;
+	return getYCoordinate();
     }
 
     /** returns the X position of the paddle
      */
     
     public int getXpos(){
-	return this.x;
+	return getXCoordinate();
     }
 
     /**
@@ -180,7 +173,7 @@ public class Paddle {
      */
 
     public int getPaddleBotHit(){
-	int Ypos2 = Screen.h - (Screen.h-37);
+	int Ypos2 = 37;
 	return Ypos2;
     }
 
@@ -190,10 +183,10 @@ public class Paddle {
     
     public void movePaddle(){
 	if(p.y <= this.getPaddleBotHit()){
-	    setYpos(this.getPaddleBotHit());
+	    setYpos( this.getPaddleBotHit() );
 	}
 	if(p.y >= this.getPaddleTopHit()){
-	    setYpos(this.getPaddleTopHit());
+	    setYpos( this.getPaddleTopHit() );
 	}
 	
 	p.y += dy;
