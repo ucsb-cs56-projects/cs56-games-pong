@@ -1,0 +1,116 @@
+// Benjamin Hartl
+// Sarah Darwiche
+
+// Our equivalent of the C++ .h file to keep track of all of our classes
+
+class MainMenu{
+    private int levelDifficulty;
+    private int newWindowWidth;
+    private int newWindowHeight;  
+    public JRadioButton easy;
+    public JRadioButton medium;
+    public JRadioButton hard;
+    public Instructions i;
+    
+    MainMenu();
+    public int getLevelDifficulty();
+    class PlayListener implements ActionListener{
+	public void actionPerformed(ActionEvent e)}
+    class InstructionsListener implements ActionListener{
+	public void actionPerformed(ActionEvent e)}
+    public static void main (String[] args) {}
+}
+
+public class Instructions{
+    JFrame jf;
+
+    Instructions();
+    public void setToVisible();
+    public void displayInstructions();
+    class BackToMainListener implements ActionListener{
+	public void actionPerformed(ActionEvent e)}
+}
+
+public class Screen extends JFrame {
+    static int w;
+    static int h;
+    public Pong game;
+    public Graphics doublebufferG;
+    public Image doublebufferImg;
+
+    Screen( int windowWidth, int windowHeight );
+    public void setScreenWidth(int width);
+    public void setScreenHeight(int height);
+    public int getScreenWidth();
+    public int getScreenHeight();
+    public void draw(Graphics g);
+    public void paint(Graphics g);
+    public class myKeyAdapter extends KeyAdapter{ 
+	public void keyPressed(KeyEvent evt)};
+    public void keyReleased(KeyEvent evt);
+}
+	
+public class Pong implements Runnable {
+    public int points;
+    public Paddle p1;
+    public Paddle p2;
+    public Ball b;
+    public int ballsLost = 0;
+    public JTextField text;
+    public JScrollPane jScrollPane1;
+ 
+    Pong();
+    public int getPoints();
+    public void setPoints(int newPoints);
+    public void draw(Graphics g);
+    public void gameWin();
+    public void gameLoss();
+    public static void sortArray(int array[], String array2[], int n);
+    public void pointsReset();
+    public void moveGame();
+    public void paddleCollision() ;
+    public void wallCollision() ;
+    public void run();
+}
+
+public class Paddle {
+    public Rectangle p;
+    public int x,y;
+    public int dy;
+    public int dx;
+    public boolean right;
+    public static final Integer paddleHeight = 90;
+    
+    Paddle(int x, int y);
+    Paddle(int x, int y, boolean sideRight);
+    public void keyPressed(KeyEvent evt);
+    public void draw(Graphics g);
+    public void setdy(int newdy);
+    public int getdy();
+    public void setYpos(int newY);
+    public int getYpos();
+    public int getXpos();
+    public int getPaddleTopHit();
+    public int getPaddleBotHit();
+    public void movePaddle();
+}
+
+public class Ball {
+    public int x,y;
+    public int dx,dy;
+    public int w,h;
+    public Rectangle rect;
+ 
+    Ball(int x, int y, int w, int h);
+    public void setXpos(int x);
+    public void setYpos(int y);
+    public void setdx(int newdx);
+    public void setdy(int newdy);
+    public int getXpos();
+    public int getYpos();
+    public int getdx();
+    public int getdy();
+    public void draw(Graphics g);
+    public void resetBall();
+}
+

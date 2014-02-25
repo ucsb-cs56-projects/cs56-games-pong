@@ -26,12 +26,12 @@ import java.awt.geom.Rectangle2D; // for the bounding box
  @version CS56, Winter 2014, UCSB 
 */
 public class Paddle {
-    Rectangle p;
-    int x,y;
-    int dy;
-    int dx;
-    boolean right;
-    public static Integer paddleHeight = 90;
+    public Rectangle p;
+    public int x,y;
+    public int dy;
+    public int dx;
+    public boolean right;
+    public static final Integer paddleHeight = 90;
 
 
     /** Paddle contructor to initialize intial x,y placement of paddle
@@ -40,9 +40,7 @@ public class Paddle {
     */
 
     public Paddle(int x, int y){
-    this.x = x;
-    this.y = y;
-    p = new Rectangle(x,y,10,paddleHeight);
+	this( x, y, false );
     }
 
     /** Right paddle constructor to initialize intial x,y placement of paddle
@@ -52,22 +50,12 @@ public class Paddle {
     */
 
     public Paddle(int x, int y, boolean sideRight){
-    this.x = x;
-    this.y = y;
-    p = new Rectangle(x,y,10,paddleHeight);
-    this.right = sideRight;
+	this.x = x;
+	this.y = y;
+	p = new Rectangle(x,y,10,paddleHeight);
+	this.right = sideRight;
     }
-
-    /** set the height of the paddle
-     *   @param newHeight chooses the new height for the paddle
-     */
-
-    public void setPaddleHeight(int newHeight){
-    this.paddleHeight = newHeight;
-    }
-
-
-   
+ 
     /** KeyPressed handles what to do if player hits up or down key, and Q and A key.
      *  Paddle should move up upon up key and Q key, and down upon down key and A key.
      *   @param evt finds which key on the keyboard was hit.
@@ -128,34 +116,11 @@ public class Paddle {
 
     public void draw(Graphics g){
         Color paddleColor;
-        double ballC = Math.random();
-        Color purple = new Color (131,0,131) ;
-        Color darkBlue = new Color (24,52,111);
-        if(ballC < 0.1){
-            paddleColor = Color.RED;
-        }
-        else if(ballC < 0.2){
-            paddleColor = darkBlue;
-            }
-        else if(ballC < 0.3){
-            paddleColor = Color.ORANGE;
-        }
-        else if(ballC < 0.4){
-            paddleColor = Color.CYAN;
-        }
-        else if(ballC < 0.5){
-            paddleColor = Color.YELLOW;
-        }
-        else if(ballC < 0.6){
-            paddleColor = purple;
-            }
-        else if(ballC < 0.7){
-            paddleColor = Color.GREEN;
-        }
-        else{
-            paddleColor = Color.BLUE; //twice as likely to get Blue
-        }
-        g.setColor(paddleColor);
+	int r = (int) (Math.random() * 250);
+	int gr = (int) (Math.random() * 250);
+	int b = (int) (Math.random() * 250);
+ 
+        g.setColor(new Color( r, gr, b ) );
         g.fillRect(p.x,p.y,p.width,p.height);
     }
 
@@ -232,5 +197,5 @@ public class Paddle {
 	}
 	
 	p.y += dy;
-    } 
+	}
 }

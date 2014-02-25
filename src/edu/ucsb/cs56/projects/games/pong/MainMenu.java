@@ -46,6 +46,8 @@ public class MainMenu {
 	difficulty.add(medium);
 	difficulty.add(hard);
 
+	easy.setSelected(true);
+
 	ButtonPanel.add(easy);
 	ButtonPanel.add(medium);
 	ButtonPanel.add(hard);
@@ -81,7 +83,7 @@ public class MainMenu {
 	levelDifficulty = getLevelDifficulty();
 	newWindowWidth = 8 * levelDifficulty;
 	newWindowHeight = 6 * levelDifficulty;
-	//Screen s = new Screen();
+	Screen s = new Screen( newWindowWidth, newWindowHeight );
 	
 	System.out.println( newWindowWidth + ", " + newWindowHeight );
 	}

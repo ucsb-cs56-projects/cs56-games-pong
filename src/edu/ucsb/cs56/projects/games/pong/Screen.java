@@ -31,20 +31,11 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 */
 
 public class Screen extends JFrame {
-    public static int w;
-    public static int h;
-    public static Integer newW;
-    public static Integer newY;
-
-    /**
-     *Create a static edu.ucsb.cs56.projects.games.pong.Ball so we can work with it
-     * and buffer graphics to ease performance issues
-     */
-
-    static Pong game = new Pong();
-    Graphics doublebufferG;
-    Image doublebufferImg;
-
+    static int w;
+    static int h;
+    public Pong game;
+    public Graphics doublebufferG;
+    public Image doublebufferImg;
 
     /** sets the width of the screen
      *   @param width the width of the Screen
@@ -80,8 +71,10 @@ public class Screen extends JFrame {
      * @param e MouseEvents to handle running game when mouse is on Screen.
      */
 
-    public Screen() {
- 
+    public Screen( int windowWidth, int windowHeight ) {
+	this.setScreenWidth(windowWidth); // put this before pong is initialized since Pong uses the static variables in Screen
+	this.setScreenHeight(windowHeight);
+	game = new Pong();
 	getContentPane().addMouseListener(new MouseAdapter()
 	    {
 		public void mouseEntered(MouseEvent e){
@@ -92,9 +85,8 @@ public class Screen extends JFrame {
         
 	this.addKeyListener(new myKeyAdapter());
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	this.setScreenWidth(newW);
-	this.setScreenHeight(newY);
-	this.setSize(w,h);
+
+	this.setSize( windowWidth, windowHeight );
 	this.setBackground(Color.BLACK);
 	this.setResizable(false);
 	

@@ -25,10 +25,10 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 */
 public class Ball {
 
-    int x,y;
-    int dx,dy;
-    int w,h;
-    Rectangle rect;
+    public int x,y;
+    public int dx,dy;
+    public int w,h;
+    public Rectangle rect;
                                                 
     /** edu.ucsb.cs56.projects.games.pong.Ball constructor to initialize location of edu.ucsb.cs56.projects.games.pong.Ball onto the screen
      *  and draw it as a rectangle for a simpler and precise hitbox.
@@ -39,14 +39,14 @@ public class Ball {
      */
 
     public Ball(int x, int y, int w, int h){
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-
-    setdx(-2);
-    setdy(1);
-    rect = new Rectangle(this.x,this.y,20,20);
+	this.x = x;
+	this.y = y;
+	this.w = w;
+	this.h = h;
+	
+	setdx(-2);
+	setdy(1);
+	rect = new Rectangle(this.x,this.y,20,20);
     }
 
     /** sets a different x position for the ball
@@ -118,43 +118,20 @@ public class Ball {
    
     public void draw(Graphics g){
 
-        Color ballColor = Color.RED;
-        double ballC = Math.random();
-        Color purple = new Color (131,0,131) ;
-        Color darkBlue = new Color (24,52,111);
-        if(ballC < 0.1){
-            ballColor = Color.RED;
-        }
-        else if(ballC < 0.2){
-            ballColor = darkBlue;
-            }
-            else if(ballC < 0.3){
-                ballColor = Color.ORANGE;
-            }
-            else if(ballC < 0.4){
-                ballColor = Color.CYAN;
-                }
-            else if(ballC < 0.5){
-                ballColor = Color.YELLOW;
-            }
-            else if(ballC < 0.6){
-                ballColor = purple;
-                }
-            else if(ballC < 0.7){
-                ballColor = Color.GREEN;
-            }
-            else if(ballC < 0.8){
-                ballColor = ballColor;
-                }
-            else{
-                ballColor = Color.BLUE; //twice as likely to get Blue
-            }
-    g.setColor(ballColor);
+ 
+	g.setColor(ballColor);
         //  g.fillRect(b.x,b.y,b.width,b.height);  
         g.fillOval(x,y,rect.width,rect.height);
 
     }
 
+    public Color getRandomColor(){
+	int r = (int) (Math.random() * 250);
+	int gr = (int) (Math.random() * 250);
+	int b = (int) (Math.random() * 250);
+	
+	return( new Color( r, gr, b ) );
+    }
     /** resets the ball to the middle parts of the screen
      */
     

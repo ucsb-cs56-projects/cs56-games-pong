@@ -41,7 +41,6 @@ public class Pong implements Runnable {
     Paddle p1;
     Paddle p2;
     Ball b;
-    Ball b2;
     
     int ballsLost = 0;
     JTextField text;
@@ -52,8 +51,8 @@ public class Pong implements Runnable {
 
     public Pong() {
         this.p1 = new Paddle(8,160);
-        this.p2 = new Paddle(50, 160, true);
-        this.b = new Ball(300,300,20,20);
+        this.p2 = new Paddle(Screen.w - 18 , 160, true);
+        this.b = new Ball((int)(Screen.w / 2),(int)(Screen.h / 2),20,20);
         this.points = 0;
         this.text = new JTextField();
         this.ballsLost = 0;

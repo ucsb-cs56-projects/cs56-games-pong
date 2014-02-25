@@ -8,7 +8,6 @@ public class Instructions{
     JFrame jf;
     Instructions()
     {
-	System.out.println("null");
 	jf = new JFrame( "test" );
 	jf.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 	jf.setSize( 640, 480 );
@@ -17,7 +16,13 @@ public class Instructions{
 	jf.add(backToMain, BorderLayout.SOUTH );
 	jf.setLocationRelativeTo( null );
 	setToVisible();
-	
+	JPanel jp = new JPanel();
+	jf.add( jp );
+	JLabel l = new JLabel("<html><p>Here<br>is the text that we want<br>and will see if it goes to the new<br>line. It works to have it in the center<br>but now it will create a new line</p></html>", SwingConstants.CENTER);
+
+	///////////////  Set Instructions   ^^^^
+	//////////////////////
+ 	jp.add( l );
     }
     
     public void setToVisible()
