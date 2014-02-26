@@ -57,7 +57,7 @@ public class Pong implements Runnable {
     /** returns the current value of times it hits a wall
      */
 
-    public int getHits() { return hits; }      // times it hit any paddle
+    public int getHits( ) { return hits; }      // times it hit any paddle
     
     public void incrementHits() { hits++; }    // whenever it hits a paddle
 
@@ -68,7 +68,7 @@ public class Pong implements Runnable {
 	    System.out.println("player 2 lost");
 	    gameLoss(p2);
 	}
-	else if(p1.ballCount <= 0){
+	else if(p1.ballCount <= 0 ){
 	    System.out.println("player 1 lost");
 	    gameLoss(p1);
 	}
@@ -324,13 +324,13 @@ public class Pong implements Runnable {
 		// sets velocity facing opposite direction
 		// resets ball to the middle
 		// adds points, 
-		p1.playerMissed( b, getHits() );  // increment ballsLost for p1
+		p1.playerMissed( b, getHits(), p2 );  // increment ballsLost for p1
 		gameObject.isGoingRight = true;
 		hitsReset();
 	    }
         else if( b.getXCoordinate() >= ( Screen.w - 20 ) )
 	    {
-		p2.playerMissed( b, getHits() );
+		p2.playerMissed( b, getHits(), p1 );
 		gameObject.isGoingRight = false;
 		hitsReset();
 	    }

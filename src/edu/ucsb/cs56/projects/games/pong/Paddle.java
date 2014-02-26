@@ -128,18 +128,12 @@ public class Paddle extends gameObject{
     
     public int getPoints(){ return points; }
 
-    public void gameLoss()
-    {
-	//System.out.print( "*" );
-	//System.out.print( "Player " + this + " has lost" );
-    }
-
-    public void playerMissed( Ball ball, int numOfPoints )
+    public void playerMissed( Ball ball, int numOfPoints, Paddle winner )
     {
 	decrementBalls();
 	ball.setXVelocity( -1 * ball.getXVelocity() );
 	ball.resetBall();
-	incrementPoints( numOfPoints );
+	winner.incrementPoints( numOfPoints );
 	
     }
     
