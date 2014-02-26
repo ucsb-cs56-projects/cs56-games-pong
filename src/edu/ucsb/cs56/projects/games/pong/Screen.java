@@ -57,8 +57,11 @@ public class Screen extends JFrame {
 	game = new Pong();
 	theball = new Thread(game);
 	theball.start();
-	//theball.stop();
+	//game.checkGameStatus();
+       	//theball.stop();
 	addKeyListener(new myKeyAdapter());
+	
+
 
 	
 	setTitle( "Pong" );
@@ -77,8 +80,8 @@ public class Screen extends JFrame {
 	g.drawString( "" + game.p1.getPoints(), 10, 100 );
 	g.drawString( "player 2 ", Screen.w - 150, 70 );
 	g.drawString( "" + game.p2.getPoints(), Screen.w - 50, 100 );
-	g.drawString( "Lives " + ( 3 - game.p2.ballsLost ), 10, Screen.h - 10 );
-	g.drawString( "Lives " + ( 3 - game.p1.ballsLost ), Screen.w - 120 , Screen.h - 10 );
+	g.drawString( "Lives " + ( game.p1.ballCount ), 10, Screen.h - 10 );
+	g.drawString( "Lives " + ( game.p2.ballCount ), Screen.w - 120 , Screen.h - 10 );
 
 
 	game.draw(g);

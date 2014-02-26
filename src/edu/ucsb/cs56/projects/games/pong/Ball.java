@@ -38,7 +38,7 @@ public class Ball extends gameObject {
     public Ball( int x, int y, int w, int h )
     {
 	super( x, y, w, h );	
-	ballsLost = 0;
+      	//ballsLost = 0;
 	startBall();
     }
 

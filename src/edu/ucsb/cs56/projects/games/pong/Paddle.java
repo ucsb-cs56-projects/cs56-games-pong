@@ -27,7 +27,7 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 */
 public class Paddle extends gameObject{
     public int points;
-    public int ballsLost;
+    public int ballCount;
     public boolean right;
     public static final Integer paddleHeight = 90;
 
@@ -50,7 +50,7 @@ public class Paddle extends gameObject{
     public Paddle(int x, int y, boolean sideRight){
 	super( x, y );
 	
-	ballsLost = 0;
+	ballCount = 3;
 	points = 0;
 	right = sideRight;
     }
@@ -122,7 +122,7 @@ public class Paddle extends gameObject{
 
     public int getPaddleBotHit(){ return 37; }
 
-    public void incrementBallsLost(){ ballsLost++; }
+    public void decrementBalls(){ ballCount--; }
     
     public void incrementPoints( int numOfPoints ){ points += numOfPoints; }
     
@@ -136,7 +136,7 @@ public class Paddle extends gameObject{
 
     public void playerMissed( Ball ball, int numOfPoints )
     {
-	incrementBallsLost();
+	decrementBalls();
 	ball.setXVelocity( -1 * ball.getXVelocity() );
 	ball.resetBall();
 	incrementPoints( numOfPoints );

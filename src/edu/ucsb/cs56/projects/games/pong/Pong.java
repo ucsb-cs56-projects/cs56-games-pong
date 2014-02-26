@@ -62,11 +62,22 @@ public class Pong implements Runnable {
     public void incrementHits() { hits++; }    // whenever it hits a paddle
 
     public void hitsReset(){ hits = 0; }       // when a paddle misses the ball
+    
+    public void checkGameStatus(){
+	if(p2.ballCount <= 0 ){
+	    System.out.println("player 2 lost");
+	    gameLoss(p2);
+	}
+	else if(p1.ballCount <= 0){
+	    System.out.println("player 1 lost");
+	    gameLoss(p1);
+	}
+    }
 
     public void draw(Graphics g) {             // to draw the ball
         b.draw(g);
 	
-	if( p2.ballsLost >= 3 )                // each player has 3 lives
+	/**	if( p2.ballsLost >= 3 )                // each player has 3 lives
 	    {
 		////////////////////////////////////////////
 		// infinite loop
@@ -79,11 +90,10 @@ public class Pong implements Runnable {
 	    //g.setColor(Color.WHITE);
 	    //g.drawString("GAME OVER!",275,100);
 		gameLoss( p1 );
-	    }
+		}*/
     }
 
-    ////////////////////////////////////////////////////////////
-    // infinite loop
+   
     public void gameLoss( Paddle p )
     {
 	
@@ -314,13 +324,13 @@ public class Pong implements Runnable {
 		// sets velocity facing opposite direction
 		// resets ball to the middle
 		// adds points, 
-		p2.playerMissed( b, getHits() );  // increment ballsLost for p1
+		p1.playerMissed( b, getHits() );  // increment ballsLost for p1
 		gameObject.isGoingRight = true;
 		hitsReset();
 	    }
         else if( b.getXCoordinate() >= ( Screen.w - 20 ) )
 	    {
-		p1.playerMissed( b, getHits() );
+		p2.playerMissed( b, getHits() );
 		gameObject.isGoingRight = false;
 		hitsReset();
 	    }
@@ -333,6 +343,8 @@ public class Pong implements Runnable {
 	    {
 		b.setYVelocity( -1 * b.getYVelocity() );
 	    }
+
+	checkGameStatus();
     }
 
     /** Run thread to move paddles and ball
