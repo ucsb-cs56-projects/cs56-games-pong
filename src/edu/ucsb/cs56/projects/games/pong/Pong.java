@@ -50,12 +50,12 @@ public class Pong implements Runnable {
      */
 
     public Pong() {
-        this.p1 = new Paddle(8,160);
-        this.p2 = new Paddle(Screen.w - 18 , 160, true);
-        this.b = new Ball((int)(Screen.w / 2),(int)(Screen.h / 2),20,20);
-        this.points = 0;
-        this.text = new JTextField();
-        this.ballsLost = 0;
+        p1 = new Paddle(8,160);
+        p2 = new Paddle(Screen.w - 18 , 160, true);
+        b = new Ball((int)(Screen.w / 2),(int)(Screen.h / 2),20,20);
+        points = 0;
+        text = new JTextField();
+        ballsLost = 0;
     }
 
     /** returns the current value of points
@@ -270,8 +270,8 @@ public class Pong implements Runnable {
     public void moveGame() {
         p1.movePaddle();
         p2.movePaddle();
-        b.setXpos(b.getXpos()+b.getdx());
-        b.setYpos(b.getYpos()+b.getdy());
+        b.setXpos( b.getXpos() + b.getXVelocity() );
+        b.setYpos( b.getYpos() + b.getYVelocity() );
         paddleCollision();
         wallCollision();
         }
@@ -285,7 +285,7 @@ public class Pong implements Runnable {
         }
     
         if((b.rect).intersects(p2.p)){
-            b.setXVelocity( 3 );
+            b.setXVelocity( -3 );
         }
     }
 

@@ -123,6 +123,7 @@ public class Paddle extends gameObject{
      */
 
     public void setdy(int newdy){
+	//this.setYVelocity( newdy );
 	dy = newdy;
     }
 
@@ -131,6 +132,7 @@ public class Paddle extends gameObject{
 
     public int getdy(){
 	return this.dy;
+	//return this.getYVelocity();
     }
 
 

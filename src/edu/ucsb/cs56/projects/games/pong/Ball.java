@@ -26,7 +26,7 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 public class Ball extends gameObject {
 
     //public int dx,dy;
-    public int w,h;
+    //public int w,h;
     public Rectangle rect;
                                                 
     /** edu.ucsb.cs56.projects.games.pong.Ball constructor to initialize location of edu.ucsb.cs56.projects.games.pong.Ball onto the screen
@@ -42,8 +42,8 @@ public class Ball extends gameObject {
 
 	//	this.x = x;
 	//this.y = y;
-	this.w = w;
-	this.h = h;
+	//	this.w = w;
+	//this.h = h;
 	
 	//	setdx(-2);
 	//setdy(1);
