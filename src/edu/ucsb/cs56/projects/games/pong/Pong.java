@@ -37,86 +37,94 @@ import java.util.ArrayList;
 
 public class Pong implements Runnable {
 
-    int points;
-    Paddle p1;
-    Paddle p2;
-    Ball b;
-    
-    int ballsLost = 0;
-    JTextField text;
-    JScrollPane jScrollPane1;
+    int hits;               // times it hits a paddle
+    Paddle p1;              // Left Paddle
+    Paddle p2;              // Right Paddle
+    Ball b;                 // the ball
+    int moreSpeed = 1;      // to increase speed every 4 hits
+    boolean gameIsGoing = true;
     
     /** Pong constructor to initialize 2 paddle objects, a ball object, and points value
      */
 
     public Pong() {
-        p1 = new Paddle(8,160);
-        p2 = new Paddle(Screen.w - 18 , 160, true);
-        b = new Ball((int)(Screen.w / 2),(int)(Screen.h / 2),20,20);
-        points = 0;
-        text = new JTextField();
-        ballsLost = 0;
+        p1 = new Paddle( 8, 160 );                      // Left Paddle
+        p2 = new Paddle( Screen.w - 18 , 160, true );  // Right Paddle
+        b = new Ball( (int)(Screen.w / 2), (int)(Screen.h / 2), 20, 20 );
+        hits = 0;                                      // # of times of wall
     }
 
-    /** returns the current value of points
+    /** returns the current value of times it hits a wall
      */
 
-    public int getPoints() {
-        return points;
-    }
+    public int getHits() { return hits; }      // times it hit any paddle
     
-    /** sets points value to newPoints
-     *  @param newPoints chooses a new amount of points
-     */
+    public void incrementHits() { hits++; }    // whenever it hits a paddle
 
-    public void setPoints(int newPoints) {
-        this.points = newPoints;
-    }
+    public void hitsReset(){ hits = 0; }       // when a paddle misses the ball
 
-    /** draw a ball to the screen, draw Win or Lose game depending on points value
-     *  @param g graphics draws the pink ball.
-     */
-
-    public void draw(Graphics g) {
+    public void draw(Graphics g) {             // to draw the ball
         b.draw(g);
-    
-	if(ballsLost >= 3) {
-	    gameLoss();
-	    g.setFont(new Font("sansserif", Font.BOLD, 32));
-	    g.setColor(Color.WHITE);
-	    g.drawString("GAME OVER!",275,100);
-	}
+	
+	if( p2.ballsLost >= 3 )                // each player has 3 lives
+	    {
+		////////////////////////////////////////////
+		// infinite loop
+		gameLoss( p2 );                // will print p2 lost
+	    }
+
+	else if( p1.ballsLost >= 3 ) 
+	    {
+	    //g.setFont(new Font("sansserif", Font.BOLD, 32));
+	    //g.setColor(Color.WHITE);
+	    //g.drawString("GAME OVER!",275,100);
+		gameLoss( p1 );
+	    }
+    }
+
+    ////////////////////////////////////////////////////////////
+    // infinite loop
+    public void gameLoss( Paddle p )
+    {
+	
+	System.out.print( "*" );
+	kill();
+	
     }
 
     /** handles player winning the game,  reset ball values to 0 and stop the ball from moving
      */
+    //////////////////////////////////// no call for game win
+    /////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////
 
-    public void gameWin(){
+    /*    public void gameWin(){
         b.setXVelocity(0);
         b.setYVelocity(0);
         b.setXpos(0);
         b.setYpos(0);
         b = null;
-    }
+	}*/
 
     /** handles players losing the game, stop the ball from moving
      */
 
-    public void gameLoss(){
-        final JFrame f = new JFrame();
+    //public void gameLoss(){
+        
+	/*final JFrame f = new JFrame();
 	JLabel label = new JLabel("Enter your name!", JLabel.CENTER);
         JPanel newF = new JPanel();
         final JTextField text = new JTextField();
         JButton button = new JButton("Enter");
 	newF.setLayout(new GridLayout(5,3,0,10));
 
-	newF.add(new JLabel(""));
+	newF.add(new JLabel("")); ////////////////////////////////////
 	newF.add(new JLabel(""));
 	newF.add(new JLabel(""));	
 	newF.add(new JLabel(""));
 	
 	newF.add(label);	
-	newF.add(new JLabel(""));	
+	newF.add(new JLabel("")); // set empty labels to fill grid layout
 	newF.add(new JLabel(""));
         
 	newF.add(text);
@@ -127,7 +135,7 @@ public class Pong implements Runnable {
 	newF.add(new JLabel(""));	
 	newF.add(new JLabel(""));	
 	newF.add(new JLabel(""));	
-	newF.add(new JLabel(""));
+	newF.add(new JLabel("")); ///////////////////////////////////
 
         f.setSize(Screen.w,Screen.h);
         f.add(newF);
@@ -138,7 +146,7 @@ public class Pong implements Runnable {
                 try{
                     // Create file 
                     PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("scores.txt", true)));
-                    out.write(points + " " + text.getText() + "\n");
+                    out.write(hits + " " + text.getText() + "\n");
                     out.close();
                     f.dispose();    
                     ArrayList<String> yo = new ArrayList<String>();         
@@ -224,18 +232,22 @@ public class Pong implements Runnable {
                     hs.setSize(500,100);
                     hs.setVisible(true);
                     
-                }catch (Exception ex){//Catch exception if any
-                    System.err.println("Error: " + ex.getMessage());
+                }catch (Exception ex){  //Catch exception if any
+                    System.err.println("Error:******** " + ex);
+		    // returns java.lang.NumberFormatException: null
                 }
             }
         });
         
-	////////////////////////////////////// dont need if dereference b
+	////////////////////////////////////// dont need if set b = null
         //b.setXVelocity( 0 );
         //b.setXCoordinate( 0 );
         //b.setYCoordinate( 0 );
         b = null;
-    }
+	*/
+	//b = null;   // removes ball
+	//System.out.println( "gameLoss, stub" );
+    //}
 
     /** sort 2 arrays using insertsort method to help make leaderboard
     *  @param array[] sort game scores
@@ -257,68 +269,89 @@ public class Pong implements Runnable {
         }
     }
 
-    /** resets the points back to 0
-     */
-
-    public void pointsReset(){
-        this.points = 0;
-    }
-
-    /** Move the paddles and the ball. Check for collision 
-     */
-
-    public void moveGame() {
-        p1.movePaddle();
-        p2.movePaddle();
-        b.setXpos( b.getXpos() + b.getXVelocity() );
-        b.setYpos( b.getYpos() + b.getYVelocity() );
-        paddleCollision();
+    public void moveGame() { // every iterations of thread the ball calls this
+        p1.movePaddle();     // draws paddles at new location
+        p2.movePaddle();      
+	//                   // sets the new locations
+	b.setXCoordinate( b.getXCoordinate() + b.getXVelocity() );
+        b.setYCoordinate( b.getYCoordinate() + b.getYVelocity() );
+	//                   // checks if it hit a paddle
+	paddleCollision();
+	//                   // checks if it hit a wall
         wallCollision();
-        }
+    }
     
-        /** Detect whether ball hits a paddle
-         */
+    /** Detect whether ball hits a paddle
+     */
+    
+    public void paddleCollision() {// speed starts out at 1
+	if( getHits() % 5 == 0 )   // every 5 hits increases speed by 1,
+	    moreSpeed = 1;
+	else
+	    moreSpeed = 0;	       
 
-        public void paddleCollision() {
-        if((b.rect).intersects(p1.p)){
-            b.setXVelocity( 3 );
-        }
-    
-        if((b.rect).intersects(p2.p)){
-            b.setXVelocity( -3 );
+	// Sets the new velocity if it hits either paddle, p1 or p2
+	if( ( b.rectangle ).intersects( p1.rectangle ) ){  // if ball hits p1
+	    b.setXVelocity( -1 * ( b.getXVelocity() - moreSpeed ) );
+	    incrementHits();                               // count hits
+	}
+	
+	else if( ( b.rectangle ).intersects( p2.rectangle ) ){// if ball hits p2
+            b.setXVelocity( -1 * ( b.getXVelocity() + moreSpeed ) );
+	    incrementHits();                               // count hits
         }
     }
-
+    
     /** Detect whether the ball hits a wall
      */
 
-    public void wallCollision() {
-        if(b.getXpos() <= (Screen.w - Screen.w)){
-            b.setXVelocity( -3 );
-            this.ballsLost++;
-            b.resetBall();
-        }
-        if(b.getXpos() >= (Screen.w - 20)){
-            b.setXVelocity( -3 );
-            this.points++;
-        }
-        if(b.getYpos() >= (Screen.h - 20)){
-            b.setYVelocity( -3 );
-        }
-        if(b.getYpos() <= (Screen.h - Screen.h + 30)){
-            b.setYVelocity( 3 );
-        }
+    public void wallCollision() 
+    {
+	//  when p1 misses / hits the wall behind it
+        if( b.getXCoordinate() <= ( 0 ) )
+	    {
+		// increments ballsLost for p1, only get 3
+		// sets velocity facing opposite direction
+		// resets ball to the middle
+		// adds points, 
+		p2.playerMissed( b, getHits() );  // increment ballsLost for p1
+		gameObject.isGoingRight = true;
+		hitsReset();
+	    }
+        else if( b.getXCoordinate() >= ( Screen.w - 20 ) )
+	    {
+		p1.playerMissed( b, getHits() );
+		gameObject.isGoingRight = false;
+		hitsReset();
+	    }
+	
+	if( b.getYCoordinate() >= ( Screen.h - 20 ) )
+	    {
+		b.setYVelocity( -1 * b.getYVelocity() );
+	    }
+        else if( b.getYCoordinate() <=  30 )
+	    {
+		b.setYVelocity( -1 * b.getYVelocity() );
+	    }
     }
 
     /** Run thread to move paddles and ball
      */
 
     public void run(){
+	b.stopBall();
         try{
-            while(true){
+            while( gameIsGoing ){
                 moveGame();
                 Thread.sleep(15);
             }
         }catch(Exception e){}
-    }   
+	
+    }
+    public void kill()
+    {
+	gameIsGoing = false;
+	Screen.theball.stop();
+    }
 }
+    

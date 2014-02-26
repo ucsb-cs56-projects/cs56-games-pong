@@ -26,9 +26,8 @@ import java.awt.geom.Rectangle2D; // for the bounding box
  @version CS56, Winter 2014, UCSB 
 */
 public class Paddle extends gameObject{
-    public Rectangle p;
-    public int dy;
-    public int dx;
+    public int points;
+    public int ballsLost;
     public boolean right;
     public static final Integer paddleHeight = 90;
 
@@ -50,9 +49,12 @@ public class Paddle extends gameObject{
 
     public Paddle(int x, int y, boolean sideRight){
 	super( x, y );
-	p = new Rectangle( x, y, 10, paddleHeight );
-	this.right = sideRight;
+	
+	ballsLost = 0;
+	points = 0;
+	right = sideRight;
     }
+    
  
     /** KeyPressed handles what to do if player hits up or down key, and Q and A key.
      *  Paddle should move up upon up key and Q key, and down upon down key and A key.
@@ -60,24 +62,25 @@ public class Paddle extends gameObject{
      */
     
     public void keyPressed(KeyEvent evt){
-        if (this.right == false) {
-            if(evt.getKeyCode() == evt.VK_Q){
-                System.exit(0);
+
+        if ( this.right == false ) {
+            if( evt.getKeyCode() == evt.VK_Q ){
+                System.exit( 0 );
             }
-            if(evt.getKeyCode() == evt.VK_W){
-                setdy(-5);
+            if( evt.getKeyCode() == evt.VK_W ){
+		setYVelocity( -5 );
             }
-            if(evt.getKeyCode() == evt.VK_S){
-                setdy(5);
+            if( evt.getKeyCode() == evt.VK_S ){
+                setYVelocity( 5 );
             }
         
         }
         else {
-            if(evt.getKeyCode() == evt.VK_UP){
-                setdy(-5);
+            if( evt.getKeyCode() == evt.VK_UP ){
+		setYVelocity( -5 );
             }
-            if(evt.getKeyCode() == evt.VK_DOWN){
-                setdy(5);
+            if( evt.getKeyCode() == evt.VK_DOWN ){
+		setYVelocity( 5 );
             }
         }
     }
@@ -87,110 +90,67 @@ public class Paddle extends gameObject{
      */
 
     public void keyReleased(KeyEvent evt){
-    if (this.right == false) {
-        if(evt.getKeyCode() == evt.VK_W){
-        setdy(0);
+	
+    if ( this.right == false ) {
+        if( evt.getKeyCode() == evt.VK_W ){
+	    setYVelocity( 0 );
         }
 
-        if(evt.getKeyCode() == evt.VK_S){
-        setdy(0);
+        if( evt.getKeyCode() == evt.VK_S ){
+	    setYVelocity( 0 );
         }
     }
     else {
-        if(evt.getKeyCode() == evt.VK_UP){
-        setdy(0);
+        if( evt.getKeyCode() == evt.VK_UP ){
+	    setYVelocity( 0 );
         }
 
-        if(evt.getKeyCode() == evt.VK_DOWN){
-        setdy(0);
+        if( evt.getKeyCode() == evt.VK_DOWN ){
+	    setYVelocity( 0 );
         }
     }
     }
 
-
-    /** draw the paddle onto the screen as a rectangle
-     *   @param g graphics handles the drawing of the paddle
-     */
-
-    public void draw(Graphics g){
+    public void draw(Graphics g)
+    {
         g.setColor( getRandomColor() );
-        g.fillRect(p.x,p.y,p.width,p.height);
+        g.fillRect( getXCoordinate(), getYCoordinate(), 
+		    getWidth(), getHeight() );
     }
 
+    public int getPaddleTopHit(){ return ( Screen.h - 97 ); }
 
-    /** set the speed of the change of y position
-     *   @param newdy chooses the new speed
-     */
+    public int getPaddleBotHit(){ return 37; }
 
-    public void setdy(int newdy){
-	//this.setYVelocity( newdy );
-	dy = newdy;
-    }
-
-    /** return the dy of the paddle
-     */
-
-    public int getdy(){
-	return this.dy;
-	//return this.getYVelocity();
-    }
-
-
-    /** set the speed of the change of x position
-     *   @param newY chooses the new speed
-     */
+    public void incrementBallsLost(){ ballsLost++; }
     
-    public void setYpos(int newY){
-    	p.y =  newY;
-    }
-
-    /** returns the Y position of the paddle
-     */
+    public void incrementPoints( int numOfPoints ){ points += numOfPoints; }
     
-    public int getYpos(){
-	return getYCoordinate();
+    public int getPoints(){ return points; }
+
+    public void gameLoss()
+    {
+	//System.out.print( "*" );
+	//System.out.print( "Player " + this + " has lost" );
     }
 
-    /** returns the X position of the paddle
-     */
-    
-    public int getXpos(){
-	return getXCoordinate();
+    public void playerMissed( Ball ball, int numOfPoints )
+    {
+	incrementBallsLost();
+	ball.setXVelocity( -1 * ball.getXVelocity() );
+	ball.resetBall();
+	incrementPoints( numOfPoints );
+	
     }
-
-    /**
-     *  returns the Ypos of the paddle, which is
-     * the top of the screen where the paddle can highest
-     *  go to.
-     */
-
-    public int getPaddleTopHit(){
-	int Ypos = Screen.h - 97;
-	return Ypos;
-    }
-
-    /**
-     * returns the Ypos2 of the paddle, which is the lowest point
-     * the paddle can go to.
-     */
-
-    public int getPaddleBotHit(){
-	int Ypos2 = 37;
-	return Ypos2;
-    }
-
-    /** move handles the changing position of the paddle,
-     *  keeps the paddle from going offscreen.
-     */
     
     public void movePaddle(){
-	if(p.y <= this.getPaddleBotHit()){
-	    setYpos( this.getPaddleBotHit() );
+	if( getYCoordinate() <= this.getPaddleBotHit() ){
+	    setYCoordinate( this.getPaddleBotHit() );
 	}
-	if(p.y >= this.getPaddleTopHit()){
-	    setYpos( this.getPaddleTopHit() );
+	else if( getYCoordinate() >= this.getPaddleTopHit() ){
+	    setYCoordinate( this.getPaddleTopHit() );
 	}
 	
-	p.y += dy;
+	setYCoordinate( getYCoordinate() + getYVelocity() );
 	}
 }

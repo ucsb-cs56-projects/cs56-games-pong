@@ -78,13 +78,14 @@ public class MainMenu {
 
     class PlayListener implements ActionListener
     {
+	Screen s = null;
 	public void actionPerformed(ActionEvent e)
 	{
 	levelDifficulty = getLevelDifficulty();
 	newWindowWidth = 8 * levelDifficulty;
 	newWindowHeight = 6 * levelDifficulty;
-	Screen s = new Screen( newWindowWidth, newWindowHeight );
-	
+	if( s == null )
+	    s = new Screen( newWindowWidth, newWindowHeight );
 	System.out.println( newWindowWidth + ", " + newWindowHeight );
 	}
     }

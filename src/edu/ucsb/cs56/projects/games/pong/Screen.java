@@ -36,35 +36,13 @@ public class Screen extends JFrame {
     public Pong game;
     public Graphics doublebufferG;
     public Image doublebufferImg;
+    static Thread theball;
 
-    /** sets the width of the screen
-     *   @param width the width of the Screen
-     */
-
-    public void setScreenWidth(int width){
+    public void setScreenSize( int width, int height )
+    {
 	this.w = width;
-    }
-
-    /** sets the height of the screen
-     *   @param height the height of the Screen
-     */
- 
-    public void setScreenHeight(int height){
 	this.h = height;
-    }
-
-    /** returns the width of the screen
-     */
-
-    public int getScreenWidth(){
-	return this.w;
-    }
-
-    /** returns the height of the screen
-     */
-
-    public int getScreenHeight(){
-	return this.h;
+	setSize( w, h );
     }
 
     /** Screen Constructor and mouseEntered function to unpause game.
@@ -72,30 +50,20 @@ public class Screen extends JFrame {
      */
 
     public Screen( int windowWidth, int windowHeight ) {
-	this.setScreenWidth(windowWidth); // put this before pong is initialized since Pong uses the static variables in Screen
-	this.setScreenHeight(windowHeight);
+	setScreenSize( windowWidth, windowHeight );
+	setBackground(Color.BLACK);
+	setResizable(false);
+	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	game = new Pong();
-	getContentPane().addMouseListener(new MouseAdapter()
-	    {
-		public void mouseEntered(MouseEvent e){
-		    Thread theball = new Thread(game);
-		    theball.start();
-		}
-	    });
-        
-	this.addKeyListener(new myKeyAdapter());
-	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	theball = new Thread(game);
+	theball.start();
+	//theball.stop();
+	addKeyListener(new myKeyAdapter());
 
-	this.setSize( windowWidth, windowHeight );
-	this.setBackground(Color.BLACK);
-	this.setResizable(false);
 	
-	this.setTitle("Cooperative PONG. WIN: 10 LOSE: -3. MOUSE OVER TO UNPAUSE AND INCREASE SPEED");
-	this.setVisible(true);
+	setTitle( "Pong" );
+	setVisible( true );
     }
-
-
-
 
     /** draw text, ball, paddle onto screen
      *   @param g graphics perform drawing operations
@@ -104,15 +72,17 @@ public class Screen extends JFrame {
     public void draw(Graphics g){
 	g.setFont(new Font("sansserif", Font.BOLD, 28));
 	g.setColor(Color.WHITE);
-	g.drawString("Points: ", 280, 70);
+	g.drawString("Hits: " + game.getHits(), 280, 70);
+	g.drawString( "player 1 ", 10,70 );
+	g.drawString( "" + game.p1.getPoints(), 10, 100 );
+	g.drawString( "player 2 ", Screen.w - 150, 70 );
+	g.drawString( "" + game.p2.getPoints(), Screen.w - 50, 100 );
+	g.drawString( "Lives " + ( 3 - game.p2.ballsLost ), 10, Screen.h - 10 );
+	g.drawString( "Lives " + ( 3 - game.p1.ballsLost ), Screen.w - 120 , Screen.h - 10 );
 
-	g.setFont(new Font("sansserif", Font.BOLD, 32));
-	g.setColor(Color.WHITE);
-	g.drawString(game.points + "",400,70);
 
 	game.draw(g);
 	game.p1.draw(g);
-	repaint();
 	game.p2.draw(g);
 	repaint();
     }
@@ -122,10 +92,10 @@ public class Screen extends JFrame {
      */
 
     public void paint(Graphics g){
-	doublebufferImg = createImage(getWidth(), getHeight());
+	doublebufferImg = createImage( getWidth(), getHeight());
 	doublebufferG = doublebufferImg.getGraphics();
-	draw(doublebufferG);
-	g.drawImage(doublebufferImg,0,0,this);
+	draw( doublebufferG );
+	g.drawImage( doublebufferImg, 0, 0, this );
     }
 
     /** myKeyAdapter handles keyboard events.
@@ -137,6 +107,13 @@ public class Screen extends JFrame {
 	public void keyPressed(KeyEvent evt){
 	    game.p1.keyPressed(evt);
 	    game.p2.keyPressed(evt);
+	    if( game.b.isStopped() )
+		{
+		    if( evt.getKeyCode() == evt.VK_SPACE )
+			game.b.startBall();
+		    else
+			theball.yield();
+		}
 	}
 
 	/** myKeyAdapter handles keyboard released events.
@@ -148,13 +125,5 @@ public class Screen extends JFrame {
 	    game.p1.keyReleased(evt);
 	    game.p2.keyReleased(evt);
 	}
-    }
-
-
-    /** create the screen and start the threads of the ball and paddle
-     *  so they can start animating.
-     *   @param args no return
-     */
-
-   
+    }  
 }

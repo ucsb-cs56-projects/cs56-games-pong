@@ -4,35 +4,38 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 class gameObject{
-    public int xCoordinate;
-    public int yCoordinate;
-    
     public int xVelocity;
     public int yVelocity;
+    static boolean isGoingRight = false;
+    public Rectangle rectangle;
 
-    gameObject() 
-    {
-	
-	
-    }
-    gameObject( int x, int y )
-    {
-	this( x, y, 0, 0 );
+
+    gameObject() {  }            // Default, not used
+    gameObject( int x, int y )   // used by p1, it does on the left 
+    {    
+	//  Calls the other Constructor below with this( )
+	this( x, y, 10, Paddle.paddleHeight ); // paddleHeight is static
     }
     
-    gameObject( int x, int y, int dx, int dy )
+    // called by on
+    gameObject( int x, int y, int rectW, int rectH )
     {
-	setXCoordinate( x );
-	setYCoordinate( y );
-	setXVelocity( dx );
-	setYVelocity( dy );
+	setXVelocity( 0 );
+	setYVelocity( 0 );
+	rectangle = new Rectangle( x, y, rectW, rectH );
     }
     
-    public int getXCoordinate() { return xCoordinate; }
-    public void setXCoordinate( int x ) { xCoordinate = x; }
+    public int getXCoordinate() { return rectangle.x; }
+    public void setXCoordinate( int x ) { rectangle.x = x; }
 
-    public int getYCoordinate() { return yCoordinate; }
-    public void setYCoordinate( int y ) { yCoordinate = y; }
+    public int getYCoordinate() { return rectangle.y; }
+    public void setYCoordinate( int y ) { rectangle.y = y; }
+
+    public int getWidth() { return rectangle.width; }
+    public void setWidth( int w ) { rectangle.width = w; }
+
+    public int getHeight() { return rectangle.height; }
+    public void setHeight( int h ) { rectangle.height = h; }
 
     public int getXVelocity() { return xVelocity; }
     public void setXVelocity( int dx ) { xVelocity = dx; }

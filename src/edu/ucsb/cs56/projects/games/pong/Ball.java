@@ -25,9 +25,7 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 */
 public class Ball extends gameObject {
 
-    //public int dx,dy;
-    //public int w,h;
-    public Rectangle rect;
+    public int ballsLost;
                                                 
     /** edu.ucsb.cs56.projects.games.pong.Ball constructor to initialize location of edu.ucsb.cs56.projects.games.pong.Ball onto the screen
      *  and draw it as a rectangle for a simpler and precise hitbox.
@@ -37,112 +35,47 @@ public class Ball extends gameObject {
      *  @param h set initial h of ball
      */
 
-    public Ball(int x, int y, int w, int h){
-	super( x, y, -2, 1 );	
-
-	//	this.x = x;
-	//this.y = y;
-	//	this.w = w;
-	//this.h = h;
-	
-	//	setdx(-2);
-	//setdy(1);
-	rect = new Rectangle( getXCoordinate(), getYCoordinate(),20,20);
-	//rect = new Rectangle(this.x,this.y,20,20);
+    public Ball( int x, int y, int w, int h )
+    {
+	super( x, y, w, h );	
+	ballsLost = 0;
+	startBall();
     }
 
-    /** sets a different x position for the ball
-     *  @param x chooses the new x position
-     */
-
-    public void setXpos(int x){
-	setXCoordinate( x );
-	//this.x = x;
-	rect.x = getXCoordinate();
-	//rect.x = x - 10;
-    }
-
-    /** sets a different y position for the ball
-     *  @param y chooses the new x position
-     */
-
-    public void setYpos(int y){
-	setYCoordinate( y );
-	//this.y = y;
-	rect.y = getYCoordinate() - 10;
-	//rect.y = y - 10;
-    }
-
-    /** sets a different speed of x position for the ball
-     *  @param newdx chooses the new x speed
-     */
-
-    public void setdx(int newdx){ 
-	setXVelocity( newdx );
-    }
-
-    /** sets a different speed of y position for the ball 
-     *  @param newdy chooses the new y speed
-     */
-
-    public void setdy(int newdy){
-	setYVelocity( newdy );
-    }
-
-    /** returns the coordinate of the x location of the ball
-     */
-
-    public int getXpos(){
-	return getXCoordinate();
-	//return this.x;
-    }
-
-    /** returns the coordinate of the y location of the ball
-     */
-
-    public int getYpos(){
-	return getYCoordinate();
-	//return this.y;
-    }
-
-    /** returns the dx of the ball
-     */
-
-    public int getdx(){
-	return getXVelocity();
-    }
-
-    /** returns the dy of the ball
-     */
-   
-    public int getdy(){
-	return getYVelocity();
-    }
-
-
-    /** draw a pink ball and fill the rectangle to represent the ball
-     *  @param g graphics draws the pink ball.
-     */
-   
-    public void draw(Graphics g){
-
- 
+    public void draw( Graphics g )
+    {
 	g.setColor( getRandomColor() );
-        //  g.fillRect(b.x,b.y,b.width,b.height);  
-	g.fillOval(getXCoordinate(), getYCoordinate(),
-		   rect.width,rect.height);
-	//g.fillOval(x,y,rect.width,rect.height);
-
+	g.fillOval( getXCoordinate(), getYCoordinate(), 
+		    getWidth(), getHeight() );
     }
 
-    /** resets the ball to the middle parts of the screen
-     */
+    public void startBall()  // true goes right
+    {
+	int speed = 3;
+	if( gameObject.isGoingRight == false )
+	    speed = -3;
+	setXVelocity( speed );
+	setYVelocity( speed );
+    }
     
-    public void resetBall(){
-	if ( getXCoordinate() <= Screen.w - Screen.w){
-	//if (x <= Screen.w - Screen.w){
-	    setXpos(Screen.w/2);
-	    setYpos(Screen.h/2);
-	}
+    public boolean isStopped()
+    {
+	if( ( getXVelocity() == 0 ) && ( getYVelocity() == 0 ) )
+	    return true;
+	else 
+	    return false;
+    }
+
+    public void stopBall()
+    {
+	setYVelocity( 0 );
+	setXVelocity( 0 );
+    }
+    
+    public void resetBall() 
+    {
+	stopBall();
+	setXCoordinate( Screen.w / 2 );
+	setYCoordinate( Screen.h / 2 );
     }
 }
