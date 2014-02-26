@@ -43,11 +43,13 @@ public class Pong implements Runnable {
     Ball b;                 // the ball
     int moreSpeed = 1;      // to increase speed every 4 hits
     boolean gameIsGoing = true;
+    Paddle winner;
     
     /** Pong constructor to initialize 2 paddle objects, a ball object, and points value
      */
 
     public Pong() {
+     
         p1 = new Paddle( 8, 160 );                      // Left Paddle
         p2 = new Paddle( Screen.w - 18 , 160, true );  // Right Paddle
         b = new Ball( (int)(Screen.w / 2), (int)(Screen.h / 2), 20, 20 );
@@ -62,14 +64,27 @@ public class Pong implements Runnable {
     public void incrementHits() { hits++; }    // whenever it hits a paddle
 
     public void hitsReset(){ hits = 0; }       // when a paddle misses the ball
-    
+
+    public void setWinner(Paddle a) { winner = a; }
+
+    public Paddle getWinner(){ return winner;}
+
+    public String toString() {
+	if( winner.right == true)
+	    return "Player 2";
+	else
+	    return "Player 1";
+	    }
+
     public void checkGameStatus(){
 	if(p2.ballCount <= 0 ){
 	    System.out.println("player 2 lost");
-	    gameLoss(p2);
+	    setWinner(p1);
+	     gameLoss(p2);
 	}
 	else if(p1.ballCount <= 0 ){
 	    System.out.println("player 1 lost");
+	    setWinner(p2);
 	    gameLoss(p1);
 	}
     }
@@ -97,43 +112,27 @@ public class Pong implements Runnable {
     public void gameLoss( Paddle p )
     {
 	
-	System.out.print( "*" );
+        gameEnd();
 	kill();
 	
     }
 
-    /** handles player winning the game,  reset ball values to 0 and stop the ball from moving
-     */
-    //////////////////////////////////// no call for game win
-    /////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////
-
-    /*    public void gameWin(){
-        b.setXVelocity(0);
-        b.setYVelocity(0);
-        b.setXpos(0);
-        b.setYpos(0);
-        b = null;
-	}*/
-
-    /** handles players losing the game, stop the ball from moving
-     */
-
-    //public void gameLoss(){
+    public void gameEnd(){
         
-	/*final JFrame f = new JFrame();
-	JLabel label = new JLabel("Enter your name!", JLabel.CENTER);
+	final JFrame f = new JFrame();
+	JLabel label = new JLabel( toString() + " wins!", JLabel.CENTER);
+	JLabel label2 = new JLabel("Enter your name!", JLabel.CENTER);
         JPanel newF = new JPanel();
         final JTextField text = new JTextField();
         JButton button = new JButton("Enter");
 	newF.setLayout(new GridLayout(5,3,0,10));
 
 	newF.add(new JLabel("")); ////////////////////////////////////
-	newF.add(new JLabel(""));
+	newF.add(label);
 	newF.add(new JLabel(""));	
 	newF.add(new JLabel(""));
 	
-	newF.add(label);	
+	newF.add(label2);	
 	newF.add(new JLabel("")); // set empty labels to fill grid layout
 	newF.add(new JLabel(""));
         
@@ -254,10 +253,10 @@ public class Pong implements Runnable {
         //b.setXCoordinate( 0 );
         //b.setYCoordinate( 0 );
         b = null;
-	*/
+      
 	//b = null;   // removes ball
 	//System.out.println( "gameLoss, stub" );
-    //}
+   }
 
     /** sort 2 arrays using insertsort method to help make leaderboard
     *  @param array[] sort game scores

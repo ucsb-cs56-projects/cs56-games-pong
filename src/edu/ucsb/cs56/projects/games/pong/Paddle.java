@@ -28,7 +28,7 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 public class Paddle extends gameObject{
     public int points;
     public int ballCount;
-    public boolean right;
+    public  boolean right;
     public static final Integer paddleHeight = 90;
 
 
