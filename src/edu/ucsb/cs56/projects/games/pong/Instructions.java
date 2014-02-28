@@ -8,7 +8,7 @@ public class Instructions{
     JFrame jf;
     Instructions()
     {
-	jf = new JFrame( "test" );
+	jf = new JFrame( "Instructions" );
 	jf.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 	jf.setSize( 640, 480 );
 	JButton backToMain = new JButton( "Back To Main Menu" );
@@ -18,7 +18,7 @@ public class Instructions{
 	setToVisible();
 	JPanel jp = new JPanel();
 	jf.add( jp );
-	JLabel l = new JLabel("<html><p>Here<br>is the text that we want<br>and will see if it goes to the new<br>line. It works to have it in the center<br>but now it will create a new line</p></html>", SwingConstants.CENTER);
+	JLabel l = new JLabel(displayInstructions(), SwingConstants.CENTER);
 
 	///////////////  Set Instructions   ^^^^
 	//////////////////////
@@ -31,9 +31,9 @@ public class Instructions{
 	displayInstructions();
     }
     
-    public void displayInstructions()
+    public String displayInstructions()
     {
-	System.out.println("Stub,instructions go here");
+	return ("<html><p><br>Difficulty:<br>The Screen size increases with the difficulty that is chosen.<br><br>How To Play:<br>Player 1 uses W to move the paddle up and S to move their paddle down.<br>Player 2 uses the Up and Down arrows to move their paddle up and down<br><br>Hit the space bar to move the ball initially.<br>The ball will increase in speed every 5 times it hits a paddle.<br>You lose a life if you miss the ball.<br>When you lose a life, the total hits will be added to your opponents score.<br>The winner is the player with remaining lives.</p></html>");
     }
 
     class BackToMainListener implements ActionListener{
