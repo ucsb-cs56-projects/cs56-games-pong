@@ -15,10 +15,10 @@ public class PongTest
 {
     /**
        test constructor from Pong
-       @see Pong
+//       @see Pong
     */
    
-    @Test public void testConstructor()
+    /*    @Test public void testConstructor()
     {
         Pong game = new Pong();
   Paddle pp = new Paddle(8, 160);
@@ -29,20 +29,24 @@ public class PongTest
 
   assertEquals(bb.getXpos(), game.b.getXpos());
   assertEquals(bb.getYpos(), game.b.getYpos());
-    }
+  }*/
 
-   
+    
+//////////////////////////////////////////////
+// tests the incrementor
+// for loop
+////////////////////////////////   
     /**
        test getPoints
-       @see Pong#getPoints
+    //   @see Pong#getPoints
     */
-   
-    @Test public void testgetPoints()
+    /*
+    @Test public void testgetHits()
     {
         Pong game = new Pong();
   game.setPoints(5);
         assertEquals(5,game.getPoints());
     }
 
-
+    */
 }

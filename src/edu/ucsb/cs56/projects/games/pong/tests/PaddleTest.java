@@ -15,37 +15,42 @@ public class PaddleTest
 {
     /**
        test constructor from PaddleTest
-       @see Paddle
+       //@see Paddle
 
     */ 
-    @Test public void testConstructor(){
+    /*    @Test public void testConstructor(){
         Paddle paddle = new Paddle(20,20);
         assertEquals(20,paddle.getXpos());
   assertEquals(20,paddle.getYpos()); 
     }
-
+    */
     /**
        test constructor from PaddleTest
-       @see Paddle
+      // @see Paddle
 
     */
-    @Test public void testConstructor2(){
+    /*    @Test public void testConstructor2(){
   Paddle paddle = new Paddle(30,100);
         assertEquals(30,paddle.getXpos());
   assertEquals(100,paddle.getYpos()); 
-    }
+  }*/
  
   
 
+
+    //////////////////////////////////
+    // not needed
+    // changed to getYVelocity()
+    // setYVelocity( int dy )
     /**
        test getdy
-       @see Paddle#getdy
+       //@see Paddle#getdy
     */
-    @Test public void testgetdy(){
+    /*    @Test public void testgetdy(){
         Paddle paddle = new Paddle(30,100);
   paddle.setdy(7);
         assertEquals(7,paddle.getdy());
-    }
+	}*/
 
 
 }
