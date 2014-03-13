@@ -80,7 +80,7 @@ public class Pong implements Runnable {
 	if(p2.ballCount <= 0 ){
 	    System.out.println("player 2 lost");
 	    setWinner(p1);
-	     gameLoss(p2);
+	    gameLoss(p2);
 	}
 	else if(p1.ballCount <= 0 ){
 	    System.out.println("player 1 lost");
@@ -92,7 +92,7 @@ public class Pong implements Runnable {
     public void draw(Graphics g) {             // to draw the ball
         b.draw(g);
 	
-	/**	if( p2.ballsLost >= 3 )                // each player has 3 lives
+	/*	if( p2.ballsLost >= 3 )                // each player has 3 lives
 	    {
 		////////////////////////////////////////////
 		// infinite loop
@@ -119,7 +119,9 @@ public class Pong implements Runnable {
 
     public void gameEnd(){
         
-	final JFrame f = new JFrame();
+	GameOver gameOver = new GameOver( toString(), winner.getPoints() );
+    }
+	/*	final JFrame f = new JFrame();
 	JLabel label = new JLabel( toString() + " wins!", JLabel.CENTER);
 	JLabel label2 = new JLabel("Enter your name!", JLabel.CENTER);
         JPanel newF = new JPanel();
@@ -151,8 +153,11 @@ public class Pong implements Runnable {
         f.setVisible(true);
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
-            {//Execute when button is pressed
-                try{
+            {*/
+
+
+		//Execute when button is pressed
+                /*try{
                     // Create file 
                     PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("scores.txt", true)));
                     out.write(hits + " " + text.getText() + "\n");
@@ -244,19 +249,10 @@ public class Pong implements Runnable {
                 }catch (Exception ex){  //Catch exception if any
                     System.err.println("Error:******** " + ex);
 		    // returns java.lang.NumberFormatException: null
-                }
-            }
-        });
-        
-	////////////////////////////////////// dont need if set b = null
-        //b.setXVelocity( 0 );
-        //b.setXCoordinate( 0 );
-        //b.setYCoordinate( 0 );
-        b = null;
-      
-	//b = null;   // removes ball
-	//System.out.println( "gameLoss, stub" );
-   }
+		    }*/
+	//           }
+	//   });
+	//}
 
     /** sort 2 arrays using insertsort method to help make leaderboard
     *  @param array[] sort game scores
