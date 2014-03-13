@@ -87,7 +87,6 @@ public class MainMenu {
 	newWindowHeight = 6 * levelDifficulty;
 	if( s == null )
 	    s = new Screen( newWindowWidth, newWindowHeight );
-	System.out.println( newWindowWidth + ", " + newWindowHeight );
 	}
     }
     //Button Listener for instructions button

@@ -78,25 +78,15 @@ public class Pong implements Runnable {
     public void checkGameStatus()
     {
 	if(p2.ballCount <= 0 ){
-	    System.out.println("player 2 lost");
 	    setWinner(p1);
 	    gameLoss(p2);
 	}
 	else if(p1.ballCount <= 0 ){
-	    System.out.println("player 1 lost");
 	    setWinner(p2);
 	    gameLoss(p1);
 	}
     }
-
-    /////////////////////////////////////////////////////////////
-    /// not sure if we need this draw
-    // draws the ball
-    public void draw(Graphics g) {             // to draw the ball
-        b.draw(g);
-    }
-
-   
+  
     // Brings up frame to enter the users name
     public void gameLoss( Paddle p )
     {

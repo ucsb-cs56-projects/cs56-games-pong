@@ -19,14 +19,12 @@ class EndOfGame {
     //Reads the High Scores file
     public void readTheFile()
     {
-	System.out.println( "readTheFile()" );
 	try{
-	    File scoresFile = new File( "scores.txt" );
+	    File scoresFile = new File( "src/edu/ucsb/cs56/projects/games/pong/scores.txt" );
 	    FileReader fileReader = new FileReader( scoresFile );
 	    BufferedReader reader = new BufferedReader( fileReader );
 
 	    String line = reader.readLine(); //reads the file
-	    System.out.println( "scores.txt = " + line );
 
 	    String[] parsedList = line.split( "/" ); //parses the file
 	    putInArrayList( parsedList );
@@ -70,9 +68,8 @@ class EndOfGame {
     //Saves new file
     public void saveToFile( )
     {
-	System.out.println( "saveToFile()" );
 	try{
-	    FileWriter writer = new FileWriter( "scores.txt" );
+	    FileWriter writer = new FileWriter( "src/edu/ucsb/cs56/projects/games/pong/scores.txt" );
 	    String finalOutput = "";
 	    for( int i = 0; i < 5; i++ )
 		{
@@ -81,7 +78,6 @@ class EndOfGame {
 	    
 	    writer.write( finalOutput );
 	    writer.flush();
-	    System.out.println( "scores.txt = " + finalOutput );
 	    writer.close();
 	}catch( IOException ioe ){
 	    ioe.printStackTrace();

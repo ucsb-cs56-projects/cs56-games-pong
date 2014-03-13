@@ -74,7 +74,7 @@ public class Screen extends JFrame {
 	g.drawString( "Lives " + ( game.p2.ballCount ), Screen.w - 120 , Screen.h - 10 );
 
 
-	game.draw(g);
+	game.b.draw(g);
 	game.p1.draw(g);
 	game.p2.draw(g);
 	repaint();
