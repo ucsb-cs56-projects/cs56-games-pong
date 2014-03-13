@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
+//Class for Main Menu selection
 public class MainMenu {
     private int levelDifficulty;
     private int newWindowWidth;
@@ -57,11 +57,12 @@ public class MainMenu {
 	frame.setSize( 640, 480 );
 	frame.setLocationRelativeTo( null );
 	frame.setVisible( true );
-
+	//Button Listener for Play Button
 	play.addActionListener( new PlayListener());
 	instructions.addActionListener( new InstructionsListener());
 
     }
+    //Sets level difficulty based on user input
     public int getLevelDifficulty()
     {
 	if( easy.isSelected() )
@@ -75,7 +76,7 @@ public class MainMenu {
 
 	return levelDifficulty;
     }
-
+    //sets new window parameters based on level difficulty
     class PlayListener implements ActionListener
     {
 	Screen s = null;
@@ -89,7 +90,7 @@ public class MainMenu {
 	System.out.println( newWindowWidth + ", " + newWindowHeight );
 	}
     }
-    
+    //Button Listener for instructions button
     class InstructionsListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
@@ -100,7 +101,7 @@ public class MainMenu {
 	}
 
     }
-
+    
     public static void main (String[] args) {
 
 	MainMenu m = new MainMenu();

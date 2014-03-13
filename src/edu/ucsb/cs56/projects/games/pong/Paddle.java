@@ -16,27 +16,22 @@ import java.awt.geom.GeneralPath; // combinations of lines and curves
 import java.awt.geom.Line2D;  // single lines
 import java.awt.geom.Rectangle2D; // for the bounding box  
 
-/** Paddle is the class that will move the user-controlled paddle
- around the screen
 
- @author Timothy Fok
- @author Sanchit Gupta, Bhanu Khanijau
- @author Jake Dumont, Heneli Kailahi
- @author Benjamin Hartl, Sarah Darwiche
- @version CS56, Winter 2014, UCSB 
-*/
+// Timothy Fok
+// Sanchit Gupta, Bhanu Khanijau
+// Jake Dumont, Heneli Kailahi
+// Benjamin Hartl, Sarah Darwiche
+// CS56, Winter 2014, UCSB 
+
+//Moves the user-controlled paddle around the screen
 public class Paddle extends gameObject{
     public int points;
     public int ballCount;
     public  boolean right;
-    public static final Integer paddleHeight = 90;
+    public static final Integer paddleHeight = 90; //fixes paddle height at 
 
 
-    /** Paddle contructor to initialize intial x,y placement of paddle
-     @param x sets the x position of the paddle.
-     @param y sets the y position of the paddle.
-    */
-
+    // Paddle contructor to initialize intial x,y placement of paddle
     public Paddle(int x, int y){
 	this( x, y, false );
     }

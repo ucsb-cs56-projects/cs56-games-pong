@@ -45,33 +45,23 @@ public class Screen extends JFrame {
 	setSize( w, h );
     }
 
-    /** Screen Constructor and mouseEntered function to unpause game.
-     * @param e MouseEvents to handle running game when mouse is on Screen.
-     */
-
-    public Screen( int windowWidth, int windowHeight ) {
+    // Screen Constructor and mouseEntered function to unpause game
+      public Screen( int windowWidth, int windowHeight ) {
 	setScreenSize( windowWidth, windowHeight );
 	setBackground(Color.BLACK);
 	setResizable(false);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 	game = new Pong();
 	theball = new Thread(game);
 	theball.start();
-	//game.checkGameStatus();
-       	//theball.stop();
+
 	addKeyListener(new myKeyAdapter());
-	
-
-
-	
-	setTitle( "Pong" );
+       	setTitle( "Pong" );
 	setVisible( true );
     }
 
-    /** draw text, ball, paddle onto screen
-     *   @param g graphics perform drawing operations
-     */
-
+    // draw text, ball, paddle onto screen
     public void draw(Graphics g){
 	g.setFont(new Font("sansserif", Font.BOLD, 28));
 	g.setColor(Color.WHITE);
@@ -90,10 +80,7 @@ public class Screen extends JFrame {
 	repaint();
     }
 
-    /** paint buffer graphics onto screen
-     *   @param g graphics perform paint operations
-     */
-
+    // paint buffer graphics onto screen
     public void paint(Graphics g){
 	doublebufferImg = createImage( getWidth(), getHeight());
 	doublebufferG = doublebufferImg.getGraphics();
@@ -101,11 +88,8 @@ public class Screen extends JFrame {
 	g.drawImage( doublebufferImg, 0, 0, this );
     }
 
-    /** myKeyAdapter handles keyboard events.
-     *  it handles up and down keys in particular
-     *  for movement of paddle.  
-     */
-    
+
+   // Handles up and down keys for movement of paddle.  
     public class myKeyAdapter extends KeyAdapter {
 	public void keyPressed(KeyEvent evt){
 	    game.p1.keyPressed(evt);
@@ -119,10 +103,6 @@ public class Screen extends JFrame {
 		}
 	}
 
-	/** myKeyAdapter handles keyboard released events.
-	 *  it handles up and down keys in particular
-	 *  for movement of paddle.
-	 */
 
 	public void keyReleased(KeyEvent evt){
 	    game.p1.keyReleased(evt);

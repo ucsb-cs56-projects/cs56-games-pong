@@ -11,7 +11,7 @@ public class GameOver{
     String name;
     int score;
     JTextField text;
-
+    //Class to send in winner to High Score List
     GameOver( String winner, int points )
     {
 	name = winner;
@@ -21,7 +21,7 @@ public class GameOver{
 	jf.setVisible( true );
 
     }
-
+    //Set up frame structure for Game Over Screen
     public void setUpFrame()
     {
 	jf = new JFrame( "Game Over" );
@@ -29,7 +29,7 @@ public class GameOver{
         jf.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         jf.setSize( Screen.w, Screen.h );
     }
-
+    //Add labels for entering winner name
     public void addLabels()
     {
 	jp = new JPanel();
@@ -63,7 +63,7 @@ public class GameOver{
 	
 	jf.add( jp );
     }
-
+    //Button Listener for "Enter" that will trigger  Display High Scores
     class ButtonListener implements ActionListener{
 	public void actionPerformed( ActionEvent ae )
 	{
