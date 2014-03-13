@@ -5,7 +5,7 @@ import java.io.*;
 import java.awt.*;
 
 class EndOfGame {
-
+    //Create ArrayList to store high scores and names
     public ArrayList<HighScore> hList = new ArrayList<HighScore>();
 
     public HighScore winner;
@@ -16,7 +16,7 @@ class EndOfGame {
 	readTheFile();
 	saveToFile();
     }
-
+    //Reads the High Scores file
     public void readTheFile()
     {
 	System.out.println( "readTheFile()" );
@@ -25,10 +25,10 @@ class EndOfGame {
 	    FileReader fileReader = new FileReader( scoresFile );
 	    BufferedReader reader = new BufferedReader( fileReader );
 
-	    String line = reader.readLine();
+	    String line = reader.readLine(); //reads the file
 	    System.out.println( "scores.txt = " + line );
 
-	    String[] parsedList = line.split( "/" );
+	    String[] parsedList = line.split( "/" ); //parses the file
 	    putInArrayList( parsedList );
 	    checkArrayList();
 	    reader.close();
@@ -36,7 +36,7 @@ class EndOfGame {
 	    ioe.printStackTrace();
 	}
     }
-
+    //Checks ArrayList to see if winner will be placed in top five
     public void checkArrayList()
     {
 	for( int i = 0; i < 5; i++ )
@@ -49,14 +49,14 @@ class EndOfGame {
 		    }
 	    }
     }
-
+    //Checks if winner score is higher than current ArrayList index
     public boolean isGreaterThan( int i )
     {
 	if( winner.getPlayerScore() > hList.get( i ).getPlayerScore() )
 	    return true;
 	return false;
     }
-
+    //Adds winner to ArrayList
     public void putInArrayList( String[] parsedList )
     {
 	HighScore hs;
@@ -67,7 +67,7 @@ class EndOfGame {
 		hList.add( hs );
 	    }
     }
-
+    //Saves new file
     public void saveToFile( )
     {
 	System.out.println( "saveToFile()" );

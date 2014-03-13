@@ -3,7 +3,7 @@ package edu.ucsb.cs56.projects.games.pong;
 import javax.swing.*;
 import java.awt.*;
 
-
+//Class to display High Scores
 public class DisplayHighScores{
 
     JFrame jf;
@@ -11,11 +11,11 @@ public class DisplayHighScores{
     EndOfGame eog;
     DisplayHighScores( String name, int score )
     {
-	eog = new EndOfGame( score, name );
+	eog = new EndOfGame( score, name ); //Call EndOfGame()
 	setUpFrame();
 	showScores();
     }
-
+    //Set up frame structure for High Score Window
     public void setUpFrame()
     {
 	jf = new JFrame( "High Scores" );
@@ -26,7 +26,7 @@ public class DisplayHighScores{
         jf.setSize( Screen.w, Screen.h );
 	jf.setVisible( true );
     }
-
+    //Print scores on labels
     public void showScores()
     {
 	for( int i = 0; i < 5; i++ )

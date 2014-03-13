@@ -13,7 +13,7 @@ public class HighScore{
 	    playerName = name;
 	}
 
-    public int getPlayerScore() { return playerScore; }
+    public int getPlayerScore()   { return playerScore; }
 
     public String getPlayerName() { return playerName; }
     
