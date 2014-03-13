@@ -57,9 +57,6 @@ public class Pong implements Runnable {
 	moreSpeed = 1;
     }
 
-    /** returns the current value of times it hits a wall
-     */
-
     public int getHits( ){ return hits; }     // times it hit any paddle
     
     public void incrementHits(){ hits++; }    // whenever it hits a paddle
@@ -77,7 +74,7 @@ public class Pong implements Runnable {
 	    return "Player 1";
     }
 
-    // checks each time a ball is lost if they hav any lives left
+    // Checks each time a ball is lost if they hav any lives left
     public void checkGameStatus()
     {
 	if(p2.ballCount <= 0 ){
@@ -100,7 +97,7 @@ public class Pong implements Runnable {
     }
 
    
-    // brings up frame to enter the users name
+    // Brings up frame to enter the users name
     public void gameLoss( Paddle p )
     {
 	GameOver gameOver = new GameOver( toString(), winner.getPoints() );
@@ -200,7 +197,7 @@ public class Pong implements Runnable {
 	
     }
     
-    // stops the thread
+    // Stops the thread
     public void kill()
     {
 	gameIsGoing = false;
