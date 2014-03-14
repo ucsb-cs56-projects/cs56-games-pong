@@ -91,8 +91,8 @@ public class Pong implements Runnable {
     public void gameLoss( Paddle p )
     {
 	GameOver gameOver = new GameOver( toString(), winner.getPoints() );
+	Screen.jf.dispose();
 	kill();                 // kills the thread 
-	
     }
 
     public void moveGame() { // every iterations of thread the ball calls this
@@ -161,13 +161,13 @@ public class Pong implements Runnable {
 	//   then the Y velocity is reversed to stay on screen
 
 	// checks if ball hits the bottom of the screen
-	if( b.getYCoordinate() >= ( Screen.h - 20 ) )
+	if( b.getYCoordinate() >= ( Screen.h - 60 ) )
 	    {
 		b.setYVelocity( -1 * b.getYVelocity() );
 	    }
 	
 	// checks if ball hits the top of the screen
-        else if( b.getYCoordinate() <=  30 )
+        else if( b.getYCoordinate() <=  0 )
 	    {
 		b.setYVelocity( -1 * b.getYVelocity() );
 	    }

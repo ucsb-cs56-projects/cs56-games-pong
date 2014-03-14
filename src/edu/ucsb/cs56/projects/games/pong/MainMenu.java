@@ -15,6 +15,7 @@ public class MainMenu {
     public JRadioButton hard;
 
     Instructions i;
+    Screen s;
 
     public MainMenu() {
 	
@@ -22,18 +23,20 @@ public class MainMenu {
 	JPanel panel = new JPanel();
 	JButton instructions = new JButton( "Instructions" );
 	JButton play = new JButton( "Play" );
+	JButton highScores = new JButton( "High Scores" );
 
 	frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 	frame.add( panel );
 	
 	panel.setLayout( new BoxLayout( panel, BoxLayout.Y_AXIS ) );
 
-	instructions.setAlignmentX(JFrame.CENTER_ALIGNMENT );
-	
-	play.setAlignmentX(JFrame.CENTER_ALIGNMENT );
+	instructions.setAlignmentX( JFrame.CENTER_ALIGNMENT );
+	highScores.setAlignmentX( JFrame.CENTER_ALIGNMENT );
+	play.setAlignmentX( JFrame.CENTER_ALIGNMENT );
 	
 	panel.add( instructions );
-  
+	panel.add( highScores );
+       
 	JPanel ButtonPanel = new JPanel();
 
 	ButtonGroup difficulty = new ButtonGroup();
@@ -57,9 +60,12 @@ public class MainMenu {
 	frame.setSize( 640, 480 );
 	frame.setLocationRelativeTo( null );
 	frame.setVisible( true );
+	frame.setResizable( false );
+	
 	//Button Listener for Play Button
 	play.addActionListener( new PlayListener());
 	instructions.addActionListener( new InstructionsListener());
+	highScores.addActionListener( new HighScoresListener() );
 
     }
     //Sets level difficulty based on user input
@@ -79,13 +85,11 @@ public class MainMenu {
     //sets new window parameters based on level difficulty
     class PlayListener implements ActionListener
     {
-	Screen s = null;
 	public void actionPerformed(ActionEvent e)
 	{
-	levelDifficulty = getLevelDifficulty();
-	newWindowWidth = 8 * levelDifficulty;
-	newWindowHeight = 6 * levelDifficulty;
-	if( s == null )
+	    levelDifficulty = getLevelDifficulty();
+	    newWindowWidth = 8 * levelDifficulty;
+	    newWindowHeight = 6 * levelDifficulty;
 	    s = new Screen( newWindowWidth, newWindowHeight );
 	}
     }
@@ -99,6 +103,13 @@ public class MainMenu {
 		i.setToVisible();
 	}
 
+    }
+    
+    //Button Listener for instructions button
+    class HighScoresListener implements ActionListener{
+	public void actionPerformed(ActionEvent e){
+	    DisplayHighScores displayhs = new DisplayHighScores( "", 0 );
+	}
     }
     
     public static void main (String[] args) {

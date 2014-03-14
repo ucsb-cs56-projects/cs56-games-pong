@@ -28,6 +28,8 @@ public class GameOver{
 
         jf.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         jf.setSize( Screen.w, Screen.h );
+	jf.setLocationRelativeTo( null );
+	jf.setResizable( false );
     }
     //Add labels for entering winner name
     public void addLabels()

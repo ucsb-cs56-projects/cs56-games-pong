@@ -30,65 +30,74 @@ import java.awt.geom.Rectangle2D; // for the bounding box
  @version CS56, Spring 2013, UCSB
 */
 
-public class Screen extends JFrame {
+public class Screen{
+    static JFrame jf;
     static int w;
     static int h;
     public Pong game;
     public Graphics doublebufferG;
     public Image doublebufferImg;
     static Thread theball;
+    MyDrawPanel mdp;
 
-    public void setScreenSize( int width, int height )
-    {
-	this.w = width;
-	this.h = height;
-	setSize( w, h );
-    }
+
 
     // Screen Constructor and mouseEntered function to unpause game
       public Screen( int windowWidth, int windowHeight ) {
-	setScreenSize( windowWidth, windowHeight );
-	setBackground(Color.BLACK);
-	setResizable(false);
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	game = new Pong();
-	theball = new Thread(game);
-	theball.start();
-
-	addKeyListener(new myKeyAdapter());
-       	setTitle( "Pong" );
-	setVisible( true );
+	  jf = new JFrame( "Pong" );
+	  mdp = new MyDrawPanel();
+	  jf.add( mdp );
+	  setScreenSize( windowWidth, windowHeight );
+	  jf.setBackground(Color.BLACK);
+	  jf.setResizable( false );
+	  jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	  
+	  game = new Pong();
+	  theball = new Thread(game);
+	  theball.start();
+	  
+	  jf.addKeyListener(new myKeyAdapter());
+	  jf.setVisible( true );
     }
 
-    // draw text, ball, paddle onto screen
-    public void draw(Graphics g){
-	g.setFont(new Font("sansserif", Font.BOLD, 28));
-	g.setColor(Color.WHITE);
-	g.drawString("Hits: " + game.getHits(), 280, 70);
-	g.drawString( "player 1 ", 10,70 );
-	g.drawString( "" + game.p1.getPoints(), 10, 100 );
-	g.drawString( "player 2 ", Screen.w - 150, 70 );
-	g.drawString( "" + game.p2.getPoints(), Screen.w - 50, 100 );
-	g.drawString( "Lives " + ( game.p1.ballCount ), 10, Screen.h - 10 );
-	g.drawString( "Lives " + ( game.p2.ballCount ), Screen.w - 120 , Screen.h - 10 );
+    public void setScreenSize( int width, int height )
+    {
+	w = width;
+	h = height;
+	jf.setSize( w, h );
+	jf.setLocationRelativeTo( null );
 
-
-	game.b.draw(g);
-	game.p1.draw(g);
-	game.p2.draw(g);
-	repaint();
     }
 
-    // paint buffer graphics onto screen
-    public void paint(Graphics g){
-	doublebufferImg = createImage( getWidth(), getHeight());
-	doublebufferG = doublebufferImg.getGraphics();
-	draw( doublebufferG );
-	g.drawImage( doublebufferImg, 0, 0, this );
+    class MyDrawPanel extends JPanel{
+	// draw text, ball, paddle onto screen
+	public void draw(Graphics g){
+	    g.setFont(new Font("sansserif", Font.BOLD, 28));
+	    g.setColor(Color.WHITE);
+	    g.drawString("Hits: " + game.getHits(), 280, 40);
+	    g.drawString( "player 1 ", 30, 40 );
+	    g.drawString( "" + game.p1.getPoints(), 30, 70 );
+	    g.drawString( "player 2 ", Screen.w - 180, 40 );
+	    g.drawString( "" + game.p2.getPoints(), Screen.w - 70, 70 );
+	    g.drawString( "Lives " + ( game.p1.ballCount ), 30, Screen.h - 47 );
+	    g.drawString( "Lives " + ( game.p2.ballCount ), Screen.w - 140 , Screen.h - 47 );
+	    
+	    
+	    game.b.draw(g);
+	    game.p1.draw(g);
+	    game.p2.draw(g);
+	    jf.repaint();
+	}
+	
+	// paint buffer graphics onto screen
+	public void paint(Graphics g){
+	    doublebufferImg = jf.createImage( jf.getWidth(), jf.getHeight());
+	    doublebufferG = doublebufferImg.getGraphics();
+	    draw( doublebufferG );
+	    g.drawImage( doublebufferImg, 0, 0, jf );
+	}
     }
-
-
+	
    // Handles up and down keys for movement of paddle.  
     public class myKeyAdapter extends KeyAdapter {
 	public void keyPressed(KeyEvent evt){

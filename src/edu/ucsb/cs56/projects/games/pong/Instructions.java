@@ -21,6 +21,7 @@ public class Instructions{
 	jf.setSize( 640, 480 );
 	
 	jf.setLocationRelativeTo( null );
+	jf.setResizable( false );
 	setToVisible();
 
     }

@@ -113,9 +113,11 @@ public class Paddle extends gameObject{
 		    getWidth(), getHeight() );
     }
 
-    public int getPaddleTopHit(){ return ( Screen.h - 97 ); }
+    // Actually is the bottom of screen
+    public int getPaddleTopHit(){ return ( Screen.h - 134 ); }
 
-    public int getPaddleBotHit(){ return 37; }
+    // Actually is the top of screen
+    public int getPaddleBotHit(){ return 3; }
 
     public void decrementBalls(){ ballCount--; }
     
