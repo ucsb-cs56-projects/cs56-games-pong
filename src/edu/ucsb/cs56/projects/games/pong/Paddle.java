@@ -51,11 +51,7 @@ public class Paddle extends gameObject{
     }
     
  
-    /** KeyPressed handles what to do if player hits up or down key, and Q and A key.
-     *  Paddle should move up upon up key and Q key, and down upon down key and A key.
-     *   @param evt finds which key on the keyboard was hit.
-     */
-    
+    // Controls the movement up and down for the paddle    
     public void keyPressed(KeyEvent evt){
 
         if ( this.right == false ) {
@@ -80,10 +76,7 @@ public class Paddle extends gameObject{
         }
     }
 
-    /** KeyReleased handles what to do if player releases up or down key, or Q or A key.
-     *   @param evt finds which key on the keyboard was hit.
-     */
-
+    // stops the movement of the paddle when any key is released
     public void keyReleased(KeyEvent evt){
 	
     if ( this.right == false ) {
@@ -106,6 +99,7 @@ public class Paddle extends gameObject{
     }
     }
 
+    // gets a new random color to draw the paddle and then redraws it
     public void draw(Graphics g)
     {
         g.setColor( getRandomColor() );
@@ -119,12 +113,17 @@ public class Paddle extends gameObject{
     // Actually is the top of screen
     public int getPaddleBotHit(){ return 3; }
 
+    // lose a life
     public void decrementBalls(){ ballCount--; }
     
+    // add the number of hits to the users score
     public void incrementPoints( int numOfPoints ){ points += numOfPoints; }
     
     public int getPoints(){ return points; }
 
+    // when the ball hits the wall behind the paddle
+    //   it resets the ball to the middle of the screen, stops it
+    //   and switches the velocity to go the opposite way
     public void playerMissed( Ball ball, int numOfPoints, Paddle winner )
     {
 	decrementBalls();
@@ -134,6 +133,8 @@ public class Paddle extends gameObject{
 	
     }
     
+    // gets activated when up or down key is pressed
+    //   then sets the new coordinates for the paddle to be drawn
     public void movePaddle(){
 	if( getYCoordinate() <= this.getPaddleBotHit() ){
 	    setYCoordinate( this.getPaddleBotHit() );
