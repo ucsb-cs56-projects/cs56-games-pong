@@ -16,27 +16,22 @@ import java.awt.geom.GeneralPath; // combinations of lines and curves
 import java.awt.geom.Line2D;  // single lines
 import java.awt.geom.Rectangle2D; // for the bounding box  
 
-/** Paddle is the class that will move the user-controlled paddle
- around the screen
 
- @author Timothy Fok
- @author Sanchit Gupta, Bhanu Khanijau
- @author Jake Dumont, Heneli Kailahi
- @author Benjamin Hartl, Sarah Darwiche
- @version CS56, Winter 2014, UCSB 
-*/
+// Timothy Fok
+// Sanchit Gupta, Bhanu Khanijau
+// Jake Dumont, Heneli Kailahi
+// Benjamin Hartl, Sarah Darwiche
+// CS56, Winter 2014, UCSB 
+
+//Moves the user-controlled paddle around the screen
 public class Paddle extends gameObject{
     public int points;
     public int ballCount;
     public  boolean right;
-    public static final Integer paddleHeight = 90;
+    public static final Integer paddleHeight = 90; //fixes paddle height at 
 
 
-    /** Paddle contructor to initialize intial x,y placement of paddle
-     @param x sets the x position of the paddle.
-     @param y sets the y position of the paddle.
-    */
-
+    // Paddle contructor to initialize intial x,y placement of paddle
     public Paddle(int x, int y){
 	this( x, y, false );
     }
@@ -56,11 +51,7 @@ public class Paddle extends gameObject{
     }
     
  
-    /** KeyPressed handles what to do if player hits up or down key, and Q and A key.
-     *  Paddle should move up upon up key and Q key, and down upon down key and A key.
-     *   @param evt finds which key on the keyboard was hit.
-     */
-    
+    // Controls the movement up and down for the paddle    
     public void keyPressed(KeyEvent evt){
 
         if ( this.right == false ) {
@@ -85,10 +76,7 @@ public class Paddle extends gameObject{
         }
     }
 
-    /** KeyReleased handles what to do if player releases up or down key, or Q or A key.
-     *   @param evt finds which key on the keyboard was hit.
-     */
-
+    // stops the movement of the paddle when any key is released
     public void keyReleased(KeyEvent evt){
 	
     if ( this.right == false ) {
@@ -111,6 +99,7 @@ public class Paddle extends gameObject{
     }
     }
 
+    // gets a new random color to draw the paddle and then redraws it
     public void draw(Graphics g)
     {
         g.setColor( getRandomColor() );
@@ -118,16 +107,23 @@ public class Paddle extends gameObject{
 		    getWidth(), getHeight() );
     }
 
-    public int getPaddleTopHit(){ return ( Screen.h - 97 ); }
+    // Actually is the bottom of screen
+    public int getPaddleTopHit(){ return ( Screen.h - 134 ); }
 
-    public int getPaddleBotHit(){ return 37; }
+    // Actually is the top of screen
+    public int getPaddleBotHit(){ return 3; }
 
+    // lose a life
     public void decrementBalls(){ ballCount--; }
     
+    // add the number of hits to the users score
     public void incrementPoints( int numOfPoints ){ points += numOfPoints; }
     
     public int getPoints(){ return points; }
 
+    // when the ball hits the wall behind the paddle
+    //   it resets the ball to the middle of the screen, stops it
+    //   and switches the velocity to go the opposite way
     public void playerMissed( Ball ball, int numOfPoints, Paddle winner )
     {
 	decrementBalls();
@@ -137,6 +133,8 @@ public class Paddle extends gameObject{
 	
     }
     
+    // gets activated when up or down key is pressed
+    //   then sets the new coordinates for the paddle to be drawn
     public void movePaddle(){
 	if( getYCoordinate() <= this.getPaddleBotHit() ){
 	    setYCoordinate( this.getPaddleBotHit() );
