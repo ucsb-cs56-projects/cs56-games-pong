@@ -1,6 +1,12 @@
 Pong
 ==============
 
+project history
+===============
+```
+ W14 | bronhuston 4pm | sarahdarwiche,benjaminhartl | An implementation of the classic game Pong, with cooperative multiplayer support.
+```
+
 An implementation of the classic game Pong, with cooperative multiplayer support.
 
 To Compile and Run:
