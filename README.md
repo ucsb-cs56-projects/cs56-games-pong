@@ -1,6 +1,8 @@
 Pong
 ==============
 
+TODO: maybe add a few more tickets, most of the existing ones wouldn't take much time to implement.  Other than that it builds and runs fine (David Coffill)
+
 project history
 ===============
 ```
