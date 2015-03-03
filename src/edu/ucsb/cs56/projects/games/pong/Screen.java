@@ -82,6 +82,10 @@ public class Screen{
 	    g.drawString( "Lives " + ( game.p1.ballCount ), 30, Screen.h - 47 );
 	    g.drawString( "Lives " + ( game.p2.ballCount ), Screen.w - 140 , Screen.h - 47 );
 	    
+	    if( game.b.isStopped() ) {
+		g.drawString( "Game Paused", 200, 100 );
+		g.drawString( "Press M to return to Main Menu", 60, 370 );
+	    }
 	    
 	    game.b.draw(g);
 	    game.p1.draw(g);
@@ -107,9 +111,20 @@ public class Screen{
 		{
 		    if( evt.getKeyCode() == evt.VK_SPACE )
 			game.b.startBall();
-		    else
+		    if( evt.getKeyCode() == evt.VK_P )
+			game.b.startBall();
+		    if( evt.getKeyCode() == evt.VK_M ) {
+			jf.setVisible(false);
+		        
+		    }
+		    else 
 			theball.yield();
 		}
+	    else {
+		if( evt.getKeyCode() == evt.VK_P )
+		    game.b.stopBall();
+	    }
+		
 	}
 
 

@@ -193,5 +193,11 @@ public class Pong implements Runnable {
 	gameIsGoing = false;
 	Screen.theball.stop();
     }
+
+  
+        
+
 }
     
+
+  
