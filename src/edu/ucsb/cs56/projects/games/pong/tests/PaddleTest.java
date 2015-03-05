@@ -18,11 +18,19 @@ public class PaddleTest
        //@see Paddle
 
     */ 
+<<<<<<< HEAD
+     @Test public void testConstructor(){
+        Paddle paddle = new Paddle(20,20);
+        assertEquals(20,paddle.getXCoordinate());
+  assertEquals(20,paddle.getYCoordinate()); 
+  }
+=======
     /*    @Test public void testConstructor(){
         Paddle paddle = new Paddle(20,20);
         assertEquals(20,paddle.getXCoordinate());
   assertEquals(20,paddle.getYCoordinate()); 
     }*/
+>>>>>>> c0718998d42ee9377f73c5840fd8eb88a156ccb7
     
     /**
        test constructor from PaddleTest
