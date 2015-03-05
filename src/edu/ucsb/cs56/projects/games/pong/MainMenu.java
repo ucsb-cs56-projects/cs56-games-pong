@@ -114,6 +114,7 @@ public class MainMenu {
 
 	return levelDifficulty;
     }
+    /** isExtremeType2() checks if the ExtremeType2 button was pressed */
     public static boolean isExtremeType2()
     {
 	boolean result = false;

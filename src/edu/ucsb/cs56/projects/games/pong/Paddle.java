@@ -109,7 +109,7 @@ public class Paddle extends gameObject{
         g.fillRect( getXCoordinate(), getYCoordinate(), 
 		    getWidth(), getHeight() );
     }
-
+    /** the draw2 function runs when ExtremeType2 is being played */
     public void draw2(Graphics g)
     {
         g.setColor( getRandomColor() );
