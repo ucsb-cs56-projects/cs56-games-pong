@@ -13,6 +13,9 @@ public class MainMenu {
     public JRadioButton easy;
     public JRadioButton medium;
     public JRadioButton hard;
+    public JRadioButton ExtremeType1; 
+    public JRadioButton supereasy;
+
 
     Instructions i;
     Screen s;
@@ -40,20 +43,29 @@ public class MainMenu {
 	JPanel ButtonPanel = new JPanel();
 
 	ButtonGroup difficulty = new ButtonGroup();
+	supereasy = new JRadioButton( "SUPEREASY" );
 	easy = new JRadioButton( "Easy" );
 	medium = new JRadioButton( "Medium" );
 	hard = new JRadioButton( "Hard" );
+	ExtremeType1 = new JRadioButton( "ExtremeType1" );
 
 	
+	difficulty.add(supereasy);
 	difficulty.add(easy);
 	difficulty.add(medium);
 	difficulty.add(hard);
+	difficulty.add(ExtremeType1);
+	
+
 
 	easy.setSelected(true);
-
+	ButtonPanel.add(supereasy);
 	ButtonPanel.add(easy);
 	ButtonPanel.add(medium);
 	ButtonPanel.add(hard);
+	ButtonPanel.add(ExtremeType1);
+
+
 
 	panel.add(ButtonPanel);
 	panel.add( play );
@@ -72,13 +84,19 @@ public class MainMenu {
     public int getLevelDifficulty()
     {
 	if( easy.isSelected() )
-	    levelDifficulty = 80;
-	
-	if( medium.isSelected() )
 	    levelDifficulty = 100;
 	
-	if( hard.isSelected() )
+	if( medium.isSelected() )
 	    levelDifficulty = 120;
+	
+	if( hard.isSelected() )
+	    levelDifficulty = 140;
+	
+	if( ExtremeType1.isSelected() )
+            levelDifficulty = 170;
+	
+	if( supereasy.isSelected() )
+            levelDifficulty = 80;
 
 	return levelDifficulty;
     }

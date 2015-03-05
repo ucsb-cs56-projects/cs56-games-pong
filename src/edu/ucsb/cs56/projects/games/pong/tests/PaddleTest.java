@@ -13,17 +13,17 @@ import static org.junit.Assert.assertEquals;
 
 public class PaddleTest 
 {
-    /**
+		/**
        test constructor from PaddleTest
        //@see Paddle
 
     */ 
-    /*    @Test public void testConstructor(){
+        @Test public void testConstructor(){
         Paddle paddle = new Paddle(20,20);
-        assertEquals(20,paddle.getXpos());
-  assertEquals(20,paddle.getYpos()); 
+        assertEquals(20,paddle.getXCoordinate());
+  assertEquals(20,paddle.getYCoordinate()); 
     }
-    */
+    
     /**
        test constructor from PaddleTest
       // @see Paddle
