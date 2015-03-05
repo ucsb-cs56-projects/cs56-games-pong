@@ -18,6 +18,8 @@ public class MainMenu {
     public JRadioButton hard;
     public JRadioButton ExtremeType1; 
     public JRadioButton supereasy;
+    public static JRadioButton ExtremeType2;
+
 
 
     Instructions i;
@@ -53,6 +55,7 @@ public class MainMenu {
 	medium = new JRadioButton( "Medium" );
 	hard = new JRadioButton( "Hard" );
 	ExtremeType1 = new JRadioButton( "ExtremeType1" );
+	ExtremeType2 = new JRadioButton( "ExtremeType2" );
 
 	
 	difficulty.add(supereasy);
@@ -60,6 +63,8 @@ public class MainMenu {
 	difficulty.add(medium);
 	difficulty.add(hard);
 	difficulty.add(ExtremeType1);
+	difficulty.add(ExtremeType2);
+
 	
 
 
@@ -69,6 +74,8 @@ public class MainMenu {
 	ButtonPanel.add(medium);
 	ButtonPanel.add(hard);
 	ButtonPanel.add(ExtremeType1);
+	ButtonPanel.add(ExtremeType2);
+
 
 
 
@@ -102,8 +109,19 @@ public class MainMenu {
 	
 	if( supereasy.isSelected() )
             levelDifficulty = 80;
+  	if( ExtremeType2.isSelected() )
+            levelDifficulty = 120;
 
 	return levelDifficulty;
+    }
+    public static boolean isExtremeType2()
+    {
+	boolean result = false;
+	if( ExtremeType2.isSelected() )
+	{
+	result= true;
+	}
+	return result;
     }
     /** PlayListener sets new window parameters based on level difficulty */
     class PlayListener implements ActionListener

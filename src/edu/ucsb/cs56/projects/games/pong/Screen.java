@@ -95,13 +95,23 @@ public class Screen{
 		g.drawString( "Game Paused", 200, 100 );
 		g.drawString( "Press M to return to Main Menu", 60, 370 );
 	    }
-	    
+	     
+  	    if (MainMenu.isExtremeType2() == true)
+	    {
+	    game.b.draw(g);
+	    game.p1.draw2(g);
+	    game.p2.draw2(g);
+	    jf.repaint();
+
+	    }
+    	    else{
 	    game.b.draw(g);
 	    game.p1.draw(g);
 	    game.p2.draw(g);
 	    jf.repaint();
-	}
-	
+	    }
+}
+	 	
 	/** the paint function paints buffer graphics onto screen
 	 * @param g the graphics drawer
 	 */

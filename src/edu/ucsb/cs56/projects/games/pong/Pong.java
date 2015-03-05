@@ -54,7 +54,7 @@ public class Pong implements Runnable {
      */
     public Pong() {
 	p1 = new Paddle( 8, 160 );                        // Left Paddle
-        p2 = new Paddle( Screen.w - 18 , 160, true );     // Right Paddle
+        p2 = new Paddle( Screen.w - 38 , 160, true );     // Right Paddle
         b = new Ball( (int)(Screen.w / 2), (int)(Screen.h / 2), 20, 20 );
         hits = 0;                                      // # of times of wall
 	moreSpeed = 1;

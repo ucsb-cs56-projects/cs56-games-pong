@@ -110,7 +110,14 @@ public class Paddle extends gameObject{
 		    getWidth(), getHeight() );
     }
 
-    /** getPaddleTopHit(): Actually is the bottom of screen */
+    public void draw2(Graphics g)
+    {
+        g.setColor( getRandomColor() );
+        g.fillRect( getXCoordinate(), getYCoordinate(),
+                    getWidth()+15 , getHeight()-60 );
+    }
+
+	/** getPaddleTopHit(): Actually is the bottom of screen */
     public int getPaddleTopHit(){ return ( Screen.h - 134 ); }
 
     /** getPaddleBotHit(): Actually is the top of screen */
