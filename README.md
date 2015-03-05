@@ -33,4 +33,4 @@ The Winner is whoever has the most lives at the end, their name will be prompted
 If their score is in the top 5 of the High Score, then it will be saved to the High Score.
 
 ![](http://i.imgur.com/NAKKNhR.jpg)
-![](http://i.imgur.com/gzozY47.jpg)
+![](http://i.imgur.com/jdCMrej.jpg)
