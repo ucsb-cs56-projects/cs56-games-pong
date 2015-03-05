@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-//Class for Main Menu selection
+/** edu.ucsb.cs56.projects.games.pong.MainMenu is the class for Main Menu selection. It brings up the main menu and has buttons that allow the user to play the game, read the instructions, or view the high scores
+ @author Vincent Gandolfo, Krishna Lingampalli
+ @version CS56, Winter 2015, UCSB
+*/ 
 public class MainMenu {
     private int levelDifficulty;
     private int newWindowWidth;
@@ -16,7 +19,9 @@ public class MainMenu {
 
     Instructions i;
     Screen s;
-
+    /** Constructor for MainMenu that creates the whole menu. A JFrame is created, and buttons are available for the options, which include view instructions, view high scores, and pick a difficulty
+     */
+       
     public MainMenu() {
 	
        	JFrame frame = new JFrame( "Main Menu" );
@@ -68,7 +73,7 @@ public class MainMenu {
 	highScores.addActionListener( new HighScoresListener() );
 
     }
-    //Sets level difficulty based on user input
+    /** getLevelDifficulty() sets level difficulty based on user input */
     public int getLevelDifficulty()
     {
 	if( easy.isSelected() )
@@ -82,7 +87,7 @@ public class MainMenu {
 
 	return levelDifficulty;
     }
-    //sets new window parameters based on level difficulty
+    /** PlayListener sets new window parameters based on level difficulty */
     class PlayListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e)
@@ -93,7 +98,7 @@ public class MainMenu {
 	    s = new Screen( newWindowWidth, newWindowHeight );
 	}
     }
-    //Button Listener for instructions button
+    /** InstructionsListener is a Button Listener for instructions button */
     class InstructionsListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
@@ -105,7 +110,7 @@ public class MainMenu {
 
     }
     
-    //Button Listener for instructions button
+    /** HighScoresListener is a Button Listener for high scores button */
     class HighScoresListener implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 	    DisplayHighScores displayhs = new DisplayHighScores( "", 0 );

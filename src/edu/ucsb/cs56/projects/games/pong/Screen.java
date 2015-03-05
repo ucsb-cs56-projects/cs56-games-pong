@@ -27,7 +27,8 @@ import java.awt.geom.Rectangle2D; // for the bounding box
  @author Bhanu Khanijau, Sanchit Gupta   
  @author Jake Dumont, Heneli Kailahi
  @author Benjamin Hartl, Sarah Darwiche
- @version CS56, Spring 2013, UCSB
+ @author Vincent Gandolfo, Krishna Lingampalli
+ @version CS56, Winter 2015, UCSB
 */
 
 public class Screen{
@@ -42,7 +43,10 @@ public class Screen{
 
 
 
-    // Screen Constructor and mouseEntered function to unpause game
+    /** Screen Constructor and mouseEntered function to unpause game 
+     * @param windowWidth width of the JFrame window
+     * @param windowHeight height of the JFrame window
+     */
       public Screen( int windowWidth, int windowHeight ) {
 	  jf = new JFrame( "Pong" );
 	  mdp = new MyDrawPanel();
@@ -59,7 +63,10 @@ public class Screen{
 	  jf.addKeyListener(new myKeyAdapter());
 	  jf.setVisible( true );
     }
-
+    /** setScreenSize sets the size of the screen 
+     * @param width width of the screen
+     * @param height height of the screen
+     */
     public void setScreenSize( int width, int height )
     {
 	w = width;
@@ -68,9 +75,11 @@ public class Screen{
 	jf.setLocationRelativeTo( null );
 
     }
-
+    /** MyDrawPanel draws the graphics onto the screen */
     class MyDrawPanel extends JPanel{
-	// draw text, ball, paddle onto screen
+	/** the draw function draws text, ball, paddle onto screen
+	 * @param g the graphics drawer
+	 */
 	public void draw(Graphics g){
 	    g.setFont(new Font("sansserif", Font.BOLD, 28));
 	    g.setColor(Color.WHITE);
@@ -93,7 +102,9 @@ public class Screen{
 	    jf.repaint();
 	}
 	
-	// paint buffer graphics onto screen
+	/** the paint function paints buffer graphics onto screen
+	 * @param g the graphics drawer
+	 */
 	public void paint(Graphics g){
 	    doublebufferImg = jf.createImage( jf.getWidth(), jf.getHeight());
 	    doublebufferG = doublebufferImg.getGraphics();
@@ -102,8 +113,11 @@ public class Screen{
 	}
     }
 	
-   // Handles up and down keys for movement of paddle.  
+    /** myKeyAdapter handles up and down keys for movement of paddle. */  
     public class myKeyAdapter extends KeyAdapter {
+	/** keyPressed checks if certain keys are pressed
+	 * @param evt the KeyEvent
+	 */
 	public void keyPressed(KeyEvent evt){
 	    game.p1.keyPressed(evt);
 	    game.p2.keyPressed(evt);
@@ -127,7 +141,9 @@ public class Screen{
 		
 	}
 
-
+	/** keyReleased checks if certain keys are released
+	 * @param evt the KeyEvent
+	 */
 	public void keyReleased(KeyEvent evt){
 	    game.p1.keyReleased(evt);
 	    game.p2.keyReleased(evt);

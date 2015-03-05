@@ -4,19 +4,28 @@ import java.util.ArrayList;
 import java.io.*;
 import java.awt.*;
 
+/** edu.ucsb.cs56.projects.games.pong.EndOfGame is the class that provides instructions for how to end the game and display high scores
+ @author Vincent Gandolfo, Krishna Lingampalli
+ @version CS56, Winter 2015, UCSB
+*/
+
 class EndOfGame {
     //Create ArrayList to store high scores and names
     public ArrayList<HighScore> hList = new ArrayList<HighScore>();
 
     public HighScore winner;
-    
+  
+    /** Constructor that identifies the winner, and writes and saves their name      *  and score to a file
+     *  @param score score of the player who just won
+     *  @param name name of the player who just won
+     */  
     public EndOfGame( int score, String name )
     {
 	winner = new HighScore( score, name ); 
 	readTheFile();
 	saveToFile();
     }
-    //Reads the High Scores file
+    /** readTheFile() reads the High Scores file */
     public void readTheFile()
     {
 	try{
@@ -34,7 +43,7 @@ class EndOfGame {
 	    ioe.printStackTrace();
 	}
     }
-    //Checks ArrayList to see if winner will be placed in top five
+    /** checkArrayList() checks ArrayList to see if winner will be placed in top five */
     public void checkArrayList()
     {
 	for( int i = 0; i < 5; i++ )
@@ -47,14 +56,14 @@ class EndOfGame {
 		    }
 	    }
     }
-    //Checks if winner score is higher than current ArrayList index
+    /** isGreaterThan() checks if winner score is higher than current ArrayList index */
     public boolean isGreaterThan( int i )
     {
 	if( winner.getPlayerScore() > hList.get( i ).getPlayerScore() )
 	    return true;
 	return false;
     }
-    //Adds winner to ArrayList
+    /** putInArrayList() adds winner to ArrayList */
     public void putInArrayList( String[] parsedList )
     {
 	HighScore hs;
@@ -65,7 +74,7 @@ class EndOfGame {
 		hList.add( hs );
 	    }
     }
-    //Saves new file
+    /** saveToFile() saves new file */
     public void saveToFile( )
     {
 	try{
