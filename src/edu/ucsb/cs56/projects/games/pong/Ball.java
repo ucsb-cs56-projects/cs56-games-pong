@@ -21,7 +21,8 @@ import java.awt.geom.Rectangle2D; // for the bounding box
  @author Sanchit Gupta, Bhanu Khanijau
  @author Jake Dumont, Heneli Kailahi
  @author Benjamin Hartl, Sarah Darwiche
- @version CS56, Spring 2013, UCSB                   
+ @author Vincent Gandolfo, Krishna Lingampalli
+ @version CS56, Winter 2015, UCSB                   
 */
 
 // The Movement of the Ball on the screen
@@ -45,7 +46,7 @@ public class Ball extends gameObject {
 	startBall();
     }
 
-    // Sets a new Color for the ball and redraws the ball with new coordinates
+    /** The draw method sets a new Color for the ball and redraws the ball with new coordinates */ 
     public void draw( Graphics g )
     {
 	g.setColor( getRandomColor() );
@@ -53,8 +54,7 @@ public class Ball extends gameObject {
 		    getWidth(), getHeight() );
     }
 
-    // When the ball is stopped, this will start the ball in the opposite
-    //   direction of the way it was going
+    /** startBall(): When the ball is stopped, this will start the ball in the opposite direction of the way it was going  */
     public void startBall()
     {
 	int speed = 3;
@@ -64,7 +64,7 @@ public class Ball extends gameObject {
 	setYVelocity( speed );
     }
     
-    // Checks if the ball is stopped
+    /** isStopped() checks if the ball is stopped */
     public boolean isStopped()
     {
 	if( ( getXVelocity() == 0 ) && ( getYVelocity() == 0 ) )
@@ -73,14 +73,14 @@ public class Ball extends gameObject {
 	    return false;
     }
     
-    // Stops the ball no matter what
+    /** stopBall() stops the ball no matter what */
     public void stopBall()
     {
 	setYVelocity( 0 );
 	setXVelocity( 0 );
     }
     
-    // Puts the ball back in the middle of the screen and stops the ball
+    /** resetBall() puts the ball back in the middle of the screen and stops the ball */
     public void resetBall() 
     {
 	stopBall();

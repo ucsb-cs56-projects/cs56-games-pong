@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-//Class for Main Menu selection
+/** edu.ucsb.cs56.projects.games.pong.MainMenu is the class for Main Menu selection. It brings up the main menu and has buttons that allow the user to play the game, read the instructions, or view the high scores
+ @author Vincent Gandolfo, Krishna Lingampalli
+ @version CS56, Winter 2015, UCSB
+*/ 
 public class MainMenu {
     private int levelDifficulty;
     private int newWindowWidth;
@@ -13,10 +16,17 @@ public class MainMenu {
     public JRadioButton easy;
     public JRadioButton medium;
     public JRadioButton hard;
+    public JRadioButton ExtremeType1; 
+    public JRadioButton supereasy;
+    public static JRadioButton ExtremeType2;
+
+
 
     Instructions i;
     Screen s;
-
+    /** Constructor for MainMenu that creates the whole menu. A JFrame is created, and buttons are available for the options, which include view instructions, view high scores, and pick a difficulty
+     */
+       
     public MainMenu() {
 	
        	JFrame frame = new JFrame( "Main Menu" );
@@ -40,20 +50,34 @@ public class MainMenu {
 	JPanel ButtonPanel = new JPanel();
 
 	ButtonGroup difficulty = new ButtonGroup();
+	supereasy = new JRadioButton( "SUPEREASY" );
 	easy = new JRadioButton( "Easy" );
 	medium = new JRadioButton( "Medium" );
 	hard = new JRadioButton( "Hard" );
+	ExtremeType1 = new JRadioButton( "ExtremeType1" );
+	ExtremeType2 = new JRadioButton( "ExtremeType2" );
 
 	
+	difficulty.add(supereasy);
 	difficulty.add(easy);
 	difficulty.add(medium);
 	difficulty.add(hard);
+	difficulty.add(ExtremeType1);
+	difficulty.add(ExtremeType2);
+
+	
+
 
 	easy.setSelected(true);
-
+	ButtonPanel.add(supereasy);
 	ButtonPanel.add(easy);
 	ButtonPanel.add(medium);
 	ButtonPanel.add(hard);
+	ButtonPanel.add(ExtremeType1);
+	ButtonPanel.add(ExtremeType2);
+
+
+
 
 	panel.add(ButtonPanel);
 	panel.add( play );
@@ -68,21 +92,39 @@ public class MainMenu {
 	highScores.addActionListener( new HighScoresListener() );
 
     }
-    //Sets level difficulty based on user input
+    /** getLevelDifficulty() sets level difficulty based on user input */
     public int getLevelDifficulty()
     {
 	if( easy.isSelected() )
-	    levelDifficulty = 80;
-	
-	if( medium.isSelected() )
 	    levelDifficulty = 100;
 	
-	if( hard.isSelected() )
+	if( medium.isSelected() )
 	    levelDifficulty = 120;
+	
+	if( hard.isSelected() )
+	    levelDifficulty = 140;
+	
+	if( ExtremeType1.isSelected() )
+            levelDifficulty = 170;
+	
+	if( supereasy.isSelected() )
+            levelDifficulty = 80;
+  	if( ExtremeType2.isSelected() )
+            levelDifficulty = 120;
 
 	return levelDifficulty;
     }
-    //sets new window parameters based on level difficulty
+    /** isExtremeType2() checks if the ExtremeType2 button was pressed */
+    public static boolean isExtremeType2()
+    {
+	boolean result = false;
+	if( ExtremeType2.isSelected() )
+	{
+	result= true;
+	}
+	return result;
+    }
+    /** PlayListener sets new window parameters based on level difficulty */
     class PlayListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e)
@@ -93,7 +135,7 @@ public class MainMenu {
 	    s = new Screen( newWindowWidth, newWindowHeight );
 	}
     }
-    //Button Listener for instructions button
+    /** InstructionsListener is a Button Listener for instructions button */
     class InstructionsListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
@@ -105,7 +147,7 @@ public class MainMenu {
 
     }
     
-    //Button Listener for instructions button
+    /** HighScoresListener is a Button Listener for high scores button */
     class HighScoresListener implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 	    DisplayHighScores displayhs = new DisplayHighScores( "", 0 );
