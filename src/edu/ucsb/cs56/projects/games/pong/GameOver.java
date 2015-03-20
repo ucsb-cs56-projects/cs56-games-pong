@@ -4,6 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/** edu.ucsb.cs56.projects.games.pong.GameOver is the class that gives instructions on what to do when the game ends
+ @author Vincent Gandolfo, Krishna Lingampalli
+ @version CS56, Winter 2015, UCSB
+*/
+
 public class GameOver{
     
     JFrame jf;
@@ -12,6 +17,10 @@ public class GameOver{
     int score;
     JTextField text;
     //Class to send in winner to High Score List
+    /** Constructor that initializes the winner's name and the number of points the winner got. It also sets up a frame with labels.
+     * @param winner the name of the winner of the game
+     * @param points the number of points the winner scored
+     */ 
     GameOver( String winner, int points )
     {
 	name = winner;
@@ -21,7 +30,7 @@ public class GameOver{
 	jf.setVisible( true );
 
     }
-    //Set up frame structure for Game Over Screen
+    /** setUpFrame() sets up a frame structure for Game Over Screen */
     public void setUpFrame()
     {
 	jf = new JFrame( "Game Over" );
@@ -31,7 +40,7 @@ public class GameOver{
 	jf.setLocationRelativeTo( null );
 	jf.setResizable( false );
     }
-    //Add labels for entering winner name
+    /** addLabels() adds labels for entering winner name */
     public void addLabels()
     {
 	jp = new JPanel();
@@ -65,7 +74,7 @@ public class GameOver{
 	
 	jf.add( jp );
     }
-    //Button Listener for "Enter" that will trigger  Display High Scores
+    /** Button Listener for "Enter" that will trigger  Display High Scores */
     class ButtonListener implements ActionListener{
 	public void actionPerformed( ActionEvent ae )
 	{

@@ -27,12 +27,13 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/** edu.ucsb.cs56.projects.games.pong.Ball is the class that will move the ball around the screen
-
+/** edu.ucsb.cs56.projects.games.pong.Pong is the class that will facilitate
+ * the game of Pong being run 
  @author Sanchit Gupta, Bhanu Khanijau
  @author Heneli Kailahi, Jake Dumont  
  @author Benjamin Hartl, Sarah Darwiche
- @version CS56, Winter 2014, UCSB
+ @author Vincent Gandolfo, Krishna Lingampalli
+ @version CS56, Winter 2015, UCSB
 */
 
 public class Pong implements Runnable {
@@ -48,25 +49,31 @@ public class Pong implements Runnable {
     
     boolean gameIsGoing = true;    
     
-    // It initializes 2 paddle objects, a ball object, and points value
+    /** The Pong constructor initializes 2 paddle objects, a ball object, and 
+     * a points value 
+     */
     public Pong() {
 	p1 = new Paddle( 8, 160 );                        // Left Paddle
-        p2 = new Paddle( Screen.w - 18 , 160, true );     // Right Paddle
+        p2 = new Paddle( Screen.w - 38 , 160, true );     // Right Paddle
         b = new Ball( (int)(Screen.w / 2), (int)(Screen.h / 2), 20, 20 );
         hits = 0;                                      // # of times of wall
 	moreSpeed = 1;
     }
-
-    public int getHits( ){ return hits; }     // times it hit any paddle
-    
-    public void incrementHits(){ hits++; }    // whenever it hits a paddle
-
-    public void hitsReset(){ hits = 0; }      // when a paddle misses the ball
-
+    /** getHits() returns the number of times the ball hits any paddle */
+    public int getHits( ){ return hits; }     
+    /** incrementHits() increments the number of hits when it hits a paddle */
+    public void incrementHits(){ hits++; }    
+    /** hitsReset() sets hits to 0 when a paddle misses a ball */
+    public void hitsReset(){ hits = 0; }      
+    /** getWinner() returns the paddle that just won the points */
     public Paddle getWinner(){ return winner; }
+    /** setWinner takes a Paddle object as a parameter, then sets
+     * the winner to that Paddle argument
+     * @param a the Paddle that just won
+     */
     public void setWinner(Paddle a) { winner = a; }
 
-    // Prints out which player has won
+    /** toString() returns which player has won in a string */ 
     public String toString() {
 	if( winner.right == true )
 	    return "Player 2";
@@ -74,7 +81,9 @@ public class Pong implements Runnable {
 	    return "Player 1";
     }
 
-    // Checks each time a ball is lost if they hav any lives left
+    /** checkGameStatus() checks each time a ball is lost if they 
+     *  have any lives left 
+     */
     public void checkGameStatus()
     {
 	if(p2.ballCount <= 0 ){
@@ -87,14 +96,14 @@ public class Pong implements Runnable {
 	}
     }
   
-    // Brings up frame to enter the users name
+    /** gameLoss brings up a frame to enter the user's name */
     public void gameLoss( Paddle p )
     {
 	GameOver gameOver = new GameOver( toString(), winner.getPoints() );
 	Screen.jf.dispose();
 	kill();                 // kills the thread 
     }
-
+    /** moveGame() allows the ball and paddles in the game to be moved */
     public void moveGame() { // every iterations of thread the ball calls this
         p1.movePaddle();     // draws paddles at new location
         p2.movePaddle();      
@@ -110,7 +119,7 @@ public class Pong implements Runnable {
         wallCollision();
     }
     
-    /** Detect whether ball hits a paddle
+    /** paddleCollision() detects whether ball hits a paddle
      */
     
     public void paddleCollision() { // speed starts out at 1
@@ -135,7 +144,7 @@ public class Pong implements Runnable {
         }
     }
     
-    // Detect whether the ball hits a wall
+    /** wallCollision() detects whether the ball hits a wall */
     public void wallCollision() 
     {
 	// if p1 misses / hits the wall behind it
@@ -175,7 +184,7 @@ public class Pong implements Runnable {
 	checkGameStatus();
     }
 
-    // Checks the movements every 15 milliseconds
+    /** run() checks the movements every 15 milliseconds */
     public void run(){
 	b.stopBall();
         try{
@@ -187,11 +196,17 @@ public class Pong implements Runnable {
 	
     }
     
-    // Stops the thread
+    /** kill() stops the thread */
     public void kill()
     {
 	gameIsGoing = false;
 	Screen.theball.stop();
     }
+
+  
+        
+
 }
     
+
+  
