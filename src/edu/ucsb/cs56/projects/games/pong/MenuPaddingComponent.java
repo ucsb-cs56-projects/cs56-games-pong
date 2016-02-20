@@ -16,7 +16,7 @@ public class MenuPaddingComponent extends MainMenuComponent {
         this.height = height;
         this.width = width;
         this.backgroundColor = backgroundColor;
-        this.setPreferredSize(new Dimension(height,width));
+        this.setPreferredSize(new Dimension(width,height));
     }
 
     public String getTitle() {

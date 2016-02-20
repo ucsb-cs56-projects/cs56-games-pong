@@ -38,9 +38,9 @@ public class MainMenuUI {
         panel.setVisible(true);
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
-        panel.add(new MenuPaddingComponent(Color.GREEN,HEIGHT,WIDTH/3),BoxLayout.X_AXIS);
-        panel.add(new MenuPaddingComponent(Color.BLUE,HEIGHT,WIDTH/3),BoxLayout.X_AXIS);
-        panel.add(new MenuPaddingComponent(Color.RED,HEIGHT,WIDTH/3),BoxLayout.X_AXIS);
+        panel.add(new MenuPaddingComponent(Color.GREEN,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
+        panel.add(new MenuPaddingComponent(Color.BLUE,HEIGHT,WIDTH/2),BoxLayout.X_AXIS);
+        panel.add(new MenuPaddingComponent(Color.RED,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
 
         for(MainMenuComponent component: menuItems) {
 //            panel.add(component,BorderLayout.CENTER);
