@@ -28,68 +28,81 @@ public class MainMenu {
      */
        
     public MainMenu() {
-	
+
+		// Construct Window
+
        	JFrame frame = new JFrame( "Main Menu" );
-	JPanel panel = new JPanel();
-	JButton instructions = new JButton( "Instructions" );
-	JButton play = new JButton( "Play" );
-	JButton highScores = new JButton( "High Scores" );
+		JPanel panel = new JPanel();
+        panel.setSize(640, 480);
+        panel.setBackground(Color.BLACK);
+        panel.setOpaque(true);
+        panel.setVisible(true);
 
-	frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-	frame.add( panel );
-	
-	panel.setLayout( new BoxLayout( panel, BoxLayout.Y_AXIS ) );
+        frame.setSize( 640, 480 );
+        frame.setLocationRelativeTo( null );
+        frame.add(panel);
+//        frame.setBackground(Color.BLACK);
+        frame.setVisible(true);
 
-	instructions.setAlignmentX( JFrame.CENTER_ALIGNMENT );
-	highScores.setAlignmentX( JFrame.CENTER_ALIGNMENT );
-	play.setAlignmentX( JFrame.CENTER_ALIGNMENT );
-	
-	panel.add( instructions );
-	panel.add( highScores );
-       
-	JPanel ButtonPanel = new JPanel();
-
-	ButtonGroup difficulty = new ButtonGroup();
-	supereasy = new JRadioButton( "SUPEREASY" );
-	easy = new JRadioButton( "Easy" );
-	medium = new JRadioButton( "Medium" );
-	hard = new JRadioButton( "Hard" );
-	ExtremeType1 = new JRadioButton( "ExtremeType1" );
-	ExtremeType2 = new JRadioButton( "ExtremeType2" );
-
-	
-	difficulty.add(supereasy);
-	difficulty.add(easy);
-	difficulty.add(medium);
-	difficulty.add(hard);
-	difficulty.add(ExtremeType1);
-	difficulty.add(ExtremeType2);
-
-	
-
-
-	easy.setSelected(true);
-	ButtonPanel.add(supereasy);
-	ButtonPanel.add(easy);
-	ButtonPanel.add(medium);
-	ButtonPanel.add(hard);
-	ButtonPanel.add(ExtremeType1);
-	ButtonPanel.add(ExtremeType2);
-
-
-
-
-	panel.add(ButtonPanel);
-	panel.add( play );
-	frame.setSize( 640, 480 );
-	frame.setLocationRelativeTo( null );
-	frame.setVisible( true );
-	frame.setResizable( false );
-	
-	//Button Listener for Play Button
-	play.addActionListener( new PlayListener());
-	instructions.addActionListener( new InstructionsListener());
-	highScores.addActionListener( new HighScoresListener() );
+//		JButton instructions = new JButton( "Instructions" );
+//		JButton play = new JButton( "Play" );
+//		JButton highScores = new JButton( "High Scores" );
+//
+//		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+//		frame.add( panel );
+//
+//		panel.setLayout( new BoxLayout( panel, BoxLayout.Y_AXIS ) );
+//
+//		instructions.setAlignmentX( JFrame.CENTER_ALIGNMENT );
+//		highScores.setAlignmentX( JFrame.CENTER_ALIGNMENT );
+//		play.setAlignmentX( JFrame.CENTER_ALIGNMENT );
+//
+//		panel.add( instructions );
+//		panel.add( highScores );
+//
+//		JPanel ButtonPanel = new JPanel();
+//
+//		ButtonGroup difficulty = new ButtonGroup();
+//		supereasy = new JRadioButton( "SUPEREASY" );
+//		easy = new JRadioButton( "Easy" );
+//		medium = new JRadioButton( "Medium" );
+//		hard = new JRadioButton( "Hard" );
+//		ExtremeType1 = new JRadioButton( "ExtremeType1" );
+//		ExtremeType2 = new JRadioButton( "ExtremeType2" );
+//
+//
+//		difficulty.add(supereasy);
+//		difficulty.add(easy);
+//		difficulty.add(medium);
+//		difficulty.add(hard);
+//		difficulty.add(ExtremeType1);
+//		difficulty.add(ExtremeType2);
+//
+//
+//
+//
+//		easy.setSelected(true);
+//		ButtonPanel.add(supereasy);
+//		ButtonPanel.add(easy);
+//		ButtonPanel.add(medium);
+//		ButtonPanel.add(hard);
+//		ButtonPanel.add(ExtremeType1);
+//		ButtonPanel.add(ExtremeType2);
+//
+//
+//
+//
+//		panel.add(ButtonPanel);
+//		panel.add( play );
+//		frame.setSize( 640, 480 );
+//		frame.setLocationRelativeTo( null );
+//		frame.setVisible( true );
+//		frame.setResizable( false );
+//
+//		//Button Listener for Play Button
+//		play.addActionListener( new PlayListener());
+//		instructions.addActionListener( new InstructionsListener());
+//		highScores.addActionListener( new HighScoresListener() );
 
     }
     /** getLevelDifficulty() sets level difficulty based on user input */
