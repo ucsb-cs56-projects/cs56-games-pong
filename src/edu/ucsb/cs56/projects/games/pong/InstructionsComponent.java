@@ -16,12 +16,14 @@ public class InstructionsComponent extends MainMenuComponent implements MouseLis
     private boolean mouseExited;
     private final int fontHeight;
     private final String title;
+    private Color backgroundColor;
 
-    public InstructionsComponent() {
+    public InstructionsComponent(Color backgroundColor) {
         super();
         this.setPreferredSize(new Dimension(200,200));
         title = "Instructions";
         fontHeight = 28;
+        this.backgroundColor = backgroundColor;
 
     }
 
@@ -32,7 +34,7 @@ public class InstructionsComponent extends MainMenuComponent implements MouseLis
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.YELLOW);
+        g.setColor(backgroundColor);
         g.fillRect(0,0,600,480);
         g.setColor(Color.BLACK);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, fontHeight));

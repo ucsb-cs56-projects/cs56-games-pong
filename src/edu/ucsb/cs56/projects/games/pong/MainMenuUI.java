@@ -29,8 +29,14 @@ public class MainMenuUI {
         frame.setLocationRelativeTo( null );
 //        frame.add(panel);
         ArrayList<MainMenuComponent> menuItems = new ArrayList<MainMenuComponent>();
-        instructionsComponent = new InstructionsComponent();
-        menuItems.add(instructionsComponent);
+        InstructionsComponent instructionsComponent1 = new InstructionsComponent(Color.darkGray);
+        InstructionsComponent instructionsComponent2 = new InstructionsComponent(Color.PINK);
+        InstructionsComponent instructionsComponent3 = new InstructionsComponent(Color.MAGENTA);
+
+        menuItems.add(instructionsComponent1);
+        menuItems.add(instructionsComponent2);
+        menuItems.add(instructionsComponent3);
+
         panel.setSize(WIDTH, HEIGHT);
         panel.setBackground(Color.BLACK);
         panel.setOpaque(true);
@@ -38,14 +44,19 @@ public class MainMenuUI {
         panel.setVisible(true);
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
+        MenuPaddingComponent menuList = new MenuPaddingComponent(Color.BLUE,HEIGHT,WIDTH/2);
         panel.add(new MenuPaddingComponent(Color.GREEN,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
-        panel.add(new MenuPaddingComponent(Color.BLUE,HEIGHT,WIDTH/2),BoxLayout.X_AXIS);
+        panel.add(menuList,BoxLayout.X_AXIS);
+//        panel.add(new MenuPaddingComponent(Color.BLUE,HEIGHT,WIDTH/2),BoxLayout.X_AXIS);
+//        panel.add(gridLayout,HEIGHT,WIDTH/2);
+
         panel.add(new MenuPaddingComponent(Color.RED,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
 
         for(MainMenuComponent component: menuItems) {
-//            panel.add(component,BorderLayout.CENTER);
-//            gridLayout.addLayoutComponent(component.getTitle(),instructionsComponent);
+            menuList.add(component.getTitle(),component);
         }
+
+        menuList.setLayout(gridLayout);
 //        panel.setLayout(gridLayout);
 //        panel.add(instructionsComponent);
         frame.add(panel);
