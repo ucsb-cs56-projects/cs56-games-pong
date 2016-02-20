@@ -14,7 +14,7 @@ public class MainMenuUI {
     protected final int WIDTH = 640;
     protected final int HEIGHT = 480;
 
-//    private GridLayout gridLayout = new GridLayout();
+    private GridLayout gridLayout = new GridLayout(3,1);
     private InstructionsComponent instructionsComponent;
 //    private HighScoreComponent highScoreComponent;
 //    private PlayComponent playComponent;
@@ -26,18 +26,19 @@ public class MainMenuUI {
         frame.setSize( WIDTH, HEIGHT );
         frame.setLocationRelativeTo( null );
         frame.add(panel);
-        ArrayList<MainMenuUIItem> menuItems = new ArrayList<MainMenuUIItem>();
+        ArrayList<MainMenuComponent> menuItems = new ArrayList<MainMenuComponent>();
         instructionsComponent = new InstructionsComponent();
-//        menuItems.add(instructionsComponent);
+        menuItems.add(instructionsComponent);
         panel.setSize(WIDTH, HEIGHT);
         panel.setBackground(Color.BLACK);
         panel.setOpaque(true);
 
         panel.setVisible(true);
+        for(MainMenuComponent component: menuItems) {
+            gridLayout.addLayoutComponent(component.getTitle(),instructionsComponent);
+        }
+        panel.setLayout(gridLayout);
         panel.add(instructionsComponent);
-//        for(MainMenuUIItem component: menuItems) {
-//            gridLayout.addLayoutComponent(component.getTitle(),instructionsComponent);
-//        }
         frame.add(panel);
 //        frame.setLayout(gridLayout);
 //        frame.repaint();

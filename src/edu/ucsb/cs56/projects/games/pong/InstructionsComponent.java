@@ -8,20 +8,26 @@ import java.awt.event.MouseListener;
 /**
  * Created by angel on 2/20/16.
  */
-public class InstructionsComponent extends JComponent implements MouseListener {
+public class InstructionsComponent extends MainMenuComponent implements MouseListener {
 
     private boolean mouseEntered;
     private boolean mouseClicked;
     private boolean mousePrssed;
     private boolean mouseExited;
-    private static final int FONT_HEIGHT = 28;
+    private final int fontHeight;
+    private final String title;
+
     public InstructionsComponent() {
         super();
         this.setPreferredSize(new Dimension(200,200));
+        title = "Instructions";
+        fontHeight = 28;
 
-//        this.repaint();
     }
 
+    public String getTitle() {
+        return title;
+    }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -29,8 +35,8 @@ public class InstructionsComponent extends JComponent implements MouseListener {
         g.setColor(Color.YELLOW);
         g.fillRect(0,0,600,480);
         g.setColor(Color.BLACK);
-        g.setFont(new Font("sansserif", Font.BOLD, FONT_HEIGHT));
-        g.drawString(this.getX()+" "+ this.getHeight()+ " " +this.getY() + "Instructions",0,FONT_HEIGHT);
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, fontHeight));
+        g.drawString(title,0,fontHeight);
     }
 
     @Override
