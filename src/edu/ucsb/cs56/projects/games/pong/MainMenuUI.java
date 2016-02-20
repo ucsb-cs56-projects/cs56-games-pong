@@ -1,5 +1,7 @@
 package edu.ucsb.cs56.projects.games.pong;
 
+import sun.awt.VerticalBagLayout;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -25,7 +27,7 @@ public class MainMenuUI {
         panel = new JPanel();
         frame.setSize( WIDTH, HEIGHT );
         frame.setLocationRelativeTo( null );
-        frame.add(panel);
+//        frame.add(panel);
         ArrayList<MainMenuComponent> menuItems = new ArrayList<MainMenuComponent>();
         instructionsComponent = new InstructionsComponent();
         menuItems.add(instructionsComponent);
@@ -34,11 +36,18 @@ public class MainMenuUI {
         panel.setOpaque(true);
 
         panel.setVisible(true);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+
+        panel.add(new MenuPaddingComponent(Color.GREEN,HEIGHT,WIDTH/3),BoxLayout.X_AXIS);
+        panel.add(new MenuPaddingComponent(Color.BLUE,HEIGHT,WIDTH/3),BoxLayout.X_AXIS);
+        panel.add(new MenuPaddingComponent(Color.RED,HEIGHT,WIDTH/3),BoxLayout.X_AXIS);
+
         for(MainMenuComponent component: menuItems) {
-            gridLayout.addLayoutComponent(component.getTitle(),instructionsComponent);
+//            panel.add(component,BorderLayout.CENTER);
+//            gridLayout.addLayoutComponent(component.getTitle(),instructionsComponent);
         }
-        panel.setLayout(gridLayout);
-        panel.add(instructionsComponent);
+//        panel.setLayout(gridLayout);
+//        panel.add(instructionsComponent);
         frame.add(panel);
 //        frame.setLayout(gridLayout);
 //        frame.repaint();
