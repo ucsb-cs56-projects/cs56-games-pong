@@ -32,15 +32,18 @@ public class MainMenu {
 		// Construct Window
 
        	JFrame frame = new JFrame( "Main Menu" );
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
         panel.setSize(640, 480);
         panel.setBackground(Color.BLACK);
         panel.setOpaque(true);
         panel.setVisible(true);
-
+        InstructionsComponent component = new InstructionsComponent();
+        panel.add(component);
         frame.setSize( 640, 480 );
         frame.setLocationRelativeTo( null );
         frame.add(panel);
+
 //        frame.setBackground(Color.BLACK);
         frame.setVisible(true);
 
