@@ -28,10 +28,13 @@ public class MainMenuUI {
         frame.setSize( WIDTH, HEIGHT );
         frame.setLocationRelativeTo( null );
 //        frame.add(panel);
-        ArrayList<MouseMotionListener> menuItems = new ArrayList<MouseMotionListener>();
+        ArrayList<MenuTextComponent> menuItems = new ArrayList<MenuTextComponent>();
         MenuTextComponent menuTextComponent1 = new MenuTextComponent("Instructions",Color.BLACK);
         MenuTextComponent menuTextComponent2 = new MenuTextComponent("Play",Color.BLACK);
         MenuTextComponent menuTextComponent3 = new MenuTextComponent("High Scores",Color.BLACK);
+        menuTextComponent1.addMouseListener(menuTextComponent1); // make a handler
+        menuTextComponent2.addMouseListener(menuTextComponent2);
+        menuTextComponent3.addMouseListener(menuTextComponent3);
 
         menuItems.add(menuTextComponent1);
         menuItems.add(menuTextComponent2);
@@ -44,22 +47,21 @@ public class MainMenuUI {
         panel.setVisible(true);
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
-        MenuPaddingComponent menuList = new MenuPaddingComponent(Color.BLUE,HEIGHT,WIDTH/2);
+        MenuPaddingComponent menuList = new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH/2);
         panel.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
         panel.add(menuList,BoxLayout.X_AXIS);
 //        panel.add(new MenuPaddingComponent(Color.BLUE,HEIGHT,WIDTH/2),BoxLayout.X_AXIS);
 //        panel.add(gridLayout,HEIGHT,WIDTH/2);
 
         panel.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
+        menuList.setLayout(gridLayout);
 
         menuList.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH));
-        for(MouseMotionListener component: menuItems) {
-            menuList.add((Component) component);
-            menuList.addMouseMotionListener(component);
+        for(MenuTextComponent component: menuItems) {
+            menuList.add(component.getTitle(), component);
 
         }
         menuList.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH));
-        menuList.setLayout(gridLayout);
 //        panel.setLayout(gridLayout);
 //        panel.add(menuTextComponent);
         frame.add(panel);
