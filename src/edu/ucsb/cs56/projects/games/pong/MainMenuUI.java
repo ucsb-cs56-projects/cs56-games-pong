@@ -13,8 +13,9 @@ import java.util.ArrayList;
 public class MainMenuUI {
     protected JFrame frame;
     protected JPanel panel;
-    protected final int WIDTH = 640;
-    protected final int HEIGHT = 480;
+    protected static final int WIDTH = 640;
+    protected static final int HEIGHT = 480;
+    static Screen screen;
 
     private GridLayout gridLayout = new GridLayout(5,1);
     private MenuTextComponent menuTextComponent;
@@ -27,7 +28,6 @@ public class MainMenuUI {
         panel = new JPanel();
         frame.setSize( WIDTH, HEIGHT );
         frame.setLocationRelativeTo( null );
-//        frame.add(panel);
         ArrayList<MenuTextComponent> menuItems = new ArrayList<MenuTextComponent>();
         MenuTextComponent menuTextComponent1 = new MenuTextComponent("Instructions",Color.BLACK);
         MenuTextComponent menuTextComponent2 = new MenuTextComponent("Play",Color.BLACK);
@@ -41,17 +41,14 @@ public class MainMenuUI {
         menuItems.add(menuTextComponent3);
 
         panel.setSize(WIDTH, HEIGHT);
-        panel.setBackground(Color.BLACK);
-        panel.setOpaque(true);
-
-        panel.setVisible(true);
+//        panel.setBackground(Color.BLACK);
+//        panel.setOpaque(true);
+        frame.setBackground(Color.BLACK);
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
         MenuPaddingComponent menuList = new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH/2);
         panel.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
         panel.add(menuList,BoxLayout.X_AXIS);
-//        panel.add(new MenuPaddingComponent(Color.BLUE,HEIGHT,WIDTH/2),BoxLayout.X_AXIS);
-//        panel.add(gridLayout,HEIGHT,WIDTH/2);
 
         panel.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
         menuList.setLayout(gridLayout);
@@ -62,11 +59,7 @@ public class MainMenuUI {
 
         }
         menuList.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH));
-//        panel.setLayout(gridLayout);
-//        panel.add(menuTextComponent);
         frame.add(panel);
-//        frame.setLayout(gridLayout);
-//        frame.repaint();
         frame.setVisible(true);
 
 
@@ -77,4 +70,7 @@ public class MainMenuUI {
         MainMenuUI menu = new MainMenuUI();
     }
 
+    public static void call() {
+        screen = new Screen(WIDTH,HEIGHT);
+    }
 }

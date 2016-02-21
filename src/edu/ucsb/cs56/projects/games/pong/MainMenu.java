@@ -3,6 +3,7 @@ package edu.ucsb.cs56.projects.games.pong;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 /** edu.ucsb.cs56.projects.games.pong.MainMenu is the class for Main Menu selection. It brings up the main menu and has buttons that allow the user to play the game, read the instructions, or view the high scores
  @author Vincent Gandolfo, Krishna Lingampalli
@@ -19,33 +20,83 @@ public class MainMenu {
     public JRadioButton ExtremeType1; 
     public JRadioButton supereasy;
     public static JRadioButton ExtremeType2;
+    protected JFrame frame;
+    protected JPanel panel;
+    protected static final int WIDTH = 640;
+    protected static final int HEIGHT = 480;
+    static Screen screen;
 
-
+    private GridLayout gridLayout = new GridLayout(5,1);
 
     Instructions i;
     Screen s;
     /** Constructor for MainMenu that creates the whole menu. A JFrame is created, and buttons are available for the options, which include view instructions, view high scores, and pick a difficulty
      */
-       
+
     public MainMenu() {
-
-		// Construct Window
-
-       	JFrame frame = new JFrame( "Main Menu" );
+        frame = new JFrame( "Main Menu" );
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel panel = new JPanel();
-        panel.setSize(640, 480);
-        panel.setBackground(Color.BLACK);
-        panel.setOpaque(true);
-        panel.setVisible(true);
-        MenuTextComponent component = new MenuTextComponent("Instructions",Color.BLACK);
-        panel.add(component);
-        frame.setSize( 640, 480 );
+        panel = new JPanel();
+        frame.setSize( WIDTH, HEIGHT );
         frame.setLocationRelativeTo( null );
-        frame.add(panel);
+        ArrayList<MenuTextComponent> menuItems = new ArrayList<MenuTextComponent>();
+        MenuTextComponent menuTextComponent1 = new MenuTextComponent("Instructions",Color.BLACK);
+        MenuTextComponent menuTextComponent2 = new MenuTextComponent("Play",Color.BLACK);
+        MenuTextComponent menuTextComponent3 = new MenuTextComponent("High Scores",Color.BLACK);
+        menuTextComponent1.addMouseListener(menuTextComponent1); // make a handler
+        menuTextComponent2.addMouseListener(menuTextComponent2);
+        menuTextComponent3.addMouseListener(menuTextComponent3);
 
-//        frame.setBackground(Color.BLACK);
+        menuItems.add(menuTextComponent1);
+        menuItems.add(menuTextComponent2);
+        menuItems.add(menuTextComponent3);
+
+        panel.setSize(WIDTH, HEIGHT);
+//        panel.setBackground(Color.BLACK);
+//        panel.setOpaque(true);
+        frame.setBackground(Color.BLACK);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+
+        MenuPaddingComponent menuList = new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH/2);
+        panel.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
+        panel.add(menuList,BoxLayout.X_AXIS);
+
+        panel.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
+        menuList.setLayout(gridLayout);
+
+        menuList.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH));
+        for(MenuTextComponent component: menuItems) {
+            menuList.add(component.getTitle(), component);
+
+        }
+        menuList.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH));
+        frame.add(panel);
         frame.setVisible(true);
+
+
+
+    }
+
+
+//    public MainMenu() {
+//
+//		// Construct Window
+
+//       	JFrame frame = new JFrame( "Main Menu" );
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		JPanel panel = new JPanel();
+//        panel.setSize(640, 480);
+//        panel.setBackground(Color.BLACK);
+//        panel.setOpaque(true);
+//        panel.setVisible(true);
+//        MenuTextComponent component = new MenuTextComponent("Instructions",Color.BLACK);
+//        panel.add(component);
+//        frame.setSize( 640, 480 );
+//        frame.setLocationRelativeTo( null );
+//        frame.add(panel);
+//
+////        frame.setBackground(Color.BLACK);
+//        frame.setVisible(true);
 
 //		JButton instructions = new JButton( "Instructions" );
 //		JButton play = new JButton( "Play" );
@@ -106,40 +157,31 @@ public class MainMenu {
 //		play.addActionListener( new PlayListener());
 //		instructions.addActionListener( new InstructionsListener());
 //		highScores.addActionListener( new HighScoresListener() );
-
-    }
+//
+//    }
     /** getLevelDifficulty() sets level difficulty based on user input */
     public int getLevelDifficulty()
     {
-	if( easy.isSelected() )
-	    levelDifficulty = 100;
-	
-	if( medium.isSelected() )
-	    levelDifficulty = 120;
-	
-	if( hard.isSelected() )
-	    levelDifficulty = 140;
-	
-	if( ExtremeType1.isSelected() )
-            levelDifficulty = 170;
-	
-	if( supereasy.isSelected() )
-            levelDifficulty = 80;
-  	if( ExtremeType2.isSelected() )
-            levelDifficulty = 120;
+//	if( easy.isSelected() )
+//	    levelDifficulty = 100;
+//
+//	if( medium.isSelected() )
+//	    levelDifficulty = 120;
+//
+//	if( hard.isSelected() )
+//	    levelDifficulty = 140;
+//
+//	if( ExtremeType1.isSelected() )
+//            levelDifficulty = 170;
+//
+//	if( supereasy.isSelected() )
+//            levelDifficulty = 80;
+//  	if( ExtremeType2.isSelected() )
+//            levelDifficulty = 120;
 
-	return levelDifficulty;
+	return 120;
     }
-    /** isExtremeType2() checks if the ExtremeType2 button was pressed */
-    public static boolean isExtremeType2()
-    {
-	boolean result = false;
-	if( ExtremeType2.isSelected() )
-	{
-	result= true;
-	}
-	return result;
-    }
+  
     /** PlayListener sets new window parameters based on level difficulty */
     class PlayListener implements ActionListener
     {

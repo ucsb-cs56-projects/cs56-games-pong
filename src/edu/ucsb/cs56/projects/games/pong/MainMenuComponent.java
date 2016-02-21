@@ -7,5 +7,4 @@ import javax.swing.*;
  */
 public abstract class MainMenuComponent extends JComponent implements UserRetrievable {
 
-
 }

@@ -45,6 +45,11 @@ public class MenuTextComponent extends MainMenuComponent implements MouseListene
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
+        if(textColor.equals(Color.BLUE) && MainMenuUI.screen == null) {
+            MainMenuUI.call();
+        } else if(textColor.equals(Color.BLUE) && !Screen.jf.isVisible()) {
+            Screen.jf.setVisible(true);
+        }
 
 
     }
