@@ -2,6 +2,8 @@ package edu.ucsb.cs56.projects.games.pong;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +28,7 @@ public class MainMenuUI {
         frame.setSize( WIDTH, HEIGHT );
         frame.setLocationRelativeTo( null );
 //        frame.add(panel);
-        ArrayList<MainMenuComponent> menuItems = new ArrayList<MainMenuComponent>();
+        ArrayList<MouseMotionListener> menuItems = new ArrayList<MouseMotionListener>();
         MenuTextComponent menuTextComponent1 = new MenuTextComponent("Instructions",Color.BLACK);
         MenuTextComponent menuTextComponent2 = new MenuTextComponent("Play",Color.BLACK);
         MenuTextComponent menuTextComponent3 = new MenuTextComponent("High Scores",Color.BLACK);
@@ -51,11 +53,12 @@ public class MainMenuUI {
         panel.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
 
         menuList.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH));
-        for(MainMenuComponent component: menuItems) {
-            menuList.add(component.getTitle(),component);
+        for(MouseMotionListener component: menuItems) {
+            menuList.add((Component) component);
+            menuList.addMouseMotionListener(component);
+
         }
         menuList.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH));
-
         menuList.setLayout(gridLayout);
 //        panel.setLayout(gridLayout);
 //        panel.add(menuTextComponent);
@@ -63,6 +66,7 @@ public class MainMenuUI {
 //        frame.setLayout(gridLayout);
 //        frame.repaint();
         frame.setVisible(true);
+
 
 
     }

@@ -4,11 +4,12 @@ import javax.swing.JComponent;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 /**
  * Created by angel on 2/20/16.
  */
-public class MenuTextComponent extends MainMenuComponent implements MouseListener {
+public class MenuTextComponent extends MainMenuComponent implements MouseMotionListener {
 
     private boolean mouseEntered;
     private boolean mouseClicked;
@@ -16,13 +17,14 @@ public class MenuTextComponent extends MainMenuComponent implements MouseListene
     private boolean mouseExited;
     private final int fontHeight;
     private final String title;
+    private Color textColor = Color.WHITE;
     private Color backgroundColor;
 
     public MenuTextComponent(String title, Color backgroundColor) {
         super();
-        this.setPreferredSize(new Dimension(200,200));
-        this.title = title;
         fontHeight = 28;
+        this.title = title;
+        this.setPreferredSize(new Dimension(fontHeight*title.length(),fontHeight));
         this.backgroundColor = backgroundColor;
 
     }
@@ -36,33 +38,37 @@ public class MenuTextComponent extends MainMenuComponent implements MouseListene
         super.paintComponent(g);
         g.setColor(backgroundColor);
         g.fillRect(0,0,600,480);
-        g.setColor(Color.WHITE);
+        g.setColor(textColor);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, fontHeight));
+        TextArea text = new TextArea(title);
+        // TextComponent
         g.drawString(title,0,fontHeight);
     }
 
     @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
+    public void mouseDragged(MouseEvent mouseEvent) {
 
     }
 
     @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-
+    public void mouseMoved(MouseEvent mouseEvent) {
+        if((mouseEvent.getY() - this.getY()) < 28)
+            textColor = Color.RED;
+        else
+            textColor = Color.BLUE;
+        repaint();
     }
 
-    @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
 
-    }
+//    @Override
+//    public void mouseEntered(MouseEvent mouseEvent) {
+//        if(mouseEvent.getY()-this.getY() < 28) {
+//            textColor = Color.RED;
+//        } else {
+//            textColor = Color.BLUE;
+//        }
+//        repaint();
+//
+//    }
 
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-        mouseEntered = true;
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-
-    }
 }
