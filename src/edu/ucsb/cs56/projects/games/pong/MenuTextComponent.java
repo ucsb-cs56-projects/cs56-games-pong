@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 /**
  * Created by angel on 2/20/16.
  */
-public class InstructionsComponent extends MainMenuComponent implements MouseListener {
+public class MenuTextComponent extends MainMenuComponent implements MouseListener {
 
     private boolean mouseEntered;
     private boolean mouseClicked;
@@ -18,10 +18,10 @@ public class InstructionsComponent extends MainMenuComponent implements MouseLis
     private final String title;
     private Color backgroundColor;
 
-    public InstructionsComponent(Color backgroundColor) {
+    public MenuTextComponent(String title, Color backgroundColor) {
         super();
         this.setPreferredSize(new Dimension(200,200));
-        title = "Instructions";
+        this.title = title;
         fontHeight = 28;
         this.backgroundColor = backgroundColor;
 
@@ -36,7 +36,7 @@ public class InstructionsComponent extends MainMenuComponent implements MouseLis
         super.paintComponent(g);
         g.setColor(backgroundColor);
         g.fillRect(0,0,600,480);
-        g.setColor(Color.BLACK);
+        g.setColor(Color.WHITE);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, fontHeight));
         g.drawString(title,0,fontHeight);
     }

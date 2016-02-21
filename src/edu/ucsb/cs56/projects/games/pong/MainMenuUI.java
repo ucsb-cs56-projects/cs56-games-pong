@@ -1,7 +1,5 @@
 package edu.ucsb.cs56.projects.games.pong;
 
-import sun.awt.VerticalBagLayout;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,8 +14,8 @@ public class MainMenuUI {
     protected final int WIDTH = 640;
     protected final int HEIGHT = 480;
 
-    private GridLayout gridLayout = new GridLayout(3,1);
-    private InstructionsComponent instructionsComponent;
+    private GridLayout gridLayout = new GridLayout(5,1);
+    private MenuTextComponent menuTextComponent;
 //    private HighScoreComponent highScoreComponent;
 //    private PlayComponent playComponent;
 
@@ -29,13 +27,13 @@ public class MainMenuUI {
         frame.setLocationRelativeTo( null );
 //        frame.add(panel);
         ArrayList<MainMenuComponent> menuItems = new ArrayList<MainMenuComponent>();
-        InstructionsComponent instructionsComponent1 = new InstructionsComponent(Color.darkGray);
-        InstructionsComponent instructionsComponent2 = new InstructionsComponent(Color.PINK);
-        InstructionsComponent instructionsComponent3 = new InstructionsComponent(Color.MAGENTA);
+        MenuTextComponent menuTextComponent1 = new MenuTextComponent("Instructions",Color.BLACK);
+        MenuTextComponent menuTextComponent2 = new MenuTextComponent("Play",Color.BLACK);
+        MenuTextComponent menuTextComponent3 = new MenuTextComponent("High Scores",Color.BLACK);
 
-        menuItems.add(instructionsComponent1);
-        menuItems.add(instructionsComponent2);
-        menuItems.add(instructionsComponent3);
+        menuItems.add(menuTextComponent1);
+        menuItems.add(menuTextComponent2);
+        menuItems.add(menuTextComponent3);
 
         panel.setSize(WIDTH, HEIGHT);
         panel.setBackground(Color.BLACK);
@@ -45,20 +43,22 @@ public class MainMenuUI {
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
         MenuPaddingComponent menuList = new MenuPaddingComponent(Color.BLUE,HEIGHT,WIDTH/2);
-        panel.add(new MenuPaddingComponent(Color.GREEN,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
+        panel.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
         panel.add(menuList,BoxLayout.X_AXIS);
 //        panel.add(new MenuPaddingComponent(Color.BLUE,HEIGHT,WIDTH/2),BoxLayout.X_AXIS);
 //        panel.add(gridLayout,HEIGHT,WIDTH/2);
 
-        panel.add(new MenuPaddingComponent(Color.RED,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
+        panel.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH/4),BoxLayout.X_AXIS);
 
+        menuList.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH));
         for(MainMenuComponent component: menuItems) {
             menuList.add(component.getTitle(),component);
         }
+        menuList.add(new MenuPaddingComponent(Color.BLACK,HEIGHT,WIDTH));
 
         menuList.setLayout(gridLayout);
 //        panel.setLayout(gridLayout);
-//        panel.add(instructionsComponent);
+//        panel.add(menuTextComponent);
         frame.add(panel);
 //        frame.setLayout(gridLayout);
 //        frame.repaint();

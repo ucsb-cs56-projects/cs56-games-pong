@@ -38,7 +38,7 @@ public class MainMenu {
         panel.setBackground(Color.BLACK);
         panel.setOpaque(true);
         panel.setVisible(true);
-        InstructionsComponent component = new InstructionsComponent(Color.BLACK);
+        MenuTextComponent component = new MenuTextComponent("Instructions",Color.BLACK);
         panel.add(component);
         frame.setSize( 640, 480 );
         frame.setLocationRelativeTo( null );
