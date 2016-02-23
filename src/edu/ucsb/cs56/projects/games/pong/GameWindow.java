@@ -8,7 +8,6 @@ import java.awt.*;
  */
 public class GameWindow extends JFrame {
     private static final Dimension DIMENSION = new Dimension(640,480);
-    static Screen screen;
 
 
     public GameWindow(String title, Dimension dimension) {
@@ -21,13 +20,8 @@ public class GameWindow extends JFrame {
 
     public static void main(String[] args) {
         GameWindow window = new GameWindow("Main Menu",DIMENSION);
-//        MainMenuUI gameMenu = new MainMenuUI(DIMENSION);
-//        window.add(gameMenu);
+        MainMenuUI gameMenu = new MainMenuUI();
+        window.add(gameMenu);
         window.setVisible(true);
-        call();
     }
-    public static void call() {
-        screen = new Screen(WIDTH,HEIGHT);
-    }
-
 }

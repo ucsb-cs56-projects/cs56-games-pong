@@ -40,9 +40,9 @@ public class MainMenu {
         frame.setSize( WIDTH, HEIGHT );
         frame.setLocationRelativeTo( null );
         ArrayList<MenuTextComponent> menuItems = new ArrayList<MenuTextComponent>();
-        MenuTextComponent menuTextComponent1 = new MenuTextComponent("Instructions",Color.BLACK);
-        MenuTextComponent menuTextComponent2 = new MenuTextComponent("Play",Color.BLACK);
-        MenuTextComponent menuTextComponent3 = new MenuTextComponent("High Scores",Color.BLACK);
+        MenuTextComponent menuTextComponent1 = new InstructionsTextComponent("Instructions",Color.BLACK);
+        MenuTextComponent menuTextComponent2 = new PlayTextComponent("Play",Color.BLACK);
+        MenuTextComponent menuTextComponent3 = new HighScoreTextComponent("High Scores",Color.BLACK);
         menuTextComponent1.addMouseListener(menuTextComponent1); // make a handler
         menuTextComponent2.addMouseListener(menuTextComponent2);
         menuTextComponent3.addMouseListener(menuTextComponent3);
