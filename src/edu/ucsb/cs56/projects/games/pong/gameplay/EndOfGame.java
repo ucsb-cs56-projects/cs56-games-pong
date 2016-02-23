@@ -1,15 +1,16 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.gameplay;
+
+import edu.ucsb.cs56.projects.games.pong.highscore.HighScore;
 
 import java.util.ArrayList;
 import java.io.*;
-import java.awt.*;
 
-/** edu.ucsb.cs56.projects.games.pong.EndOfGame is the class that provides instructions for how to end the game and display high scores
+/** edu.ucsb.cs56.projects.games.pong.gameplay.EndOfGame is the class that provides instructions for how to end the game and display high scores
  @author Vincent Gandolfo, Krishna Lingampalli
  @version CS56, Winter 2015, UCSB
 */
 
-class EndOfGame {
+public class EndOfGame {
     //Create ArrayList to store high scores and names
     public ArrayList<HighScore> hList = new ArrayList<HighScore>();
 

@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.highscore;
 
 import java.awt.*;
 
@@ -15,8 +15,8 @@ public class HighScore{
     /** Constructor that sets the instance variables playerName and playerScore      *  to the arguments name and score 
      * @param score the score of the player won just won
      * @param name the name of the player who just won
-     */   
-HighScore( int score, String name )
+     */
+    public HighScore(int score, String name)
 	{
 	    playerScore = score;
 	    playerName = name;

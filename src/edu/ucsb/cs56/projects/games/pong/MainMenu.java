@@ -1,5 +1,10 @@
 package edu.ucsb.cs56.projects.games.pong;
 
+import edu.ucsb.cs56.projects.games.pong.gameplay.Screen;
+import edu.ucsb.cs56.projects.games.pong.highscore.DisplayHighScores;
+import edu.ucsb.cs56.projects.games.pong.menu.*;
+import edu.ucsb.cs56.projects.games.pong.menu.instructions.Instructions;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.menu;
 
 import javax.swing.*;
 import java.awt.*;

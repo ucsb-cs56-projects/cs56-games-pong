@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.gameplay;
 
 //code influence and ideas from http://www.dreamincode.net/forums/topic/172211-programing-an-applet-game-of-pong/
 //http://www.youtube.com/watch?v=E-CJYELJa88
@@ -6,21 +6,12 @@ package edu.ucsb.cs56.projects.games.pong;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.BasicStroke;
 import java.awt.Color; // class for Colors
 import java.awt.Graphics;
-import java.awt.Rectangle;  // squares and rectangles
-import java.awt.Shape; // general class for shapes
-import java.awt.Stroke;
-import java.awt.geom.AffineTransform; // translation, rotation, scale
-import java.awt.geom.Ellipse2D;  // ellipses and circles
-import java.awt.geom.GeneralPath; // combinations of lines and curves
-import java.awt.geom.Line2D;  // single lines
-import java.awt.geom.Rectangle2D; // for the bounding box
+
 
 /** Screen is the GUI implementation of the Pong game
  @author Timothy Fok 
@@ -32,7 +23,7 @@ import java.awt.geom.Rectangle2D; // for the bounding box
 */
 
 public class Screen{
-    static JFrame jf;
+    public static JFrame jf;
     static int w;
     static int h;
     public Pong game;

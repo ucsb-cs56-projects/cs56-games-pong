@@ -1,4 +1,6 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.menu;
+
+import edu.ucsb.cs56.projects.games.pong.gameplay.Screen;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -15,10 +17,10 @@ public class PlayTextComponent extends MenuTextComponent  {
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         if(textColor.equals(Color.BLUE) && screen == null) {
-            screen = new Screen(MainMenuComponent.getDimension().width,MainMenuComponent.getDimension().height);
+            screen = new Screen(getDimension().width, getDimension().height);
         }
         else if(textColor.equals(Color.BLUE) && screen != null) {
-            screen.jf.setSize(MainMenuComponent.getDimension().width,MainMenuComponent.getDimension().height);
+            screen.jf.setSize(getDimension().width, getDimension().height);
             screen.jf.setVisible(true);
         }
     }

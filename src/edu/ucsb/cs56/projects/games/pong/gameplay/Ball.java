@@ -1,22 +1,8 @@
-package edu.ucsb.cs56.projects.games.pong; 
+package edu.ucsb.cs56.projects.games.pong.gameplay;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.BasicStroke;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.Color; // class for Colors
 import java.awt.Graphics;
-import java.awt.Rectangle;  // squares and rectangles
-import java.awt.Shape; // general class for shapes
-import java.awt.Stroke;
-import java.awt.geom.AffineTransform; // translation, rotation, scale
-import java.awt.geom.Ellipse2D;  // ellipses and circles
-import java.awt.geom.GeneralPath; // combinations of lines and curves
-import java.awt.geom.Line2D;  // single lines 
-import java.awt.geom.Rectangle2D; // for the bounding box
 
-/** edu.ucsb.cs56.projects.games.pong.Ball is the class that will move the ball around the screen
+/** edu.ucsb.cs56.projects.games.pong.gameplay.Ball is the class that will move the ball around the screen
  @author Timothy Fok  
  @author Sanchit Gupta, Bhanu Khanijau
  @author Jake Dumont, Heneli Kailahi
@@ -30,7 +16,7 @@ public class Ball extends gameObject {
 
     public int ballsLost;
                                                 
-    /** edu.ucsb.cs56.projects.games.pong.Ball constructor to initialize location of edu.ucsb.cs56.projects.games.pong.Ball onto the screen
+    /** edu.ucsb.cs56.projects.games.pong.gameplay.Ball constructor to initialize location of edu.ucsb.cs56.projects.games.pong.gameplay.Ball onto the screen
      *  and draw it as a rectangle for a simpler and precise hitbox.
      *  @param x set initial x coordinate of ball
      *  @param y set initial y coordinate of ball 

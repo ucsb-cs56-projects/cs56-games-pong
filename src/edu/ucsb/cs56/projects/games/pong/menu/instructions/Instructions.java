@@ -1,10 +1,10 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.menu.instructions;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-/** edu.ucsb.cs56.projects.games.pong.Instructions is the classs that displays the instructions to the game when the user presses the instructions button
+/** edu.ucsb.cs56.projects.games.pong.menu.instructions.Instructions is the classs that displays the instructions to the game when the user presses the instructions button
  @author Vincent Gandolfo, Krishna Lingampalli
  @version CS56, Winter 2015, UCSB
 */
@@ -13,7 +13,7 @@ public class Instructions{
     JFrame jf;         
     
     /** Constructor that sets up the JFrame and Components that allow the instructions to be displayed */
-    Instructions()
+    public Instructions()
     {
 	setUpFrame();
 	setUpFrameComponents();

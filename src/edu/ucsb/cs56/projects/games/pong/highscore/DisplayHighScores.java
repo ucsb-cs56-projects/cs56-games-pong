@@ -1,4 +1,6 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.highscore;
+
+import edu.ucsb.cs56.projects.games.pong.gameplay.EndOfGame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +20,7 @@ public class DisplayHighScores{
      * @param name name of the player who just won
      * @param score score of the player who just won
      */
-    DisplayHighScores( String name, int score )
+    public DisplayHighScores( String name, int score )
     {
 	eog = new EndOfGame( score, name ); //Call EndOfGame()
 	setUpFrame();

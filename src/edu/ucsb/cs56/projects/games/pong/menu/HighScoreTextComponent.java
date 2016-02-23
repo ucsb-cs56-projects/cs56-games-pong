@@ -1,4 +1,6 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.menu;
+
+import edu.ucsb.cs56.projects.games.pong.highscore.DisplayHighScores;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
