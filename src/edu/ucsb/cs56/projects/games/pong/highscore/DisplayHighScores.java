@@ -55,9 +55,9 @@ public class DisplayHighScores{
     /** showScores() prints scores on labels */
     public void showScores()
     {
-	for( int i = 0; i < 5; i++ )
+	for(HighScore highscore: eog.hList)
 	    {
-		jp.add( new JLabel( eog.hList.get( i ).toString( ": ", "" ), JLabel.CENTER ) );
+		jp.add( new JLabel( highscore.toString( ": ", "" ), JLabel.CENTER ) );
 	    }
     }
     /** BackToMainListener provides a way to get back to the main menu */

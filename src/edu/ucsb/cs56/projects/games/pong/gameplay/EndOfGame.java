@@ -15,7 +15,7 @@ public class EndOfGame {
     public ArrayList<HighScore> hList = new ArrayList<HighScore>();
 
     public HighScore winner;
-  
+
     /** Constructor that identifies the winner, and writes and saves their name      *  and score to a file
      *  @param score score of the player who just won
      *  @param name name of the player who just won
@@ -30,15 +30,14 @@ public class EndOfGame {
     public void readTheFile()
     {
 	try{
-	    File scoresFile = new File( "src/edu/ucsb/cs56/projects/games/pong/scores.txt" );
+	    File scoresFile = new File( "src/edu/ucsb/cs56/projects/games/pong/highscore/scores.txt" );
 	    FileReader fileReader = new FileReader( scoresFile );
 	    BufferedReader reader = new BufferedReader( fileReader );
-
-	    String line = reader.readLine(); //reads the file
-
-	    String[] parsedList = line.split( "/" ); //parses the file
-	    putInArrayList( parsedList );
-	    checkArrayList();
+		String line;
+	    while((line = reader.readLine()) != null) { //reads the file
+			String[] users = line.split(",");
+			hList.add(new HighScore(Integer.parseInt(users[0]),users[1]));
+		}
 	    reader.close();
 	}catch( IOException ioe ){
 	    ioe.printStackTrace();
@@ -68,10 +67,10 @@ public class EndOfGame {
     public void putInArrayList( String[] parsedList )
     {
 	HighScore hs;
-	for( int i = 0; i < 5; i++ )
+	for( int i = 0; i < parsedList.length; i++ )
 	    {
-		hs = new HighScore( Integer.parseInt( parsedList[ 2*i ] ),
-				    parsedList[ 2*i + 1 ] );
+		hs = new HighScore( Integer.parseInt( parsedList[i ] ),
+				    parsedList[ i] );
 		hList.add( hs );
 	    }
     }
@@ -79,15 +78,15 @@ public class EndOfGame {
     public void saveToFile( )
     {
 	try{
-	    FileWriter writer = new FileWriter( "src/edu/ucsb/cs56/projects/games/pong/scores.txt" );
-	    String finalOutput = "";
-	    for( int i = 0; i < 5; i++ )
+	    BufferedWriter writer = new BufferedWriter(new FileWriter( "src/edu/ucsb/cs56/projects/games/pong/highscore/scores.txt" ));
+	    String playerScore = "";
+	    for(HighScore highscore : hList )
 		{
-		    finalOutput = finalOutput + hList.get( i ).toString( "/", "/" );
+			playerScore = highscore.getPlayerScore()+"," +highscore.getPlayerName();
+			writer.write(playerScore);
+			writer.newLine();
 		}
-	    
-	    writer.write( finalOutput );
-	    writer.flush();
+		writer.flush();
 	    writer.close();
 	}catch( IOException ioe ){
 	    ioe.printStackTrace();

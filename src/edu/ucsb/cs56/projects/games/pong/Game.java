@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.games.pong.gameplay;
+package edu.ucsb.cs56.projects.games.pong;
 
 import edu.ucsb.cs56.projects.games.pong.menu.MainMenuUI;
 
