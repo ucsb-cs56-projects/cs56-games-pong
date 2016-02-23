@@ -22,7 +22,7 @@ public class EndOfGame {
      */  
     public EndOfGame( int score, String name )
     {
-	winner = new HighScore( score, name ); 
+	winner = new HighScore( score, name );
 	readTheFile();
 	saveToFile();
     }
@@ -30,13 +30,14 @@ public class EndOfGame {
     public void readTheFile()
     {
 	try{
-	    File scoresFile = new File( "src/edu/ucsb/cs56/projects/games/pong/highscore/scores.txt" );
+	    File scoresFile = new File( "src/edu/ucsb/cs56/projects/games/pong/highscore/scores.csv" );
 	    FileReader fileReader = new FileReader( scoresFile );
 	    BufferedReader reader = new BufferedReader( fileReader );
 		String line;
 	    while((line = reader.readLine()) != null) { //reads the file
 			String[] users = line.split(",");
-			hList.add(new HighScore(Integer.parseInt(users[0]),users[1]));
+			if(users.length == 2)
+				hList.add(new HighScore(Integer.parseInt(users[0]),users[1]));
 		}
 	    reader.close();
 	}catch( IOException ioe ){
@@ -78,19 +79,28 @@ public class EndOfGame {
     public void saveToFile( )
     {
 	try{
-	    BufferedWriter writer = new BufferedWriter(new FileWriter( "src/edu/ucsb/cs56/projects/games/pong/highscore/scores.txt" ));
+	    BufferedWriter writer = new BufferedWriter(new FileWriter( "src/edu/ucsb/cs56/projects/games/pong/highscore/scores.csv" ));
 	    String playerScore = "";
+		String winnerScore = "";
 	    for(HighScore highscore : hList )
 		{
 			playerScore = highscore.getPlayerScore()+"," +highscore.getPlayerName();
 			writer.write(playerScore);
 			writer.newLine();
 		}
+		if(winner != null) {
+			winnerScore = winner.getPlayerScore()+"," +winner.getPlayerName();
+			writer.write(winnerScore);
+			writer.newLine();
+			hList.add(winner);
+		}
+
+
 		writer.flush();
 	    writer.close();
 	}catch( IOException ioe ){
 	    ioe.printStackTrace();
 	}
     }
-    
+
 }

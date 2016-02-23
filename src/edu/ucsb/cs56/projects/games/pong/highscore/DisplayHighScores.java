@@ -25,7 +25,7 @@ public class DisplayHighScores{
 	eog = new EndOfGame( score, name ); //Call EndOfGame()
 	setUpFrame();
 	setUpFrameComponents();
-	showScores();
+    showScores();
     }
     /**setUpFrame() sets up the frame structure for High Score Window */
     public void setUpFrame()
