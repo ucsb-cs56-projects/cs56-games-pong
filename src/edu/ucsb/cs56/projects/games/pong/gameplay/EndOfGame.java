@@ -5,9 +5,14 @@ import edu.ucsb.cs56.projects.games.pong.highscore.HighScore;
 import java.util.ArrayList;
 import java.io.*;
 
-/** edu.ucsb.cs56.projects.games.pong.gameplay.EndOfGame is the class that provides instructions for how to end the game and display high scores
- @author Vincent Gandolfo, Krishna Lingampalli
- @version CS56, Winter 2015, UCSB
+/** edu.ucsb.cs56.projects.games.pong.gameplay.EndOfGame
+ *
+ * EndOfGame provides details for reading and writing the current list of PlayerScores
+ * If a new Highscore is encountered, it will write this to the CSV file of highscores.
+ *
+ * @author Vincent Gandolfo, Krishna Lingampalli
+ * @author Angel Ortega
+ * @version CS56, Winter 2016, UCSB
 */
 
 public class EndOfGame {
@@ -43,37 +48,6 @@ public class EndOfGame {
 	}catch( IOException ioe ){
 	    ioe.printStackTrace();
 	}
-    }
-    /** checkArrayList() checks ArrayList to see if winner will be placed in top five */
-    public void checkArrayList()
-    {
-	for( int i = 0; i < 5; i++ )
-	    {
-		if( isGreaterThan( i ) )
-		    {
-			hList.add( i, winner );
-			hList.remove( 5 );
-			return;
-		    }
-	    }
-    }
-    /** isGreaterThan() checks if winner score is higher than current ArrayList index */
-    public boolean isGreaterThan( int i )
-    {
-	if( winner.getPlayerScore() > hList.get( i ).getPlayerScore() )
-	    return true;
-	return false;
-    }
-    /** putInArrayList() adds winner to ArrayList */
-    public void putInArrayList( String[] parsedList )
-    {
-	HighScore hs;
-	for( int i = 0; i < parsedList.length; i++ )
-	    {
-		hs = new HighScore( Integer.parseInt( parsedList[i ] ),
-				    parsedList[ i] );
-		hList.add( hs );
-	    }
     }
     /** saveToFile() saves new file */
     public void saveToFile( )
