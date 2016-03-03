@@ -7,7 +7,7 @@ import java.awt.*;
  @version CS56, Winter 2015, UCSB
 */
 
-public class HighScore{
+public class HighScore implements Comparable {
     
     private final String playerName;
     private final int playerScore;
@@ -31,5 +31,20 @@ public class HighScore{
     {
 	return ( getPlayerScore() + first +  getPlayerName() + last );
     }
-    
+
+    /***
+     * Highest playerScore is given priority.
+     * @param o
+     * @return
+     */
+    @Override
+    public int compareTo(Object o) {
+        HighScore otherScore = (HighScore) o;
+        if(this.playerScore < otherScore.playerScore)
+            return 1;
+        else if(this.playerScore == otherScore.playerScore)
+            return 0;
+        else
+            return -1;
+    }
 }

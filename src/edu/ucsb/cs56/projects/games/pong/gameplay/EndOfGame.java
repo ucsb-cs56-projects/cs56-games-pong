@@ -4,6 +4,7 @@ import edu.ucsb.cs56.projects.games.pong.highscore.HighScore;
 
 import java.util.ArrayList;
 import java.io.*;
+import java.util.Collections;
 
 /** edu.ucsb.cs56.projects.games.pong.gameplay.EndOfGame
  *
@@ -44,7 +45,9 @@ public class EndOfGame {
 			if(users.length == 2)
 				hList.add(new HighScore(Integer.parseInt(users[0]),users[1]));
 		}
-	    reader.close();
+		Collections.sort(hList);
+
+		reader.close();
 	}catch( IOException ioe ){
 	    ioe.printStackTrace();
 	}
@@ -69,6 +72,7 @@ public class EndOfGame {
 			hList.add(winner);
 		}
 
+		Collections.sort(hList);
 
 		writer.flush();
 	    writer.close();
