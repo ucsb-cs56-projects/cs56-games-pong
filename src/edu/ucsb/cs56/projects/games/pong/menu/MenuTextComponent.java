@@ -60,7 +60,7 @@ public abstract class MenuTextComponent extends MainMenuComponent implements Mou
 
     protected void playGameStartAudio() {
         try {
-            // Audio credit goes to NoiseCollector via: edu/ucsb/cs56/projects/games/pong/menu/243020__plasterbrain__game-start.ogg
+            // Audio credit goes to Cabeeno Rossley via: edu/ucsb/cs56/projects/games/pong/menu/126418__cabeeno-rossley__button-select.wav
             InputStream ioR = new FileInputStream("src/edu/ucsb/cs56/projects/games/pong/menu/126418__cabeeno-rossley__button-select.wav");
             AudioStream audio = new AudioStream(ioR);
             this.setAudio(audio);
