@@ -5,8 +5,12 @@ import edu.ucsb.cs56.projects.games.pong.menu.MainMenuUI;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by angel on 2/21/16.
+/** edu.ucsb.cs56.projects.games.pong.Game
+ * Game contains the launcher(main).
+ * It provides the frame/window details for the Game.
+ * 
+ * @author Angel Ortega
+ * @version CS56, Winter 2016, UCSB
  */
 public class Game extends JFrame {
     private static final Dimension DIMENSION = new Dimension(640,480);
