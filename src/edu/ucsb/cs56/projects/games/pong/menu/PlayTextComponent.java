@@ -17,6 +17,7 @@ public class PlayTextComponent extends MenuTextComponent  {
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         if(textColor.equals(Color.BLUE)) {
+            playGameStartAudio();
             DifficultyLevelPrompt prompt = new DifficultyLevelPrompt();
             if(prompt.isSelected())
                 screen = new Screen(8*prompt.getDifficulty(), 6*prompt.getDifficulty());

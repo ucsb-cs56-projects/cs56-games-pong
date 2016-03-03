@@ -16,6 +16,7 @@ public class HighScoreTextComponent extends MenuTextComponent {
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
+        playGameStartAudio();
         if(textColor.equals(Color.BLUE)) {
             DisplayHighScores displayhs = new DisplayHighScores("", 0);
         }

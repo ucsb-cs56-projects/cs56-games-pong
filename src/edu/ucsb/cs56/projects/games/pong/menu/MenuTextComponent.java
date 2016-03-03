@@ -1,8 +1,15 @@
 package edu.ucsb.cs56.projects.games.pong.menu;
 
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by angel on 2/20/16.
@@ -14,6 +21,7 @@ public abstract class MenuTextComponent extends MainMenuComponent implements Mou
     protected Color textColor = Color.WHITE;
     private Color backgroundColor;
     protected boolean screenCalled;
+    protected AudioStream audio;
 
     public MenuTextComponent(String title, Color backgroundColor) {
         super();
@@ -50,4 +58,22 @@ public abstract class MenuTextComponent extends MainMenuComponent implements Mou
         repaint();
     }
 
+    protected void playGameStartAudio() {
+        try {
+            // Audio credit goes to NoiseCollector via: edu/ucsb/cs56/projects/games/pong/menu/243020__plasterbrain__game-start.ogg
+            InputStream ioR = new FileInputStream("src/edu/ucsb/cs56/projects/games/pong/menu/126418__cabeeno-rossley__button-select.wav");
+            AudioStream audio = new AudioStream(ioR);
+            this.setAudio(audio);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        AudioPlayer.player.start(audio);
+    }
+
+
+    public void setAudio(AudioStream audio) {
+        this.audio = audio;
+    }
 }

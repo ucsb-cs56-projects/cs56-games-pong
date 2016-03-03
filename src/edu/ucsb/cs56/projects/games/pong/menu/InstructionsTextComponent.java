@@ -17,6 +17,7 @@ public class InstructionsTextComponent extends MenuTextComponent {
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         if(textColor.equals(Color.BLUE)) {
+            playGameStartAudio();
             if( instructions == null )
                 instructions = new Instructions();
             else
