@@ -31,6 +31,8 @@ public class DifficultyLevelPrompt extends JPanel {
         if (responseFromUser == JOptionPane.OK_OPTION && itemChosen != null) {
             difficulty = DIFFICULTIES.get(itemChosen.toString()).intValue();
             this.selected = true;
+        } else {
+            this.remove(this);
         }
     }
 
