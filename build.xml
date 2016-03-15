@@ -1,6 +1,6 @@
 <project default="compile">
 
-  <property name="mainClass" value="MainMenu" />
+  <property name="mainClass" value="Game" />
  
   <!-- build.xml for CP3, S12, CS56
        name: Timothy Fok-->
@@ -90,7 +90,7 @@
    <mkdir dir="dist" />                                                         
    <jar destfile="dist/${projectName}.jar" basedir="build">  
     <manifest>
-      <attribute name="${mainClass}" value="Screen"/>
+        <attribute name="Main-Class" value="${packageName}.Game"/>
     </manifest>
    </jar>
  </target>   

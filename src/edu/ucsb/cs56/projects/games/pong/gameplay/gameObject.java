@@ -1,10 +1,8 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.gameplay;
 
 import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
 
-/** edu.ucsb.cs56.projects.games.pong.gameObject is used to change velocities of objects used in the game pong
+/** edu.ucsb.cs56.projects.games.pong.gameplay.gameObject is used to change velocities of objects used in the game pong
  @author Vincent Gandolfo, Krishna Lingampalli
  @version CS56, Winter 2015, UCSB
 */

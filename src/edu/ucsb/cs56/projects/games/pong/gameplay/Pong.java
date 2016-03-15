@@ -1,43 +1,25 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.gameplay;
 
-import javax.swing.*;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
-import java.awt.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.Color; // class for Colors
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Rectangle;  // squares and rectangles
-import java.awt.Shape; // general class for shapes
-import java.awt.Stroke;
-import java.awt.geom.AffineTransform; // translation, rotation, scale
-import java.awt.geom.Ellipse2D;  // ellipses and circles
-import java.awt.geom.GeneralPath; // combinations of lines and curves
-import java.awt.geom.Line2D;  // single lines
-import java.awt.geom.Rectangle2D; // for the bounding box
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-
-/** edu.ucsb.cs56.projects.games.pong.Pong is the class that will facilitate
+/** edu.ucsb.cs56.projects.games.pong.gameplay.Pong is the class that will facilitate
  * the game of Pong being run 
  @author Sanchit Gupta, Bhanu Khanijau
  @author Heneli Kailahi, Jake Dumont  
  @author Benjamin Hartl, Sarah Darwiche
  @author Vincent Gandolfo, Krishna Lingampalli
- @version CS56, Winter 2015, UCSB
+ @author Angel Ortega
+ @version CS56, Winter 2016, UCSB
 */
 
 public class Pong implements Runnable {
-    
+
     int hits;                      // times it hits a paddle
     int moreSpeed = 1;             // to increase speed every 5 hits
     
@@ -47,8 +29,10 @@ public class Pong implements Runnable {
     
     Ball b;                        // The Ball
     
-    boolean gameIsGoing = true;    
-    
+    boolean gameIsGoing = true;
+    private AudioStream audio;
+
+
     /** The Pong constructor initializes 2 paddle objects, a ball object, and 
      * a points value 
      */
@@ -123,27 +107,50 @@ public class Pong implements Runnable {
      */
     
     public void paddleCollision() { // speed starts out at 1
-	if( getHits() % 5 == 0 )    // every 5 hits increases speed by 1,
+
+    if( getHits() % 5 == 0 )    // every 5 hits increases speed by 1,
 	    moreSpeed = 1;
 	else
-	    moreSpeed = 0;	       
+	    moreSpeed = 0;
 
 	// Sets the new velocity if it hits either paddle, p1 or p2
 	//   and adds the increments the number of hits 
 	
 	// checks if it hits p1
 	if( ( b.rectangle ).intersects( p1.rectangle ) ){
-	    b.setXVelocity( -1 * ( b.getXVelocity() - moreSpeed ) );
+        playPaddleCollisionAudio();
+        b.setXVelocity( -1 * ( b.getXVelocity() - moreSpeed ) );
 	    incrementHits();
-	}
+
+    }
 	
 	// checks if it hits p2
 	else if( ( b.rectangle ).intersects( p2.rectangle ) ){
-            b.setXVelocity( -1 * ( b.getXVelocity() + moreSpeed ) );
+        playPaddleCollisionAudio();
+        b.setXVelocity( -1 * ( b.getXVelocity() + moreSpeed ) );
 	    incrementHits();
-        }
+
     }
-    
+    }
+
+    /**
+     * Load collision file for paddles and play collision afterwards
+     * Credit for audio file goes to NoiseCollector @: http://www.freesound.org/people/NoiseCollector/packs/254/
+     */
+    private void playPaddleCollisionAudio() {
+        try {
+            // Audio credit goes to NoiseCollector via: http://www.freesound.org/people/NoiseCollector/packs/254/
+            InputStream ioR = new FileInputStream("src/edu/ucsb/cs56/projects/games/pong/gameplay/4359__noisecollector__pongblipf4.wav");
+            AudioStream audio = new AudioStream(ioR);
+            this.setAudio(audio);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        AudioPlayer.player.start(audio);
+    }
+
     /** wallCollision() detects whether the ball hits a wall */
     public void wallCollision() 
     {
@@ -203,9 +210,9 @@ public class Pong implements Runnable {
 	Screen.theball.stop();
     }
 
-  
-        
-
+    public void setAudio(AudioStream audio) {
+        this.audio = audio;
+    }
 }
     
 

@@ -1,10 +1,12 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.gameplay;
+
+import edu.ucsb.cs56.projects.games.pong.highscore.DisplayHighScores;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-/** edu.ucsb.cs56.projects.games.pong.GameOver is the class that gives instructions on what to do when the game ends
+/** edu.ucsb.cs56.projects.games.pong.gameplay.GameOver is the class that gives instructions on what to do when the game ends
  @author Vincent Gandolfo, Krishna Lingampalli
  @version CS56, Winter 2015, UCSB
 */

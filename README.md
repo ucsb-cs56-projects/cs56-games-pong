@@ -5,6 +5,25 @@ TODO: maybe add a few more tickets, most of the existing ones wouldn't take much
 
 project history
 ===============
+
+### W16 final remarks
+
+`W16: Angel Ortega, Ben Patient, 4PM lab`
+
+* What the code does:
+  * The code is a simple game of Pong for two players, with scores.
+* Features that could be added:
+  * AI for the paddle
+  * Multiple ball modes
+  * Unit-tests
+* What bugs exist:
+  * Pausing does not pause the paddles
+* Opportunities for refactoring:
+  * Make variables private, prefer to use nonstatic variables
+  * Remove coupling
+  * Consider builder pattern for GUI creation
+
+### W14 remarks
 ```
  W14 | bronhuston 4pm | sarahdarwiche,benjaminhartl | An implementation of the classic game Pong, with cooperative multiplayer support.
 ```
@@ -20,11 +39,11 @@ How To Play:
 Player 1 (on the left)
   "W" -- Move up
   "S" -- Move down
-  
+
 Player 2 (on the right)
   up arrow -- Move up
   down arrow -- Move down
-  
+
 When the ball is stopped, Press the spacebar to activate motion.
 Try to not let the ball hit your side of the screen or you will lose a life.
 The player who wins the round, recieves the total number of hits added to their score.

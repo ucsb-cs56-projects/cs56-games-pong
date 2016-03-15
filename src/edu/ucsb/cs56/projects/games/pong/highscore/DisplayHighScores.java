@@ -1,4 +1,6 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.highscore;
+
+import edu.ucsb.cs56.projects.games.pong.gameplay.EndOfGame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,12 +20,12 @@ public class DisplayHighScores{
      * @param name name of the player who just won
      * @param score score of the player who just won
      */
-    DisplayHighScores( String name, int score )
+    public DisplayHighScores( String name, int score )
     {
 	eog = new EndOfGame( score, name ); //Call EndOfGame()
 	setUpFrame();
 	setUpFrameComponents();
-	showScores();
+    showScores();
     }
     /**setUpFrame() sets up the frame structure for High Score Window */
     public void setUpFrame()
@@ -53,9 +55,9 @@ public class DisplayHighScores{
     /** showScores() prints scores on labels */
     public void showScores()
     {
-	for( int i = 0; i < 5; i++ )
+	for(HighScore highscore: eog.hList)
 	    {
-		jp.add( new JLabel( eog.hList.get( i ).toString( ": ", "" ), JLabel.CENTER ) );
+		jp.add( new JLabel( highscore.toString( ": ", "" ), JLabel.CENTER ) );
 	    }
     }
     /** BackToMainListener provides a way to get back to the main menu */

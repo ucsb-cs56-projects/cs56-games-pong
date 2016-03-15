@@ -1,6 +1,7 @@
 package edu.ucsb.cs56.projects.games.pong;
 
-import org.junit.Test;
+import edu.ucsb.cs56.projects.games.pong.gameplay.Ball;
+
 import static org.junit.Assert.assertEquals;
 
 /**

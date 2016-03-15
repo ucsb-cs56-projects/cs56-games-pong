@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.highscore;
 
 import java.awt.*;
 
@@ -7,7 +7,7 @@ import java.awt.*;
  @version CS56, Winter 2015, UCSB
 */
 
-public class HighScore{
+public class HighScore implements Comparable {
     
     private final String playerName;
     private final int playerScore;
@@ -15,8 +15,8 @@ public class HighScore{
     /** Constructor that sets the instance variables playerName and playerScore      *  to the arguments name and score 
      * @param score the score of the player won just won
      * @param name the name of the player who just won
-     */   
-HighScore( int score, String name )
+     */
+    public HighScore(int score, String name)
 	{
 	    playerScore = score;
 	    playerName = name;
@@ -31,5 +31,20 @@ HighScore( int score, String name )
     {
 	return ( getPlayerScore() + first +  getPlayerName() + last );
     }
-    
+
+    /***
+     * Highest playerScore is given priority.
+     * @param o
+     * @return
+     */
+    @Override
+    public int compareTo(Object o) {
+        HighScore otherScore = (HighScore) o;
+        if(this.playerScore < otherScore.playerScore)
+            return 1;
+        else if(this.playerScore == otherScore.playerScore)
+            return 0;
+        else
+            return -1;
+    }
 }
