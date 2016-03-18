@@ -114,16 +114,16 @@ public class Screen{
 	public void keyPressed(KeyEvent evt){
 	    game.p1.keyPressed(evt);
 	    game.p2.keyPressed(evt);
+	    if( evt.getKeyCode() == evt.VK_M ) {
+			jf.setVisible(false);
+		}
 	    if( game.b.isStopped() )
 		{
 		    if( evt.getKeyCode() == evt.VK_SPACE )
 			game.b.startBall();
 		    if( evt.getKeyCode() == evt.VK_P )
 			game.b.startBall();
-		    if( evt.getKeyCode() == evt.VK_M ) {
-			jf.setVisible(false);
-		        
-		    }
+		    
 		    else 
 			theball.yield();
 		}
