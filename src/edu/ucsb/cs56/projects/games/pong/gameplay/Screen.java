@@ -112,8 +112,6 @@ public class Screen{
 	 * @param evt the KeyEvent
 	 */
 	public void keyPressed(KeyEvent evt){
-	    game.p1.keyPressed(evt);
-	    game.p2.keyPressed(evt);
 	    if( evt.getKeyCode() == evt.VK_M ) {
 			jf.setVisible(false);
 		}
@@ -128,6 +126,8 @@ public class Screen{
 			theball.yield();
 		}
 	    else {
+	    	game.p1.keyPressed(evt);
+	    	game.p2.keyPressed(evt);
 		if( evt.getKeyCode() == evt.VK_P )
 		    game.b.stopBall();
 	    }
