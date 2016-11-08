@@ -1,13 +1,14 @@
 package edu.ucsb.cs56.projects.games.pong.gameplay;
 
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
+import edu.ucsb.cs56.projects.games.pong.sound.SoundEffect;
 
+import javax.sound.sampled.*; 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import edu.ucsb.cs56.projects.games.pong.menu.PlayTextComponent;
+
 /** edu.ucsb.cs56.projects.games.pong.gameplay.Pong is the class that will facilitate
  * the game of Pong being run 
  @author Sanchit Gupta, Bhanu Khanijau
@@ -15,7 +16,8 @@ import edu.ucsb.cs56.projects.games.pong.menu.PlayTextComponent;
  @author Benjamin Hartl, Sarah Darwiche
  @author Vincent Gandolfo, Krishna Lingampalli
  @author Angel Ortega
- @version CS56, Winter 2016, UCSB
+ @author Millan Batra and Alexander Ngo
+ @version CS56, Fall 2016, UCSB
 */
 
 public class Pong implements Runnable {
@@ -30,7 +32,7 @@ public class Pong implements Runnable {
     Ball b;                        // The Ball
     
     boolean gameIsGoing = true;
-    private AudioStream audio;
+    SoundEffect collision = new SoundEffect("4359__noisecollector__pongblipf4.wav");
 
 
     /** The Pong constructor initializes 2 paddle objects, a ball object, and 
@@ -38,7 +40,8 @@ public class Pong implements Runnable {
      */
     public Pong() {
 	p1 = new Paddle( 8, 160 );                        // Left Paddle
-        p2 = new Paddle( Screen.w - 38 , 160, true );// Right Paddle
+        p2 = new Paddle( Screen.w - 38 , 160, true );     // Right Paddle
+	
 	//Difficultylevel returnd =new DifficultyLevel(0, 20, 20);// call difficulty level with the same parameters of the ball but return new size.
 	//System.out.println("the d from Playtext.difficult is " + d.getpassedDifficulty());
 	//	System.out.println("newwidth and newheight and screenfacotr are " + PlayTextComponent.newwidth + " and " +
@@ -170,17 +173,9 @@ public class Pong implements Runnable {
      * Credit for audio file goes to NoiseCollector @: http://www.freesound.org/people/NoiseCollector/packs/254/
      */
     private void playPaddleCollisionAudio() {
-        try {
-            // Audio credit goes to NoiseCollector via: http://www.freesound.org/people/NoiseCollector/packs/254/
-            InputStream ioR = new FileInputStream("src/edu/ucsb/cs56/projects/games/pong/gameplay/4359__noisecollector__pongblipf4.wav");
-            AudioStream audio = new AudioStream(ioR);
-            this.setAudio(audio);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        AudioPlayer.player.start(audio);
+ // Audio credit goes to NoiseCollector via: http://www.freesound.org/people/NoiseCollector/packs/254/
+	collision.playClip();
+            
     }
 
     /** wallCollision() detects whether the ball hits a wall */
@@ -242,9 +237,6 @@ public class Pong implements Runnable {
 	Screen.theball.stop();
     }
 
-    public void setAudio(AudioStream audio) {
-        this.audio = audio;
-    }
 }
     
 

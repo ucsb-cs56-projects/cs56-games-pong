@@ -2,9 +2,9 @@ package edu.ucsb.cs56.projects.games.pong.menu;
 
 import edu.ucsb.cs56.projects.games.pong.gameplay.DifficultyLevel;
 import edu.ucsb.cs56.projects.games.pong.gameplay.Screen;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
+import edu.ucsb.cs56.projects.games.pong.sound.SoundEffect;
 
+import javax.sound.sampled.*; 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
@@ -21,6 +21,7 @@ public class PlayTextComponent extends MenuTextComponent  {
     public static int newheight;//
     public static int screenfactor;
     public static int difficulty;
+    protected SoundEffect audio = new SoundEffect("87035__runnerpack__menusel.wav");
     public PlayTextComponent(String title, Color backgroundColor) {
         super(title, backgroundColor);
     }
@@ -40,7 +41,7 @@ public class PlayTextComponent extends MenuTextComponent  {
 		//System.out.println("newheight in play text is " + screenfactor);
 		difficulty=d.getDifficulty();
 		//System.out.println("difficulty in play text is " + screenfactor);
-                screen = new Screen(4 * prompt.getDifficulty(), 3 * prompt.getDifficulty());
+                screen = new Screen(8 * prompt.getDifficulty(), 6 * prompt.getDifficulty());
 	    }
         }
 //        else if(textColor.equals(Color.BLUE) && screen != null) {
@@ -62,17 +63,8 @@ public class PlayTextComponent extends MenuTextComponent  {
     
     @Override
     protected void playGameStartAudio() {
-        try {
-            // Audio credit goes to Runner Pack via: http://freesound.org/people/RunnerPack/sounds/87035/
-            InputStream ioR = new FileInputStream("src/edu/ucsb/cs56/projects/games/pong/menu/87035__runnerpack__menusel.wav");
-            AudioStream audio = new AudioStream(ioR);
-            this.setAudio(audio);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        AudioPlayer.player.start(audio);
-    }
+    // Audio credit goes to Runner Pack via: http://freesound.org/people/RunnerPack/sounds/87035/
+	audio.playClip();
 
+    }
 }
