@@ -33,7 +33,6 @@ public class DifficultyLevelPrompt extends JPanel {
         Object itemChosen = selections.getSelectedItem();
         if (responseFromUser == JOptionPane.OK_OPTION && itemChosen != null) {
             difficulty = DIFFICULTIES.get(itemChosen.toString()).intValue();
-	    System.out.println("the difficulty variable in DPrompt is "+ difficulty);////////////////
             this.selected = true;
         } else {
             this.remove(this);
