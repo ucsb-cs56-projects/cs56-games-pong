@@ -114,7 +114,15 @@ public class Screen{
 	public void keyPressed(KeyEvent evt){
 	    game.p1.keyPressed(evt);
 	    game.p2.keyPressed(evt);
-	    if( game.b.isStopped() )
+	    
+	    boolean ballintersectsp1 = game.b.rectangle.intersects( game.p1.rectangle);
+	    boolean ballintersectsp2 = game.b.rectangle.intersects( game.p2.rectangle);
+	    if( evt.getKeyCode() == evt.VK_F&&ballintersectsp1 )  /////////////////////////// If you press F, hold it down
+		game.b.holdBallToPaddle(game.p1);               /////////////////////////////////////////////////////////
+	    if( evt.getKeyCode() == evt.VK_F&&ballintersectsp2 )
+		game.b.holdBallToPaddle(game.p2);
+	    
+	    if( game.b.isStopped())
 		{
 		    if( evt.getKeyCode() == evt.VK_SPACE )
 			game.b.startBall();
