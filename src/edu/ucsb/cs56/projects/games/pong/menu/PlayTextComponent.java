@@ -40,7 +40,7 @@ public class PlayTextComponent extends MenuTextComponent  {
 		//System.out.println("newheight in play text is " + screenfactor);
 		difficulty=d.getDifficulty();
 		//System.out.println("difficulty in play text is " + screenfactor);
-                screen = new Screen(4 * prompt.getDifficulty(), 3 * prompt.getDifficulty());
+                screen = new Screen(8* prompt.getDifficulty(), 6 * prompt.getDifficulty());
 	    }
         }
 //        else if(textColor.equals(Color.BLUE) && screen != null) {
