@@ -22,11 +22,14 @@ public class DifficultyLevelPrompt extends JPanel {
         put("Chaos",170);
 
     }};
+    public Map<String, Integer> getHashmap(){
+	return DIFFICULTIES;}
     public DifficultyLevelPrompt() {
+	
         JComboBox selections = new JComboBox(DIFFICULTIES.keySet().toArray());
         this.add(selections);
         int responseFromUser = JOptionPane.showConfirmDialog(null,this,
-                "Selection your difficulty:",JOptionPane.OK_CANCEL_OPTION,JOptionPane.OK_OPTION);
+                "Select your difficulty:",JOptionPane.OK_CANCEL_OPTION,JOptionPane.OK_OPTION);
         Object itemChosen = selections.getSelectedItem();
         if (responseFromUser == JOptionPane.OK_OPTION && itemChosen != null) {
             difficulty = DIFFICULTIES.get(itemChosen.toString()).intValue();
@@ -35,7 +38,6 @@ public class DifficultyLevelPrompt extends JPanel {
             this.remove(this);
         }
     }
-
     public boolean isSelected() {
         return selected;
     }

@@ -27,7 +27,12 @@
     <mkdir dir ="build" />
     <javac srcdir="src" destdir="build" debug="true"
        debuglevel="lines,vars,source" includeantruntime="false">
-     <classpath>                                                                       <pathelement location="build"/>                                                 <pathelement location="lib/junit-4.8.2.jar"/>                                 </classpath>                                                                   </javac>   
+     <compilerarg value="-Xlint"/> 
+     <classpath>                                                                       
+     <pathelement location="build"/>      
+     <pathelement location="lib/junit-4.8.2.jar"/>      
+     </classpath>        
+     </javac>   
   </target>
 
 
@@ -49,19 +54,29 @@
     <delete quiet = "true" dir ="temp"/>
   </target> 
 
-  <target name="javadoc" depends="compile">                                         <delete dir="javadoc" quiet="true" />                                           <javadoc  destdir="javadoc" author="true" version="true" use="true" >             <fileset dir="src" includes="**/*.java"/>                                       <classpath>                                                                       <pathelement location="lib/junit-4.8.2.jar"/>      
-</classpath>                                                                  </javadoc>                                                                      <!-- delete the old javadoc -->                                                                
+  <target name="javadoc" depends="compile">
+    <delete dir="javadoc" quiet="true" />
+    <javadoc  destdir="javadoc" author="true" version="true" use="true" >
+      <fileset dir="src" includes="**/*.java"/>
+      <classpath>
+	<pathelement location="lib/junit-4.8.2.jar"/>
+      </classpath>
+    </javadoc>
+    <!-- delete the old javadoc -->                                                                
    <delete quiet="true" dir="${javadocDest}" />                                 
 
    <!-- copy everything you just made to the javadoc destination, and then make it readable -->   
 
-   <copy todir="${javadocDest}" >                                                    <fileset dir="javadoc"/>                                                      </copy>                                                                      
+   <copy todir="${javadocDest}" >
+     <fileset dir="javadoc"/>
+   </copy>                                                                      
 
    <!-- Note: this only does the chmod command on the                                             
         javadoc subdirectory and its contents.  You MIGHT have to                                 
         MANUALLY do the chmod on the parent directories.  However,                                
         you should only need to do that once. -->                                                 
-                                                                                   <chmod dir="${javadocDest}" perm="755"  type="dir" includes="**" />                            
+
+   <chmod dir="${javadocDest}" perm="755"  type="dir" includes="**" />                            
    <chmod dir="${javadocDest}" perm="755"  type="file" includes="**/*" />                         
    <echo>Javadoc deployed to ${javadocURL}</echo>                                                 
   </target>      
@@ -85,7 +100,11 @@
        
     </junit>
   </target>
-
+  
+  <copy todir="build/edu/ucsb/cs56/projects/games/pong/sound">
+    <fileset dir="src/edu/ucsb/cs56/projects/games/pong/sound" includes="**/*.wav" />
+      </copy>
+  
  <target name="jar" depends="compile">                                          
    <mkdir dir="dist" />                                                         
    <jar destfile="dist/${projectName}.jar" basedir="build">  
