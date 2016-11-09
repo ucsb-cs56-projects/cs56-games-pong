@@ -74,7 +74,7 @@ public class Screen{
 	public void draw(Graphics g){
 	    g.setFont(new Font("sansserif", Font.BOLD, 28));
 	    g.setColor(Color.WHITE);
-	    g.drawString("Hits: " + game.getHits(), 280, 40);
+	    g.drawString("Hits: " + game.getHits(), Screen.w/2 - 60, 40);
 	    g.drawString( "player 1 ", 30, 40 );
 	    g.drawString( "" + game.p1.getPoints(), 30, 70 );
 	    g.drawString( "player 2 ", Screen.w - 180, 40 );
@@ -83,8 +83,8 @@ public class Screen{
 	    g.drawString( "Lives " + ( game.p2.ballCount ), Screen.w - 140 , Screen.h - 47 );
 	    
 	    if( game.b.isStopped() ) {
-		g.drawString( "Game Paused", 200, 100 );
-		g.drawString( "Press M to return to Main Menu", 60, 370 );
+		g.drawString( "Game Paused", Screen.w/2 - 110, Screen.h/2 - 100 );
+		g.drawString( "Press M to return to Main Menu", Screen.w/2 - 240, Screen.h/2 + 100 );
 	    }
 	     
 		// if level difficulty blahblah
