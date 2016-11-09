@@ -15,26 +15,25 @@ import java.awt.Graphics;
 public class Paddle extends gameObject{
     public int points;
     public int ballCount;
-    public  boolean right;
-    public static final Integer paddleHeight = 90; //fixes paddle height at 
+    public boolean right;
 
 
     /** Paddle contructor to initialize intial x,y placement of paddle
      * @param x set initial x coordinate of paddle
      * @param y set initial y coordinate of paddle
      */
-    public Paddle(int x, int y){
-	this( x, y, false );
+    public Paddle(int x, int y, int rectH ){
+	this( x, y, rectH, false );
     }
 
-    /** Right paddle constructor to initialize intial x,y placement of paddle
+    /** Right paddle constructor to initialize initial x,y placement of paddle
      @param x set initial x position of the paddle
      @param y set initial y position of the paddle
      @param sideRight sees if the paddle is the rightmost paddle
     */
 
-    public Paddle(int x, int y, boolean sideRight){
-	super( x, y );
+    public Paddle(int x, int y, int rectH, boolean sideRight){
+	super( x, y, rectH );
 	
 	ballCount = 3;
 	points = 0;

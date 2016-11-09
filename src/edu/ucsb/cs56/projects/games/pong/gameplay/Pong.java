@@ -1,13 +1,13 @@
 package edu.ucsb.cs56.projects.games.pong.gameplay;
 
 import edu.ucsb.cs56.projects.games.pong.sound.SoundEffect;
+import edu.ucsb.cs56.projects.games.pong.menu.PlayTextComponent;
 
 import javax.sound.sampled.*; 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import edu.ucsb.cs56.projects.games.pong.menu.PlayTextComponent;
 
 /** edu.ucsb.cs56.projects.games.pong.gameplay.Pong is the class that will facilitate
  * the game of Pong being run 
@@ -29,29 +29,29 @@ public class Pong implements Runnable {
     Paddle p2;                     // Right Paddle
     Paddle winner;                 // the paddle that wins
     
-    Ball b;                        // The Ball
-    
+    Ball b;                        // The Ball    
+
     boolean gameIsGoing = true;
     SoundEffect collision = new SoundEffect("4359__noisecollector__pongblipf4.wav");
-
+    DifficultyLevel difficulty = new DifficultyLevel(PlayTextComponent.getDifficulty());
 
     /** The Pong constructor initializes 2 paddle objects, a ball object, and 
      * a points value 
      */
     public Pong() {
-	p1 = new Paddle( 8, 160 );                        // Left Paddle
-        p2 = new Paddle( Screen.w - 38 , 160, true );     // Right Paddle
+	p1 = new Paddle( 8, Screen.h/2 - (difficulty.getPaddleHeight())/2, difficulty.getPaddleHeight());                        // Left Paddle
+        p2 = new Paddle( Screen.w - 38 , Screen.h/2 - (difficulty.getPaddleHeight())/2, difficulty.getPaddleHeight(),true );     // Right Paddle
 	
 	//Difficultylevel returnd =new DifficultyLevel(0, 20, 20);// call difficulty level with the same parameters of the ball but return new size.
 	//System.out.println("the d from Playtext.difficult is " + d.getpassedDifficulty());
 	//	System.out.println("newwidth and newheight and screenfacotr are " + PlayTextComponent.newwidth + " and " +
-	//		   PlayTextComponent.newheight + "and"+PlayTextComponent.screenfactor);
+	//		   .newheight + "and"+PlayTextComponent.screenfactor);
 	//System.out.println(" 2+ PlayTextComponent.screenfactor)/2 is " + (2+ PlayTextComponent.screenfactor)/2);
 			  
-	b = new Ball( (int)((Screen.w-PlayTextComponent.newwidth ) /2),
-		      (int)((Screen.h-PlayTextComponent.newheight) / 2),
-		      PlayTextComponent.newwidth,
-		      PlayTextComponent.newheight);
+	b = new Ball( ((Screen.w-difficulty.getWidth()) /2),
+		      ((Screen.h-difficulty.getHeight()) / 2),
+		     difficulty.getWidth(),
+		      difficulty.getHeight());
         hits = 0;                                      // # of times of wall
 	moreSpeed = 1;
     }

@@ -13,13 +13,14 @@ class gameObject{
     static boolean isGoingRight = false;   // direction of the ball
     public Rectangle rectangle;            // holds the x and y coordinates
                                            //   as well as width and height
+
     /** Default constructor, not used */
     gameObject() {  }            
 
     /** Constructor used by both the Paddles, so all paddles are the same size */
-    gameObject( int x, int y ) 
+    gameObject( int x, int y, int rectH) 
     {    
-	this( x, y, 10, Paddle.paddleHeight ); // paddleHeight is static
+	this( x, y, 10, rectH); 
     }
     
     /** This constructor is used to set coordinates and size, used by subclasses Ball and Paddle */
