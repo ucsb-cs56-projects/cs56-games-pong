@@ -20,6 +20,7 @@ public class DifficultyLevel
     private int width;
     private int height;
     private int origballsize=5;
+    private int paddleHeight;
     
     public DifficultyLevel(int difficultylevel)
     {
@@ -29,52 +30,64 @@ public class DifficultyLevel
 	    screenfactor=10;
 	    width=origballsize*screenfactor;
 	    height=origballsize*screenfactor;
+	    paddleHeight = 110;
 	}
     else if(diflevel==100)//easy
 	{
 	    screenfactor=8;
 	    width=origballsize*screenfactor;
 	    height=origballsize*screenfactor;
+	    paddleHeight = 100;
 	}
     else if(diflevel==120)//medium
 	{
 	    screenfactor=6;
 	    width=origballsize*screenfactor;
 	    height=origballsize*screenfactor;
+	    paddleHeight = 90;
 	}
     else if(diflevel==130)//hard
 	{
 	    screenfactor=4;
 	    width=origballsize*screenfactor;
 	    height=origballsize*screenfactor;
+	    paddleHeight = 80;
 	}
     else if(diflevel==140)//extreme
 	{
 	    screenfactor=2;
 	    width=origballsize*screenfactor;
 	    height=origballsize*screenfactor;
+	    paddleHeight = 70;
+
 	}
     else if(diflevel==170)//chaos
 	{
 	    screenfactor=1;
 	    width=origballsize*screenfactor;
 	    height=origballsize*screenfactor;
+	    paddleHeight = 60;
+
 	}
     }
     public int getDifficulty()
     {
 	return diflevel;
     }
-    public int getNewHeight()
+    public int getHeight()
     {
 	return height;
     }
-    public int getNewWidth()
+    public int getWidth()
     {
-	return height;
+	return width;
     }
     public int getScreenFactor()
     {
 	return screenfactor;
+    }
+    public int getPaddleHeight()
+    {
+	return paddleHeight;
     }
 }
