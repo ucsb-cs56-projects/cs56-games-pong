@@ -17,9 +17,6 @@ import java.io.InputStream;
  */
 public class PlayTextComponent extends MenuTextComponent  {
     private Screen screen;
-    public static int newwidth;//
-    public static int newheight;//
-    public static int screenfactor;
     public static int difficulty;
     protected SoundEffect audio = new SoundEffect("87035__runnerpack__menusel.wav");
     public PlayTextComponent(String title, Color backgroundColor) {
@@ -33,14 +30,7 @@ public class PlayTextComponent extends MenuTextComponent  {
             if(prompt.isSelected()) {
                 playGameStartAudio();
 		DifficultyLevel d=new DifficultyLevel(prompt.getDifficulty());
-		newwidth=d.getNewWidth();
-		//System.out.println("newwidth in play text is " + newwidth);
-		newheight=d.getNewHeight();
-		//System.out.println("newheight in play text is " + newheight);
-		screenfactor=d.getScreenFactor();
-		//System.out.println("newheight in play text is " + screenfactor);
 		difficulty=d.getDifficulty();
-		//System.out.println("difficulty in play text is " + screenfactor);
                 screen = new Screen(8 * prompt.getDifficulty(), 6 * prompt.getDifficulty());
 	    }
         }
@@ -65,6 +55,9 @@ public class PlayTextComponent extends MenuTextComponent  {
     protected void playGameStartAudio() {
     // Audio credit goes to Runner Pack via: http://freesound.org/people/RunnerPack/sounds/87035/
 	audio.playClip();
-
     }
+   public static int getDifficulty() 
+   {
+	return difficulty;
+   }
 }
