@@ -21,13 +21,13 @@ public class PaddleTest
     */ 
     //<<<<<<< HEAD
      @Test public void testConstructor(){
-        Paddle paddle = new Paddle(20,20);
+        Paddle paddle = new Paddle(20,20, 90);
         assertEquals(20,paddle.getXCoordinate());
   assertEquals(20,paddle.getYCoordinate()); 
   }
     //=======
     /*    @Test public void testConstructor(){
-        Paddle paddle = new Paddle(20,20);
+        Paddle paddle = new Paddle(20,20, 90);
         assertEquals(20,paddle.getXCoordinate());
   assertEquals(20,paddle.getYCoordinate()); 
     }*/
@@ -39,7 +39,7 @@ public class PaddleTest
 
     */
     /*    @Test public void testConstructor2(){
-  Paddle paddle = new Paddle(30,100);
+  Paddle paddle = new Paddle(30,100, 90);
         assertEquals(30,paddle.getXpos());
   assertEquals(100,paddle.getYpos()); 
   }*/
@@ -56,7 +56,7 @@ public class PaddleTest
        //@see Paddle#getdy
     */
     /*    @Test public void testgetdy(){
-        Paddle paddle = new Paddle(30,100);
+        Paddle paddle = new Paddle(30,100, 90);
   paddle.setdy(7);
         assertEquals(7,paddle.getdy());
 	}*/
