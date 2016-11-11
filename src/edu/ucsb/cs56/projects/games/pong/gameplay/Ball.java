@@ -15,6 +15,7 @@ import edu.ucsb.cs56.projects.games.pong.menu.PlayTextComponent;
 // The Movement of the Ball on the screen
 public class Ball extends gameObject{
 
+    DifficultyLevel difficulty = new DifficultyLevel(PlayTextComponent.getDifficulty());
     public int ballsLost;
                                                 
     /** edu.ucsb.cs56.projects.games.pong.gameplay.Ball constructor to initialize location of edu.ucsb.cs56.projects.games.pong.gameplay.Ball onto the screen
@@ -46,19 +47,19 @@ public class Ball extends gameObject{
     public void startBall()
     {
 	int speed=0;
-	if(PlayTextComponent.difficulty==80){
+	if(difficulty.getDifficulty()==80){
 		speed= 1;
 	}
-	else if (PlayTextComponent.difficulty==100){
+	else if (difficulty.getDifficulty()==100){
 		speed= 2;
 	}
-	else if (PlayTextComponent.difficulty==130){
+	else if (difficulty.getDifficulty()==130){
 		speed= 3;
 	}
-	else if (PlayTextComponent.difficulty==140){
+	else if (difficulty.getDifficulty()==140){
 		speed= 4;
 	}
-	else if (PlayTextComponent.difficulty==170){
+	else if (difficulty.getDifficulty()==170){
 		speed= 5;
 	}
 	if( gameObject.isGoingRight == false )
@@ -87,8 +88,8 @@ public class Ball extends gameObject{
     public void resetBall() 
     {
 	stopBall();
-	setXCoordinate((Screen.w-PlayTextComponent.newwidth) / 2 );
-	setYCoordinate((Screen.h-PlayTextComponent.newheight) / 2 );
+	setXCoordinate(( Screen.w-difficulty.getWidth() ) / 2 );
+	setYCoordinate(( Screen.h-difficulty.getHeight() ) / 2 );
     }
     ///work in progress below
     public void holdBallToPaddle(Paddle gluepaddle)/////////////////////////////
