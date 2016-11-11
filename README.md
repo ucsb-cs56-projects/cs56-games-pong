@@ -17,7 +17,7 @@ project history
   * Multiple ball modes
   * Unit-tests
 * What bugs exist:
-  * Pausing does not pause the paddles
+  *Potential lag from audio collisions 
 * Opportunities for refactoring:
   * Make variables private, prefer to use nonstatic variables
   * Remove coupling

@@ -120,6 +120,28 @@ public class Pong implements Runnable {
 	if( ( b.rectangle ).intersects( p1.rectangle ) ){
         playPaddleCollisionAudio();
         b.setXVelocity( -1 * ( b.getXVelocity() - moreSpeed ) );
+        if(b.getYCoordinate() + b.getHeight()/2 >= p1.getYCoordinate() + p1.getHeight()/2)
+        {
+            if(b.getYVelocity() >= 0)
+            {
+            b.setYVelocity(( b.getYVelocity() + moreSpeed ) );             
+            }
+            else
+            {
+            b.setYVelocity( -1 * ( b.getYVelocity() - moreSpeed ) );
+            }
+        }
+        else  //(b.getYCoordinate() < p1.getYCoordinate() + p1.getHeight()/2)
+        {
+            if(b.getYVelocity() <= 0)
+            {
+            b.setYVelocity(( b.getYVelocity() - moreSpeed ) );             
+            }
+            else
+            {
+            b.setYVelocity( -1 * ( b.getYVelocity() + moreSpeed ) );
+            }
+        }
 	    incrementHits();
 
     }
@@ -128,6 +150,28 @@ public class Pong implements Runnable {
 	else if( ( b.rectangle ).intersects( p2.rectangle ) ){
         playPaddleCollisionAudio();
         b.setXVelocity( -1 * ( b.getXVelocity() + moreSpeed ) );
+        if(b.getYCoordinate() + b.getHeight()/2 >= p2.getYCoordinate() + p2.getHeight()/2)
+        {
+            if(b.getYVelocity() >= 0)
+            {
+            b.setYVelocity(( b.getYVelocity() + moreSpeed ) );             
+            }
+            else
+            {
+            b.setYVelocity( -1 * ( b.getYVelocity() - moreSpeed ) );
+            }
+        }
+        else //(b.getYCoordinate() < p2.getYCoordinate() + p2.getHeight()/2)
+        {
+            if(b.getYVelocity() <= 0)
+            {
+            b.setYVelocity(( b.getYVelocity() - moreSpeed ) );             
+            }
+            else
+            {
+            b.setYVelocity( -1 * ( b.getYVelocity() + moreSpeed ) );
+            }
+        }
 	    incrementHits();
 
     }

@@ -15,7 +15,8 @@ import java.awt.Graphics;
 public class Ball extends gameObject {
 
     public int ballsLost;
-                                                
+    public int xspeed2;
+    public int yspeed2;                                            
     /** edu.ucsb.cs56.projects.games.pong.gameplay.Ball constructor to initialize location of edu.ucsb.cs56.projects.games.pong.gameplay.Ball onto the screen
      *  and draw it as a rectangle for a simpler and precise hitbox.
      *  @param x set initial x coordinate of ball
@@ -43,11 +44,24 @@ public class Ball extends gameObject {
     /** startBall(): When the ball is stopped, this will start the ball in the opposite direction of the way it was going  */
     public void startBall()
     {
-	int speed = 3;
-	if( gameObject.isGoingRight == false )
-	    speed = -3;
-	setXVelocity( speed );
-	setYVelocity( speed );
+	int xspeed;
+        int yspeed;
+        if(xspeed2 == 0 && yspeed2 == 0)
+        {
+            xspeed = 3;
+            yspeed = 3;
+            if( gameObject.isGoingRight == false )
+                xspeed = -3;
+                yspeed = -3;
+        }
+        else
+        {
+           xspeed = xspeed2; 
+           yspeed = yspeed2; 
+        }
+	    
+	    setXVelocity( xspeed );
+	    setYVelocity( yspeed );
     }
     
     /** isStopped() checks if the ball is stopped */
@@ -62,6 +76,8 @@ public class Ball extends gameObject {
     /** stopBall() stops the ball no matter what */
     public void stopBall()
     {
+    	xspeed2 = getXVelocity();
+        yspeed2 = getYVelocity();
 	setYVelocity( 0 );
 	setXVelocity( 0 );
     }
