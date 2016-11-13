@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-
+import edu.ucsb.cs56.projects.games.pong.menu.PlayTextComponent;
 /** edu.ucsb.cs56.projects.games.pong.gameplay.Pong is the class that will facilitate
  * the game of Pong being run 
  @author Sanchit Gupta, Bhanu Khanijau
@@ -21,7 +21,7 @@ import java.io.InputStream;
 public class Pong implements Runnable {
 
     int hits;                      // times it hits a paddle
-    int moreSpeed = 1;             // to increase speed every 5 hits
+    int moreSpeed=1;             // to increase speed every 5 hits
     
     Paddle p1;                     // Left Paddle
     Paddle p2;                     // Right Paddle
@@ -38,8 +38,17 @@ public class Pong implements Runnable {
      */
     public Pong() {
 	p1 = new Paddle( 8, 160 );                        // Left Paddle
-        p2 = new Paddle( Screen.w - 38 , 160, true );     // Right Paddle
-        b = new Ball( (int)(Screen.w / 2), (int)(Screen.h / 2), 20, 20 );
+        p2 = new Paddle( Screen.w - 38 , 160, true );// Right Paddle
+	//Difficultylevel returnd =new DifficultyLevel(0, 20, 20);// call difficulty level with the same parameters of the ball but return new size.
+	//System.out.println("the d from Playtext.difficult is " + d.getpassedDifficulty());
+	//	System.out.println("newwidth and newheight and screenfacotr are " + PlayTextComponent.newwidth + " and " +
+	//		   PlayTextComponent.newheight + "and"+PlayTextComponent.screenfactor);
+	//System.out.println(" 2+ PlayTextComponent.screenfactor)/2 is " + (2+ PlayTextComponent.screenfactor)/2);
+			  
+	b = new Ball( (int)((Screen.w-PlayTextComponent.newwidth ) /2),
+		      (int)((Screen.h-PlayTextComponent.newheight) / 2),
+		      PlayTextComponent.newwidth,
+		      PlayTextComponent.newheight);
         hits = 0;                                      // # of times of wall
 	moreSpeed = 1;
     }
@@ -55,6 +64,10 @@ public class Pong implements Runnable {
      * the winner to that Paddle argument
      * @param a the Paddle that just won
      */
+
+
+
+
     public void setWinner(Paddle a) { winner = a; }
 
     /** toString() returns which player has won in a string */ 
@@ -88,6 +101,14 @@ public class Pong implements Runnable {
 	kill();                 // kills the thread 
     }
     /** moveGame() allows the ball and paddles in the game to be moved */
+
+
+
+
+
+
+
+
     public void moveGame() { // every iterations of thread the ball calls this
         p1.movePaddle();     // draws paddles at new location
         p2.movePaddle();      
@@ -98,17 +119,28 @@ public class Pong implements Runnable {
 	
 	// checks if it hit a paddle
 	paddleCollision();
-	
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///if paddleCollision and key b.setX and then if move down, ball down, if move up ball up
+	//	if(( b.rectangle ).intersects( p1.rectangle ) && keypressed)
+	//  {
+	//		holdBalltoPaddle(p1);
+	//  }
+	//else  if(( b.rectangle ).intersects( p1.rectangle ) && keypressed)//
+	      //  {
+	//	holdBalltoPaddle(p2);
+	//  }
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// checks if the ball hit a wall
-        wallCollision();
+	wallCollision();
     }
     
     /** paddleCollision() detects whether ball hits a paddle
      */
     
     public void paddleCollision() { // speed starts out at 1
-
-    if( getHits() % 5 == 0 )    // every 5 hits increases speed by 1,
+	if( getHits() % 5 == 0 )    // every 5 hits increases speed by 1,
 	    moreSpeed = 1;
 	else
 	    moreSpeed = 0;
@@ -181,7 +213,7 @@ public class Pong implements Runnable {
 	    {
 		b.setYVelocity( -1 * b.getYVelocity() );
 	    }
-	
+      
 	// checks if ball hits the top of the screen
         else if( b.getYCoordinate() <=  0 )
 	    {

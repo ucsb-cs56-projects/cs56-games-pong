@@ -1,6 +1,7 @@
 package edu.ucsb.cs56.projects.games.pong.gameplay;
 
 import java.awt.Graphics;
+import edu.ucsb.cs56.projects.games.pong.menu.PlayTextComponent;
 
 /** edu.ucsb.cs56.projects.games.pong.gameplay.Ball is the class that will move the ball around the screen
  @author Timothy Fok  
@@ -12,7 +13,7 @@ import java.awt.Graphics;
 */
 
 // The Movement of the Ball on the screen
-public class Ball extends gameObject {
+public class Ball extends gameObject{
 
     public int ballsLost;
                                                 
@@ -28,8 +29,9 @@ public class Ball extends gameObject {
     // inputs are start x, start y, width of ball, and height of ball
     public Ball( int x, int y, int w, int h )
     {
-	super( x, y, w, h );	
+	super( x, y, w, h );
 	startBall();
+	
     }
 
     /** The draw method sets a new Color for the ball and redraws the ball with new coordinates */ 
@@ -43,9 +45,24 @@ public class Ball extends gameObject {
     /** startBall(): When the ball is stopped, this will start the ball in the opposite direction of the way it was going  */
     public void startBall()
     {
-	int speed = 3;
+	int speed=0;
+	if(PlayTextComponent.difficulty==80){
+		speed= 1;
+	}
+	else if (PlayTextComponent.difficulty==100){
+		speed= 2;
+	}
+	else if (PlayTextComponent.difficulty==130){
+		speed= 3;
+	}
+	else if (PlayTextComponent.difficulty==140){
+		speed= 4;
+	}
+	else if (PlayTextComponent.difficulty==170){
+		speed= 5;
+	}
 	if( gameObject.isGoingRight == false )
-	    speed = -3;
+		speed = speed*-1;
 	setXVelocity( speed );
 	setYVelocity( speed );
     }
@@ -70,7 +87,15 @@ public class Ball extends gameObject {
     public void resetBall() 
     {
 	stopBall();
-	setXCoordinate( Screen.w / 2 );
-	setYCoordinate( Screen.h / 2 );
+	setXCoordinate((Screen.w-PlayTextComponent.newwidth) / 2 );
+	setYCoordinate((Screen.h-PlayTextComponent.newheight) / 2 );
+    }
+    ///work in progress below
+    public void holdBallToPaddle(Paddle gluepaddle)/////////////////////////////
+    {
+	Paddle gp=gluepaddle;
+	setXCoordinate(gp.getXCoordinate());//when intersection happens
+	setYCoordinate(gp.getYCoordinate());
+
     }
 }
