@@ -2,14 +2,9 @@ package edu.ucsb.cs56.projects.games.pong.menu;
 
 import edu.ucsb.cs56.projects.games.pong.sound.SoundEffect;
 
-import javax.sound.sampled.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Created by angel on 2/20/16.

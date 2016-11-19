@@ -127,11 +127,11 @@ public class Screen{
 
 	    if( game.b.isStopped())
 		{
-		    if( evt.getKeyCode() == evt.VK_SPACE )
+		    if( evt.getKeyCode() == KeyEvent.VK_SPACE )
 			game.b.startBall();
-		    if( evt.getKeyCode() == evt.VK_P && game.b.attached == false)
+		    if( evt.getKeyCode() == KeyEvent.VK_P && game.b.attached == false)
 			game.b.startBall();
-		    if( evt.getKeyCode() == evt.VK_M ) {
+		    if( evt.getKeyCode() == KeyEvent.VK_M ) {
 			jf.setVisible(false);
 		        
 		    }
@@ -139,7 +139,7 @@ public class Screen{
 			theball.yield();
 		}
 	    else {
-			if( evt.getKeyCode() == evt.VK_P )
+			if( evt.getKeyCode() == KeyEvent.VK_P )
 			    game.b.stopBall();
 		    }
 		

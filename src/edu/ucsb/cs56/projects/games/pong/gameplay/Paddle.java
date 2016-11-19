@@ -45,22 +45,22 @@ public class Paddle extends gameObject{
     public void keyPressed(KeyEvent evt){
 
         if ( this.right == false ) {
-            if( evt.getKeyCode() == evt.VK_Q ){
+            if( evt.getKeyCode() == KeyEvent.VK_Q ){
                 System.exit( 0 );
             }
-            if( evt.getKeyCode() == evt.VK_W ){
+            if( evt.getKeyCode() == KeyEvent.VK_W ){
 		setYVelocity( -5 );
             }
-            if( evt.getKeyCode() == evt.VK_S ){
+            if( evt.getKeyCode() == KeyEvent.VK_S ){
                 setYVelocity( 5 );
             }
         
         }
         else {
-            if( evt.getKeyCode() == evt.VK_UP ){
+            if( evt.getKeyCode() == KeyEvent.VK_UP ){
 		setYVelocity( -5 );
             }
-            if( evt.getKeyCode() == evt.VK_DOWN ){
+            if( evt.getKeyCode() == KeyEvent.VK_DOWN ){
 		setYVelocity( 5 );
             }
         }
@@ -70,20 +70,20 @@ public class Paddle extends gameObject{
     public void keyReleased(KeyEvent evt){
 	
     if ( this.right == false ) {
-        if( evt.getKeyCode() == evt.VK_W ){
+        if( evt.getKeyCode() == KeyEvent.VK_W ){
 	    setYVelocity( 0 );
         }
 
-        if( evt.getKeyCode() == evt.VK_S ){
+        if( evt.getKeyCode() == KeyEvent.VK_S ){
 	    setYVelocity( 0 );
         }
     }
     else {
-        if( evt.getKeyCode() == evt.VK_UP ){
+        if( evt.getKeyCode() == KeyEvent.VK_UP ){
 	    setYVelocity( 0 );
         }
 
-        if( evt.getKeyCode() == evt.VK_DOWN ){
+        if( evt.getKeyCode() == KeyEvent.VK_DOWN ){
 	    setYVelocity( 0 );
         }
     }

@@ -99,12 +99,12 @@ public class Ball extends gameObject{
     {
    	 origXVelocity = getXVelocity();
    	 attached = true;
-   	 if(evt.getKeyCode() == evt.VK_A && ( (int)distance < getWidth() ) ) {
+   	 if(evt.getKeyCode() == KeyEvent.VK_A && ( (int)distance < getWidth() ) ) {
    		 setXVelocity(0);
    		 setYVelocity(0);
    	 }
    	 
-   	 if(evt.getKeyCode() == evt.VK_F && ( (int)distance < 1.5*getWidth() ) ) {
+   	 if(evt.getKeyCode() == KeyEvent.VK_F && ( (int)distance < 1.5*getWidth() ) ) {
    		 setXVelocity(0);
    		 setYVelocity(0);
    	 }
@@ -113,12 +113,12 @@ public class Ball extends gameObject{
     public void releaseBallFromPaddle(KeyEvent evt, double distance)/////////////////////////////
     {
    	 attached = false;
-   	 if(evt.getKeyCode() == evt.VK_A ) {
+   	 if(evt.getKeyCode() == KeyEvent.VK_A ) {
    		 setXVelocity(origXVelocity * -1);
    		 setYVelocity(speed);
    	 }
    	 
-   	 if(evt.getKeyCode() == evt.VK_F && ( (int)distance < 1.5*getWidth() ) ) {
+   	 if(evt.getKeyCode() == KeyEvent.VK_F && ( (int)distance < 1.5*getWidth() ) ) {
    		 setXVelocity(origXVelocity * -1);
    		 setYVelocity(speed);
    	 }
@@ -126,46 +126,46 @@ public class Ball extends gameObject{
     
     public void keyPressed(KeyEvent evt, double p1, double p2){
 
-        if ( (evt.getKeyCode() == evt.VK_A) && ((int)p1 < getWidth()) && (attached == false)) {
+        if ( (evt.getKeyCode() == KeyEvent.VK_A) && ((int)p1 < getWidth()) && (attached == false)) {
        	 holdBallToPaddle(evt, p1);
         }
-        if( evt.getKeyCode() == evt.VK_W && attached == true){
+        if( evt.getKeyCode() == KeyEvent.VK_W && attached == true){
        	 setYVelocity( -5 );
         }
-        if( evt.getKeyCode() == evt.VK_S && attached == true){
+        if( evt.getKeyCode() == KeyEvent.VK_S && attached == true){
             setYVelocity( 5 );
         }
         
         
-        if (evt.getKeyCode() == evt.VK_F && (int)p2 < 1.5*getWidth() && attached == false) {
+        if (evt.getKeyCode() == KeyEvent.VK_F && (int)p2 < 1.5*getWidth() && attached == false) {
        	 holdBallToPaddle(evt, p2);
         }
-        if( evt.getKeyCode() == evt.VK_UP && attached == true){
+        if( evt.getKeyCode() == KeyEvent.VK_UP && attached == true){
        	 setYVelocity( -5 );
         }
-        if( evt.getKeyCode() == evt.VK_DOWN && attached == true){
+        if( evt.getKeyCode() == KeyEvent.VK_DOWN && attached == true){
        	 setYVelocity( 5 );
         }
     }
     
     public void keyReleased(KeyEvent evt, double p1, double p2){
    		
-   	 if ( evt.getKeyCode() == evt.VK_A && attached == true ) {
+   	 if ( evt.getKeyCode() == KeyEvent.VK_A && attached == true ) {
        	 releaseBallFromPaddle(evt, p1);
    	 }
-        if( evt.getKeyCode() == evt.VK_W && attached == true){
+        if( evt.getKeyCode() == KeyEvent.VK_W && attached == true){
        	 setYVelocity( 0 );
         }
-        if( evt.getKeyCode() == evt.VK_S && attached == true){
+        if( evt.getKeyCode() == KeyEvent.VK_S && attached == true){
             setYVelocity( 0 );
         }
-        if (evt.getKeyCode() == evt.VK_F && attached == true) {
+        if (evt.getKeyCode() == KeyEvent.VK_F && attached == true) {
        	 releaseBallFromPaddle(evt,p2);
         }
-        if( evt.getKeyCode() == evt.VK_UP && attached == true){
+        if( evt.getKeyCode() == KeyEvent.VK_UP && attached == true){
        	 setYVelocity( 0 );
         }
-        if( evt.getKeyCode() == evt.VK_DOWN && attached == true){
+        if( evt.getKeyCode() == KeyEvent.VK_DOWN && attached == true){
        	 setYVelocity( 0 );
         }
    	    }

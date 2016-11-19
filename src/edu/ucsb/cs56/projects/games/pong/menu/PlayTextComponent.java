@@ -4,13 +4,8 @@ import edu.ucsb.cs56.projects.games.pong.gameplay.DifficultyLevel;
 import edu.ucsb.cs56.projects.games.pong.gameplay.Screen;
 import edu.ucsb.cs56.projects.games.pong.sound.SoundEffect;
 
-import javax.sound.sampled.*; 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Created by angelortega on 2/22/16.
