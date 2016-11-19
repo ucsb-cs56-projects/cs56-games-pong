@@ -3,10 +3,6 @@ package edu.ucsb.cs56.projects.games.pong.gameplay;
 import edu.ucsb.cs56.projects.games.pong.sound.SoundEffect;
 import edu.ucsb.cs56.projects.games.pong.menu.PlayTextComponent;
 
-import javax.sound.sampled.*; 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
 /** edu.ucsb.cs56.projects.games.pong.gameplay.Pong is the class that will facilitate
@@ -117,25 +113,12 @@ public class Pong implements Runnable {
         p2.movePaddle();      
 	
 	// sets the new locations
-	b.setXCoordinate( b.getXCoordinate() + b.getXVelocity() );
+        b.setXCoordinate( b.getXCoordinate() + b.getXVelocity() );
         b.setYCoordinate( b.getYCoordinate() + b.getYVelocity() );
 	
 	// checks if it hit a paddle
 	paddleCollision();
 
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	///if paddleCollision and key b.setX and then if move down, ball down, if move up ball up
-	//	if(( b.rectangle ).intersects( p1.rectangle ) && keypressed)
-	//  {
-	//		holdBalltoPaddle(p1);
-	//  }
-	//else  if(( b.rectangle ).intersects( p1.rectangle ) && keypressed)//
-	      //  {
-	//	holdBalltoPaddle(p2);
-	//  }
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// checks if the ball hit a wall
 	wallCollision();
     }
     

@@ -1,6 +1,7 @@
 package edu.ucsb.cs56.projects.games.pong.gameplay;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import edu.ucsb.cs56.projects.games.pong.menu.PlayTextComponent;
 
 /** edu.ucsb.cs56.projects.games.pong.gameplay.Ball is the class that will move the ball around the screen
@@ -17,6 +18,9 @@ public class Ball extends gameObject{
 
     DifficultyLevel difficulty = new DifficultyLevel(PlayTextComponent.getDifficulty());
     public int ballsLost;
+    public int speed = 1;
+    public int origXVelocity;
+    public boolean attached = false;
                                                 
     /** edu.ucsb.cs56.projects.games.pong.gameplay.Ball constructor to initialize location of edu.ucsb.cs56.projects.games.pong.gameplay.Ball onto the screen
      *  and draw it as a rectangle for a simpler and precise hitbox.
@@ -46,7 +50,6 @@ public class Ball extends gameObject{
     /** startBall(): When the ball is stopped, this will start the ball in the opposite direction of the way it was going  */
     public void startBall()
     {
-	int speed=0;
 	if(difficulty.getDifficulty()==80){
 		speed= 1;
 	}
@@ -71,7 +74,7 @@ public class Ball extends gameObject{
     /** isStopped() checks if the ball is stopped */
     public boolean isStopped()
     {
-	if( ( getXVelocity() == 0 ) && ( getYVelocity() == 0 ) )
+	if( ( getXVelocity() == 0 ) && ( getYVelocity() == 0 ) && attached == false )
 	    return true;
 	else 
 	    return false;
@@ -92,11 +95,78 @@ public class Ball extends gameObject{
 	setYCoordinate(( Screen.h-difficulty.getHeight() ) / 2 );
     }
     ///work in progress below
-    public void holdBallToPaddle(Paddle gluepaddle)/////////////////////////////
+    public void holdBallToPaddle(KeyEvent evt, double distance)/////////////////////////////
     {
-	Paddle gp=gluepaddle;
-	setXCoordinate(gp.getXCoordinate());//when intersection happens
-	setYCoordinate(gp.getYCoordinate());
-
+   	 origXVelocity = getXVelocity();
+   	 attached = true;
+   	 if(evt.getKeyCode() == evt.VK_A && ( (int)distance < getWidth() ) ) {
+   		 setXVelocity(0);
+   		 setYVelocity(0);
+   	 }
+   	 
+   	 if(evt.getKeyCode() == evt.VK_F && ( (int)distance < 1.5*getWidth() ) ) {
+   		 setXVelocity(0);
+   		 setYVelocity(0);
+   	 }
     }
+    
+    public void releaseBallFromPaddle(KeyEvent evt, double distance)/////////////////////////////
+    {
+   	 attached = false;
+   	 if(evt.getKeyCode() == evt.VK_A ) {
+   		 setXVelocity(origXVelocity * -1);
+   		 setYVelocity(speed);
+   	 }
+   	 
+   	 if(evt.getKeyCode() == evt.VK_F && ( (int)distance < 1.5*getWidth() ) ) {
+   		 setXVelocity(origXVelocity * -1);
+   		 setYVelocity(speed);
+   	 }
+    }
+    
+    public void keyPressed(KeyEvent evt, double p1, double p2){
+
+        if ( (evt.getKeyCode() == evt.VK_A) && ((int)p1 < getWidth()) && (attached == false)) {
+       	 holdBallToPaddle(evt, p1);
+        }
+        if( evt.getKeyCode() == evt.VK_W && attached == true){
+       	 setYVelocity( -5 );
+        }
+        if( evt.getKeyCode() == evt.VK_S && attached == true){
+            setYVelocity( 5 );
+        }
+        
+        
+        if (evt.getKeyCode() == evt.VK_F && (int)p2 < 1.5*getWidth() && attached == false) {
+       	 holdBallToPaddle(evt, p2);
+        }
+        if( evt.getKeyCode() == evt.VK_UP && attached == true){
+       	 setYVelocity( -5 );
+        }
+        if( evt.getKeyCode() == evt.VK_DOWN && attached == true){
+       	 setYVelocity( 5 );
+        }
+    }
+    
+    public void keyReleased(KeyEvent evt, double p1, double p2){
+   		
+   	 if ( evt.getKeyCode() == evt.VK_A && attached == true ) {
+       	 releaseBallFromPaddle(evt, p1);
+   	 }
+        if( evt.getKeyCode() == evt.VK_W && attached == true){
+       	 setYVelocity( 0 );
+        }
+        if( evt.getKeyCode() == evt.VK_S && attached == true){
+            setYVelocity( 0 );
+        }
+        if (evt.getKeyCode() == evt.VK_F && attached == true) {
+       	 releaseBallFromPaddle(evt,p2);
+        }
+        if( evt.getKeyCode() == evt.VK_UP && attached == true){
+       	 setYVelocity( 0 );
+        }
+        if( evt.getKeyCode() == evt.VK_DOWN && attached == true){
+       	 setYVelocity( 0 );
+        }
+   	    }
 }

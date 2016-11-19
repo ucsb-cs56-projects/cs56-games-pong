@@ -111,22 +111,25 @@ public class Screen{
 	/** keyPressed checks if certain keys are pressed
 	 * @param evt the KeyEvent
 	 */
-	public void keyPressed(KeyEvent evt){
-	    game.p1.keyPressed(evt);
+	public void keyPressed(KeyEvent evt) {
+		game.p1.keyPressed(evt);
 	    game.p2.keyPressed(evt);
-	    
-	    boolean ballintersectsp1 = game.b.rectangle.intersects( game.p1.rectangle);
-	    boolean ballintersectsp2 = game.b.rectangle.intersects( game.p2.rectangle);
-	    if( evt.getKeyCode() == evt.VK_F&&ballintersectsp1 )  /////////////////////////// If you press F, hold it down
-		game.b.holdBallToPaddle(game.p1);               /////////////////////////////////////////////////////////
-	    if( evt.getKeyCode() == evt.VK_F&&ballintersectsp2 )
-		game.b.holdBallToPaddle(game.p2);
-	    
+	    int p1x=game.p1.getXCoordinate();
+	    int p1y=game.p1.getYCoordinate();
+	    int p2x=game.p2.getXCoordinate();
+	    int p2y=game.p2.getYCoordinate();
+	    int bx =game.b.getXCoordinate();
+	    int by =game.b.getYCoordinate();
+
+	    double p1fromBall =Math.hypot(Math.abs(p1x-bx),Math.abs(p1y-by));
+	    double p2fromBall =Math.hypot(Math.abs(p2x-bx),Math.abs(p2y-by));
+	    game.b.keyPressed(evt, p1fromBall, p2fromBall);       
+
 	    if( game.b.isStopped())
 		{
 		    if( evt.getKeyCode() == evt.VK_SPACE )
 			game.b.startBall();
-		    if( evt.getKeyCode() == evt.VK_P )
+		    if( evt.getKeyCode() == evt.VK_P && game.b.attached == false)
 			game.b.startBall();
 		    if( evt.getKeyCode() == evt.VK_M ) {
 			jf.setVisible(false);
@@ -136,9 +139,9 @@ public class Screen{
 			theball.yield();
 		}
 	    else {
-		if( evt.getKeyCode() == evt.VK_P )
-		    game.b.stopBall();
-	    }
+			if( evt.getKeyCode() == evt.VK_P )
+			    game.b.stopBall();
+		    }
 		
 	}
 
@@ -146,8 +149,18 @@ public class Screen{
 	 * @param evt the KeyEvent
 	 */
 	public void keyReleased(KeyEvent evt){
+		int p1x=game.p1.getXCoordinate();
+	    int p1y=game.p1.getYCoordinate();
+	    int p2x=game.p2.getXCoordinate();
+	    int p2y=game.p2.getYCoordinate();
+	    int bx =game.b.getXCoordinate();
+	    int by =game.b.getYCoordinate();
+
+	    double p1fromBall =Math.hypot(Math.abs(p1x-bx),Math.abs(p1y-by));
+	    double p2fromBall =Math.hypot(Math.abs(p2x-bx),Math.abs(p2y-by));
 	    game.p1.keyReleased(evt);
 	    game.p2.keyReleased(evt);
+	    game.b.keyReleased(evt, p1fromBall, p2fromBall);
 	}
     }  
 }
