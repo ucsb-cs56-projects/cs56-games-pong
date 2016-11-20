@@ -209,10 +209,28 @@ public class Pong implements Runnable {
 	    }
         
         if(DifficultyLevel.getDifficulty()==90) {
+        	if( b.getXCoordinate() <= ( 0 ) )
+    	    {
+    		p1.playerMissed( b, getHits(), p2 );
+    		b1.resetBall();
+
+    		gameObject.isGoingRight = true;
+    		hitsReset();
+    	    }
+    	// check if p2 misses
+            else if( b.getXCoordinate() >= ( Screen.w - 20 ) )
+    	    {
+    		p2.playerMissed( b, getHits(), p1 );
+    		gameObject.isGoingRight = false;
+    		hitsReset();
+    		b1.resetBall();
+    	    }
+        	
         	if(  (b1.getXCoordinate() <=  0)) {
         		p1.playerMissed( b1, getHits(), p2 );
         		gameObject.isGoingRight = true;
         		hitsReset();
+        		b.resetBall();
         	}
         	// check if p2 misses
         	if(   ( b1.getXCoordinate() >= (Screen.w - 20) ) ) {
@@ -220,6 +238,7 @@ public class Pong implements Runnable {
         		//p2.playerMissed( b1, getHits(), p1 );
         		gameObject.isGoingRight = false;
         		hitsReset();
+        		b.resetBall();
         	}
         }
 
