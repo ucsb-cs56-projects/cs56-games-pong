@@ -12,7 +12,7 @@ public class DifficultyLevelPrompt extends JPanel {
     private int difficulty;
     private boolean selected;
     private static final String[] DIFFICULTY_LEVELS = new String[]
-            { "Super-Easy", "Easy", "Medium","Hard","Extreme", "Chaos"};
+            { "Super-Easy", "Easy", "Medium","Hard","Extreme", "Chaos", "Two Balls"};
     private static final Map<String,Integer> DIFFICULTIES =  new LinkedHashMap<String,Integer>(){{
         put("Super-Easy",80);
         put("Easy",100);
@@ -20,6 +20,7 @@ public class DifficultyLevelPrompt extends JPanel {
         put("Hard",130);
         put("Extreme",140);
         put("Chaos",170);
+        put("Two Balls",90);
 
     }};
     public Map<String, Integer> getHashmap(){

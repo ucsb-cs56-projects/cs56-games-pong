@@ -6,17 +6,16 @@ package edu.ucsb.cs56.projects.games.pong.gameplay;
 
 public class DifficultyLevel
 {
-    /**
-   // @param origwidth
-   // @param origheight
+    /*
     @param difficultylevel
     */
-    private int diflevel;
-    private int screenfactor;
-    private int width;
-    private int height;
-    private int origballsize=5;
-    private int paddleHeight;
+    public static int diflevel;
+    public static int screenfactor;
+    public static int width;
+    public static int height;
+    public static int origballsize=5;
+    public static int paddleHeight;
+    public static int numBalls = 1;
     
     public DifficultyLevel(int difficultylevel)
     {
@@ -65,25 +64,20 @@ public class DifficultyLevel
 	    paddleHeight = 60;
 
 	}
-    }
-    public int getDifficulty()
+    else if (diflevel == 90) 
     {
-	return diflevel;
+    	screenfactor=10;
+	    width=origballsize*screenfactor;
+	    height=origballsize*screenfactor;
+	    paddleHeight = 100;
+	    numBalls = 2;
     }
-    public int getHeight()
-    {
-	return height;
     }
-    public int getWidth()
-    {
-	return width;
-    }
-    public int getScreenFactor()
-    {
-	return screenfactor;
-    }
-    public int getPaddleHeight()
-    {
-	return paddleHeight;
-    }
+    
+    public static int getDifficulty() { return diflevel; }
+    public static int getHeight() { return height; }
+    public static int getWidth() { return width; }
+    public static int getScreenFactor() { return screenfactor; }
+    public static int getPaddleHeight() { return paddleHeight; }
+    public static int getNumOfBalls() {return numBalls; }
 }

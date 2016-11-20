@@ -11,6 +11,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color; // class for Colors
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 
 /** Screen is the GUI implementation of the Pong game
@@ -51,6 +52,7 @@ public class Screen{
 	  theball = new Thread(game);
 	  theball.start();
 	  
+	  
 	  jf.addKeyListener(new myKeyAdapter());
 	  jf.setVisible( true );
     }
@@ -83,17 +85,24 @@ public class Screen{
 	    g.drawString( "Lives " + ( game.p2.ballCount ), Screen.w - 140 , Screen.h - 47 );
 	    
 	    if( game.b.isStopped() ) {
-		g.drawString( "Game Paused", Screen.w/2 - 110, Screen.h/2 - 100 );
-		g.drawString( "Press M to return to Main Menu", Screen.w/2 - 240, Screen.h/2 + 100 );
+		g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
+		g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
 	    }
 	     
-		// if level difficulty blahblah
-	    game.b.draw(g);
-	    game.p1.draw(g);
-	    game.p2.draw(g);
-	    jf.repaint();
-
-}
+	    if(DifficultyLevel.getDifficulty()==90) {
+	    	game.b1.draw(g);
+	    	game.b.draw(g);
+	    	game.p1.draw(g);
+	    	game.p2.draw(g);
+	    	jf.repaint();
+		}
+	    else {
+	    	game.b.draw(g);
+	    	game.p1.draw(g);
+	    	game.p2.draw(g);
+	    	jf.repaint();
+	    }
+	}
 	 	
 	/** the paint function paints buffer graphics onto screen
 	 * @param g the graphics drawer
@@ -112,35 +121,31 @@ public class Screen{
 	 * @param evt the KeyEvent
 	 */
 	public void keyPressed(KeyEvent evt) {
+		double [] distance = distanceCalc();
 		game.p1.keyPressed(evt);
-	    game.p2.keyPressed(evt);
-	    int p1x=game.p1.getXCoordinate();
-	    int p1y=game.p1.getYCoordinate();
-	    int p2x=game.p2.getXCoordinate();
-	    int p2y=game.p2.getYCoordinate();
-	    int bx =game.b.getXCoordinate();
-	    int by =game.b.getYCoordinate();
+	    game.p2.keyPressed(evt);	
+	    game.b.keyPressed(evt, distance);       
 
-	    double p1fromBall =Math.hypot(Math.abs(p1x-bx),Math.abs(p1y-by));
-	    double p2fromBall =Math.hypot(Math.abs(p2x-bx),Math.abs(p2y-by));
-	    game.b.keyPressed(evt, p1fromBall, p2fromBall);       
-
-	    if( game.b.isStopped())
+	    if( game.b.isStopped() || game.b1.isStopped() )
 		{
-		    if( evt.getKeyCode() == KeyEvent.VK_SPACE )
-			game.b.startBall();
-		    if( evt.getKeyCode() == KeyEvent.VK_P && game.b.attached == false)
-			game.b.startBall();
+		    if( evt.getKeyCode() == KeyEvent.VK_SPACE ) {
+		    	game.b.startBall();
+		    	game.b1.startBall();
+		    }
+		    if( evt.getKeyCode() == KeyEvent.VK_P && game.b.attached == false){
+		    	game.b.startBall();
+		    	game.b1.startBall();
+		    }
 		    if( evt.getKeyCode() == KeyEvent.VK_M ) {
-			jf.setVisible(false);
-		        
+		    	jf.setVisible(false);     
 		    }
 		    else 
-			theball.yield();
+		    	Thread.yield();
 		}
 	    else {
 			if( evt.getKeyCode() == KeyEvent.VK_P )
 			    game.b.stopBall();
+				game.b1.stopBall();
 		    }
 		
 	}
@@ -149,18 +154,36 @@ public class Screen{
 	 * @param evt the KeyEvent
 	 */
 	public void keyReleased(KeyEvent evt){
-		int p1x=game.p1.getXCoordinate();
+		double [] distance = distanceCalc();
+	    game.p1.keyReleased(evt);
+	    game.p2.keyReleased(evt);
+	    game.b.keyReleased(evt, distance);
+	}
+    }
+    
+    public double [] distanceCalc() {
+    	double [] distance = new double[6];
+    	
+    	int p1x=game.p1.getXCoordinate();
 	    int p1y=game.p1.getYCoordinate();
 	    int p2x=game.p2.getXCoordinate();
 	    int p2y=game.p2.getYCoordinate();
 	    int bx =game.b.getXCoordinate();
 	    int by =game.b.getYCoordinate();
-
+	    
 	    double p1fromBall =Math.hypot(Math.abs(p1x-bx),Math.abs(p1y-by));
 	    double p2fromBall =Math.hypot(Math.abs(p2x-bx),Math.abs(p2y-by));
-	    game.p1.keyReleased(evt);
-	    game.p2.keyReleased(evt);
-	    game.b.keyReleased(evt, p1fromBall, p2fromBall);
-	}
-    }  
+	  
+	    double p1fromBottom = (double) Screen.h- p1y -DifficultyLevel.getPaddleHeight() - 25;
+	    double p2fromBottom = (double) Screen.h - p2y - DifficultyLevel.getPaddleHeight() - 25;
+	    
+	    distance[0]=p1fromBall;
+	    distance[1]=p2fromBall;
+	    distance[2]=p1fromBottom;
+	    distance[3]=p2fromBottom;
+	    distance[4]=p1y;
+	    distance[5]=p2y;
+	    
+	    return distance;
+    }
 }
