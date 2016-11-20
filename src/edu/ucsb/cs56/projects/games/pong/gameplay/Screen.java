@@ -134,11 +134,12 @@ public class Screen{
 	    game.p2.keyPressed(evt);	
 	    game.b.keyPressed(evt, distance);       
 	    
-	    if( game.b.isStopped() || game.b1.isStopped() )
-		{
-		    if( evt.getKeyCode() == KeyEvent.VK_SPACE ) {
-		    	game.b.startBall();
-		    	game.b1.startBall();
+	    if(DifficultyLevel.getDifficulty()==90) {
+	    	if( game.b.isStopped() || game.b1.isStopped() )
+	    	{
+	    		if( evt.getKeyCode() == KeyEvent.VK_SPACE ) {
+	    			game.b.startBall();
+	    			game.b1.startBall();
 		    }
 		    if( evt.getKeyCode() == KeyEvent.VK_P && game.b.attached == false){
 		    	game.b.startBall();
@@ -149,13 +150,35 @@ public class Screen{
 		    }
 		    else 
 		    	theball.yield();
-		}
-	    else {
-			if( evt.getKeyCode() == KeyEvent.VK_P ) {
-			    game.b.stopBall();
-				game.b1.stopBall();
+	    	}
+	    	else {
+	    		if( evt.getKeyCode() == KeyEvent.VK_P ) {
+	    			game.b.stopBall();
+	    			game.b1.stopBall();
+	    		}
+	    	}	
 	    }
-	    }	
+	    else {
+	    	if( game.b.isStopped())
+	    	{
+	    		if( evt.getKeyCode() == KeyEvent.VK_SPACE ) {
+	    			game.b.startBall();
+		    }
+		    if( evt.getKeyCode() == KeyEvent.VK_P && game.b.attached == false){
+		    	game.b.startBall();
+		    }
+		    if( evt.getKeyCode() == KeyEvent.VK_M ) {
+		    	jf.setVisible(false);     
+		    }
+		    else 
+		    	theball.yield();
+	    	}
+	    	else {
+	    		if( evt.getKeyCode() == KeyEvent.VK_P ) {
+	    			game.b.stopBall();
+	    		}
+	    	}
+	    }
 	}
 
 	/** keyReleased checks if certain keys are released
@@ -168,6 +191,7 @@ public class Screen{
 	    game.b.keyReleased(evt, distance);
 	}
     }
+   
     
     public double [] distanceCalc() {
     	double [] distance = new double[6];
