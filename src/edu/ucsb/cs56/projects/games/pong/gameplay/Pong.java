@@ -215,7 +215,7 @@ public class Pong implements Runnable {
         		hitsReset();
         	}
         	// check if p2 misses
-        	else if(   ( b1.getXCoordinate() >= (Screen.w - 20) ) ) {
+        	if(   ( b1.getXCoordinate() >= (Screen.w - 20) ) ) {
         		p2.playerMissed( b1, getHits(), p1 );
         		//p2.playerMissed( b1, getHits(), p1 );
         		gameObject.isGoingRight = false;
@@ -231,12 +231,7 @@ public class Pong implements Runnable {
 	    {
         	b.setYVelocity( -1 * b.getYVelocity() );
 	    }
-        
-        if(DifficultyLevel.getDifficulty()==90) {
-        	if( b1.getYCoordinate() >= ( Screen.h - 60 ) ) {
-        		b1.setYVelocity( -1 * b1.getYVelocity() );
-        	}
-        }
+       
 
 	// checks if ball hits the top of the screen
         else if( b.getYCoordinate() <=  0 )
@@ -244,6 +239,16 @@ public class Pong implements Runnable {
         	b.setYVelocity( -1 * b.getYVelocity() );
 	    }
 
+        
+        if(DifficultyLevel.getDifficulty()==90) {
+        	if( b1.getYCoordinate() >= ( Screen.h - 60 ) ) {
+        		b1.setYVelocity( -1 * b1.getYVelocity() );
+        	}
+        	
+        	else if( b1.getYCoordinate() <=  0 ) {
+            	b1.setYVelocity( -1 * b1.getYVelocity() );
+    	    }
+        }
 	checkGameStatus();
     }
 

@@ -90,6 +90,10 @@ public class Screen{
 	    }
 	     
 	    if(DifficultyLevel.getDifficulty()==90) {
+	    	if( game.b.isStopped() || game.b1.isStopped() ) {
+	    		g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
+	    		g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
+	    	    }
 	    	game.b1.draw(g);
 	    	game.b.draw(g);
 	    	game.p1.draw(g);
@@ -97,6 +101,10 @@ public class Screen{
 	    	jf.repaint();
 		}
 	    else {
+	    	if( game.b.isStopped() ) {
+	    		g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
+	    		g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
+	    	    }
 	    	game.b.draw(g);
 	    	game.p1.draw(g);
 	    	game.p2.draw(g);

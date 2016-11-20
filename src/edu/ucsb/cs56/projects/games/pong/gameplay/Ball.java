@@ -81,16 +81,16 @@ public class Ball extends gameObject{
     /** stopBall() stops the ball no matter what */
     public void stopBall()
     {
-	setYVelocity( 0 );
-	setXVelocity( 0 );
+    	setYVelocity( 0 );
+    	setXVelocity( 0 );
     }
     
     /** resetBall() puts the ball back in the middle of the screen and stops the ball */
     public void resetBall() 
     {
-	stopBall();
-	setXCoordinate(( Screen.w-DifficultyLevel.getWidth() ) / 2 );
-	setYCoordinate(( Screen.h-DifficultyLevel.getHeight() ) / 2 );
+    	stopBall();
+    	setXCoordinate(( Screen.w-DifficultyLevel.getWidth() ) / 2 );
+		setYCoordinate(( Screen.h-DifficultyLevel.getHeight() ) / 2 );
     }
     ///work in progress below
     public void holdBallToPaddle(KeyEvent evt, double distance)/////////////////////////////
