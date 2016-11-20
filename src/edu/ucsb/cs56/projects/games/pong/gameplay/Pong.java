@@ -41,14 +41,14 @@ public class Pong implements Runnable {
         b = new Ball( ((Screen.w-DifficultyLevel.getWidth()) /2),
 		      ((Screen.h-DifficultyLevel.getHeight()) / 2),
 		     DifficultyLevel.getHeight(),
-		      DifficultyLevel.getHeight());
+		      DifficultyLevel.getHeight(), false);
         
         if(DifficultyLevel.getDifficulty()==90)
 	    {
         	b1 = new Ball( (int)((Screen.w-DifficultyLevel.getWidth() ) /2),
 		      (int)((Screen.h-4*DifficultyLevel.getHeight()) / 2),
 		      DifficultyLevel.getHeight(),
-		      DifficultyLevel.getHeight());
+		      DifficultyLevel.getHeight(), true);
 	    }
         
         hits = 0;                                      // # of times of wall

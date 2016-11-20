@@ -19,6 +19,7 @@ public class Ball extends gameObject{
     public int speed = 1;
     public int origXVelocity;
     public boolean attached = false;
+    boolean isGoingRight = false;
                                                 
     /** edu.ucsb.cs56.projects.games.pong.gameplay.Ball constructor to initialize location of edu.ucsb.cs56.projects.games.pong.gameplay.Ball onto the screen
      *  and draw it as a rectangle for a simpler and precise hitbox.
@@ -30,9 +31,9 @@ public class Ball extends gameObject{
 
     // Constructor
     // inputs are start x, start y, width of ball, and height of ball
-    public Ball( int x, int y, int w, int h )
+    public Ball( int x, int y, int w, int h, boolean isGoingRight )
     {
-	super( x, y, w, h );
+	super( x, y, w, h, isGoingRight );
 	startBall();
 	
     }

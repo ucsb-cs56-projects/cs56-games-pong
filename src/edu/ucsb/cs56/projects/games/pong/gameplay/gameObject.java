@@ -31,6 +31,14 @@ class gameObject{
 	rectangle = new Rectangle( x, y, rectW, rectH );
     }
     
+    gameObject( int x, int y, int rectW, int rectH, boolean isGoingRight )
+    {
+	setXVelocity( 0 );
+	setYVelocity( 0 );
+	this.isGoingRight = true;
+	rectangle = new Rectangle( x, y, rectW, rectH );
+    }
+    
     // ( x, y ) coordinates are to the upper left hand corner
 
     // The x Coordinate to the left hand side
