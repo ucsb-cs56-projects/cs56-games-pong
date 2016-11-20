@@ -133,7 +133,7 @@ public class Screen{
 		game.p1.keyPressed(evt);
 	    game.p2.keyPressed(evt);	
 	    game.b.keyPressed(evt, distance);       
-
+	    
 	    if( game.b.isStopped() || game.b1.isStopped() )
 		{
 		    if( evt.getKeyCode() == KeyEvent.VK_SPACE ) {
@@ -148,14 +148,14 @@ public class Screen{
 		    	jf.setVisible(false);     
 		    }
 		    else 
-		    	Thread.yield();
+		    	theball.yield();
 		}
 	    else {
-			if( evt.getKeyCode() == KeyEvent.VK_P )
+			if( evt.getKeyCode() == KeyEvent.VK_P ) {
 			    game.b.stopBall();
 				game.b1.stopBall();
-		    }
-		
+	    }
+	    }	
 	}
 
 	/** keyReleased checks if certain keys are released

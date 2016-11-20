@@ -97,6 +97,7 @@ public class Ball extends gameObject{
     {
    	 origXVelocity = getXVelocity();
    	 attached = true;
+   	 
    	 if(evt.getKeyCode() == KeyEvent.VK_A && ( (int)distance < getWidth() ) ) {
    		 setXVelocity(0);
    		 setYVelocity(0);
