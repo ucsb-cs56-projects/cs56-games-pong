@@ -287,8 +287,8 @@ public class Pong implements Runnable {
     /** kill() stops the thread */
     public void kill()
     {
-	gameIsGoing = false;
-	Screen.theball.stop();
+    	gameIsGoing = false;
+    	Screen.theball.stop();
     }
 
 }

@@ -15,7 +15,7 @@ public class DifficultyLevel
     public static int height;
     public static int origballsize=5;
     public static int paddleHeight;
-    public static int numBalls = 1;
+    public static int speed;
     
     public DifficultyLevel(int difficultylevel)
     {
@@ -26,6 +26,7 @@ public class DifficultyLevel
 	    width=origballsize*screenfactor;
 	    height=origballsize*screenfactor;
 	    paddleHeight = 110;
+	    speed = 1;
 	}
     else if(diflevel==100)//easy
 	{
@@ -33,6 +34,7 @@ public class DifficultyLevel
 	    width=origballsize*screenfactor;
 	    height=origballsize*screenfactor;
 	    paddleHeight = 100;
+	    speed = 2;
 	}
     else if(diflevel==120)//medium
 	{
@@ -40,6 +42,7 @@ public class DifficultyLevel
 	    width=origballsize*screenfactor;
 	    height=origballsize*screenfactor;
 	    paddleHeight = 90;
+	    speed = 3;
 	}
     else if(diflevel==130)//hard
 	{
@@ -47,6 +50,7 @@ public class DifficultyLevel
 	    width=origballsize*screenfactor;
 	    height=origballsize*screenfactor;
 	    paddleHeight = 80;
+	    speed = 3;
 	}
     else if(diflevel==140)//extreme
 	{
@@ -54,7 +58,7 @@ public class DifficultyLevel
 	    width=origballsize*screenfactor;
 	    height=origballsize*screenfactor;
 	    paddleHeight = 70;
-
+	    speed = 4;
 	}
     else if(diflevel==170)//chaos
 	{
@@ -62,6 +66,7 @@ public class DifficultyLevel
 	    width=origballsize*screenfactor;
 	    height=origballsize*screenfactor;
 	    paddleHeight = 60;
+	    speed = 5;
 
 	}
     else if (diflevel == 90) 
@@ -70,7 +75,7 @@ public class DifficultyLevel
 	    width=origballsize*screenfactor;
 	    height=origballsize*screenfactor;
 	    paddleHeight = 100;
-	    numBalls = 2;
+	    speed = 2;
     }
     }
     
@@ -79,5 +84,5 @@ public class DifficultyLevel
     public static int getWidth() { return width; }
     public static int getScreenFactor() { return screenfactor; }
     public static int getPaddleHeight() { return paddleHeight; }
-    public static int getNumOfBalls() {return numBalls; }
+    public static int getSpeed() {return speed; }
 }

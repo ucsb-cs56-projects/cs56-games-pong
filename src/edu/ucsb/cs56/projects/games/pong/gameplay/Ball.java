@@ -34,6 +34,7 @@ public class Ball extends gameObject{
     public Ball( int x, int y, int w, int h, boolean isGoingRight )
     {
 	super( x, y, w, h, isGoingRight );
+	speed = DifficultyLevel.getSpeed();
 	startBall();
 	
     }
@@ -47,23 +48,7 @@ public class Ball extends gameObject{
     }
 
     /** startBall(): When the ball is stopped, this will start the ball in the opposite direction of the way it was going  */
-    public void startBall()
-    {
-	if(DifficultyLevel.getDifficulty()==80){
-		speed= 1;
-	}
-	else if (DifficultyLevel.getDifficulty()==100){
-		speed= 2;
-	}
-	else if (DifficultyLevel.getDifficulty()==130){
-		speed= 3;
-	}
-	else if (DifficultyLevel.getDifficulty()==140){
-		speed= 4;
-	}
-	else if (DifficultyLevel.getDifficulty()==170){
-		speed= 5;
-	}
+    public void startBall() {
 	if( gameObject.isGoingRight == false )
 		speed = speed*-1;
 	setXVelocity( speed );
@@ -99,12 +84,12 @@ public class Ball extends gameObject{
    	 origXVelocity = getXVelocity();
    	 attached = true;
    	 
-   	 if(evt.getKeyCode() == KeyEvent.VK_A && ( (int)distance < getWidth() ) ) {
+   	 if(evt.getKeyCode() == KeyEvent.VK_A && ( (int)distance < DifficultyLevel.getPaddleHeight() ) ) {
    		 setXVelocity(0);
    		 setYVelocity(0);
    	 }
    	 
-   	 if(evt.getKeyCode() == KeyEvent.VK_LEFT && ( (int)distance < 1.5*getWidth() ) ) {
+   	 if(evt.getKeyCode() == KeyEvent.VK_LEFT && ( (int)distance < DifficultyLevel.getPaddleHeight() ) ) {
    		 setXVelocity(0);
    		 setYVelocity(0);
    	 }
@@ -113,12 +98,12 @@ public class Ball extends gameObject{
     public void releaseBallFromPaddle(KeyEvent evt, double distance)/////////////////////////////
     {
    	 attached = false;
-   	 if(evt.getKeyCode() == KeyEvent.VK_A && ( (int)distance < getWidth() ) ) {
+   	 if(evt.getKeyCode() == KeyEvent.VK_A && ( (int)distance < DifficultyLevel.getPaddleHeight() ) ) {
    		 setXVelocity(origXVelocity * -1);
    		 setYVelocity(speed);
    	 }
    	 
-   	 if(evt.getKeyCode() == KeyEvent.VK_LEFT && ( (int)distance < 1.5*getWidth() ) ) {
+   	 if(evt.getKeyCode() == KeyEvent.VK_LEFT && ( (int)distance < DifficultyLevel.getPaddleHeight() ) ) {
    		 setXVelocity(origXVelocity * -1);
    		 setYVelocity(speed);
    	 }
@@ -126,7 +111,7 @@ public class Ball extends gameObject{
     
     public void keyPressed(KeyEvent evt, double [] distance){
 
-        if ( (evt.getKeyCode() == KeyEvent.VK_A) && ((int)distance[0] < getWidth()) && (attached == false)) {
+        if ( (evt.getKeyCode() == KeyEvent.VK_A) && ((int)distance[0] < DifficultyLevel.getPaddleHeight()) && (attached == false)) {
        	 holdBallToPaddle(evt, distance[0]);
         }
         if( evt.getKeyCode() == KeyEvent.VK_W && attached == true && (int)distance[4] 
@@ -139,7 +124,7 @@ public class Ball extends gameObject{
         }
         
         
-        if (evt.getKeyCode() == KeyEvent.VK_LEFT && (int)distance[1] < 1.5*getWidth() && attached == false) {
+        if (evt.getKeyCode() == KeyEvent.VK_LEFT && (int)distance[1] < DifficultyLevel.getPaddleHeight() && attached == false) {
        	 holdBallToPaddle(evt, distance[1]);
         }
         if( evt.getKeyCode() == KeyEvent.VK_UP && attached == true && (int)distance[5] 
