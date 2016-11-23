@@ -129,7 +129,7 @@ public class Screen{
 	 * @param evt the KeyEvent
 	 */
 	public void keyPressed(KeyEvent evt) {
-		double [] distance = distanceCalc();
+		ArrayList<Double> distance = distanceCalc();
 		game.p1.keyPressed(evt);
 	    game.p2.keyPressed(evt);	
 	    game.b.keyPressed(evt, distance);       
@@ -185,7 +185,7 @@ public class Screen{
 	 * @param evt the KeyEvent
 	 */
 	public void keyReleased(KeyEvent evt){
-		double [] distance = distanceCalc();
+		ArrayList<Double> distance = distanceCalc();
 	    game.p1.keyReleased(evt);
 	    game.p2.keyReleased(evt);
 	    game.b.keyReleased(evt, distance);
@@ -193,8 +193,8 @@ public class Screen{
     }
    
     
-    public double [] distanceCalc() {
-    	double [] distance = new double[6];
+    public ArrayList<Double> distanceCalc() {
+    	ArrayList<Double> distance = new ArrayList<Double>();
     	
     	int p1x=game.p1.getXCoordinate();
 	    int p1y=game.p1.getYCoordinate();
@@ -209,12 +209,12 @@ public class Screen{
 	    double p1fromBottom = (double) Screen.h- p1y -DifficultyLevel.getPaddleHeight() - 25;
 	    double p2fromBottom = (double) Screen.h - p2y - DifficultyLevel.getPaddleHeight() - 25;
 	    
-	    distance[0]=p1fromBall;
-	    distance[1]=p2fromBall;
-	    distance[2]=p1fromBottom;
-	    distance[3]=p2fromBottom;
-	    distance[4]=p1y;
-	    distance[5]=p2y;
+	    distance.add(0, p1fromBall);
+	    distance.add(1, p2fromBall);
+	    distance.add(2, p1fromBottom);
+	    distance.add(3, p2fromBottom);
+	    distance.add(4, (double) p1y);
+	    distance.add(5, (double) p2y);
 	    
 	    return distance;
     }

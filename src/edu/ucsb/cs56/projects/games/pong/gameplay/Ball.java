@@ -2,6 +2,7 @@ package edu.ucsb.cs56.projects.games.pong.gameplay;
 
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 /** edu.ucsb.cs56.projects.games.pong.gameplay.Ball is the class that will move the ball around the screen
  @author Timothy Fok  
@@ -109,38 +110,38 @@ public class Ball extends gameObject{
    	 }
     }
     
-    public void keyPressed(KeyEvent evt, double [] distance){
+    public void keyPressed(KeyEvent evt, ArrayList<Double> distance){
 
-        if ( (evt.getKeyCode() == KeyEvent.VK_A) && ((int)distance[0] < DifficultyLevel.getPaddleHeight()) && (attached == false)) {
-       	 holdBallToPaddle(evt, distance[0]);
+        if ( (evt.getKeyCode() == KeyEvent.VK_A) && ( distance.get(0) < DifficultyLevel.getPaddleHeight()) && (attached == false)) {
+       	 holdBallToPaddle(evt, distance.get(0));
         }
-        if( evt.getKeyCode() == KeyEvent.VK_W && attached == true && (int)distance[4] 
+        if( evt.getKeyCode() == KeyEvent.VK_W && attached == true && distance.get(4)
         		> 5 ){
        	 setYVelocity( -5 );
         }
-        if( evt.getKeyCode() == KeyEvent.VK_S && attached == true && (int)distance[2] 
+        if( evt.getKeyCode() == KeyEvent.VK_S && attached == true && distance.get(2) 
         		> 5){
             setYVelocity( 5 );
         }
         
         
-        if (evt.getKeyCode() == KeyEvent.VK_LEFT && (int)distance[1] < DifficultyLevel.getPaddleHeight() && attached == false) {
-       	 holdBallToPaddle(evt, distance[1]);
+        if (evt.getKeyCode() == KeyEvent.VK_LEFT && distance.get(1)< DifficultyLevel.getPaddleHeight() && attached == false) {
+       	 holdBallToPaddle(evt, distance.get(1));
         }
-        if( evt.getKeyCode() == KeyEvent.VK_UP && attached == true && (int)distance[5] 
+        if( evt.getKeyCode() == KeyEvent.VK_UP && attached == true && distance.get(5) 
         		> 5 ){
        	 setYVelocity( -5 );
         }
-        if( evt.getKeyCode() == KeyEvent.VK_DOWN && attached == true && (int)distance[3] 
+        if( evt.getKeyCode() == KeyEvent.VK_DOWN && attached == true && distance.get(3) 
         		> 5 ){
        	 setYVelocity( 5 );
         }
     }
     
-    public void keyReleased(KeyEvent evt, double[] distance){
+    public void keyReleased(KeyEvent evt, ArrayList<Double> distance){
    		
    	 if ( evt.getKeyCode() == KeyEvent.VK_A && attached == true ) {
-       	 releaseBallFromPaddle(evt, distance[0]);
+       	 releaseBallFromPaddle(evt, distance.get(0));
    	 }
         if( evt.getKeyCode() == KeyEvent.VK_W && attached == true){
        	 setYVelocity( 0 );
@@ -149,7 +150,7 @@ public class Ball extends gameObject{
             setYVelocity( 0 );
         }
         if (evt.getKeyCode() == KeyEvent.VK_LEFT && attached == true) {
-       	 releaseBallFromPaddle(evt,distance[1]);
+       	 releaseBallFromPaddle(evt,distance.get(1));
         }
         if( evt.getKeyCode() == KeyEvent.VK_UP && attached == true){
        	 setYVelocity( 0 );
