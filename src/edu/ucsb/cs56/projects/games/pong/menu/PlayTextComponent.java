@@ -4,20 +4,15 @@ import edu.ucsb.cs56.projects.games.pong.gameplay.DifficultyLevel;
 import edu.ucsb.cs56.projects.games.pong.gameplay.Screen;
 import edu.ucsb.cs56.projects.games.pong.sound.SoundEffect;
 
-import javax.sound.sampled.*; 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Created by angelortega on 2/22/16.
  */
 public class PlayTextComponent extends MenuTextComponent  {
     private Screen screen;
-    public static int difficulty;
+    
     protected SoundEffect audio = new SoundEffect("87035__runnerpack__menusel.wav");
     public PlayTextComponent(String title, Color backgroundColor) {
         super(title, backgroundColor);
@@ -30,8 +25,7 @@ public class PlayTextComponent extends MenuTextComponent  {
             if(prompt.isSelected()) {
                 playGameStartAudio();
 		DifficultyLevel d=new DifficultyLevel(prompt.getDifficulty());
-		difficulty=d.getDifficulty();
-                screen = new Screen(8 * prompt.getDifficulty(), 6 * prompt.getDifficulty());
+        screen = new Screen(8 * prompt.getDifficulty(), 6 * prompt.getDifficulty());
 	    }
         }
 //        else if(textColor.equals(Color.BLUE) && screen != null) {
@@ -56,8 +50,5 @@ public class PlayTextComponent extends MenuTextComponent  {
     // Audio credit goes to Runner Pack via: http://freesound.org/people/RunnerPack/sounds/87035/
 	audio.playClip();
     }
-   public static int getDifficulty() 
-   {
-	return difficulty;
-   }
+  
 }

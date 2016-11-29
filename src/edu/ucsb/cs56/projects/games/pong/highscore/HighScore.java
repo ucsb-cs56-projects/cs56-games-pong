@@ -1,7 +1,5 @@
 package edu.ucsb.cs56.projects.games.pong.highscore;
 
-import java.awt.*;
-
 /** edu.ucsb.cs56.projects.games.pong.HighScore is the class that turns the winner's name and score into a string
  @author Vincent Gandolfo, Krishna Lingampalli
  @version CS56, Winter 2015, UCSB

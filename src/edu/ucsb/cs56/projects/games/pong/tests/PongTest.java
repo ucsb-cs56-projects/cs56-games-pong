@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.games.pong;
+package edu.ucsb.cs56.projects.games.pong.tests;
 
 import edu.ucsb.cs56.projects.games.pong.gameplay.Pong;
 
