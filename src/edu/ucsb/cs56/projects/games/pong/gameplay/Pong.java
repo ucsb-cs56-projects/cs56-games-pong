@@ -2,6 +2,7 @@ package edu.ucsb.cs56.projects.games.pong.gameplay;
 
 import edu.ucsb.cs56.projects.games.pong.sound.SoundEffect;
 import edu.ucsb.cs56.projects.games.pong.menu.PlayTextComponent;
+import edu.ucsb.cs56.projects.games.pong.menu.ColorPrompt;
 
 /** edu.ucsb.cs56.projects.games.pong.gameplay.Pong is the class that will facilitate
  * the game of Pong being run 
@@ -35,7 +36,8 @@ public class Pong implements Runnable {
     public Pong() {
     	p1 = new Paddle( 8, Screen.h/2 - (DifficultyLevel.getPaddleHeight())/2, DifficultyLevel.getPaddleHeight());                        // Left Paddle
         p2 = new Paddle( Screen.w - 38 , Screen.h/2 - (DifficultyLevel.getPaddleHeight())/2, DifficultyLevel.getPaddleHeight(),true );     // Right Paddle
-	
+		p1.setColor(ColorPrompt.getColorA());
+		p2.setColor(ColorPrompt.getColorB());
 	
 			  
         b = new Ball( ((Screen.w-DifficultyLevel.getWidth()) /2),
