@@ -13,14 +13,14 @@ class gameObject{
     static boolean isGoingRight = false;   // direction of the ball
     public Rectangle rectangle;            // holds the x and y coordinates
                                            //   as well as width and height
-
+	public Color color;
     /** Default constructor, not used */
     gameObject() {  }            
 
     /** Constructor used by both the Paddles, so all paddles are the same size */
     gameObject( int x, int y, int rectH) 
     {    
-	this( x, y, 10, rectH); 
+	this( x, y, 10, rectH);
     }
     
     /** This constructor is used to set coordinates and size, used by subclasses Ball and Paddle */
@@ -29,14 +29,16 @@ class gameObject{
 	setXVelocity( 0 );
 	setYVelocity( 0 );
 	rectangle = new Rectangle( x, y, rectW, rectH );
+	this.color = getRandomColor();
     }
     
     gameObject( int x, int y, int rectW, int rectH, boolean isGoingRight )
     {
 	setXVelocity( 0 );
 	setYVelocity( 0 );
-	this.isGoingRight = true;
+	gameObject.isGoingRight = true;
 	rectangle = new Rectangle( x, y, rectW, rectH );
+	this.color = getRandomColor();
     }
     
     // ( x, y ) coordinates are to the upper left hand corner
@@ -48,8 +50,11 @@ class gameObject{
      * @param x x coordinate of the Paddle
      */
     public void setXCoordinate( int x ) { rectangle.x = x; }
-
-    // The y Coordinate to the top
+	
+	/**set the color of gameobject **/
+	public void setColor(Color newColor) {color = newColor;}
+    
+	// The y Coordinate to the top
     /** getYCoordinate() returns the y coordinate of the Paddle */
     public int getYCoordinate()         { return rectangle.y; }
     /** setYCoordinate sets the y coordinate of the Paddle
@@ -84,8 +89,9 @@ class gameObject{
      * @param dy the y velocity of the ball
      */
     public void setYVelocity( int dy )  { yVelocity = dy; }
+	
     /** getRandomColor() returns a new color that was randomly generated */
-    public Color getRandomColor()
+	public Color getRandomColor()
     {
 	int red = (int) (Math.random() * 250);
 	int green = (int) (Math.random() * 250);
