@@ -43,7 +43,7 @@ public class Ball extends gameObject{
     /** The draw method sets a new Color for the ball and redraws the ball with new coordinates */ 
     public void draw( Graphics g )
     {
-	g.setColor( getRandomColor() );
+	g.setColor(this.color);
 	g.fillOval( getXCoordinate(), getYCoordinate(), 
 		    getWidth(), getHeight() );
     }

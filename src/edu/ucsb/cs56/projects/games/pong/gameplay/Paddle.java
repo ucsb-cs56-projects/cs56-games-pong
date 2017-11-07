@@ -93,7 +93,7 @@ public class Paddle extends gameObject{
     /** the draw function gets a new random color to draw the paddle and then redraws it */
     public void draw(Graphics g)
     {
-        g.setColor( getRandomColor() );
+        g.setColor(this.color);
         g.fillRect( getXCoordinate(), getYCoordinate(), 
 		    getWidth(), getHeight() );
     }

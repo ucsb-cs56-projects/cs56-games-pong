@@ -21,7 +21,11 @@ public class PlayTextComponent extends MenuTextComponent  {
     public void mouseClicked(MouseEvent mouseEvent) {
         if(textColor.equals(Color.BLUE)) {
             playGameStartAudio();
-            DifficultyLevelPrompt prompt = new DifficultyLevelPrompt();
+			
+			//Set color for paddles
+			ColorPrompt cPrompt = new ColorPrompt();
+			
+			DifficultyLevelPrompt prompt = new DifficultyLevelPrompt();
             if(prompt.isSelected()) {
                 playGameStartAudio();
 		DifficultyLevel d=new DifficultyLevel(prompt.getDifficulty());
