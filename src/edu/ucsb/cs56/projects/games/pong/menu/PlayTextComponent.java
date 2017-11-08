@@ -13,18 +13,22 @@ import java.awt.event.MouseEvent;
  @version CS56, Fall 2017, UCSB
  */
 public class PlayTextComponent extends MenuTextComponent  {
+    /**Holds the object for the screen*/
     private Screen screen;
-    
+    /**Holds a new SoundEffect object for the button press*/
     protected SoundEffect audio = new SoundEffect("87035__runnerpack__menusel.wav");
+    /**Constructor for the PlayTextComponent that takes in a title String and background color*/
     public PlayTextComponent(String title, Color backgroundColor) {
         super(title, backgroundColor);
     }
+    /**Override the mouseClicked method to begin option panels and start the game*/
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         if(textColor.equals(Color.BLUE)) {
             playGameStartAudio();
 	    //Set color for paddles
-	    ColorPrompt cPrompt = new ColorPrompt();	    
+	    ColorPrompt cPrompt = new ColorPrompt();
+	    //Set difficulty level
 	    DifficultyLevelPrompt prompt = new DifficultyLevelPrompt();
             if(prompt.isSelected()) {
                 playGameStartAudio();
@@ -40,15 +44,15 @@ public class PlayTextComponent extends MenuTextComponent  {
 	//            }
 	//        }
     }
-    
+    /**Override mousePressed() not used*/
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
     }
-
+    /**Override mouseReleased() not used*/
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
     }
-    
+    /**Override playGameStartAudio to play an audio clip*/
     @Override
     protected void playGameStartAudio() {
 	// Audio credit goes to Runner Pack via: http://freesound.org/people/RunnerPack/sounds/87035/
