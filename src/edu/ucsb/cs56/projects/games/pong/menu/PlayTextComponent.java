@@ -7,8 +7,10 @@ import edu.ucsb.cs56.projects.games.pong.sound.SoundEffect;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-/**
- * Created by angelortega on 2/22/16.
+/** edu.ucsb.cs56.projects.games.pong.menu.PlayTextComponent is the class that holds the onClick event of the play button
+ @author Angel Ortega
+ @author Andrew Polk, Victoria Sneddon
+ @version CS56, Fall 2017, UCSB
  */
 public class PlayTextComponent extends MenuTextComponent  {
     private Screen screen;
@@ -21,24 +23,22 @@ public class PlayTextComponent extends MenuTextComponent  {
     public void mouseClicked(MouseEvent mouseEvent) {
         if(textColor.equals(Color.BLUE)) {
             playGameStartAudio();
-			
-			//Set color for paddles
-			ColorPrompt cPrompt = new ColorPrompt();
-			
-			DifficultyLevelPrompt prompt = new DifficultyLevelPrompt();
+	    //Set color for paddles
+	    ColorPrompt cPrompt = new ColorPrompt();	    
+	    DifficultyLevelPrompt prompt = new DifficultyLevelPrompt();
             if(prompt.isSelected()) {
                 playGameStartAudio();
 		DifficultyLevel d=new DifficultyLevel(prompt.getDifficulty());
-        screen = new Screen(8 * prompt.getDifficulty(), 6 * prompt.getDifficulty());
+		screen = new Screen(8 * prompt.getDifficulty(), 6 * prompt.getDifficulty());
 	    }
         }
-//        else if(textColor.equals(Color.BLUE) && screen != null) {
-//            DifficultyLevelPrompt prompt = new DifficultyLevelPrompt();
-//            if(prompt.isSelected()) {
-//                screen.jf.setSize(8*prompt.getDifficulty(), 6*prompt.getDifficulty());
-//                screen.jf.setVisible(true);
-//            }
-//        }
+	//        else if(textColor.equals(Color.BLUE) && screen != null) {
+	//            DifficultyLevelPrompt prompt = new DifficultyLevelPrompt();
+	//            if(prompt.isSelected()) {
+	//                screen.jf.setSize(8*prompt.getDifficulty(), 6*prompt.getDifficulty());
+	//                screen.jf.setVisible(true);
+	//            }
+	//        }
     }
     
     @Override
@@ -51,8 +51,7 @@ public class PlayTextComponent extends MenuTextComponent  {
     
     @Override
     protected void playGameStartAudio() {
-    // Audio credit goes to Runner Pack via: http://freesound.org/people/RunnerPack/sounds/87035/
+	// Audio credit goes to Runner Pack via: http://freesound.org/people/RunnerPack/sounds/87035/
 	audio.playClip();
     }
-  
 }
