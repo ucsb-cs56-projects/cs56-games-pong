@@ -14,39 +14,40 @@ import static org.junit.Assert.assertEquals;
 
 public class PaddleTest 
 {
-		/**
-       test constructor from PaddleTest
-       //@see Paddle
-
-    */ 
-    //<<<<<<< HEAD
-     @Test public void testConstructor(){
+    /**Basic constructor for PaddleTest
+     * @return PaddleTest object
+     */
+    public PaddleTest() {}
+    
+    /**
+     * test constructor from PaddleTest
+     * @see Paddle
+     */ 
+    @Test
+    public void testConstructor(){
         Paddle paddle = new Paddle(20,20, 90);
         assertEquals(20,paddle.getXCoordinate());
-  assertEquals(20,paddle.getYCoordinate()); 
-  }
+	assertEquals(20,paddle.getYCoordinate()); 
+    }
+    
     //=======
     /*    @Test public void testConstructor(){
-        Paddle paddle = new Paddle(20,20, 90);
-        assertEquals(20,paddle.getXCoordinate());
-  assertEquals(20,paddle.getYCoordinate()); 
-    }*/
+	  Paddle paddle = new Paddle(20,20, 90);
+	  assertEquals(20,paddle.getXCoordinate());
+	  assertEquals(20,paddle.getYCoordinate()); 
+	  }*/
     //>>>>>>> c0718998d42ee9377f73c5840fd8eb88a156ccb7
     
     /**
-       test constructor from PaddleTest
-      // @see Paddle
-
-    */
-    /*    @Test public void testConstructor2(){
-  Paddle paddle = new Paddle(30,100, 90);
-        assertEquals(30,paddle.getXpos());
-  assertEquals(100,paddle.getYpos()); 
-  }*/
+     * test constructor from PaddleTest
+     * @see Paddle
+     */
+    /*@Test public void testConstructor2(){
+      Paddle paddle = new Paddle(30,100, 90);
+      assertEquals(30,paddle.getXpos());
+      assertEquals(100,paddle.getYpos()); 
+      }*/
  
-  
-
-
     //////////////////////////////////
     // not needed
     // changed to getYVelocity()
@@ -54,12 +55,10 @@ public class PaddleTest
     /**
        test getdy
        //@see Paddle#getdy
-    */
+       */
     /*    @Test public void testgetdy(){
-        Paddle paddle = new Paddle(30,100, 90);
-  paddle.setdy(7);
-        assertEquals(7,paddle.getdy());
-	}*/
-
-
+	  Paddle paddle = new Paddle(30,100, 90);
+	  paddle.setdy(7);
+	  assertEquals(7,paddle.getdy());
+	  }*/   
 }

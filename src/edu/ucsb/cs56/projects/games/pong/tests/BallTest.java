@@ -14,6 +14,11 @@ import static org.junit.Assert.assertEquals;
 
 public class BallTest 
 {
+    /**Default BallTest constructor
+     * @return BallTest object
+     */
+    public BallTest() {}
+    
     /**
        test constructor from BallTest
        //@see Ball
