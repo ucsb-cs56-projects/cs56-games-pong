@@ -4,16 +4,22 @@ import java.awt.*;
 
 /** edu.ucsb.cs56.projects.games.pong.gameplay.gameObject is used to change velocities of objects used in the game pong
  @author Vincent Gandolfo, Krishna Lingampalli
- @version CS56, Winter 2015, UCSB
+ @author Andrew Polk, Victoria Sneddon
+ @version CS56, Fall 2017, UCSB
 */
 class gameObject{
     
-    public int xVelocity;                  // speed horizontally
-    public int yVelocity;                  // speed vertically
-    static boolean isGoingRight = false;   // direction of the ball
-    public Rectangle rectangle;            // holds the x and y coordinates
-                                           //   as well as width and height
-	public Color color;
+    /** Gameobject horizontal speed (x)*/
+    public int xVelocity;                  
+    /** Gameobject vertival speed (y)*/
+    public int yVelocity;                  
+    /**Holds the direction of the ball*/
+    static boolean isGoingRight = false;
+    /**Holds x and y coordinates and width and height */
+    public Rectangle rectangle;        
+    /** Holds the color of the gameObject*/                                       
+    public Color color;
+    
     /** Default constructor, not used */
     gameObject() {  }            
 
@@ -32,6 +38,7 @@ class gameObject{
 	this.color = getRandomColor();
     }
     
+    /** Constructor that takes in x, y, rectW, rectH, and if object is going right or not */
     gameObject( int x, int y, int rectW, int rectH, boolean isGoingRight )
     {
 	setXVelocity( 0 );

@@ -10,16 +10,22 @@ import java.util.ArrayList;
  @author Jake Dumont, Heneli Kailahi
  @author Benjamin Hartl, Sarah Darwiche
  @author Vincent Gandolfo, Krishna Lingampalli
- @version CS56, Winter 2015, UCSB                   
+ @author Andrew Polk, Victoria Sneddon
+ @version CS56, Fall 2017, UCSB                   
 */
 
 // The Movement of the Ball on the screen
 public class Ball extends gameObject{
 
+    /**Number of balls lost */
     public int ballsLost;
+    /**Speed of the ball */
     public int speed = 1;
+    /** Holds original x velocity */
     public int origXVelocity;
+    /**Holds if the ball is attached to a paddle */
     public boolean attached = false;
+    /** Holds if the ball is going right */
     boolean isGoingRight = false;
                                                 
     /** edu.ucsb.cs56.projects.games.pong.gameplay.Ball constructor to initialize location of edu.ucsb.cs56.projects.games.pong.gameplay.Ball onto the screen
@@ -79,7 +85,8 @@ public class Ball extends gameObject{
     	setXCoordinate(( Screen.w-DifficultyLevel.getWidth() ) / 2 );
 		setYCoordinate(( Screen.h-DifficultyLevel.getHeight() ) / 2 );
     }
-    ///work in progress below
+   
+    /** takes in KeyEvent and distance and holds ball to paddle if correct key is pressed and distance is correct */
     public void holdBallToPaddle(KeyEvent evt, double distance)/////////////////////////////
     {
    	 origXVelocity = getXVelocity();
@@ -96,6 +103,7 @@ public class Ball extends gameObject{
    	 }
     }
     
+    /** Takes in keyEvent and distance and releases ball from paddle if correct key is released*/
     public void releaseBallFromPaddle(KeyEvent evt, double distance)/////////////////////////////
     {
    	 attached = false;
@@ -109,7 +117,7 @@ public class Ball extends gameObject{
    		 setYVelocity(speed);
    	 }
     }
-    
+    /** Takes in KeyEvent and arrayList of distance and moves ball with the paddle if ball is being held */
     public void keyPressed(KeyEvent evt, ArrayList<Double> distance){
 
         if ( (evt.getKeyCode() == KeyEvent.VK_A) && ( distance.get(0) < DifficultyLevel.getPaddleHeight()) && (attached == false)) {
@@ -137,7 +145,9 @@ public class Ball extends gameObject{
        	 setYVelocity( 5 );
         }
     }
-    
+
+
+    /** takes in KeyEvent and arrayList of distance and releases ball from paddle or stops ball from moving */
     public void keyReleased(KeyEvent evt, ArrayList<Double> distance){
    		
    	 if ( evt.getKeyCode() == KeyEvent.VK_A && attached == true ) {

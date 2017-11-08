@@ -10,12 +10,17 @@ import java.awt.Graphics;
  @author Jake Dumont, Heneli Kailahi
  @author Benjamin Hartl, Sarah Darwiche
  @author Vincent Gandolfo, Krishna Lingampalli
- @version CS56, Winter 2015, UCSB 
+ @author Andrew Polk, Victoria Sneddon
+ @version CS56, Fall 2017, UCSB 
 */
 public class Paddle extends gameObject{
+    /**Number of points a player has*/
     public int points;
+    /**Holds the number of ballsLeft*/
     public int ballCount;
+    /**If this is the right side paddle*/
     public boolean right;
+    /**Not used*/
     public boolean lol;
 
 

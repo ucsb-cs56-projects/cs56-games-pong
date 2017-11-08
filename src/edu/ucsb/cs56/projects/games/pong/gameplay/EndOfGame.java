@@ -13,13 +13,15 @@ import java.util.Collections;
  *
  * @author Vincent Gandolfo, Krishna Lingampalli
  * @author Angel Ortega
- * @version CS56, Winter 2016, UCSB
+ * @author Victoria Sneddon, Andrew Polk
+ * @version CS56, Fall 2017, UCSB
 */
 
 public class EndOfGame {
-    //Create ArrayList to store high scores and names
+    /**Create ArrayList to store high scores and names */
     public ArrayList<HighScore> hList = new ArrayList<HighScore>();
-
+    
+    /** winner holds Highscore object */
     public HighScore winner;
 
     /** Constructor that identifies the winner, and writes and saves their name      *  and score to a file
