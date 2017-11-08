@@ -20,17 +20,27 @@ import java.util.ArrayList;
  @author Jake Dumont, Heneli Kailahi
  @author Benjamin Hartl, Sarah Darwiche
  @author Vincent Gandolfo, Krishna Lingampalli
- @version CS56, Winter 2015, UCSB
+ @author Victoria Sneddon, Andrew Polk
+ @version CS56, Fall 2017, UCSB
 */
 
+
 public class Screen{
+    /** holds JFrame object */
     public static JFrame jf;
+    /**holds width of screen */
     static int w;
+    /**holds height of screen*/
     static int h;
+    /** holds new Pong object */
     public Pong game;
+    /** Graphics object */
     public Graphics doublebufferG;
+    /** Image object*/
     public Image doublebufferImg;
+    /** thread for ball */
     static Thread theball;
+    /**draw panel */
     MyDrawPanel mdp;
 
 
@@ -192,7 +202,7 @@ public class Screen{
 	}
     }
    
-    
+   /** calculates distance and returns it in arrayList*/ 
     public ArrayList<Double> distanceCalc() {
     	ArrayList<Double> distance = new ArrayList<Double>();
     	
