@@ -13,9 +13,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class PongTest 
 {
-    /**Basic constructor for PongTest
-     * @return PongTest
-     */
+    /**Basic constructor for PongTest*/
     public PongTest() {}
     
     /**

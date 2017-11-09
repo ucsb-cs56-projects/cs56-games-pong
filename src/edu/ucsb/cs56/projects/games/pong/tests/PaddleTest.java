@@ -14,9 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 public class PaddleTest 
 {
-    /**Basic constructor for PaddleTest
-     * @return PaddleTest object
-     */
+    /**Basic constructor for PaddleTest*/
     public PaddleTest() {}
     
     /**

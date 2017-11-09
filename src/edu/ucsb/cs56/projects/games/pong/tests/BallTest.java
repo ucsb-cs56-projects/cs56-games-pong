@@ -14,9 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 public class BallTest 
 {
-    /**Default BallTest constructor
-     * @return BallTest object
-     */
+    /**Default BallTest constructor*/
     public BallTest() {}
     
     /**
