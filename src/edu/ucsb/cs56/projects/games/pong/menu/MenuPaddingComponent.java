@@ -19,9 +19,9 @@ public class MenuPaddingComponent extends MainMenuComponent {
     private Color backgroundColor;
 
     /**
-     * @param Color backgroundColor 
-     * @param int height
-     * @param int width
+     * @param backgroundColor chosen background color 
+     * @param height inputted height
+     * @param width inputted width
      * sets the height and width and background color and saves the preferred size to be of Dimension width, height
      */
     public MenuPaddingComponent(Color backgroundColor,int height, int width) {
@@ -44,7 +44,7 @@ public class MenuPaddingComponent extends MainMenuComponent {
 
     /**
      * creates actual image with Graphic g and sets color to backgroundColor and fills rectangle at location 0, 0 of given width and height
-     * @param Graphics g
+     * @param g for graphics
      */
     @Override
     public void paintComponent(Graphics g) {

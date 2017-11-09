@@ -34,8 +34,8 @@ public abstract class MenuTextComponent extends MainMenuComponent implements Mou
 
     /**
      * MenuTextComponent constructor to initialize values
-     * @param String title
-     * @param Color backgroundColor
+     * @param title holds String of title
+     * @param backgroundColor for background color
      */
     public MenuTextComponent(String title, Color backgroundColor) {
 
@@ -57,7 +57,7 @@ public abstract class MenuTextComponent extends MainMenuComponent implements Mou
 
     /**
      *paintComponent that creates graphic and initialzes values
-     * @param Graphics g
+     * @param g for Graphics
      */
     @Override
     public void paintComponent(Graphics g) {
@@ -68,7 +68,7 @@ public abstract class MenuTextComponent extends MainMenuComponent implements Mou
     }
 
     /** Default MouseEvents for our MouseListener
-     * @param MouseEvent mouseEvent
+     * @param mouseEvent MouseEvent for Listener
      */
     @Override
     public void mouseEntered(MouseEvent mouseEvent) {
@@ -77,7 +77,7 @@ public abstract class MenuTextComponent extends MainMenuComponent implements Mou
     }
 
     /**
-     * @param MouseEvent mouseEvent
+     * @param mouseEvent MouseEvent
      * if mouse clicks exit, text color goes to white and screen is repainted
      */
     @Override

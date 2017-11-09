@@ -12,13 +12,13 @@ public abstract class MainMenuComponent extends JComponent {
 
     /**
      *Dimension type
-     * @param Dimension dimension
+     * @param dimension static Dimension
      */
     private static Dimension dimension;
     
     /**
      *set dimention equal to dmtion
-     * @param Dimension dmtion
+     * @param dmtion sets Dimension
      */
     public static void setDimension(Dimension dmtion) {
         dimension  = dmtion;

@@ -17,15 +17,15 @@ public class InstructionsTextComponent extends MenuTextComponent {
     
     /**
      * creates a Text Component to the MenuTextComponent
-     * @param String title
-     * @param Color backgroundColor
+     * @param title of type String
+     * @param backgroundColor paramater for InstructionsTextComponent
      */
     public InstructionsTextComponent(String title, Color backgroundColor) {
         super(title, backgroundColor);
     }
 
     /**plays audio, creates new instructions and makes visible
-     * @param MouseEvent mouseEvent
+     * @param mouseEvent checks if mouse is clicked
      */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
@@ -39,7 +39,7 @@ public class InstructionsTextComponent extends MenuTextComponent {
     }
 
     /**Overriden mousePressed no body
-     * @param MouseEvent mouseEvent
+     * @param mouseEvent checks if mousePressed
      */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
@@ -48,7 +48,7 @@ public class InstructionsTextComponent extends MenuTextComponent {
 
     /**
      * Overridden mouseReleased has no body code
-     * @param MouseEvent mouseEvent
+     * @param mouseEvent checks if mouseReleased
      */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
@@ -58,7 +58,7 @@ public class InstructionsTextComponent extends MenuTextComponent {
 
     /**
      *Overridden mouseExited changes selection color
-     *@param MouseEvent mouseEvent
+     *@param mouseEvent checks if mouseExited
      */
     @Override
     public void mouseExited(MouseEvent mouseEvent) {

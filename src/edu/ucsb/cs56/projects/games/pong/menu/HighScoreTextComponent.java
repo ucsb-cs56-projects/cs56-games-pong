@@ -14,8 +14,8 @@ public class HighScoreTextComponent extends MenuTextComponent {
 
     /**
        calls constructor of superclass MenuTextComponent
-     * @param String title
-     * @param Color backgroundColor
+     * @param title of type String
+     * @param backgroundColor takes in set backgroundColor
     */
     public HighScoreTextComponent(String title, Color backgroundColor) {
         super(title, backgroundColor);
@@ -24,7 +24,7 @@ public class HighScoreTextComponent extends MenuTextComponent {
     @Override
     /**
      * plays audio, if text color is blue, creates new DisplayHighScores called displayhs
-     * @param MouseEvent mouseEvent
+     * @param mouseEvent insert object of type MouseEvent into mouseClicked
      */
     public void mouseClicked(MouseEvent mouseEvent) {
         playGameStartAudio();
@@ -35,7 +35,7 @@ public class HighScoreTextComponent extends MenuTextComponent {
 
 
     /**Overriden mousePressed has no body code
-     * @param MouseEvent mouseEvent*/
+     * @param mouseEvent parameter to mousePressed*/
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
 
@@ -43,7 +43,7 @@ public class HighScoreTextComponent extends MenuTextComponent {
     
     /**
      * Overriden mouseReleased has no body code
-     * @param MouseEvent mouseEvent
+     * @param mouseEvent parameter for mouseReleased
      */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
