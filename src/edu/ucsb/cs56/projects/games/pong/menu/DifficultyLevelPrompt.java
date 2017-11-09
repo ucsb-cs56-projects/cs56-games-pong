@@ -4,15 +4,26 @@ import javax.swing.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/** edu.ucsb.cs56.projects.game.pong.menu allows user to select difficulty level*/
 /**
- * Created by angelortega on 2/22/16.
- */
+ *  @author angelortega on 2/22/16.
+ * @author Victoria Sneddon, Andrew Polk 
+ * @version CS56, Fall 2017, UCSB
+*/ 
+
 public class DifficultyLevelPrompt extends JPanel {
 
+    /** holds vaule associated with certain difficulty level */
     private int difficulty;
+
+    /** boolean value called selected noting if difficulty level is chosen */
     private boolean selected;
+
+    /** method giving options for difficulty*/
     private static final String[] DIFFICULTY_LEVELS = new String[]
             { "Super-Easy", "Easy", "Medium","Hard","Extreme", "Chaos", "Two Balls"};
+
+    /**LinkedHashMap of  dificulty levels */
     private static final Map<String,Integer> DIFFICULTIES =  new LinkedHashMap<String,Integer>(){{
         put("Super-Easy",80);
         put("Easy",100);
@@ -23,15 +34,21 @@ public class DifficultyLevelPrompt extends JPanel {
         put("Two Balls",90);
 
     }};
+    
+    /**Map that returns difficulties */
     public Map<String, Integer> getHashmap(){
 	return DIFFICULTIES;}
+
+    /**prompt user sees to select difficulty */
     public DifficultyLevelPrompt() {
-	
+	/*ComboBox for selections */
         JComboBox selections = new JComboBox(DIFFICULTIES.keySet().toArray());
         this.add(selections);
+	/*Show OptionPane and save response to int */
         int responseFromUser = JOptionPane.showConfirmDialog(null,this,
                 "Select your difficulty:",JOptionPane.OK_CANCEL_OPTION,JOptionPane.OK_OPTION);
-        Object itemChosen = selections.getSelectedItem();
+        /*Save chosen items to objects */
+	Object itemChosen = selections.getSelectedItem();
         if (responseFromUser == JOptionPane.OK_OPTION && itemChosen != null) {
             difficulty = DIFFICULTIES.get(itemChosen.toString()).intValue();
             this.selected = true;
@@ -39,10 +56,11 @@ public class DifficultyLevelPrompt extends JPanel {
             this.remove(this);
         }
     }
+    /**isSelected() returns if items have been selected*/
     public boolean isSelected() {
         return selected;
     }
-
+    /**getDifficulty() returns difficulty*/
     public int getDifficulty() {
         return difficulty;
     }
