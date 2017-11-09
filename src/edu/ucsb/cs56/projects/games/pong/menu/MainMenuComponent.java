@@ -19,7 +19,6 @@ public abstract class MainMenuComponent extends JComponent {
     /**
      *set dimention equal to dmtion
      * @param Dimension dmtion
-     * @return nothing
      */
     public static void setDimension(Dimension dmtion) {
         dimension  = dmtion;
