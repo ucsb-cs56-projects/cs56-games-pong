@@ -24,8 +24,8 @@ public class Paddle extends gameObject{
     /**If this is the right side paddle*/
     public boolean right;
 
-    /**Not used*/
-    public boolean lol;
+    /**True if paddle is moving*/
+    private boolean paddleMoving;
 
 
     /** Paddle contructor to initialize intial x,y placement of paddle
@@ -162,13 +162,21 @@ public class Paddle extends gameObject{
     /** movePaddle() gets activated when up or down key is pressed then sets the new coordinates for the paddle to be drawn
      */
     public void movePaddle(){
+	paddleMoving = true;
+	
 	if( getYCoordinate() <= this.getPaddleBotHit() ){
 	    setYCoordinate( this.getPaddleBotHit() );
-	}
-	else if( getYCoordinate() >= this.getPaddleTopHit() ){
+	    paddleMoving = false;
+	} else if( getYCoordinate() >= this.getPaddleTopHit() ){
 	    setYCoordinate( this.getPaddleTopHit() );
+	    paddleMoving = false;
 	}
 	
 	setYCoordinate( getYCoordinate() + getYVelocity() );
     }
+
+    /**isPaddleMoving() return is the paddle is moving or not
+     * @return boolean if paddle is moving
+     */
+    public boolean isPaddleMoving() { return paddleMoving; }
 }

@@ -12,7 +12,8 @@ import edu.ucsb.cs56.projects.games.pong.menu.ColorPrompt;
  * @author Vincent Gandolfo, Krishna Lingampalli
  * @author Angel Ortega
  * @author Millan Batra and Alexander Ngo
- * @version CS56, Fall 2016, UCSB
+ * @author Andrew Polk, Victoria Sneddon
+ * @version CS56, Fall 2017, UCSB
  */
 public class Pong implements Runnable {
 
@@ -23,10 +24,10 @@ public class Pong implements Runnable {
     int moreSpeed=1;             
 
     /**Left Paddle*/
-    Paddle p1;
+    static Paddle p1;
 
     /**Right Paddle*/
-    Paddle p2;
+    static Paddle p2;
 
     /**Paddle that wins*/
     Paddle winner;                 
@@ -90,6 +91,16 @@ public class Pong implements Runnable {
      */
     public void setWinner(Paddle a) { winner = a; }
 
+    /**Returns gameobject for player1
+     * @return Paddle player1
+     */
+    public static Paddle getPlayer1() {return p1;}
+
+    /**Returns gameobject for player2
+     * @return Paddle player2
+     */
+    public static Paddle getPlayer2() {return p2;}
+    
     /** toString() returns which player has won in a string
      * @return String toString Method
      */ 
