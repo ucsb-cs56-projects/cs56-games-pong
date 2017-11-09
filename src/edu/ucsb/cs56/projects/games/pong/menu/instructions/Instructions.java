@@ -7,6 +7,8 @@ import java.awt.event.*;
 /** edu.ucsb.cs56.projects.games.pong.menu.instructions.Instructions is the classs that displays the instructions to the game when the user presses the instructions button
  @author Vincent Gandolfo, Krishna Lingampalli
  @version CS56, Winter 2015, UCSB
+ @author Victoria Sneddon, Andrew Polk
+ @version CS56, Fall 2017, UCSB
 */
 
 public class Instructions{
@@ -52,7 +54,9 @@ public class Instructions{
 	jf.setVisible(true);
     }
     
-    /** displayInstructions() displays the Instructions on how to play */
+    /** displayInstructions() displays the Instructions on how to play 
+     * @return String returns instructions
+     */
     public String displayInstructions()
     {
 	return ("<html><p><br>Difficulty:<br>The Screen size increases with the difficulty that is chosen.<br><br>How To Play:<br>Player 1 uses W to move the paddle up and S to move their paddle down.<br>Player 2 uses the Up and Down arrows to move their paddle up and down<br><br>Hit the space bar to move the ball initially.<br>Press P to pause the game.<br>Press M to return to the Main Menu.<br>The ball will increase in speed every 5 times it hits a paddle.<br>You lose a life if you miss the ball.<br>When you lose a life, the total hits will be added to your opponents score.<br>The winner is the player with remaining lives.</p></html>");
