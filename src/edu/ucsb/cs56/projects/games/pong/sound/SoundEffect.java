@@ -21,8 +21,7 @@ public class SoundEffect
     Clip clip;
 
     /**Creates a url to the sound file and opens the sound file
-     * @param takes in a string for the sound files name
-     * @return SoundEffect object
+     * @param sound takes in a string for the sound file
      */
     //Constructor
     //Creates and saves a sound effect
