@@ -203,6 +203,9 @@ public class Ball extends gameObject{
 	}
     }
 
+    /**Overrides getYVelocity to call ballAttachUpdate outside of key event
+     * @return int y velocity
+     */
     @Override
     public int getYVelocity() {
 	ballAttachUpdate();
