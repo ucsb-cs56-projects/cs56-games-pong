@@ -15,31 +15,37 @@ import java.util.ArrayList;
 
 
 /** Screen is the GUI implementation of the Pong game
- @author Timothy Fok 
- @author Bhanu Khanijau, Sanchit Gupta   
- @author Jake Dumont, Heneli Kailahi
- @author Benjamin Hartl, Sarah Darwiche
- @author Vincent Gandolfo, Krishna Lingampalli
- @author Victoria Sneddon, Andrew Polk
- @version CS56, Fall 2017, UCSB
+ * @author Timothy Fok 
+ * @author Bhanu Khanijau, Sanchit Gupta   
+ * @author Jake Dumont, Heneli Kailahi
+ * @author Benjamin Hartl, Sarah Darwiche
+ * @author Vincent Gandolfo, Krishna Lingampalli
+ * @author Victoria Sneddon, Andrew Polk
+ * @version CS56, Fall 2017, UCSB
 */
-
-
 public class Screen{
+
     /** holds JFrame object */
     public static JFrame jf;
+
     /**holds width of screen */
     static int w;
+
     /**holds height of screen*/
     static int h;
+
     /** holds new Pong object */
     public Pong game;
+
     /** Graphics object */
     public Graphics doublebufferG;
+
     /** Image object*/
     public Image doublebufferImg;
+
     /** thread for ball */
     static Thread theball;
+
     /**draw panel */
     MyDrawPanel mdp;
 
@@ -49,23 +55,24 @@ public class Screen{
      * @param windowWidth width of the JFrame window
      * @param windowHeight height of the JFrame window
      */
-      public Screen( int windowWidth, int windowHeight ) {
-	  jf = new JFrame( "Pong" );
-	  mdp = new MyDrawPanel();
-	  jf.add( mdp );
-	  setScreenSize( windowWidth, windowHeight );
-	  jf.setBackground(Color.BLACK);
-	  jf.setResizable( false );
-	  jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	  
-	  game = new Pong();
-	  theball = new Thread(game);
-	  theball.start();
-	  
-	  
-	  jf.addKeyListener(new myKeyAdapter());
-	  jf.setVisible( true );
+    public Screen( int windowWidth, int windowHeight ) {
+	jf = new JFrame( "Pong" );
+	mdp = new MyDrawPanel();
+	jf.add( mdp );
+	setScreenSize( windowWidth, windowHeight );
+	jf.setBackground(Color.BLACK);
+	jf.setResizable( false );
+	jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+	game = new Pong();
+	theball = new Thread(game);
+	theball.start();
+	
+	
+	jf.addKeyListener(new myKeyAdapter());
+	jf.setVisible( true );
     }
+    
     /** setScreenSize sets the size of the screen 
      * @param width width of the screen
      * @param height height of the screen
@@ -76,8 +83,9 @@ public class Screen{
 	h = height;
 	jf.setSize( w, h );
 	jf.setLocationRelativeTo( null );
-
+	
     }
+    
     /** MyDrawPanel draws the graphics onto the screen */
     class MyDrawPanel extends JPanel{
 	/** the draw function draws text, ball, paddle onto screen
@@ -98,23 +106,23 @@ public class Screen{
 		g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
 		g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
 	    }
-	     
+	    
 	    if(DifficultyLevel.getDifficulty()==90) {
 	    	if( game.b.isStopped() || game.b1.isStopped() ) {
-	    		g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
-	    		g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
-	    	    }
+		    g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
+		    g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
+		}
 	    	game.b1.draw(g);
 	    	game.b.draw(g);
 	    	game.p1.draw(g);
 	    	game.p2.draw(g);
 	    	jf.repaint();
-		}
+	    }
 	    else {
 	    	if( game.b.isStopped() ) {
-	    		g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
-	    		g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
-	    	    }
+		    g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
+		    g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
+		}
 	    	game.b.draw(g);
 	    	game.p1.draw(g);
 	    	game.p2.draw(g);
@@ -139,43 +147,41 @@ public class Screen{
 	 * @param evt the KeyEvent
 	 */
 	public void keyPressed(KeyEvent evt) {
-		ArrayList<Double> distance = distanceCalc();
-		game.p1.keyPressed(evt);
+	    ArrayList<Double> distance = distanceCalc();
+	    game.p1.keyPressed(evt);
 	    game.p2.keyPressed(evt);	
 	    game.b.keyPressed(evt, distance);       
 	    
 	    if(DifficultyLevel.getDifficulty()==90) {
-	    	if( game.b.isStopped() || game.b1.isStopped() )
-	    	{
-	    		if( evt.getKeyCode() == KeyEvent.VK_SPACE ) {
-	    			game.b.startBall();
-	    			game.b1.startBall();
+	    	if( game.b.isStopped() || game.b1.isStopped() ) {
+		    if( evt.getKeyCode() == KeyEvent.VK_SPACE ) {
+			game.b.startBall();
+			game.b1.startBall();
 		    }
 		    if( evt.getKeyCode() == KeyEvent.VK_P && game.b.attached == false){
-		    	game.b.startBall();
-		    	game.b1.startBall();
+			game.b.startBall();
+			game.b1.startBall();
 		    }
 		    if( evt.getKeyCode() == KeyEvent.VK_M ) {
-		    	jf.setVisible(false);     
+			jf.setVisible(false);     
 		    }
 		    else 
-		    	theball.yield();
-	    	}
+			theball.yield();
+		}
 	    	else {
-	    		if( evt.getKeyCode() == KeyEvent.VK_P ) {
-	    			game.b.stopBall();
-	    			game.b1.stopBall();
-	    		}
+		    if( evt.getKeyCode() == KeyEvent.VK_P ) {
+			game.b.stopBall();
+			game.b1.stopBall();
+		    }
 	    	}	
 	    }
 	    else {
-	    	if( game.b.isStopped())
-	    	{
-	    		if( evt.getKeyCode() == KeyEvent.VK_SPACE ) {
-	    			game.b.startBall();
+	    	if( game.b.isStopped()) {
+		    if( evt.getKeyCode() == KeyEvent.VK_SPACE ) {
+			game.b.startBall();
 		    }
 		    if( evt.getKeyCode() == KeyEvent.VK_P && game.b.attached == false){
-		    	game.b.startBall();
+			game.b.startBall();
 		    }
 		    if( evt.getKeyCode() == KeyEvent.VK_M ) {
 		    	jf.setVisible(false);     
@@ -184,48 +190,50 @@ public class Screen{
 		    	theball.yield();
 	    	}
 	    	else {
-	    		if( evt.getKeyCode() == KeyEvent.VK_P ) {
-	    			game.b.stopBall();
-	    		}
+		    if( evt.getKeyCode() == KeyEvent.VK_P ) {
+			game.b.stopBall();
+		    }
 	    	}
 	    }
 	}
-
+	
 	/** keyReleased checks if certain keys are released
 	 * @param evt the KeyEvent
 	 */
 	public void keyReleased(KeyEvent evt){
-		ArrayList<Double> distance = distanceCalc();
+	    ArrayList<Double> distance = distanceCalc();
 	    game.p1.keyReleased(evt);
 	    game.p2.keyReleased(evt);
 	    game.b.keyReleased(evt, distance);
 	}
     }
-   
-   /** calculates distance and returns it in arrayList*/ 
+    
+    /** calculates distance and returns it in arrayList
+     * @return ArrayList list of distances
+     */ 
     public ArrayList<Double> distanceCalc() {
     	ArrayList<Double> distance = new ArrayList<Double>();
     	
     	int p1x=game.p1.getXCoordinate();
-	    int p1y=game.p1.getYCoordinate();
-	    int p2x=game.p2.getXCoordinate();
-	    int p2y=game.p2.getYCoordinate();
-	    int bx =game.b.getXCoordinate();
-	    int by =game.b.getYCoordinate();
-	    
-	    double p1fromBall =Math.hypot(Math.abs(p1x-bx),Math.abs(p1y-by));
-	    double p2fromBall =Math.hypot(Math.abs(p2x-bx),Math.abs(p2y-by));
-	  
-	    double p1fromBottom = (double) Screen.h- p1y -DifficultyLevel.getPaddleHeight() - 25;
-	    double p2fromBottom = (double) Screen.h - p2y - DifficultyLevel.getPaddleHeight() - 25;
-	    
-	    distance.add(0, p1fromBall);
-	    distance.add(1, p2fromBall);
-	    distance.add(2, p1fromBottom);
-	    distance.add(3, p2fromBottom);
-	    distance.add(4, (double) p1y);
-	    distance.add(5, (double) p2y);
-	    
-	    return distance;
+	int p1y=game.p1.getYCoordinate();
+	int p2x=game.p2.getXCoordinate();
+	int p2y=game.p2.getYCoordinate();
+	int bx =game.b.getXCoordinate();
+	int by =game.b.getYCoordinate();
+	
+	double p1fromBall =Math.hypot(Math.abs(p1x-bx),Math.abs(p1y-by));
+	double p2fromBall =Math.hypot(Math.abs(p2x-bx),Math.abs(p2y-by));
+	
+	double p1fromBottom = (double) Screen.h- p1y -DifficultyLevel.getPaddleHeight() - 25;
+	double p2fromBottom = (double) Screen.h - p2y - DifficultyLevel.getPaddleHeight() - 25;
+	
+	distance.add(0, p1fromBall);
+	distance.add(1, p2fromBall);
+	distance.add(2, p1fromBottom);
+	distance.add(3, p2fromBottom);
+	distance.add(4, (double) p1y);
+	distance.add(5, (double) p2y);
+	
+	return distance;
     }
 }

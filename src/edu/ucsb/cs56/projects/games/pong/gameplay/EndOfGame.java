@@ -34,53 +34,54 @@ public class EndOfGame {
 	readTheFile();
 	saveToFile();
     }
-    /** readTheFile() reads the High Scores file */
+
+    /** readTheFile() reads the High Scores file*/
     public void readTheFile()
     {
 	try{
 	    File scoresFile = new File( "src/edu/ucsb/cs56/projects/games/pong/highscore/scores.csv" );
 	    FileReader fileReader = new FileReader( scoresFile );
 	    BufferedReader reader = new BufferedReader( fileReader );
-		String line;
+	    String line;
 	    while((line = reader.readLine()) != null) { //reads the file
-			String[] users = line.split(",");
-			if(users.length == 2)
-				hList.add(new HighScore(Integer.parseInt(users[0]),users[1]));
-		}
-		Collections.sort(hList);
-
-		reader.close();
+		String[] users = line.split(",");
+		if(users.length == 2)
+		    hList.add(new HighScore(Integer.parseInt(users[0]),users[1]));
+	    }
+	    Collections.sort(hList);
+	    
+	    reader.close();
 	}catch( IOException ioe ){
 	    ioe.printStackTrace();
 	}
     }
-    /** saveToFile() saves new file */
+
+    /** saveToFile() saves new file*/
     public void saveToFile( )
     {
 	try{
 	    BufferedWriter writer = new BufferedWriter(new FileWriter( "src/edu/ucsb/cs56/projects/games/pong/highscore/scores.csv" ));
 	    String playerScore = "";
-		String winnerScore = "";
+	    String winnerScore = "";
 	    for(HighScore highscore : hList )
 		{
-			playerScore = highscore.getPlayerScore()+"," +highscore.getPlayerName();
-			writer.write(playerScore);
-			writer.newLine();
+		    playerScore = highscore.getPlayerScore()+"," +highscore.getPlayerName();
+		    writer.write(playerScore);
+		    writer.newLine();
 		}
-		if(winner != null) {
-			winnerScore = winner.getPlayerScore()+"," +winner.getPlayerName();
-			writer.write(winnerScore);
-			writer.newLine();
-			hList.add(winner);
-		}
+	    if(winner != null) {
+		winnerScore = winner.getPlayerScore()+"," +winner.getPlayerName();
+		writer.write(winnerScore);
+		writer.newLine();
+		hList.add(winner);
+	    }
+	    
+	    Collections.sort(hList);
 
-		Collections.sort(hList);
-
-		writer.flush();
+	    writer.flush();
 	    writer.close();
 	}catch( IOException ioe ){
 	    ioe.printStackTrace();
 	}
     }
-
 }
