@@ -6,17 +6,18 @@ import java.util.Map;
 import java.awt.Color;
 
 /** edu.ucsb.cs56.projects.games.pong.menu.ColorPrompt is the class that will allow players to select paddle colors 
-    @author Andrew Polk, Victoria Sneddon
-    @version CS56, Fall 2017, UCSB
-*/
-
+ * @author Andrew Polk, Victoria Sneddon
+ * @version CS56, Fall 2017, UCSB
+ */
 public class ColorPrompt extends JPanel {
 		
     /**Holds if color for player1 has been selected*/
     private boolean selected;
+
     /**A list of strings of the availible colors */
     private static final String[] Color_Choices = new String[]
 	{"White", "Pink", "Blue", "Green", "Orange", "Yellow", "Red", "Purple"};
+
     /**A map with keys (String) and values (Color) filled with colors */
     private static final Map<String, Color> COLORS = new LinkedHashMap<String, Color>(){{
 	    put("White", new Color(255,255,255));
@@ -31,10 +32,13 @@ public class ColorPrompt extends JPanel {
 
     /**Color for player 1 or left side */
     private static Color colorA = COLORS.get("White");
+
     /**Color for player 2 or right side*/
     private static Color colorB = COLORS.get("White");
 		
-    /**getHashmap() returns a map of preset colors*/
+    /**getHashmap() returns a map of preset colors
+     * @return Map map of colors
+     */
     public Map<String, Color> getHashmap(){
 	return COLORS;}
 
@@ -66,16 +70,23 @@ public class ColorPrompt extends JPanel {
 	}
     }
 
-    /**isSelected() returns if items have been selected*/
+    /**isSelected() returns if items have been selected
+     * @return boolean if selected
+     */
     public boolean isSelected(){
 	return selected;
     }
 	
-    /**getColorA() returns the color for player 1 or the left paddle*/
+    /**getColorA() returns the color for player 1 or the left paddle
+     * @return Color color for A
+     */
     public static Color getColorA(){
 	return colorA;
     }
-    /**getColorB() return the color for player 2 or the right paddle*/
+    
+    /**getColorB() return the color for player 2 or the right paddle
+     * @return Color color for B
+     */
     public static Color getColorB(){
 	return colorB;
     }
