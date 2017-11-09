@@ -64,6 +64,7 @@ public class DisplayHighScores{
     class BackToMainListener implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 	    jf.setVisible(false);
+	    edu.ucsb.cs56.projects.games.pong.Game.setWindowVisibility(true);
 	}
     }
 

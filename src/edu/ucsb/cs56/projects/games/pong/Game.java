@@ -18,6 +18,9 @@ public class Game extends JFrame {
     /** sets dimension */
     private static final Dimension DIMENSION = new Dimension(640,480);
 
+    /** Holds the main game JFrame */
+    private static Game window;
+    
     /** constructor for Game; takes in a title and dimension 
      * @param title The title for the JFrame
      * @param dimension Dimensions for the window
@@ -34,9 +37,14 @@ public class Game extends JFrame {
      * @param args not used
      */
     public static void main(String[] args) {
-        Game window = new Game("Main Menu",DIMENSION);
+        window = new Game("Main Menu",DIMENSION);
         MainMenuUI game = new MainMenuUI();
         window.add(game);
-        window.setVisible(true);
+	//Opens the window with a static function that can be called from anywhere
+	setWindowVisibility(true);
+    }
+
+    public static void setWindowVisibility(boolean visibility){
+	window.setVisible(visibility);
     }
 }

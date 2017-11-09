@@ -70,8 +70,23 @@ public class Screen{
 	
 	
 	jf.addKeyListener(new myKeyAdapter());
-	jf.setVisible( true );
+
+	edu.ucsb.cs56.projects.games.pong.Game.setWindowVisibility(false);
+	//Opens window with a static method that can be called from anywhere
+	setWindowVisibility(true);
     }
+
+
+    /**sets window open or closed
+     * @param visibility boolean if window is visible or not
+     */
+    public static void setWindowVisibility(boolean visibility){
+	jf.setVisible(visibility);
+    }
+
+
+
+    
     
     /** setScreenSize sets the size of the screen 
      * @param width width of the screen
@@ -163,6 +178,7 @@ public class Screen{
 			game.b1.startBall();
 		    }
 		    if( evt.getKeyCode() == KeyEvent.VK_M ) {
+			edu.ucsb.cs56.projects.games.pong.Game.setWindowVisibility(true);
 			jf.setVisible(false);     
 		    }
 		    else 
@@ -184,7 +200,8 @@ public class Screen{
 			game.b.startBall();
 		    }
 		    if( evt.getKeyCode() == KeyEvent.VK_M ) {
-		    	jf.setVisible(false);     
+		    	setWindowVisibility(false);
+			edu.ucsb.cs56.projects.games.pong.Game.setWindowVisibility(true);
 		    }
 		    else 
 		    	theball.yield();

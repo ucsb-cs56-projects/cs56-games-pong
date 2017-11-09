@@ -21,11 +21,11 @@ public class HighScoreTextComponent extends MenuTextComponent {
         super(title, backgroundColor);
     }
 
-    @Override
     /**
      * plays audio, if text color is blue, creates new DisplayHighScores called displayhs
      * @param mouseEvent insert object of type MouseEvent into mouseClicked
      */
+    @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         playGameStartAudio();
         if(textColor.equals(Color.BLUE)) {
