@@ -17,11 +17,17 @@ public class PlayTextComponent extends MenuTextComponent  {
     private Screen screen;
     /**Holds a new SoundEffect object for the button press*/
     protected SoundEffect audio = new SoundEffect("87035__runnerpack__menusel.wav");
-    /**Constructor for the PlayTextComponent that takes in a title String and background color*/
+
+    /**Constructor for the PlayTextComponent that takes in a title String and background color
+     * @param title type String
+     *@param backgroundColor of type Color
+     */
     public PlayTextComponent(String title, Color backgroundColor) {
         super(title, backgroundColor);
     }
-    /**Override the mouseClicked method to begin option panels and start the game*/
+    /**Override the mouseClicked method to begin option panels and start the game
+     * @param mouseEvent of type MouseEvent
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         if(textColor.equals(Color.BLUE)) {

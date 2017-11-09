@@ -26,6 +26,7 @@ public abstract class MainMenuComponent extends JComponent {
     
     /**
      * returns dimension
+     * @return Dimension getDimension
      */
     public static Dimension getDimension() {
         return dimension;

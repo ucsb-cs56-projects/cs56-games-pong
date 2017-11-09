@@ -35,7 +35,9 @@ public class DifficultyLevelPrompt extends JPanel {
 
     }};
     
-    /**Map that returns difficulties */
+    /**Map that returns difficulties 
+     * @return Map
+     */
     public Map<String, Integer> getHashmap(){
 	return DIFFICULTIES;}
 
@@ -56,11 +58,15 @@ public class DifficultyLevelPrompt extends JPanel {
             this.remove(this);
         }
     }
-    /**isSelected() returns if items have been selected*/
+    /**isSelected() returns if items have been selected
+     * @return boolean isSelected
+     */
     public boolean isSelected() {
         return selected;
     }
-    /**getDifficulty() returns difficulty*/
+    /**getDifficulty() returns difficulty
+     * @return int getDifficulty
+     */
     public int getDifficulty() {
         return difficulty;
     }
