@@ -10,14 +10,18 @@ import java.awt.*;
  * It provides the frame/window details for the Game.
  * 
  * @author Angel Ortega
- * @Victoria Sneddon, Andrew Polk
+ * @author Victoria Sneddon, Andrew Polk
  * @version CS56, Fall 2017, UCSB
  */
 public class Game extends JFrame {
+
     /** sets dimension */
     private static final Dimension DIMENSION = new Dimension(640,480);
 
-    /** constructor for Game; takes in a title and dimension */
+    /** constructor for Game; takes in a title and dimension 
+     * @param title The title for the JFrame
+     * @param dimension Dimensions for the window
+     */
     public Game(String title, Dimension dimension) {
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,7 +29,10 @@ public class Game extends JFrame {
         this.setLocationRelativeTo( null );
         this.setBackground(Color.BLACK);
     }
-    /** main, entry point for game */
+    
+    /** main, entry point for game 
+     * @param args not used
+     */
     public static void main(String[] args) {
         Game window = new Game("Main Menu",DIMENSION);
         MainMenuUI game = new MainMenuUI();
