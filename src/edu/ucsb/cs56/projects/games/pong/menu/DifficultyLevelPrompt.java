@@ -19,11 +19,6 @@ public class DifficultyLevelPrompt extends JPanel {
     /** boolean value called selected noting if difficulty level is chosen */
     private boolean selected;
 
-    /** method giving options for difficulty*/
-    /* private static final String[] DIFFICULTY_LEVELS = new String[]
-	{ "Super-Easy", "Easy", "Medium","Hard","Extreme", "Chaos", "Custom Mode"};
-    */
-
     /**LinkedHashMap of  dificulty levels */
     private static final Map<String,Integer> DIFFICULTIES =  new LinkedHashMap<String,Integer>(){{
 	    put("Super-Easy",80);
