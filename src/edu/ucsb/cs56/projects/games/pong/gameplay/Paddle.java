@@ -32,21 +32,23 @@ public class Paddle extends gameObject{
      * @param x set initial x coordinate of paddle
      * @param y set initial y coordinate of paddle
      * @param rectH paddle height
+     * @param ballNumber number of balls to be used in game
      */
-    public Paddle(int x, int y, int rectH ){
-	this( x, y, rectH, false );
+    public Paddle(int x, int y, int rectH, int ballNumber){
+	this( x, y, rectH, ballNumber, false );
     }
     
     /** Right paddle constructor to initialize initial x,y placement of paddle
      * @param x set initial x position of the paddle
      * @param y set initial y position of the paddle
      * @param rectH paddle height
+     * @param ballNumber need three times the number of ball in play to win
      * @param sideRight sees if the paddle is the rightmost paddle
      */
-    public Paddle(int x, int y, int rectH, boolean sideRight){
+    public Paddle(int x, int y, int rectH, int ballNumber, boolean sideRight){
 	super( x, y, rectH );
 	
-	ballCount = 3;
+	ballCount = 3*ballNumber;
 	points = 0;
 	right = sideRight;
     }
@@ -155,7 +157,6 @@ public class Paddle extends gameObject{
     public void playerMissed( Ball ball, int numOfPoints, Paddle winner ) {
 	decrementBalls();
 	ball.setXVelocity( -1 * ball.getXVelocity() );
-	ball.resetBall();
 	winner.incrementPoints( numOfPoints );
     }
     
