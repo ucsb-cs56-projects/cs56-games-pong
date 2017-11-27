@@ -20,50 +20,57 @@ public class DifficultyLevelPrompt extends JPanel {
     private boolean selected;
 
     /** method giving options for difficulty*/
-    private static final String[] DIFFICULTY_LEVELS = new String[]
-            { "Super-Easy", "Easy", "Medium","Hard","Extreme", "Chaos", "Two Balls"};
+    /* private static final String[] DIFFICULTY_LEVELS = new String[]
+	{ "Super-Easy", "Easy", "Medium","Hard","Extreme", "Chaos", "Custom Mode"};
+    */
 
     /**LinkedHashMap of  dificulty levels */
     private static final Map<String,Integer> DIFFICULTIES =  new LinkedHashMap<String,Integer>(){{
-        put("Super-Easy",80);
-        put("Easy",100);
-        put("Medium",120);
-        put("Hard",130);
-        put("Extreme",140);
-        put("Chaos",170);
-        put("Two Balls",90);
-
-    }};
+	    put("Super-Easy",80);
+	    put("Easy",100);
+	    put("Medium",120);
+	    put("Hard",130);
+	    put("Extreme",140);
+	    put("Chaos",170);
+	    put("Custom Mode",90); 
+	}};
     
     /**Map that returns difficulties 
      * @return Map
      */
     public Map<String, Integer> getHashmap(){
 	return DIFFICULTIES;}
-
-    /**prompt user sees to select difficulty */
+    
+    /**prompt user sees to select difficulty  */
     public DifficultyLevelPrompt() {
 	/*ComboBox for selections */
         JComboBox selections = new JComboBox(DIFFICULTIES.keySet().toArray());
         this.add(selections);
+
 	/*Show OptionPane and save response to int */
         int responseFromUser = JOptionPane.showConfirmDialog(null,this,
-                "Select your difficulty:",JOptionPane.OK_CANCEL_OPTION,JOptionPane.OK_OPTION);
-        /*Save chosen items to objects */
+							     "Select your difficulty:",
+							     JOptionPane.OK_CANCEL_OPTION,
+							     JOptionPane.OK_OPTION);
+
+	/*Save chosen items to objects */
 	Object itemChosen = selections.getSelectedItem();
-        if (responseFromUser == JOptionPane.OK_OPTION && itemChosen != null) {
+	
+	if (responseFromUser == JOptionPane.OK_OPTION && itemChosen != null) {
             difficulty = DIFFICULTIES.get(itemChosen.toString()).intValue();
             this.selected = true;
         } else {
             this.remove(this);
         }
     }
+
     /**isSelected() returns if items have been selected
      * @return boolean isSelected
      */
     public boolean isSelected() {
         return selected;
     }
+
     /**getDifficulty() returns difficulty
      * @return int getDifficulty
      */
