@@ -154,9 +154,14 @@ public class Screen{
 		ArrayList<Double> distance = distanceCalc(i);
 		game.b[i].keyPressed(evt, distance);
 	    }
-	    
+
+	    int stoppedBalls = 0;
 	    for(int i = 0; i < ballNum; i++){
-		if( game.b[i].isStopped()) {
+		if(game.b[i].isStopped())
+		    stoppedBalls++;
+	    }
+	    if(stoppedBalls == ballNum) {
+		for(int i = 0; i < ballNum; i++){
 		    if( evt.getKeyCode() == KeyEvent.VK_SPACE ) {
 			game.b[i].startBall();
 		    }
@@ -170,7 +175,9 @@ public class Screen{
 		    else 
 			theball.yield();
 		}
-		else {
+	    }
+	    else {
+		for(int i = 0; i < ballNum; i++){
 		    if( evt.getKeyCode() == KeyEvent.VK_P ) {
 			game.b[i].stopBall();
 		    }
