@@ -59,7 +59,7 @@ public class Instructions{
      */
     public String displayInstructions()
     {
-	return ("<html><p><br>Difficulty:<br>The Screen size increases with the difficulty that is chosen.<br><br>How To Play:<br>Player 1 uses W to move the paddle up and S to move their paddle down.<br>Player 2 uses the Up and Down arrows to move their paddle up and down<br><br>Hit the space bar to move the ball initially.<br>Press P to pause the game.<br>Press M to return to the Main Menu.<br>The ball will increase in speed every 5 times it hits a paddle.<br>You lose a life if you miss the ball.<br>When you lose a life, the total hits will be added to your opponents score.<br>The winner is the player with remaining lives.</p></html>");
+	return ("<html><p><br>Difficulty:<br>The Screen size increases with the difficulty that is chosen.<br><br>How To Play:<br>Player 1 uses W to move the paddle up, S to move their paddle down, and A to grab the ball.<br>Player 2 uses the Up and Down arrows to move their paddle up and down and the left arrow to grab the ball<br><br>Hit the space bar to move the ball initially.<br>Press P to pause the game.<br>Press M to return to the Main Menu.<br>The ball will increase in speed every 5 times it hits a paddle.<br>You lose a life if you miss the ball.<br>When you lose a life, the total hits will be added to your opponents score.<br>The winner is the player with remaining lives.</p></html>");
     }
 
     /** The action when the button "Back To Main Menu" is pressed. It just makes the frame not visible, so it appears to be closed and does not need to create a new instance of Instructions for every time the user clicks how to play */
