@@ -203,14 +203,14 @@ public class Pong implements Runnable {
 	    // check if p1 misses
 	    if( b[i].getXCoordinate() <= ( 0 ) ) {
 		p1.playerMissed( b[i], getHits(), p2 );
-		gameObject.isGoingRight = true;
+		b[i].isGoingRight = true;
 		hitsReset();
 		b[i].resetBall(i);
 	    }
 	    // check if p2 misses
 	    else if( b[i].getXCoordinate() >= ( Screen.w - 20 ) ) {
 		p2.playerMissed( b[i], getHits(), p1 );
-		gameObject.isGoingRight = false;
+		b[i].isGoingRight = false;
 		hitsReset();
 		b[i].resetBall(i);
 	    }
