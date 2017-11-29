@@ -50,7 +50,7 @@
     <delete dir="dist" quiet="true" />
     <delete dir="download" quiet="true" />
     <!-- delete the old javadoc -->
-    <delete quiet="true" dir="doc" />
+    <delete quiet="true" dir="docs" />
     <delete quiet = "true" dir ="temp"/>
   </target>
 
