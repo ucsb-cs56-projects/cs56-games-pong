@@ -23,7 +23,7 @@ public class PaddleTest
      */ 
     @Test
     public void testConstructor(){
-        Paddle paddle = new Paddle(20,20, 90);
+        Paddle paddle = new Paddle(20,20, 90, 1);
         assertEquals(20,paddle.getXCoordinate());
 	assertEquals(20,paddle.getYCoordinate()); 
     }
