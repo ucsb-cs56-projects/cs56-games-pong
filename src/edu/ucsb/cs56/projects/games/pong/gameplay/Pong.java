@@ -37,18 +37,19 @@ public class Pong implements Runnable {
     /**Number of balls*/
     int ballNum;
 
-    /**Secondary Ball Object*/
-    //Ball b1;
-
     /**If game is paused or not*/
     boolean gameIsGoing = true;
 
     /**SoundEffect for ball collision*/
     SoundEffect collision = new SoundEffect("4359__noisecollector__pongblipf4.wav");
 
+    /**isPaused pauses the game if = true*/
+    public static boolean isPaused = true;
+    
     /** The Pong constructor initializes 2 paddle objects, a ball object, and points value 
      */
     public Pong() {
+	isPaused = true;
 	ballNum = DifficultyLevel.getBallNum();
 	
     	p1 = new Paddle( 8, Screen.h/2 - (DifficultyLevel.getPaddleHeight())/2, DifficultyLevel.getPaddleHeight(), ballNum); // Left Paddle
@@ -130,7 +131,20 @@ public class Pong implements Runnable {
 	    gameLoss(p1);
 	}
     }
-  
+
+    /** checkBallsStopped() checks if all the balls in play are stopped
+     * @return boolean return 1 if all balls are stopped
+     */
+    public boolean checkBallStopped() {
+	int stoppedBalls = 0;
+	for(int i = 0; i < ballNum; i++){
+	    //Balls only stopped if they have collided with the wall and been reset to the center
+	    if(b[i].isStopped())
+		stoppedBalls++;
+	}
+	return (stoppedBalls == ballNum) ? true : false;
+    }
+    
     /** gameLoss brings up a frame to enter the user's name 
      * @param p Not Used
      */   
@@ -143,18 +157,21 @@ public class Pong implements Runnable {
     
     /** moveGame() allows the ball and paddles in the game to be moved*/
     public void moveGame() { // every iterations of thread the ball calls this
-        p1.movePaddle();     // draws paddles at new location
-        p2.movePaddle();      
-	
-	// sets the new locations
-	for(int i = 0; i < ballNum; i++){
-	    b[i].setXCoordinate( b[i].getXCoordinate() + b[i].getXVelocity() );
-	    b[i].setYCoordinate( b[i].getYCoordinate() + b[i].getYVelocity() );
+	//Doesnt move the game if the game is paused
+	if(!isPaused){
+	    p1.movePaddle();     // draws paddles at new location
+	    p2.movePaddle();      
+	    
+	    // sets the new locations
+	    for(int i = 0; i < ballNum; i++){
+		b[i].setXCoordinate( b[i].getXCoordinate() + b[i].getXVelocity() );
+		b[i].setYCoordinate( b[i].getYCoordinate() + b[i].getYVelocity() );
+	    }
+	    
+	    // checks if it hit a paddle
+	    paddleCollision();
+	    wallCollision();
 	}
-  
-	// checks if it hit a paddle
-        paddleCollision();
-        wallCollision();
     }
     
     /** paddleCollision() detects whether ball hits a paddle*/
@@ -220,12 +237,9 @@ public class Pong implements Runnable {
 	//   then the Y velocity is reversed to stay on screen
 	for(int i = 0; i < ballNum; i++){
 	    // checks if ball hits the bottom of the screen
-	    if( b[i].getYCoordinate() >= ( Screen.h - 60 ) )
-		{
-		    b[i].setYVelocity( -1 * b[i].getYVelocity() );
-		}
-	    
-	    
+	    if( b[i].getYCoordinate() >= ( Screen.h - 60 ) ) {
+		b[i].setYVelocity( -1 * b[i].getYVelocity() );
+	    }
 	    // checks if ball hits the top of the screen
 	    else if( b[i].getYCoordinate() <=  0 ) {
 		b[i].setYVelocity( -1 * b[i].getYVelocity() );

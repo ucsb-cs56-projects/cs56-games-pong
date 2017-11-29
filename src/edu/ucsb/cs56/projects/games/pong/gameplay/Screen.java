@@ -114,15 +114,13 @@ public class Screen{
 	    g.drawString( "Lives " + ( game.p1.ballCount ), 30, Screen.h - 47 );
 	    g.drawString( "Lives " + ( game.p2.ballCount ), Screen.w - 140 , Screen.h - 47 );
 
-	    int numberStopped = 0;
+	    //draws all the balls
 	    for(int i = 0; i < ballNum; i++){
-		if( game.b[i].isStopped() ) {
-		    numberStopped++;
-		}
 		game.b[i].draw(g);
 	    }
+	    
 	    //If all the balls have stopped then pause the game
-	    if(numberStopped == ballNum) {
+	    if(Pong.isPaused) {
 		g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
 		g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
 	    }
@@ -155,32 +153,30 @@ public class Screen{
 		game.b[i].keyPressed(evt, distance);
 	    }
 
-	    int stoppedBalls = 0;
-	    for(int i = 0; i < ballNum; i++){
-		if(game.b[i].isStopped())
-		    stoppedBalls++;
-	    }
-	    if(stoppedBalls == ballNum) {
+	    //Starts all the balls once they are all sitting in the center and space is pressed
+	    if(game.checkBallStopped()) {
+		Pong.isPaused = true;
 		for(int i = 0; i < ballNum; i++){
 		    if( evt.getKeyCode() == KeyEvent.VK_SPACE ) {
 			game.b[i].startBall();
-		    }
-		    if( evt.getKeyCode() == KeyEvent.VK_P && game.b[i].attached == false){
-			game.b[i].startBall();
-		    }
-		    if( evt.getKeyCode() == KeyEvent.VK_M ) {
-			setWindowVisibility(false);
-			edu.ucsb.cs56.projects.games.pong.Game.setWindowVisibility(true);
+			Pong.isPaused = false;
+		    }if( evt.getKeyCode() == KeyEvent.VK_P ) {
+ 			if(Pong.isPaused) {
+			    game.b[i].startBall();
+			}
 		    }
 		    else 
 			theball.yield();
 		}
 	    }
-	    else {
-		for(int i = 0; i < ballNum; i++){
-		    if( evt.getKeyCode() == KeyEvent.VK_P ) {
-			game.b[i].stopBall();
-		    }
+	    
+	    if( evt.getKeyCode() == KeyEvent.VK_P ) {
+		Pong.isPaused = !Pong.isPaused;
+	    }
+	    if(Pong.isPaused) {
+		if( evt.getKeyCode() == KeyEvent.VK_M ) {
+		    setWindowVisibility(false);
+		    edu.ucsb.cs56.projects.games.pong.Game.setWindowVisibility(true);
 		}
 	    }
 	}
