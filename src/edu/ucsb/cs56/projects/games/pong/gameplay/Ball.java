@@ -20,11 +20,10 @@ public class Ball extends gameObject{
     /**Number of balls lost */
     public int ballsLost;
 
+    /**X Speed of the ball */
+    public int speedX = 1;
     /**Speed of the ball */
     public int speed = 1;
-
-    /** Holds original x velocity */
-    public int origXVelocity;
 
     /**Holds if the ball is attached to a paddle */
     public boolean attached = false;
@@ -53,8 +52,13 @@ public class Ball extends gameObject{
     // inputs are start x, start y, width of ball, and height of ball
     public Ball( int x, int y, int w, int h, boolean isGoingRight )
     {
-	super( x, y, w, h, isGoingRight );
+	super( x, y, w, h );
 	speed = DifficultyLevel.getSpeed();
+
+	if(!isGoingRight){
+	    speed *= -1;
+	}
+	
 	startBall();
 	
 	p1 = edu.ucsb.cs56.projects.games.pong.gameplay.Pong.getPlayer1();
@@ -71,10 +75,9 @@ public class Ball extends gameObject{
 		    getWidth(), getHeight() );
     }
 
-    /** startBall(): When the ball is stopped, this will start the ball in the opposite direction of the way it was going*/
+    /** startBall(): When the ball is stopped, this will start the ball in the direction of the way it was going*/
     public void startBall() {
-	if( gameObject.isGoingRight == false )
-	    speed = speed*-1;
+	//reset speeds to original
 	setXVelocity( speed );
 	setYVelocity( speed );
     }
@@ -97,12 +100,16 @@ public class Ball extends gameObject{
     	setXVelocity( 0 );
     }
     
-    /** resetBall() puts the ball back in the middle of the screen and stops the ball*/
-    public void resetBall() 
+    /** resetBall() puts the ball back in the middle of the screen and stops the ball
+     * @params ballNumber the index number for the ball being reset
+     */
+    public void resetBall(int ballNumber) 
     {
     	stopBall();
+	if(isGoingRight && speed < 0)
+	    speed *= -1;
     	setXCoordinate(( Screen.w-DifficultyLevel.getWidth() ) / 2 );
-	setYCoordinate(( Screen.h-DifficultyLevel.getHeight() ) / 2 );
+	setYCoordinate(( Screen.h-(4*ballNumber)*DifficultyLevel.getHeight() ) / 2 );
     }
    
     /** takes in KeyEvent and distance and holds ball to paddle if correct key is pressed and distance is correct 
@@ -111,18 +118,16 @@ public class Ball extends gameObject{
      */
     public void holdBallToPaddle(KeyEvent evt, double distance)
     {
-	origXVelocity = getXVelocity();
 	attached = true;
-   	 
+	speedX = getXVelocity();
+	
 	if(evt.getKeyCode() == KeyEvent.VK_A && ( (int)distance < DifficultyLevel.getPaddleHeight() ) ) {
-	    setXVelocity(0);
-	    setYVelocity(0);
+	    stopBall();
 	    paddle = false;
 	}
    	 
 	if(evt.getKeyCode() == KeyEvent.VK_LEFT && ( (int)distance < DifficultyLevel.getPaddleHeight() ) ) {
-	    setXVelocity(0);
-	    setYVelocity(0);
+	    stopBall();
 	    paddle = true;
 	}
     }
@@ -135,14 +140,19 @@ public class Ball extends gameObject{
     {
 	attached = false;
 	if(evt.getKeyCode() == KeyEvent.VK_A && ( (int)distance < DifficultyLevel.getPaddleHeight() ) ) {
-	    setXVelocity(/*origXVelocity*/speed * -1);
-	    setYVelocity(speed);
+	    setYVelocity(p1.getYVelocity());
+	    if(speedX < 0)
+		setXVelocity(speedX * -1);
+	    else
+		setXVelocity(speedX);
 	}
    	 
 	if(evt.getKeyCode() == KeyEvent.VK_LEFT && ( (int)distance < DifficultyLevel.getPaddleHeight() ) ) {
-	    setXVelocity(/*origXVelocity*/speed * -1);
-	    setYVelocity(speed);
-	    
+	    setYVelocity(p2.getYVelocity());
+	    if(speedX > 0)
+		setXVelocity(speedX * -1);
+	    else
+		setXVelocity(speedX);
 	}
     }
     
@@ -157,10 +167,10 @@ public class Ball extends gameObject{
 	if(paddle == false && attached == true){
 	    if(p1.isPaddleMoving() == true){
 		if( evt.getKeyCode() == KeyEvent.VK_W && distance.get(4) > 5 ){
-		    setYVelocity( -5 );
+		    setYVelocity(p1.getYVelocity());
 		}
 		if( evt.getKeyCode() == KeyEvent.VK_S && distance.get(2) > 5){
-		    setYVelocity( 5 );
+		    setYVelocity(p1.getYVelocity());
 		}
 	    } else {
 		setYVelocity(0);
@@ -173,10 +183,10 @@ public class Ball extends gameObject{
 	if(paddle == true && attached == true){
 	    if(p2.isPaddleMoving() == true) {
 		if( evt.getKeyCode() == KeyEvent.VK_UP && distance.get(5) > 5 ){
-		    setYVelocity( -5 );
+		    setYVelocity(p2.getYVelocity());
 		}
 		if( evt.getKeyCode() == KeyEvent.VK_DOWN && distance.get(3) > 5 ){
-		    setYVelocity( 5 );
+		    setYVelocity(p2.getYVelocity());
 		}
 	    } else {
 		setYVelocity(0);
@@ -186,19 +196,20 @@ public class Ball extends gameObject{
 
     /**Updates the velocity if the ball is attached*/
     public void ballAttachUpdate() {
-	if(paddle == false && attached == true) {
-	    if(p1.isPaddleMoving() == true) {
-		setYVelocity(p1.getYVelocity());
-	    } else {
-		setYVelocity(0);
+	if(attached == true) {
+	    if(paddle == false) {
+		if(p1.isPaddleMoving() == true) {
+		    setYVelocity(p1.getYVelocity());
+		} else {
+		    setYVelocity(0);
+		}
 	    }
-	}
-	
-	if(paddle == true && attached == true) {
-	    if(p2.isPaddleMoving() == true) {
-		setYVelocity(p2.getYVelocity());
-	    } else {
-		setYVelocity(0);
+	    if(paddle == true) {
+		if(p2.isPaddleMoving() == true) {
+		    setYVelocity(p2.getYVelocity());
+		} else {
+		    setYVelocity(0);
+		}
 	    }
 	}
     }
@@ -217,27 +228,23 @@ public class Ball extends gameObject{
      * @param distance Arraylist of distances from balls
      */
     public void keyReleased(KeyEvent evt, ArrayList<Double> distance){
-
-	if ( evt.getKeyCode() == KeyEvent.VK_A && attached == true ) {
-	    releaseBallFromPaddle(evt, distance.get(0));
-	}
-	if(paddle == false && attached == true){
-	    if( evt.getKeyCode() == KeyEvent.VK_W && attached == true){
-		setYVelocity( 0 );
+	if(attached == true) {
+	    if ( evt.getKeyCode() == KeyEvent.VK_A) {
+		releaseBallFromPaddle(evt, distance.get(0));
 	    }
-	    if( evt.getKeyCode() == KeyEvent.VK_S && attached == true){
-		setYVelocity( 0 );
+	    if(paddle == false){
+		if( evt.getKeyCode() == KeyEvent.VK_W || evt.getKeyCode() == KeyEvent.VK_S){
+		    setYVelocity( 0 );
+		}
 	    }
-	}
-	if (evt.getKeyCode() == KeyEvent.VK_LEFT && attached == true) {
-	    releaseBallFromPaddle(evt,distance.get(1));
-	}
-	if(paddle == true && attached == true) {
-	    if( evt.getKeyCode() == KeyEvent.VK_UP && attached == true){
-		setYVelocity( 0 );
+	    
+	    if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
+		releaseBallFromPaddle(evt,distance.get(1));
 	    }
-	    if( evt.getKeyCode() == KeyEvent.VK_DOWN && attached == true){
-		setYVelocity( 0 );
+	    if(paddle == true) {
+		if( evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN){
+		    setYVelocity( 0 );
+		}
 	    }
 	}
     }

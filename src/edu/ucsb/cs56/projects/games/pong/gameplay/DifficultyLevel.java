@@ -27,16 +27,20 @@ public class DifficultyLevel {
 
     /** New ball speed */
     public static int speed;
+
+    /** How many balls there are in game */
+    public static int ballNum;
     
     /** edu.ucsb.cs56.projects.games.pong.gameplay.DifficultyLevel constructor to initialize difficulty of game onto the screen 
      * @param difficultylevel set game difficulty    
      */
 
     // Constructor
-    // inputs are game difficulty [80,100,120,130,140,170,90]
+    // inputs are game difficulty [80,100,120,130,140,170]
     public DifficultyLevel(int difficultylevel)
     {
 	diflevel=difficultylevel;
+	ballNum = 1;
 	if(diflevel==80)//supereasy
 	    {
 		screenfactor=10;
@@ -85,14 +89,6 @@ public class DifficultyLevel {
 		paddleHeight = 60;
 		speed = 5;	
 	    }
-	else if (diflevel == 90) 
-	    {
-		screenfactor=10;
-		width=origballsize*screenfactor;
-		height=origballsize*screenfactor;
-		paddleHeight = 100;
-		speed = 2;
-	    }
     }
     
     /** getDifficulty() returns the current difficulty of the game 
@@ -123,4 +119,14 @@ public class DifficultyLevel {
      * @return int The speed of the Ball
      */
     public static int getSpeed() {return speed; }
+
+    /** getBallNum() returns the number of balls int eh game
+     * @return int number of balls
+     */
+    public static int getBallNum() {return ballNum; }
+    
+    public static void setBallNum(int ballNumber) {
+	if(ballNumber >= 1 && ballNumber <= 5){
+	    ballNum = ballNumber;}
+    }
 }

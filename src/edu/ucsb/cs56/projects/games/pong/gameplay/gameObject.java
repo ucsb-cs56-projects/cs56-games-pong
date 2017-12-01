@@ -15,9 +15,6 @@ class gameObject{
     /** Gameobject vertival speed (y)*/
     public int yVelocity;                  
 
-    /**Holds the direction of the ball*/
-    static boolean isGoingRight = false;
-
     /**Holds x and y coordinates and width and height */
     public Rectangle rectangle;        
 
@@ -45,21 +42,6 @@ class gameObject{
     gameObject( int x, int y, int rectW, int rectH ) {
 	setXVelocity(0);
 	setYVelocity(0);
-	rectangle = new Rectangle( x, y, rectW, rectH );
-	this.color = getRandomColor();
-    }
-    
-    /** Constructor that takes in x, y, rectW, rectH, and if object is going right or not 
-     * @param x X position
-     * @param y Y position
-     * @param rectH rectangle height
-     * @param rectW rectangle width
-     * @param isGoingRight if ball is going right
-     */
-    gameObject( int x, int y, int rectW, int rectH, boolean isGoingRight ) {
-	setXVelocity( 0 );
-	setYVelocity( 0 );
-	gameObject.isGoingRight = true;
 	rectangle = new Rectangle( x, y, rectW, rectH );
 	this.color = getRandomColor();
     }

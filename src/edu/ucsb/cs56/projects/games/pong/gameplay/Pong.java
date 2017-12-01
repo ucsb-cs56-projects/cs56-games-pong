@@ -32,11 +32,10 @@ public class Pong implements Runnable {
     /**Paddle that wins*/
     Paddle winner;                 
 
-    /**The ball*/
-    Ball b;
-
-    /**Secondary Ball Object*/
-    Ball b1;
+    /**The balls*/
+    Ball b[];
+    /**Number of balls*/
+    int ballNum;
 
     /**If game is paused or not*/
     boolean gameIsGoing = true;
@@ -44,26 +43,35 @@ public class Pong implements Runnable {
     /**SoundEffect for ball collision*/
     SoundEffect collision = new SoundEffect("4359__noisecollector__pongblipf4.wav");
 
+    /**isPaused pauses the game if = true*/
+    public static boolean isPaused = true;
+    
     /** The Pong constructor initializes 2 paddle objects, a ball object, and points value 
      */
     public Pong() {
-    	p1 = new Paddle( 8, Screen.h/2 - (DifficultyLevel.getPaddleHeight())/2, DifficultyLevel.getPaddleHeight());                        // Left Paddle
-        p2 = new Paddle( Screen.w - 38 , Screen.h/2 - (DifficultyLevel.getPaddleHeight())/2, DifficultyLevel.getPaddleHeight(),true );     // Right Paddle
+	isPaused = true;
+	ballNum = DifficultyLevel.getBallNum();
+	
+    	p1 = new Paddle( 8, Screen.h/2 - (DifficultyLevel.getPaddleHeight())/2, DifficultyLevel.getPaddleHeight(), ballNum); // Left Paddle
+        p2 = new Paddle( Screen.w - 38 , Screen.h/2 - (DifficultyLevel.getPaddleHeight())/2, DifficultyLevel.getPaddleHeight(), ballNum, true ); // Right Paddle
 	p1.setColor(ColorPrompt.getColorA());
 	p2.setColor(ColorPrompt.getColorB());
+
+	b = new Ball[ballNum];
 	
-        b = new Ball( ((Screen.w-DifficultyLevel.getWidth()) /2),
-		      ((Screen.h-DifficultyLevel.getHeight()) / 2),
-		      DifficultyLevel.getHeight(),
-		      DifficultyLevel.getHeight(), false);
-        
-        if(DifficultyLevel.getDifficulty()==90)
-	    {
-        	b1 = new Ball( (int)((Screen.w-DifficultyLevel.getWidth() ) /2),
-			       (int)((Screen.h-4*DifficultyLevel.getHeight()) / 2),
+	for(int i = 0; i < ballNum; i++) {
+	    boolean dir = false;
+	    if(i%2 == 0)
+		dir = true;
+	    else
+		dir = false;
+	    
+	    b[i] = (new Ball( ((Screen.w-DifficultyLevel.getWidth()) /2),
+			      ((Screen.h-(4*i)*DifficultyLevel.getHeight()) /2),
 			       DifficultyLevel.getHeight(),
-			       DifficultyLevel.getHeight(), true);
-	    }
+			       DifficultyLevel.getHeight(),
+			       dir));
+	}
         
         hits = 0;                                      // # of times of wall
         moreSpeed = 1;
@@ -123,7 +131,20 @@ public class Pong implements Runnable {
 	    gameLoss(p1);
 	}
     }
-  
+
+    /** checkBallsStopped() checks if all the balls in play are stopped
+     * @return boolean return 1 if all balls are stopped
+     */
+    public boolean checkBallStopped() {
+	int stoppedBalls = 0;
+	for(int i = 0; i < ballNum; i++){
+	    //Balls only stopped if they have collided with the wall and been reset to the center
+	    if(b[i].isStopped())
+		stoppedBalls++;
+	}
+	return (stoppedBalls == ballNum) ? true : false;
+    }
+    
     /** gameLoss brings up a frame to enter the user's name 
      * @param p Not Used
      */   
@@ -136,22 +157,21 @@ public class Pong implements Runnable {
     
     /** moveGame() allows the ball and paddles in the game to be moved*/
     public void moveGame() { // every iterations of thread the ball calls this
-        p1.movePaddle();     // draws paddles at new location
-        p2.movePaddle();      
-	
-	// sets the new locations
-        b.setXCoordinate( b.getXCoordinate() + b.getXVelocity() );
-        b.setYCoordinate( b.getYCoordinate() + b.getYVelocity() );
-        
-        if(DifficultyLevel.getDifficulty()==90)
-	    {
-        	b1.setXCoordinate( b1.getXCoordinate() - b1.getXVelocity() );
-        	b1.setYCoordinate( b1.getYCoordinate() - b1.getYVelocity() );
+	//Doesnt move the game if the game is paused
+	if(!isPaused){
+	    p1.movePaddle();     // draws paddles at new location
+	    p2.movePaddle();      
+	    
+	    // sets the new locations
+	    for(int i = 0; i < ballNum; i++){
+		b[i].setXCoordinate( b[i].getXCoordinate() + b[i].getXVelocity() );
+		b[i].setYCoordinate( b[i].getYCoordinate() + b[i].getYVelocity() );
 	    }
-        
-	// checks if it hit a paddle
-        paddleCollision();
-        wallCollision();
+	    
+	    // checks if it hit a paddle
+	    paddleCollision();
+	    wallCollision();
+	}
     }
     
     /** paddleCollision() detects whether ball hits a paddle*/
@@ -164,36 +184,21 @@ public class Pong implements Runnable {
 	// Sets the new velocity if it hits either paddle, p1 or p2
 	//   and adds the increments the number of hits 
 	
-	// checks if it hits p1
-    	if( ( b.rectangle ).intersects( p1.rectangle ) ){
-	    playPaddleCollisionAudio();
-	    b.setXVelocity( -1 * ( b.getXVelocity() - moreSpeed ) );
-	    incrementHits();   
-    	}
-	
-	// checks if it hits p2
-    	else if( ( b.rectangle ).intersects( p2.rectangle ) ){
-    		playPaddleCollisionAudio();
-    		b.setXVelocity( -1 * ( b.getXVelocity() + moreSpeed ) );
-    		incrementHits();
-    	}
-	
-	if(DifficultyLevel.getDifficulty()==90){
-	    
-	    if(  (b1.rectangle ).intersects( p1.rectangle ) ){
-	    	playPaddleCollisionAudio();
-	    	b1.setXVelocity( -1 * ( b1.getXVelocity() - moreSpeed ) );
-	    	incrementHits();
+	for(int i = 0; i < ballNum; i++){
+	    // checks if it hits p1
+	    if( ( b[i].rectangle ).intersects( p1.rectangle ) ){
+		playPaddleCollisionAudio();
+		b[i].setXVelocity( -1 * ( b[i].getXVelocity() - moreSpeed ) );
+		incrementHits();   
 	    }
-
-	    // checks if it hits p2
-	    else if( ( b1.rectangle ).intersects( p2.rectangle ) ){
-	    	playPaddleCollisionAudio();
-	    	b1.setXVelocity( -1 * ( b1.getXVelocity() + moreSpeed ) );
-	    	incrementHits();
-	    }	
-	}
 	
+	    // checks if it hits p2
+	    else if( ( b[i].rectangle ).intersects( p2.rectangle ) ){
+    		playPaddleCollisionAudio();
+    		b[i].setXVelocity( -1 * ( b[i].getXVelocity() + moreSpeed ) );
+    		incrementHits();
+	    }
+	}	
     }
     
     /**
@@ -211,84 +216,44 @@ public class Pong implements Runnable {
 	// if p1 misses / hits the wall behind it
 	//   then increment balls lost, sets the ball 
 	//   to the middle and gives points to other player
-	
-	// check if p1 misses
-        if( b.getXCoordinate() <= ( 0 ) ) {
-	    p1.playerMissed( b, getHits(), p2 );
-	    gameObject.isGoingRight = true;
-	    hitsReset();
-	}
-	// check if p2 misses
-        else if( b.getXCoordinate() >= ( Screen.w - 20 ) ) {
-	    p2.playerMissed( b, getHits(), p1 );
-	    gameObject.isGoingRight = false;
-	    hitsReset();
-	}
-        
-        if(DifficultyLevel.getDifficulty()==90) {
-	    if( b.getXCoordinate() <= ( 0 ) ) {
-		p1.playerMissed( b, getHits(), p2 );
-		b1.resetBall();
-		
-		gameObject.isGoingRight = true;
+	for(int i = 0; i < ballNum; i++){
+	    // check if p1 misses
+	    if( b[i].getXCoordinate() <= ( 0 ) ) {
+		p1.playerMissed( b[i], getHits(), p2 );
+		b[i].isGoingRight = true;
 		hitsReset();
+		b[i].resetBall(i);
 	    }
 	    // check if p2 misses
-            else if( b.getXCoordinate() >= ( Screen.w - 20 ) ) {
-		p2.playerMissed( b, getHits(), p1 );
-		gameObject.isGoingRight = false;
+	    else if( b[i].getXCoordinate() >= ( Screen.w - 20 ) ) {
+		p2.playerMissed( b[i], getHits(), p1 );
+		b[i].isGoingRight = false;
 		hitsReset();
-		b1.resetBall();
+		b[i].resetBall(i);
 	    }
-	    
-	    if(  (b1.getXCoordinate() <=  0)) {
-		p1.playerMissed( b1, getHits(), p2 );
-		gameObject.isGoingRight = true;
-		hitsReset();
-		b.resetBall();
-	    }
-	    // check if p2 misses
-	    if(   ( b1.getXCoordinate() >= (Screen.w - 20) ) ) {
-		p2.playerMissed( b1, getHits(), p1 );
-		//p2.playerMissed( b1, getHits(), p1 );
-		gameObject.isGoingRight = false;
-		hitsReset();
-		b.resetBall();
-	    }
-        }
-	
+	}
+    
 	// If the ball hits the top or bottom of the screen,
 	//   then the Y velocity is reversed to stay on screen
-	
-	// checks if ball hits the bottom of the screen
-        if( b.getYCoordinate() >= ( Screen.h - 60 ) )
-	    {
-        	b.setYVelocity( -1 * b.getYVelocity() );
+	for(int i = 0; i < ballNum; i++){
+	    // checks if ball hits the bottom of the screen
+	    if( b[i].getYCoordinate() >= ( Screen.h - 60 ) ) {
+		b[i].setYVelocity( -1 * b[i].getYVelocity() );
 	    }
-	
-
-	// checks if ball hits the top of the screen
-        else if( b.getYCoordinate() <=  0 ) {
-	    b.setYVelocity( -1 * b.getYVelocity() );
+	    // checks if ball hits the top of the screen
+	    else if( b[i].getYCoordinate() <=  0 ) {
+		b[i].setYVelocity( -1 * b[i].getYVelocity() );
+	    }
 	}
-
-        
-        if(DifficultyLevel.getDifficulty()==90) {
-	    if( b1.getYCoordinate() >= ( Screen.h - 60 ) ) {
-		b1.setYVelocity( -1 * b1.getYVelocity() );
-	    }
-	    
-	    else if( b1.getYCoordinate() <=  0 ) {
-            	b1.setYVelocity( -1 * b1.getYVelocity() );
-    	    }
-        }
+       
 	checkGameStatus();
     }
     
     /** run() checks the movements every 15 milliseconds*/
     public void run(){
-	b.stopBall();
-	if(DifficultyLevel.getDifficulty()==90) { b1.stopBall(); }
+	for(int i = 0; i < ballNum; i++){
+	    b[i].stopBall();
+	}
         try{
             while( gameIsGoing ){
                 moveGame();

@@ -49,7 +49,8 @@ public class Screen{
     /**draw panel */
     MyDrawPanel mdp;
 
-
+    /**Number of balls*/
+    int ballNum;
 
     /** Screen Constructor and mouseEntered function to unpause game 
      * @param windowWidth width of the JFrame window
@@ -63,11 +64,12 @@ public class Screen{
 	jf.setBackground(Color.BLACK);
 	jf.setResizable( false );
 	jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+	ballNum = DifficultyLevel.getBallNum();
 	
 	game = new Pong();
 	theball = new Thread(game);
 	theball.start();
-	
 	
 	jf.addKeyListener(new myKeyAdapter());
 
@@ -76,17 +78,12 @@ public class Screen{
 	setWindowVisibility(true);
     }
 
-
     /**sets window open or closed
      * @param visibility boolean if window is visible or not
      */
     public static void setWindowVisibility(boolean visibility){
 	jf.setVisible(visibility);
     }
-
-
-
-    
     
     /** setScreenSize sets the size of the screen 
      * @param width width of the screen
@@ -116,33 +113,20 @@ public class Screen{
 	    g.drawString( "" + game.p2.getPoints(), Screen.w - 70, 70 );
 	    g.drawString( "Lives " + ( game.p1.ballCount ), 30, Screen.h - 47 );
 	    g.drawString( "Lives " + ( game.p2.ballCount ), Screen.w - 140 , Screen.h - 47 );
+
+	    //draws all the balls
+	    for(int i = 0; i < ballNum; i++){
+		game.b[i].draw(g);
+	    }
 	    
-	    if( game.b.isStopped() ) {
+	    //If all the balls have stopped then pause the game
+	    if(Pong.isPaused) {
 		g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
 		g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
 	    }
-	    
-	    if(DifficultyLevel.getDifficulty()==90) {
-	    	if( game.b.isStopped() || game.b1.isStopped() ) {
-		    g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
-		    g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
-		}
-	    	game.b1.draw(g);
-	    	game.b.draw(g);
-	    	game.p1.draw(g);
-	    	game.p2.draw(g);
-	    	jf.repaint();
-	    }
-	    else {
-	    	if( game.b.isStopped() ) {
-		    g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
-		    g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
-		}
-	    	game.b.draw(g);
-	    	game.p1.draw(g);
-	    	game.p2.draw(g);
-	    	jf.repaint();
-	    }
+	    game.p1.draw(g);
+	    game.p2.draw(g);
+	    jf.repaint();
 	}
 	 	
 	/** the paint function paints buffer graphics onto screen
@@ -162,55 +146,38 @@ public class Screen{
 	 * @param evt the KeyEvent
 	 */
 	public void keyPressed(KeyEvent evt) {
-	    ArrayList<Double> distance = distanceCalc();
 	    game.p1.keyPressed(evt);
-	    game.p2.keyPressed(evt);	
-	    game.b.keyPressed(evt, distance);       
-	    
-	    if(DifficultyLevel.getDifficulty()==90) {
-	    	if( game.b.isStopped() || game.b1.isStopped() ) {
+	    game.p2.keyPressed(evt);
+	    for(int i = 0; i < ballNum; i++){
+		ArrayList<Double> distance = distanceCalc(i);
+		game.b[i].keyPressed(evt, distance);
+	    }
+
+	    //Starts all the balls once they are all sitting in the center and space is pressed
+	    if(game.checkBallStopped()) {
+		Pong.isPaused = true;
+		for(int i = 0; i < ballNum; i++){
 		    if( evt.getKeyCode() == KeyEvent.VK_SPACE ) {
-			game.b.startBall();
-			game.b1.startBall();
-		    }
-		    if( evt.getKeyCode() == KeyEvent.VK_P && game.b.attached == false){
-			game.b.startBall();
-			game.b1.startBall();
-		    }
-		    if( evt.getKeyCode() == KeyEvent.VK_M ) {
-			edu.ucsb.cs56.projects.games.pong.Game.setWindowVisibility(true);
-			jf.setVisible(false);     
+			game.b[i].startBall();
+			Pong.isPaused = false;
+		    }if( evt.getKeyCode() == KeyEvent.VK_P ) {
+ 			if(Pong.isPaused) {
+			    game.b[i].startBall();
+			}
 		    }
 		    else 
 			theball.yield();
 		}
-	    	else {
-		    if( evt.getKeyCode() == KeyEvent.VK_P ) {
-			game.b.stopBall();
-			game.b1.stopBall();
-		    }
-	    	}	
 	    }
-	    else {
-	    	if( game.b.isStopped()) {
-		    if( evt.getKeyCode() == KeyEvent.VK_SPACE ) {
-			game.b.startBall();
-		    }
-		    if( evt.getKeyCode() == KeyEvent.VK_P && game.b.attached == false){
-			game.b.startBall();
-		    }
-		    if( evt.getKeyCode() == KeyEvent.VK_M ) {
-		    	setWindowVisibility(false);
-			edu.ucsb.cs56.projects.games.pong.Game.setWindowVisibility(true);
-		    }
-		    else 
-		    	theball.yield();
-	    	}
-	    	else {
-		    if( evt.getKeyCode() == KeyEvent.VK_P ) {
-			game.b.stopBall();
-		    }
-	    	}
+	    
+	    if( evt.getKeyCode() == KeyEvent.VK_P ) {
+		Pong.isPaused = !Pong.isPaused;
+	    }
+	    if(Pong.isPaused) {
+		if( evt.getKeyCode() == KeyEvent.VK_M ) {
+		    setWindowVisibility(false);
+		    edu.ucsb.cs56.projects.games.pong.Game.setWindowVisibility(true);
+		}
 	    }
 	}
 	
@@ -218,25 +185,28 @@ public class Screen{
 	 * @param evt the KeyEvent
 	 */
 	public void keyReleased(KeyEvent evt){
-	    ArrayList<Double> distance = distanceCalc();
-	    game.p1.keyReleased(evt);
-	    game.p2.keyReleased(evt);
-	    game.b.keyReleased(evt, distance);
+	    for(int i = 0; i < ballNum; i++){
+		ArrayList<Double> distance = distanceCalc(i);
+		game.p1.keyReleased(evt);
+		game.p2.keyReleased(evt);
+		game.b[i].keyReleased(evt, distance);
+	    }
 	}
     }
     
     /** calculates distance and returns it in arrayList
+     * @params i array index of ball being checked
      * @return ArrayList list of distances
      */ 
-    public ArrayList<Double> distanceCalc() {
+    public ArrayList<Double> distanceCalc(int i) {
     	ArrayList<Double> distance = new ArrayList<Double>();
     	
     	int p1x=game.p1.getXCoordinate();
 	int p1y=game.p1.getYCoordinate();
 	int p2x=game.p2.getXCoordinate();
 	int p2y=game.p2.getYCoordinate();
-	int bx =game.b.getXCoordinate();
-	int by =game.b.getYCoordinate();
+	int bx =game.b[i].getXCoordinate();
+	int by =game.b[i].getYCoordinate();
 	
 	double p1fromBall =Math.hypot(Math.abs(p1x-bx),Math.abs(p1y-by));
 	double p2fromBall =Math.hypot(Math.abs(p2x-bx),Math.abs(p2y-by));
