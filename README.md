@@ -30,12 +30,29 @@ Instructions:
   ![](http://i.imgur.com/NAKKNhR.jpg)
   ![](http://i.imgur.com/jdCMrej.jpg)
 
-
-
 TODO: maybe add a few more tickets, most of the existing ones wouldn't take much time to implement.  Other than that it builds and runs fine (David Coffill)
 
 project history(Newest remarks to oldest)
 ===============
+
+### Fall 2017 final remarks
+
+`F17 Andrew Polk, Victoria Sneddon, 2PM lab`
+
+* What the code does:
+  * allows users to choose which mode of the game "pong" they want to play and the colors of the ball and paddles
+* Features to be added:
+  * AI opponent
+  * Change y ball velocity when ball hits paddle
+* Bugs:
+  * issues with screen size for some of the modes
+  * ball can get stuck behind paddle and wall collisions
+  * pause text doesn't automatically show up always
+* Opportunities for Refactoring:
+  * code can still be better organized, neater
+* Advice:
+  * program for extensible
+  * think about the poor future students that will have to fix your code 
 
 ### Winter 2016 final remarks
 
