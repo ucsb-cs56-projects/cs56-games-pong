@@ -1,6 +1,6 @@
 ## Samuel Fu, Xingxing Geng
 - Samuel Fu (GitHubID:`iamSamuelFu`)
-- Xingxing Geng (GitHubID:'`xingxinggeng`)
+- Xingxing Geng (GitHubID:`xingxinggeng`)
 
 ## A)
 This project builds up a game simulating table tennis, which can have most up to 2 players playing at the same time on the same computer.
