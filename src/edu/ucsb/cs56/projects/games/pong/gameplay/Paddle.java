@@ -16,13 +16,13 @@ import java.awt.Graphics;
 public class Paddle extends gameObject{
 
     /**Number of points a player has*/
-    public int points;
+    protected int points;
 
     /**Holds the number of ballsLeft*/
-    public int ballCount;
+    protected int ballCount;
 
     /**If this is the right side paddle*/
-    public boolean right;
+    protected boolean right;
 
     /**True if paddle is moving*/
     private boolean paddleMoving;
@@ -48,9 +48,9 @@ public class Paddle extends gameObject{
     public Paddle(int x, int y, int rectH, int ballNumber, boolean sideRight){
 	super( x, y, rectH );
 	
-	ballCount = 3*ballNumber;
-	points = 0;
-	right = sideRight;
+	setBallCount(3*ballNumber);
+	setPoints(0);
+	setRight(sideRight);
     }
     
  
@@ -59,7 +59,7 @@ public class Paddle extends gameObject{
      */
     public void keyPressed(KeyEvent evt){
 
-        if ( this.right == false ) {
+        if ( isRight() == false ) {
             if( evt.getKeyCode() == KeyEvent.VK_Q ){
                 System.exit( 0 );
             }
@@ -85,7 +85,7 @@ public class Paddle extends gameObject{
      */
     public void keyReleased(KeyEvent evt){
 	
-	if ( this.right == false ) {
+	if ( isRight() == false ) {
 	    if( evt.getKeyCode() == KeyEvent.VK_W ){
 		setYVelocity( 0 );
 	    }
@@ -174,6 +174,22 @@ public class Paddle extends gameObject{
 	}
 	
 	setYCoordinate( getYCoordinate() + getYVelocity() );
+    }
+
+    public boolean isRight() {
+        return right;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public void setBallCount(int ballCount) {
+        this.ballCount = ballCount;
+    }
+
+    public void setRight(boolean right) {
+        this.right = right;
     }
 
     /**isPaddleMoving() return is the paddle is moving or not

@@ -108,11 +108,11 @@ public class Screen{
 	    g.setColor(Color.WHITE);
 	    g.drawString("Hits: " + game.getHits(), Screen.w/2 - 60, 40);
 	    g.drawString( "player 1 ", 30, 40 );
-	    g.drawString( "" + game.p1.getPoints(), 30, 70 );
+	    g.drawString( "" + game.getPlayer1().getPoints(), 30, 70 );
 	    g.drawString( "player 2 ", Screen.w - 180, 40 );
-	    g.drawString( "" + game.p2.getPoints(), Screen.w - 70, 70 );
-	    g.drawString( "Lives " + ( game.p1.ballCount ), 30, Screen.h - 47 );
-	    g.drawString( "Lives " + ( game.p2.ballCount ), Screen.w - 140 , Screen.h - 47 );
+	    g.drawString( "" + game.getPlayer2().getPoints(), Screen.w - 70, 70 );
+	    g.drawString( "Lives " + ( game.getPlayer1().ballCount ), 30, Screen.h - 47 );
+	    g.drawString( "Lives " + ( game.getPlayer2().ballCount ), Screen.w - 140 , Screen.h - 47 );
 
 	    //draws all the balls
 	    for(int i = 0; i < ballNum; i++){
@@ -124,8 +124,8 @@ public class Screen{
 		g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
 		g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
 	    }
-	    game.p1.draw(g);
-	    game.p2.draw(g);
+	    game.getPlayer1().draw(g);
+	    game.getPlayer2().draw(g);
 	    jf.repaint();
 	}
 	 	
@@ -146,8 +146,8 @@ public class Screen{
 	 * @param evt the KeyEvent
 	 */
 	public void keyPressed(KeyEvent evt) {
-	    game.p1.keyPressed(evt);
-	    game.p2.keyPressed(evt);
+	    game.getPlayer1().keyPressed(evt);
+	    game.getPlayer2().keyPressed(evt);
 	    for(int i = 0; i < ballNum; i++){
 		ArrayList<Double> distance = distanceCalc(i);
 		game.b[i].keyPressed(evt, distance);
@@ -187,8 +187,8 @@ public class Screen{
 	public void keyReleased(KeyEvent evt){
 	    for(int i = 0; i < ballNum; i++){
 		ArrayList<Double> distance = distanceCalc(i);
-		game.p1.keyReleased(evt);
-		game.p2.keyReleased(evt);
+		game.getPlayer1().keyReleased(evt);
+		game.getPlayer2().keyReleased(evt);
 		game.b[i].keyReleased(evt, distance);
 	    }
 	}
@@ -201,10 +201,10 @@ public class Screen{
     public ArrayList<Double> distanceCalc(int i) {
     	ArrayList<Double> distance = new ArrayList<Double>();
     	
-    	int p1x=game.p1.getXCoordinate();
-	int p1y=game.p1.getYCoordinate();
-	int p2x=game.p2.getXCoordinate();
-	int p2y=game.p2.getYCoordinate();
+    	int p1x=game.getPlayer1().getXCoordinate();
+	int p1y=game.getPlayer1().getYCoordinate();
+	int p2x=game.getPlayer2().getXCoordinate();
+	int p2y=game.getPlayer2().getYCoordinate();
 	int bx =game.b[i].getXCoordinate();
 	int by =game.b[i].getYCoordinate();
 	
