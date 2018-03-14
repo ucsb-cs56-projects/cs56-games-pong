@@ -32,7 +32,8 @@ public class Ball extends gameObject{
     private boolean paddle = false;
 
     /**Player 1*/
-    private Paddle p1;
+   // private Paddle p1;
+    private AI p1;
     /**Player 2*/
     private Paddle p2;
     

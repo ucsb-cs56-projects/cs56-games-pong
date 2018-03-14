@@ -146,7 +146,7 @@ public class Screen{
 	 * @param evt the KeyEvent
 	 */
 	public void keyPressed(KeyEvent evt) {
-	    game.getPlayer1().keyPressed(evt);
+	   // game.getPlayer1().keyPressed(evt);
 	    game.getPlayer2().keyPressed(evt);
 	    for(int i = 0; i < ballNum; i++){
 		ArrayList<Double> distance = distanceCalc(i);
@@ -187,7 +187,7 @@ public class Screen{
 	public void keyReleased(KeyEvent evt){
 	    for(int i = 0; i < ballNum; i++){
 		ArrayList<Double> distance = distanceCalc(i);
-		game.getPlayer1().keyReleased(evt);
+		//game.getPlayer1().keyReleased(evt);
 		game.getPlayer2().keyReleased(evt);
 		game.b[i].keyReleased(evt, distance);
 	    }
