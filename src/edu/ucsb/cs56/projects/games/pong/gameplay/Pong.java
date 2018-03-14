@@ -190,7 +190,7 @@ public class Pong implements Runnable {
 		playPaddleCollisionAudio();
 		b[i].setXVelocity( -1 * ( b[i].getXVelocity() - moreSpeed ) );
         if((b[i].getYVelocity() >0) && p1.getYVelocity() >0){
-            b[i].setYVelocity(b[i].getYVelocity()+2);
+            b[i].setYVelocity(b[i].getYVelocity()+3);
         }
         if((b[i].getYVelocity() <0) && p1.getYVelocity() <0){
             b[i].setYVelocity(b[i].getYVelocity()-2);
@@ -199,7 +199,7 @@ public class Pong implements Runnable {
             b[i].setYVelocity(b[i].getYVelocity()-2);
         }
         if((b[i].getYVelocity() <0) && p1.getYVelocity() >0){
-            b[i].setYVelocity(b[i].getYVelocity()+2);
+            b[i].setYVelocity(b[i].getYVelocity()+3);
         }
         incrementHits();   
 	    }
@@ -209,7 +209,7 @@ public class Pong implements Runnable {
     		playPaddleCollisionAudio();
     		b[i].setXVelocity( -1 * ( b[i].getXVelocity() + moreSpeed ) );
         if((b[i].getYVelocity() >0) && p1.getYVelocity() >0){
-            b[i].setYVelocity(b[i].getYVelocity()+2);
+            b[i].setYVelocity(b[i].getYVelocity()+3);
         }
         if((b[i].getYVelocity() <0) && p1.getYVelocity() <0){
             b[i].setYVelocity(b[i].getYVelocity()-2);
@@ -218,7 +218,7 @@ public class Pong implements Runnable {
             b[i].setYVelocity(b[i].getYVelocity()-2);
         }
         if((b[i].getYVelocity() <0) && p1.getYVelocity() >0){
-            b[i].setYVelocity(b[i].getYVelocity()+2);
+            b[i].setYVelocity(b[i].getYVelocity()+3);
         }
  		
             incrementHits();
