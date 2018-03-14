@@ -24,16 +24,13 @@ public class Pong implements Runnable {
     int moreSpeed=1;             
 
     /**Left Paddle*/
-    //static Paddle p1;
-    static AI p1;
+    static Paddle p1;
 
     /**Right Paddle*/
     static Paddle p2;
 
     /**Paddle that wins*/
-    AI winner1;
-    Paddle winner2;
-    int win = 1;//if p1 win,win = 1;otherwise win = 2
+    Paddle winner;                 
 
     /**The balls*/
     Ball b[];
@@ -55,8 +52,7 @@ public class Pong implements Runnable {
 	isPaused = true;
 	ballNum = DifficultyLevel.getBallNum();
 	
-    	//p1 = new Paddle( 8, Screen.h/2 - (DifficultyLevel.getPaddleHeight())/2, DifficultyLevel.getPaddleHeight(), ballNum); // Left Paddle
-        p1 = new AI( 8, Screen.h/2 - (DifficultyLevel.getPaddleHeight())/2, DifficultyLevel.getPaddleHeight(), ballNum); // Left Paddle
+    	p1 = new Paddle( 8, Screen.h/2 - (DifficultyLevel.getPaddleHeight())/2, DifficultyLevel.getPaddleHeight(), ballNum); // Left Paddle
         p2 = new Paddle( Screen.w - 38 , Screen.h/2 - (DifficultyLevel.getPaddleHeight())/2, DifficultyLevel.getPaddleHeight(), ballNum, true ); // Right Paddle
 	p1.setColor(ColorPrompt.getColorA());
 	p2.setColor(ColorPrompt.getColorB());
@@ -95,21 +91,18 @@ public class Pong implements Runnable {
     /** getWinner() returns the paddle that just won the points 
      * @return Paddle The object for the winner player
      */
-    public AI getWinner1(){ return winner1; }
-    public Paddle getWinner2(){ return winner2; }
+    public Paddle getWinner(){ return winner; }
 
     /** setWinner takes a Paddle object as a parameter, then sets
      * the winner to that Paddle argument
      * @param a the Paddle that just won
      */
-    public void setWinner1(AI a) { winner1 = a; }
-    public void setWinner2(Paddle a) { winner2 = a; }
+    public void setWinner(Paddle a) { winner = a; }
 
     /**Returns gameobject for player1
      * @return Paddle player1
      */
-    //public static Paddle getPlayer1() {return p1;}
-    public static AI getPlayer1() {return p1;}
+    public static Paddle getPlayer1() {return p1;}
 
     /**Returns gameobject for player2
      * @return Paddle player2
@@ -120,7 +113,7 @@ public class Pong implements Runnable {
      * @return String toString Method
      */ 
     public String toString() {
-	if( win == 2 )
+	if( winner.right == true )
 	    return "Player 2";
 	else
 	    return "Player 1";
@@ -130,14 +123,12 @@ public class Pong implements Runnable {
     public void checkGameStatus()
     {
 	if(p2.ballCount <= 0 ){
-        win = 1;
-	    setWinner1(p1);
-	    gameLoss2(p2);
+	    setWinner(p1);
+	    gameLoss(p2);
 	}
 	else if(p1.ballCount <= 0 ){
-        win = 2;
-	    setWinner2(p2);
-	    gameLoss1(p1);
+	    setWinner(p2);
+	    gameLoss(p1);
 	}
     }
 
@@ -156,17 +147,10 @@ public class Pong implements Runnable {
     
     /** gameLoss brings up a frame to enter the user's name 
      * @param p Not Used
-     */
-    public void gameLoss1( AI p )
+     */   
+    public void gameLoss( Paddle p )
     {
-        GameOver gameOver = new GameOver( toString(), p1.getPoints() );
-        Screen.jf.dispose();
-        kill();                 // kills the thread
-    }
-    
-    public void gameLoss2( Paddle p )
-    {
-	GameOver gameOver = new GameOver( toString(), p2.getPoints() );
+	GameOver gameOver = new GameOver( toString(), winner.getPoints() );
 	Screen.jf.dispose();
 	kill();                 // kills the thread 
     }
@@ -267,7 +251,7 @@ public class Pong implements Runnable {
 	    }
 	    // check if p2 misses
 	    else if( b[i].getXCoordinate() >= ( Screen.w - 20 ) ) {
-		p2.playerMissed2( b[i], getHits(), p1 );
+		p2.playerMissed( b[i], getHits(), p1 );
 		b[i].isGoingRight = false;
 		hitsReset();
 		b[i].resetBall(i);

@@ -159,12 +159,6 @@ public class Paddle extends gameObject{
 	ball.setXVelocity( -1 * ball.getXVelocity() );
 	winner.incrementPoints( numOfPoints );
     }
-
-	public void playerMissed2( Ball ball, int numOfPoints, AI winner ) {
-    decrementBalls();
-    ball.setXVelocity( -1 * ball.getXVelocity() );
-    winner.incrementPoints( numOfPoints );
-    }
     
     /** movePaddle() gets activated when up or down key is pressed then sets the new coordinates for the paddle to be drawn
      */

@@ -119,7 +119,7 @@ public class Screen{
 		game.b[i].draw(g);
 	    }
 	    
-	    //If all the balls have stopped then pause the game // change Pong.isPaused
+	    //If all the balls have stopped then pause the game //change Pong.isPaused
 	    if(game.checkBallStopped()) {
 		g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
 		g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
@@ -146,7 +146,7 @@ public class Screen{
 	 * @param evt the KeyEvent
 	 */
 	public void keyPressed(KeyEvent evt) {
-	   // game.getPlayer1().keyPressed(evt);
+	    game.getPlayer1().keyPressed(evt);
 	    game.getPlayer2().keyPressed(evt);
 	    for(int i = 0; i < ballNum; i++){
 		ArrayList<Double> distance = distanceCalc(i);
@@ -187,7 +187,7 @@ public class Screen{
 	public void keyReleased(KeyEvent evt){
 	    for(int i = 0; i < ballNum; i++){
 		ArrayList<Double> distance = distanceCalc(i);
-		//game.getPlayer1().keyReleased(evt);
+		game.getPlayer1().keyReleased(evt);
 		game.getPlayer2().keyReleased(evt);
 		game.b[i].keyReleased(evt, distance);
 	    }
