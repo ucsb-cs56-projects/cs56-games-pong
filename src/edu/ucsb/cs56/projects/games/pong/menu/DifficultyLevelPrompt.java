@@ -27,7 +27,8 @@ public class DifficultyLevelPrompt extends JPanel {
 	    put("Hard",130);
 	    put("Extreme",140);
 	    put("Chaos",170);
-	    put("Custom Mode",90); 
+	    put("Custom Mode",90);
+        put("AI Mode",120);
 	}};
     
     /**Map that returns difficulties 
