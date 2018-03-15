@@ -253,7 +253,7 @@ public class Pong implements Runnable {
 		coef=0.45;
 	}
 	if(DifficultyLevel.getDifficulty()==100){
-		coef=0.38;
+		coef=0.37;
 	}
 	if(DifficultyLevel.getDifficulty()==120){
 		coef=0.31;
@@ -271,6 +271,7 @@ public class Pong implements Runnable {
 		b[i].resetBall(i);
 	    }
 	    // check if p2 misses
+        
 	    else if( b[i].getXCoordinate() >= ( p2.getXCoordinate()-b[i].getWidth()/2-(DifficultyLevel.getOrigballsize()*DifficultyLevel.getScreenFactor()*coef) ) ) 
 	    {
 		p2.playerMissed( b[i], getHits(), p1 );
@@ -279,7 +280,6 @@ public class Pong implements Runnable {
 		b[i].resetBall(i);
 	    }
 	}
-    
 	// If the ball hits the top or bottom of the screen,
 	//   then the Y velocity is reversed to stay on screen
 	for(int i = 0; i < ballNum; i++){
