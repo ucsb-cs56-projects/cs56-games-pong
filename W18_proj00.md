@@ -1,6 +1,6 @@
 ## Samuel Fu, Xingxing Geng
 - Samuel Fu (GitHubID:`iamSamuelFu`)
-- Xingxing Geng (GitHubID:`xingxinggeng`)
+- Xingxing Geng (GitHubID:'`xingxinggeng`)
 
 ## A)
 This project builds up a game simulating table tennis, which can have most up to 2 players playing at the same time on the same computer.
@@ -29,8 +29,7 @@ The build.xml is a little bit messy in formatting but runnable. Some targets nee
 The "issues" listed pointed out many possibilities this game could turn into. All the bugs and improvements in "issues" are explained in details respectively. There are definitely enough questions for us to earn 1000 points, though some of the issues are minor.
 
 ## H)
-* Hit star to gain life :https://github.com/ucsb-cs56-projects/cs56-games-pong/issues/100
-* Adjust the size of the main screen :https://github.com/ucsb-cs56-projects/cs56-games-pong/issues/101
+Hit star to gain life :https://github.com/ucsb-cs56-projects/cs56-games-pong/issues/100
 
 ## I)
 The code overall is formatted well, and the purposes of class and methods of are clear. The variable names are mostly self-documenting. However, there are more comments than it actually needs. It makes the code easier to read within their own class, but some comments only explained what the code does, instead of why we use this code. Therefore, it is difficult to see the relationship between classes without the class diagram. I would tell whoever is going to work on the code that each object in this game (such as "paddle," "pong," and "game") was coded in seperate file under the same directory. Each file implements what each object does. It will be easier to understand the code by figuring out what object the method belongs to.

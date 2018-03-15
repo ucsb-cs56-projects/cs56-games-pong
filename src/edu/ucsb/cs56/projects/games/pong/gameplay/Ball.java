@@ -18,21 +18,22 @@ import java.util.ArrayList;
 public class Ball extends gameObject{
 
     /**Number of balls lost */
-    public int ballsLost;
+    protected int ballsLost;
 
     /**X Speed of the ball */
-    public int speedX = 1;
+    protected int speedX = 1;
     /**Speed of the ball */
-    public int speed = 1;
+    protected int speed = 1;
 
     /**Holds if the ball is attached to a paddle */
-    public boolean attached = false;
+    protected boolean attached = false;
 
     /**Paddle being held to, false=p1, true=p2*/
     private boolean paddle = false;
 
     /**Player 1*/
-    private Paddle p1;
+   // private Paddle p1;
+    private AI p1;
     /**Player 2*/
     private Paddle p2;
     
@@ -53,10 +54,11 @@ public class Ball extends gameObject{
     public Ball( int x, int y, int w, int h, boolean isGoingRight )
     {
 	super( x, y, w, h );
-	speed = DifficultyLevel.getSpeed();
+	setSpeed( DifficultyLevel.getSpeed());
 
 	if(!isGoingRight){
-	    speed *= -1;
+	    //speed *= -1;
+	    setSpeedX(getSpeed()*-1);
 	}
 	
 	startBall();
@@ -78,8 +80,8 @@ public class Ball extends gameObject{
     /** startBall(): When the ball is stopped, this will start the ball in the direction of the way it was going*/
     public void startBall() {
 	//reset speeds to original
-	setXVelocity( speed );
-	setYVelocity( speed );
+	setXVelocity( getSpeed() );
+	setYVelocity( getSpeed() );
     }
     
     /** isStopped() checks if the ball is stopped
@@ -87,7 +89,7 @@ public class Ball extends gameObject{
      */
     public boolean isStopped()
     {
-	if( ( getXVelocity() == 0 ) && ( getYVelocity() == 0 ) && attached == false )
+	if( ( getXVelocity() == 0 ) && ( getYVelocity() == 0 ) && isAttached() == false )
 	    return true;
 	else 
 	    return false;
@@ -106,8 +108,8 @@ public class Ball extends gameObject{
     public void resetBall(int ballNumber) 
     {
     	stopBall();
-	if(isGoingRight && speed < 0)
-	    speed *= -1;
+	if(isGoingRight && getSpeed() < 0)
+	    setSpeed(getSpeed()* (-1));
     	setXCoordinate(( Screen.w-DifficultyLevel.getWidth() ) / 2 );
 	setYCoordinate(( Screen.h-(4*ballNumber)*DifficultyLevel.getHeight() ) / 2 );
     }
@@ -118,18 +120,30 @@ public class Ball extends gameObject{
      */
     public void holdBallToPaddle(KeyEvent evt, double distance)
     {
-	attached = true;
-	speedX = getXVelocity();
+	//attached = true;
+	setAttached(true);
+	setSpeedX(getXVelocity());
 	
-	if(evt.getKeyCode() == KeyEvent.VK_A && ( (int)distance < DifficultyLevel.getPaddleHeight() ) ) {
+	if(evt.getKeyCode() == KeyEvent.VK_A && ( (int)(distance+35) < (DifficultyLevel.getPaddleHeight()) ) ) {
 	    stopBall();
 	    paddle = false;
 	}
-   	 
-	if(evt.getKeyCode() == KeyEvent.VK_LEFT && ( (int)distance < DifficultyLevel.getPaddleHeight() ) ) {
+
+	if(evt.getKeyCode() == KeyEvent.VK_LEFT && ( (int)(distance+45) <(DifficultyLevel.getPaddleHeight()) )) {
 	    stopBall();
 	    paddle = true;
 	}
+	/*
+	if(evt.getKeyCode() == KeyEvent.VK_A &&  (distance <(double)(DifficultyLevel.getPaddleHeight()/3  ))) {
+        stopBall();
+        paddle = false;
+    	}
+     
+    	if(evt.getKeyCode() == KeyEvent.VK_LEFT && ( distance <(double)(DifficultyLevel.getPaddleHeight()/3 ) )) {
+        stopBall();
+        paddle = true;
+    	}
+	*/
     }
     
     /** Takes in keyEvent and distance and releases ball from paddle if correct key is released
@@ -138,21 +152,22 @@ public class Ball extends gameObject{
      */
     public void releaseBallFromPaddle(KeyEvent evt, double distance)
     {
-	attached = false;
-	if(evt.getKeyCode() == KeyEvent.VK_A && ( (int)distance < DifficultyLevel.getPaddleHeight() ) ) {
+	//attached = false;
+	setAttached(false);
+	if(evt.getKeyCode() == KeyEvent.VK_A && ( (int)(distance+35) < DifficultyLevel.getPaddleHeight() ) ) {
 	    setYVelocity(p1.getYVelocity());
-	    if(speedX < 0)
-		setXVelocity(speedX * -1);
+	    if(getSpeedX() < 0)
+		setXVelocity(getSpeedX() * -1);
 	    else
-		setXVelocity(speedX);
+		setXVelocity(getSpeedX());
 	}
    	 
-	if(evt.getKeyCode() == KeyEvent.VK_LEFT && ( (int)distance < DifficultyLevel.getPaddleHeight() ) ) {
+	if(evt.getKeyCode() == KeyEvent.VK_LEFT && ( (int)(distance+45) < DifficultyLevel.getPaddleHeight() ) ) {
 	    setYVelocity(p2.getYVelocity());
-	    if(speedX > 0)
-		setXVelocity(speedX * -1);
+	    if(getSpeedX() > 0)
+		setXVelocity(getSpeedX() * -1);
 	    else
-		setXVelocity(speedX);
+		setXVelocity(getSpeedX());
 	}
     }
     
@@ -161,10 +176,10 @@ public class Ball extends gameObject{
      * @param distance ArrayList of distances from balls
      */
     public void keyPressed(KeyEvent evt, ArrayList<Double> distance){
-        if ( (evt.getKeyCode() == KeyEvent.VK_A) && ( distance.get(0) < DifficultyLevel.getPaddleHeight()) && (attached == false)) {
+        if ( (evt.getKeyCode() == KeyEvent.VK_A) && ( (int)(distance.get(0)+35) < DifficultyLevel.getPaddleHeight()) && (isAttached() == false)) {
 	    holdBallToPaddle(evt, distance.get(0));
         }
-	if(paddle == false && attached == true){
+	if(paddle == false && isAttached() == true){
 	    if(p1.isPaddleMoving() == true){
 		if( evt.getKeyCode() == KeyEvent.VK_W && distance.get(4) > 5 ){
 		    setYVelocity(p1.getYVelocity());
@@ -172,15 +187,16 @@ public class Ball extends gameObject{
 		if( evt.getKeyCode() == KeyEvent.VK_S && distance.get(2) > 5){
 		    setYVelocity(p1.getYVelocity());
 		}
-	    } else {
-		setYVelocity(0);
-	    }        
+	    }else{
+		    setYVelocity(0);
+	    }
+	    
 	}
 	
-        if (evt.getKeyCode() == KeyEvent.VK_LEFT && distance.get(1)< DifficultyLevel.getPaddleHeight() && attached == false) {
+        if (evt.getKeyCode() == KeyEvent.VK_LEFT && (int)(distance.get(1)+45)< DifficultyLevel.getPaddleHeight() && isAttached() == false) {
 	    holdBallToPaddle(evt, distance.get(1));
         }
-	if(paddle == true && attached == true){
+	if(paddle == true && isAttached() == true){
 	    if(p2.isPaddleMoving() == true) {
 		if( evt.getKeyCode() == KeyEvent.VK_UP && distance.get(5) > 5 ){
 		    setYVelocity(p2.getYVelocity());
@@ -188,15 +204,15 @@ public class Ball extends gameObject{
 		if( evt.getKeyCode() == KeyEvent.VK_DOWN && distance.get(3) > 5 ){
 		    setYVelocity(p2.getYVelocity());
 		}
-	    } else {
-		setYVelocity(0);
+	    } else{
+		    setYVelocity(0);
 	    }
 	}
     }
 
     /**Updates the velocity if the ball is attached*/
     public void ballAttachUpdate() {
-	if(attached == true) {
+	if(isAttached() == true) {
 	    if(paddle == false) {
 		if(p1.isPaddleMoving() == true) {
 		    setYVelocity(p1.getYVelocity());
@@ -228,7 +244,7 @@ public class Ball extends gameObject{
      * @param distance Arraylist of distances from balls
      */
     public void keyReleased(KeyEvent evt, ArrayList<Double> distance){
-	if(attached == true) {
+	if(isAttached() == true) {
 	    if ( evt.getKeyCode() == KeyEvent.VK_A) {
 		releaseBallFromPaddle(evt, distance.get(0));
 	    }
@@ -248,4 +264,38 @@ public class Ball extends gameObject{
 	    }
 	}
     }
+
+	/** getters and setters
+	 */
+	public int getBallsLost() {
+		return ballsLost;
+	}
+
+	public void setBallsLost(int ballsLost) {
+		this.ballsLost = ballsLost;
+	}
+
+	public int getSpeedX() {
+		return speedX;
+	}
+
+	public void setSpeedX(int speedX) {
+		this.speedX = speedX;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public boolean isAttached() {
+		return attached;
+	}
+
+	public void setAttached(boolean attached) {
+		this.attached = attached;
+	}
 }
