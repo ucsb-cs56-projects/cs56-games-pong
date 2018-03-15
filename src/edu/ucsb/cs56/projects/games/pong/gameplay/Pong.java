@@ -34,6 +34,7 @@ public class Pong implements Runnable {
 
     /**The balls*/
     Ball b[];
+    static Rectangle star;
     /**Number of balls*/
     int ballNum;
 
@@ -58,6 +59,10 @@ public class Pong implements Runnable {
 	p2.setColor(ColorPrompt.getColorB());
 
 	b = new Ball[ballNum];
+	star = new Rectangle ((((Screen.w-DifficultyLevel.getWidth()) /2) + DifficultyLevel.getHeight()/4) ,
+                              ((Screen.h-DifficultyLevel.getHeight()) /2 - (DifficultyLevel.getHeight()/2)),
+                              DifficultyLevel.getHeight()/2,
+                              DifficultyLevel.getHeight()/2);
 	
 	for(int i = 0; i < ballNum; i++) {
 	    boolean dir = false;
@@ -186,6 +191,18 @@ public class Pong implements Runnable {
 	//   and adds the increments the number of hits 
 	
 	for(int i = 0; i < ballNum; i++){
+	    //check if touch star
+        if( star.intersects( (b[i].rectangle)) ){
+            if(b[i].getXVelocity() >0){
+                p1.incrementBalls();
+                b[i].setXVelocity( -1 * ( b[i].getXVelocity() + moreSpeed ) );
+            }
+            else if(b[i].getXVelocity() < 0){
+                 p2.incrementBalls();
+                 b[i].setXVelocity( -1 * ( b[i].getXVelocity() - moreSpeed ) );
+            }
+            star = new Rectangle(0,0,1,1);
+        }
 	    // checks if it hits p1
 	    if(( ( b[i].rectangle ).intersects( p1.rectangle ))&&((b[i].getXCoordinate()+b[i].getWidth()/2)<=p2.getXCoordinate()) )
 	{
