@@ -120,7 +120,7 @@ public class Screen{
 	    }
 	    
 	    //If all the balls have stopped then pause the game
-	    if(Pong.isPaused) {
+	    if(game.checkBallStopped()) {
 		g.drawString( "Game Paused", Screen.w/2 - 100, Screen.h/2 - 100 );
 		g.drawString( "Press M to return to Main Menu", Screen.w/2 - 220, Screen.h/2 + 100 );
 	    }
