@@ -169,8 +169,9 @@ public class Pong implements Runnable {
 	    }
 	    
 	    // checks if it hit a paddle
-	    paddleCollision();
+	    //paddleCollision();
 	    wallCollision();
+	    paddleCollision();
 	}
     }
     
@@ -186,41 +187,50 @@ public class Pong implements Runnable {
 	
 	for(int i = 0; i < ballNum; i++){
 	    // checks if it hits p1
-	    if( ( b[i].rectangle ).intersects( p1.rectangle ) ){
-		playPaddleCollisionAudio();
-		b[i].setXVelocity( -1 * ( b[i].getXVelocity() - moreSpeed ) );
+	    if(( ( b[i].rectangle ).intersects( p1.rectangle ))&&((b[i].getXCoordinate()+b[i].getWidth()/2)<=p2.getXCoordinate()) )
+	{
+            playPaddleCollisionAudio();
+	    b[i].setXVelocity( -1 * ( b[i].getXVelocity() - moreSpeed ) );
+        
         if((b[i].getYVelocity() >0) && p1.getYVelocity() >0){
             b[i].setYVelocity(b[i].getYVelocity()+2);
         }
         if((b[i].getYVelocity() <0) && p1.getYVelocity() <0){
-            b[i].setYVelocity(b[i].getYVelocity()-2);
+            b[i].setYVelocity(b[i].getYVelocity()-1);
         }
         if((b[i].getYVelocity() >0) && p1.getYVelocity() <0){
-            b[i].setYVelocity(b[i].getYVelocity()-2);
+            b[i].setYVelocity(b[i].getYVelocity()-1);
         }
         if((b[i].getYVelocity() <0) && p1.getYVelocity() >0){
             b[i].setYVelocity(b[i].getYVelocity()+2);
+        }
+        if(b[i].getYVelocity() ==0){
+            b[i].setYVelocity(p1.getYVelocity());
         }
         incrementHits();   
 	    }
 	
 	    // checks if it hits p2
-	    else if( ( b[i].rectangle ).intersects( p2.rectangle ) ){
+	else if( ( b[i].rectangle ).intersects( p2.rectangle )&&((b[i].getXCoordinate()+b[i].getWidth()/2)<=p2.getXCoordinate()) )
+	   {
     		playPaddleCollisionAudio();
     		b[i].setXVelocity( -1 * ( b[i].getXVelocity() + moreSpeed ) );
+        
         if((b[i].getYVelocity() >0) && p1.getYVelocity() >0){
             b[i].setYVelocity(b[i].getYVelocity()+2);
         }
         if((b[i].getYVelocity() <0) && p1.getYVelocity() <0){
-            b[i].setYVelocity(b[i].getYVelocity()-2);
+            b[i].setYVelocity(b[i].getYVelocity()-1);
         }
         if((b[i].getYVelocity() >0) && p1.getYVelocity() <0){
-            b[i].setYVelocity(b[i].getYVelocity()-2);
+            b[i].setYVelocity(b[i].getYVelocity()-1);
         }
         if((b[i].getYVelocity() <0) && p1.getYVelocity() >0){
             b[i].setYVelocity(b[i].getYVelocity()+2);
         }
- 		
+ 		if(b[i].getYVelocity()==0){
+            b[i].setYVelocity(p2.getYVelocity());
+        }
             incrementHits();
 	    }
 	}	
@@ -238,19 +248,31 @@ public class Pong implements Runnable {
 
     /** wallCollision() detects whether the ball hits a wall*/
     public void wallCollision() {
+	double coef=0;
+	if(DifficultyLevel.getDifficulty()==80){
+		coef=0.45;
+	}
+	if(DifficultyLevel.getDifficulty()==100){
+		coef=0.38;
+	}
+	if(DifficultyLevel.getDifficulty()==120){
+		coef=0.3;
+	}
 	// if p1 misses / hits the wall behind it
 	//   then increment balls lost, sets the ball 
 	//   to the middle and gives points to other player
 	for(int i = 0; i < ballNum; i++){
 	    // check if p1 misses
-	    if( b[i].getXCoordinate() <= ( 0 ) ) {
+	    if( b[i].getXCoordinate() <= ( p1.getXCoordinate()+b[i].getWidth()/2-(DifficultyLevel.getOrigballsize()*DifficultyLevel.getScreenFactor()*coef) ))
+	    {
 		p1.playerMissed( b[i], getHits(), p2 );
 		b[i].isGoingRight = true;
 		hitsReset();
 		b[i].resetBall(i);
 	    }
 	    // check if p2 misses
-	    else if( b[i].getXCoordinate() >= ( Screen.w - 20 ) ) {
+	    else if( b[i].getXCoordinate() >= ( p2.getXCoordinate()-b[i].getWidth()/2-(DifficultyLevel.getOrigballsize()*DifficultyLevel.getScreenFactor()*coef) ) ) 
+	    {
 		p2.playerMissed( b[i], getHits(), p1 );
 		b[i].isGoingRight = false;
 		hitsReset();
@@ -282,7 +304,7 @@ public class Pong implements Runnable {
         try{
             while( gameIsGoing ){
                 moveGame();
-                Thread.sleep( 15 );
+                Thread.sleep(15 );
             }
         }catch(Exception e){}
 	
