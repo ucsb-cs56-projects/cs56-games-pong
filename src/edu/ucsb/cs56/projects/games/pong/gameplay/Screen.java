@@ -126,6 +126,15 @@ public class Screen{
 	    }
 	    game.getPlayer1().draw(g);
 	    game.getPlayer2().draw(g);
+		
+	    //draw star
+            g.setColor( Color.RED );
+            int star_x = (int) game.star.getX();
+            int star_y = (int) game.star.getY();
+            int star_width = (int) game.star.getWidth();
+            int star_height  = (int) game.star.getHeight();
+            g.fillRect(star_x,star_y,star_width,star_height);
+  		
 	    jf.repaint();
 	}
 	 	
