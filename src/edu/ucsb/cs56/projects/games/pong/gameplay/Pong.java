@@ -256,14 +256,14 @@ public class Pong implements Runnable {
 		coef=0.38;
 	}
 	if(DifficultyLevel.getDifficulty()==120){
-		coef=0.3;
+		coef=0.31;
 	}
 	// if p1 misses / hits the wall behind it
 	//   then increment balls lost, sets the ball 
 	//   to the middle and gives points to other player
 	for(int i = 0; i < ballNum; i++){
 	    // check if p1 misses
-	    if( b[i].getXCoordinate() <= ( p1.getXCoordinate()+b[i].getWidth()/2-(DifficultyLevel.getOrigballsize()*DifficultyLevel.getScreenFactor()*coef) ))
+	    if( b[i].getXCoordinate() <= ( b[i].getWidth()/2-(DifficultyLevel.getOrigballsize()*DifficultyLevel.getScreenFactor()*coef) ) )
 	    {
 		p1.playerMissed( b[i], getHits(), p2 );
 		b[i].isGoingRight = true;
