@@ -6,6 +6,7 @@ This is an implementation of the classic game Pong, with cooperative multiplayer
 To compile and run: "ant run" in the main directory
 
 There are seven game mode options that correspond to the size of the window when playing.
+(However, there are eight modes in the menu including "AI Mode," which is under construction.)
 
 How To Play:
 Player 1 (on the left)
@@ -22,7 +23,8 @@ Instructions:
   When the ball is stopped, Press the spacebar to activate motion.
   Try to not let the ball hit your side of the screen or you will lose a life.
   The player who wins the round, receives the total number of hits added to their score.
-  Each Player has 3 lives.
+  Each Player has 3 lives. However, there is a red square in the middle of the screen at beginning of each game. The
+  player who hits the square with the ball will automatically gain a life, and the square will disappear from there.
   The Winner is whoever has the most lives at the end, their name will be prompted.
   If their score is in the top 5 of the High Score, then it will be saved to the High Score.
 
@@ -34,6 +36,22 @@ TODO: maybe add a few more tickets, most of the existing ones wouldn't take much
 
 project history(Newest remarks to oldest)
 ===============
+###Winter 2018 final remarks
+
+`W18 Samuel Fu, Xingxing Geng, 6PM lab`
+
+* What the code does:
+  *  simulates the game pong according to the mode the player chose when starting the program
+* Features to be added:
+  *  AI opponent interface
+  *  Improve the menu with more aesthetic design
+  *  Make the life gaining square appear randomly
+*  Bugs:
+  * ball can behave randomly when you grab it too closely
+*  Opportunities for Refactoring:
+  * organize the comments
+*  Advice:
+  * Be careful on each "if" condition and really think thoroughly about the corner cases 
 
 ### Fall 2017 final remarks
 
