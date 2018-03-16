@@ -1,9 +1,9 @@
 package edu.ucsb.cs56.projects.games.pong.menu.instructions;
 
+import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 
 /** edu.ucsb.cs56.projects.games.pong.menu.instructions.Instructions is the classs that displays the instructions to the game when the user presses the instructions button
  @author Vincent Gandolfo, Krishna Lingampalli
@@ -16,7 +16,7 @@ public class Instructions{
     JFrame jf;
 
     /** Constructor that sets up the JFrame and Components that allow the instructions to be displayed */
-    public Instructions()throws Exception
+    public Instructions()
     {
 	setUpFrame();
 	setUpFrameComponents();
@@ -36,7 +36,7 @@ public class Instructions{
     }
 
     /** setUpFrameComponents()  sets up the layout on the frame and puts on the Instructions and the "Back To Main Menu" button */
-    public void setUpFrameComponents()throws Exception
+    public void setUpFrameComponents()
     {
 	JButton backToMain = new JButton( "Back To Main Menu" );
 	backToMain.addActionListener( new BackToMainListener() );
@@ -58,17 +58,42 @@ public class Instructions{
     /** displayInstructions() displays the Instructions on how to play
      * @return String returns instructions
      */
-    public String displayInstructions()throws Exception
+    public String displayInstructions()
     {
-        File file = new File("instructions.txt");
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        
-        String st = br.readLine();
-        return ("" + st);
-			
-			
-    }
+	    String fileName = "instructions.txt";
 
+        // This will reference one line at a time
+        String line = null;
+
+        try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader = 
+                new FileReader(fileName);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader = 
+                new BufferedReader(fileReader);
+
+            line = bufferedReader.readLine();
+
+            // Always close files.
+            bufferedReader.close();         
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                "Unable to open file '" + 
+                fileName + "'");                
+        }
+        catch(IOException ex) {
+            System.out.println(
+                "Error reading file '" 
+                + fileName + "'");                  
+            // Or we could just do this: 
+            // ex.printStackTrace();
+        }
+		return line;
+	    
+    }
 
     /** The action when the button "Back To Main Menu" is pressed. It just makes the frame not visible, so it appears to be closed and does not need to create a new instance of Instructions for every time the user clicks how to play */
     class BackToMainListener implements ActionListener{
