@@ -46,11 +46,11 @@ project history(Newest remarks to oldest)
   * AI opponent interface
   * Improve the menu with more aesthetic design
   * Make the life gaining square appear randomly
-*  Bugs:
+* Bugs:
   * ball can behave randomly when you grab it too closely
-*  Opportunities for Refactoring:
+* Opportunities for Refactoring:
   * organize the comments
-*  Advice:
+* Advice:
   * Be careful on each "if" condition and really think thoroughly about the corner cases 
 
 ### Fall 2017 final remarks
