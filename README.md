@@ -36,16 +36,16 @@ TODO: maybe add a few more tickets, most of the existing ones wouldn't take much
 
 project history(Newest remarks to oldest)
 ===============
-###Winter 2018 final remarks
+### Winter 2018 final remarks
 
 `W18 Samuel Fu, Xingxing Geng, 6PM lab`
 
 * What the code does:
-  *  simulates the game pong according to the mode the player chose when starting the program
+  * simulates the game pong according to the mode the player chose when starting the program
 * Features to be added:
-  *  AI opponent interface
-  *  Improve the menu with more aesthetic design
-  *  Make the life gaining square appear randomly
+  * AI opponent interface
+  * Improve the menu with more aesthetic design
+  * Make the life gaining square appear randomly
 *  Bugs:
   * ball can behave randomly when you grab it too closely
 *  Opportunities for Refactoring:
