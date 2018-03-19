@@ -266,7 +266,7 @@ public class Pong implements Runnable {
 
     /** wallCollision() detects whether the ball hits a wall*/
     public void wallCollision() {
-    if(DifficultyLevel.getDifficulty()==80){
+    if(DifficultyLevel.getDifficulty()==170){
 	    for(int i = 0; i < ballNum; i++){
 	    // check if p1 misses
 	    if( b[i].getXCoordinate() <= ( 0 ) ) {
