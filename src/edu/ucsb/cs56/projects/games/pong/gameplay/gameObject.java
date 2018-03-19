@@ -10,16 +10,16 @@ import java.awt.*;
 class gameObject{
     
     /** Gameobject horizontal speed (x)*/
-    public int xVelocity;                  
+    protected int xVelocity;
 
     /** Gameobject vertival speed (y)*/
-    public int yVelocity;                  
+    protected int yVelocity;
 
     /**Holds x and y coordinates and width and height */
-    public Rectangle rectangle;        
+    protected Rectangle rectangle;
 
     /** Holds the color of the gameObject*/                                     
-    public Color color;
+    protected Color color;
     
     /** Default constructor, not used */
     gameObject() {  }            
