@@ -282,7 +282,8 @@ public class Pong implements Runnable {
 		hitsReset();
 		b[i].resetBall(i);
 	    }
-	    }else{
+	    }
+   }else{
 	double coef=0;
 	if(DifficultyLevel.getDifficulty()==80){
 		coef=0.45;
@@ -315,7 +316,7 @@ public class Pong implements Runnable {
 		b[i].resetBall(i);
 	    }
 	}
-	    }
+    }
 	// If the ball hits the top or bottom of the screen,
 	//   then the Y velocity is reversed to stay on screen
 	for(int i = 0; i < ballNum; i++){
