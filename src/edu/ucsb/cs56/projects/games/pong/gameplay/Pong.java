@@ -229,7 +229,7 @@ public class Pong implements Runnable {
 	    }
 	
 	    // checks if it hits p2
-	else if( ( b[i].rectangle ).intersects( p2.rectangle )&&((b[i].getXCoordinate()+b[i].getWidth()/2)<=p2.getXCoordinate()) )
+	else if( ( b[i].rectangle ).intersects( p2.rectangle ) )
 	   {
     		playPaddleCollisionAudio();
     		b[i].setXVelocity( -1 * ( b[i].getXVelocity() + moreSpeed ) );
@@ -266,6 +266,23 @@ public class Pong implements Runnable {
 
     /** wallCollision() detects whether the ball hits a wall*/
     public void wallCollision() {
+    if(DifficultyLevel.getDifficulty()==80){
+	    for(int i = 0; i < ballNum; i++){
+	    // check if p1 misses
+	    if( b[i].getXCoordinate() <= ( 0 ) ) {
+		p1.playerMissed( b[i], getHits(), p2 );
+		b[i].isGoingRight = true;
+		hitsReset();
+		b[i].resetBall(i);
+	    }
+	    // check if p2 misses
+	    else if( b[i].getXCoordinate() >= ( Screen.w - 20 ) ) {
+		p2.playerMissed( b[i], getHits(), p1 );
+		b[i].isGoingRight = false;
+		hitsReset();
+		b[i].resetBall(i);
+	    }
+	    }else{
 	double coef=0;
 	if(DifficultyLevel.getDifficulty()==80){
 		coef=0.45;
@@ -298,6 +315,7 @@ public class Pong implements Runnable {
 		b[i].resetBall(i);
 	    }
 	}
+	    }
 	// If the ball hits the top or bottom of the screen,
 	//   then the Y velocity is reversed to stay on screen
 	for(int i = 0; i < ballNum; i++){
