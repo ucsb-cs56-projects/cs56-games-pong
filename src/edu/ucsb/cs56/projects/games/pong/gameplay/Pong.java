@@ -3,6 +3,7 @@ package edu.ucsb.cs56.projects.games.pong.gameplay;
 import edu.ucsb.cs56.projects.games.pong.sound.SoundEffect;
 import edu.ucsb.cs56.projects.games.pong.menu.PlayTextComponent;
 import edu.ucsb.cs56.projects.games.pong.menu.ColorPrompt;
+import java.awt.*;
 
 /** edu.ucsb.cs56.projects.games.pong.gameplay.Pong is the class that will facilitate
  * the game of Pong being run 
@@ -34,6 +35,7 @@ public class Pong implements Runnable {
 
     /**The balls*/
     Ball b[];
+    static Rectangle star;
     /**Number of balls*/
     int ballNum;
 
@@ -58,6 +60,10 @@ public class Pong implements Runnable {
 	p2.setColor(ColorPrompt.getColorB());
 
 	b = new Ball[ballNum];
+	star = new Rectangle ((((Screen.w-DifficultyLevel.getWidth()) /2) + DifficultyLevel.getHeight()/4) ,
+                              ((Screen.h-DifficultyLevel.getHeight()) /2 - (DifficultyLevel.getHeight()/2)),
+                              DifficultyLevel.getHeight()/2,
+                              DifficultyLevel.getHeight()/2);
 	
 	for(int i = 0; i < ballNum; i++) {
 	    boolean dir = false;
@@ -169,8 +175,9 @@ public class Pong implements Runnable {
 	    }
 	    
 	    // checks if it hit a paddle
-	    paddleCollision();
+	    //paddleCollision();
 	    wallCollision();
+	    paddleCollision();
 	}
     }
     
@@ -185,42 +192,63 @@ public class Pong implements Runnable {
 	//   and adds the increments the number of hits 
 	
 	for(int i = 0; i < ballNum; i++){
+	    //check if touch star
+        if( star.intersects( (b[i].rectangle)) ){
+            if(b[i].getXVelocity() >0){
+                p1.incrementBalls();
+                b[i].setXVelocity( -1 * ( b[i].getXVelocity() + moreSpeed ) );
+            }
+            else if(b[i].getXVelocity() < 0){
+                 p2.incrementBalls();
+                 b[i].setXVelocity( -1 * ( b[i].getXVelocity() - moreSpeed ) );
+            }
+            star = new Rectangle(0,0,1,1);
+        }
 	    // checks if it hits p1
-	    if( ( b[i].rectangle ).intersects( p1.rectangle ) ){
-		playPaddleCollisionAudio();
-		b[i].setXVelocity( -1 * ( b[i].getXVelocity() - moreSpeed ) );
+	    if(( ( b[i].rectangle ).intersects( p1.rectangle ))&&((b[i].getXCoordinate()+b[i].getWidth()/2)<=p2.getXCoordinate()) )
+	{
+            playPaddleCollisionAudio();
+	    b[i].setXVelocity( -1 * ( b[i].getXVelocity() - moreSpeed ) );
+        
         if((b[i].getYVelocity() >0) && p1.getYVelocity() >0){
             b[i].setYVelocity(b[i].getYVelocity()+2);
         }
         if((b[i].getYVelocity() <0) && p1.getYVelocity() <0){
-            b[i].setYVelocity(b[i].getYVelocity()-2);
+            b[i].setYVelocity(b[i].getYVelocity()-1);
         }
         if((b[i].getYVelocity() >0) && p1.getYVelocity() <0){
-            b[i].setYVelocity(b[i].getYVelocity()-2);
+            b[i].setYVelocity(b[i].getYVelocity()-1);
         }
         if((b[i].getYVelocity() <0) && p1.getYVelocity() >0){
             b[i].setYVelocity(b[i].getYVelocity()+2);
+        }
+        if(b[i].getYVelocity() ==0){
+            b[i].setYVelocity(p1.getYVelocity());
         }
         incrementHits();   
 	    }
 	
 	    // checks if it hits p2
-	    else if( ( b[i].rectangle ).intersects( p2.rectangle ) ){
+	else if( ( b[i].rectangle ).intersects( p2.rectangle ) )
+	   {
     		playPaddleCollisionAudio();
     		b[i].setXVelocity( -1 * ( b[i].getXVelocity() + moreSpeed ) );
+        
         if((b[i].getYVelocity() >0) && p1.getYVelocity() >0){
             b[i].setYVelocity(b[i].getYVelocity()+2);
         }
         if((b[i].getYVelocity() <0) && p1.getYVelocity() <0){
-            b[i].setYVelocity(b[i].getYVelocity()-2);
+            b[i].setYVelocity(b[i].getYVelocity()-1);
         }
         if((b[i].getYVelocity() >0) && p1.getYVelocity() <0){
-            b[i].setYVelocity(b[i].getYVelocity()-2);
+            b[i].setYVelocity(b[i].getYVelocity()-1);
         }
         if((b[i].getYVelocity() <0) && p1.getYVelocity() >0){
             b[i].setYVelocity(b[i].getYVelocity()+2);
         }
- 		
+ 		if(b[i].getYVelocity()==0){
+            b[i].setYVelocity(p2.getYVelocity());
+        }
             incrementHits();
 	    }
 	}	
@@ -238,10 +266,8 @@ public class Pong implements Runnable {
 
     /** wallCollision() detects whether the ball hits a wall*/
     public void wallCollision() {
-	// if p1 misses / hits the wall behind it
-	//   then increment balls lost, sets the ball 
-	//   to the middle and gives points to other player
-	for(int i = 0; i < ballNum; i++){
+    if(DifficultyLevel.getDifficulty()==170){
+	    for(int i = 0; i < ballNum; i++){
 	    // check if p1 misses
 	    if( b[i].getXCoordinate() <= ( 0 ) ) {
 		p1.playerMissed( b[i], getHits(), p2 );
@@ -256,8 +282,41 @@ public class Pong implements Runnable {
 		hitsReset();
 		b[i].resetBall(i);
 	    }
+	    }
+   }else{
+	double coef=0;
+	if(DifficultyLevel.getDifficulty()==80){
+		coef=0.45;
 	}
-    
+	if(DifficultyLevel.getDifficulty()==100){
+		coef=0.37;
+	}
+	if(DifficultyLevel.getDifficulty()==120){
+		coef=0.31;
+	}
+	// if p1 misses / hits the wall behind it
+	//   then increment balls lost, sets the ball 
+	//   to the middle and gives points to other player
+	for(int i = 0; i < ballNum; i++){
+	    // check if p1 misses
+	    if( b[i].getXCoordinate() <= ( b[i].getWidth()/2-(DifficultyLevel.getOrigballsize()*DifficultyLevel.getScreenFactor()*coef) ) )
+	    {
+		p1.playerMissed( b[i], getHits(), p2 );
+		b[i].isGoingRight = true;
+		hitsReset();
+		b[i].resetBall(i);
+	    }
+	    // check if p2 misses
+        
+	    else if( b[i].getXCoordinate() >= ( p2.getXCoordinate()-b[i].getWidth()/2-(DifficultyLevel.getOrigballsize()*DifficultyLevel.getScreenFactor()*coef) ) ) 
+	    {
+		p2.playerMissed( b[i], getHits(), p1 );
+		b[i].isGoingRight = false;
+		hitsReset();
+		b[i].resetBall(i);
+	    }
+	}
+    }
 	// If the ball hits the top or bottom of the screen,
 	//   then the Y velocity is reversed to stay on screen
 	for(int i = 0; i < ballNum; i++){
@@ -282,7 +341,7 @@ public class Pong implements Runnable {
         try{
             while( gameIsGoing ){
                 moveGame();
-                Thread.sleep( 15 );
+                Thread.sleep(15 );
             }
         }catch(Exception e){}
 	

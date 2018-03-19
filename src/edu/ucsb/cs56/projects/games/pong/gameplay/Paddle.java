@@ -138,6 +138,8 @@ public class Paddle extends gameObject{
     /** decrementBalls() decrements ballCount when a player loses a life 
      */
     public void decrementBalls(){ ballCount--; }
+	
+    public void incrementBalls(){ ballCount++; }
     
     /** incrementPoints adds the number of hits to the user's score 
      * @param numOfPoints number of points to add to score
