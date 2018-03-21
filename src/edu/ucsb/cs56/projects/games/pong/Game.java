@@ -2,6 +2,7 @@ package edu.ucsb.cs56.projects.games.pong;
 
 import edu.ucsb.cs56.projects.games.pong.menu.MainMenuUI;
 
+import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -36,8 +37,9 @@ public class Game extends JFrame {
     /** main, entry point for game 
      * @param args not used
      */
-    public static void main(String[] args) {
-        window = new Game("Main Menu",DIMENSION);
+    public static void main(String[] args){
+        Game windowNew = new Game("Main Menu",getDIMENSION());
+        setWindow(windowNew);
         MainMenuUI game = new MainMenuUI();
         window.add(game);
 	//Opens the window with a static function that can be called from anywhere
@@ -46,5 +48,19 @@ public class Game extends JFrame {
 
     public static void setWindowVisibility(boolean visibility){
 	window.setVisible(visibility);
+    }
+    
+    /** setters and getters
+     */
+    public static Dimension getDIMENSION() {
+        return DIMENSION;
+    }
+
+    public static Game getWindow() {
+        return window;
+    }
+
+    public static void setWindow(Game window) {
+        Game.window = window;
     }
 }
